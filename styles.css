@@ -108,10 +108,14 @@ a {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 56px;
+  grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+  gap: clamp(44px, 6vw, 84px);
   align-items: center;
   min-height: 82vh;
+}
+
+.hero-copy {
+  order: 2;
 }
 
 .hero-copy,
@@ -175,12 +179,19 @@ h3 {
   line-height: 1.28;
 }
 
-.hero-actions,
-.footer-links {
+.hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 28px;
+}
+
+.footer-links {
+  align-self: start;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(170px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
 }
 
 .button,
@@ -215,8 +226,11 @@ h3 {
 }
 
 .profile-panel {
+  order: 1;
+  justify-self: start;
   display: grid;
   gap: 20px;
+  max-width: 340px;
 }
 
 .portrait-ring {
@@ -391,8 +405,9 @@ h3 {
 
 .footer {
   display: grid;
-  grid-template-columns: minmax(260px, 0.48fr) minmax(0, 0.52fr);
-  gap: 40px;
+  grid-template-columns: minmax(320px, 0.56fr) minmax(320px, 0.44fr);
+  gap: 54px;
+  align-items: start;
   max-width: 1120px;
   margin: 0 auto;
   padding: 76px 28px 44px;
@@ -400,7 +415,15 @@ h3 {
 }
 
 .footer h2 {
-  font-size: clamp(28px, 4vw, 44px);
+  max-width: 640px;
+  font-size: clamp(28px, 4vw, 48px);
+}
+
+.footer-links a {
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  text-align: center;
 }
 
 .copyright {
@@ -439,6 +462,11 @@ h3 {
     min-height: auto;
     padding-top: 34px;
     padding-bottom: 30px;
+  }
+
+  .hero-copy,
+  .profile-panel {
+    order: initial;
   }
 
   .profile-panel {
@@ -491,10 +519,14 @@ h3 {
     padding: 7px 8px;
   }
 
-  .hero-actions,
-  .footer-links {
+  .hero-actions {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .footer-links {
+    grid-template-columns: 1fr;
     width: 100%;
   }
 
