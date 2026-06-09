@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Dachuan Song is a Ph.D. student in Electrical and Computer Engineering at George Mason University working on agent engineering, long-context memory, state-space models, and reliable AI evaluation."
+    />
+    <title>Dachuan Song | Agent Engineering & Research Engineering</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Dachuan Song home">Dachuan Song</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#publications">Papers</a>
+        <a href="#projects">Code</a>
+        <a href="#education">CV</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero section">
+        <div class="hero-copy">
+          <p class="eyebrow">Agent Engineering · Long-Context Memory · Research Engineering</p>
+          <h1>Dachuan Song</h1>
+          <p class="lead">
+            I build agents that remember, reason, use tools, and recover from errors over
+            long contexts, connecting research ideas with reproducible experiments and
+            working software.
+          </p>
+          <div class="hero-actions" aria-label="Profile links">
+            <a class="button primary" href="mailto:dsong25@gmu.edu">Email</a>
+            <a class="button" href="https://github.com/songdc98" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="button" href="https://scholar.google.com/citations?user=GhRcPq0AAAAJ&hl=en&oi=ao" target="_blank" rel="noreferrer">Scholar</a>
+            <a class="button" href="https://linkedin.com/in/dachuan-song-354554252" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+        <aside class="profile-panel" aria-label="Profile summary">
+          <div class="portrait-ring">
+            <img src="./assets/dachuan-song.png" alt="Portrait of Dachuan Song" />
+          </div>
+          <div>
+            <p class="role">Ph.D. in Electrical and Computer Engineering</p>
+            <p>George Mason University</p>
+            <p class="muted">Fairfax, Virginia</p>
+          </div>
+        </aside>
+      </section>
+
+      <section id="about" class="section split">
+        <div>
+          <p class="section-kicker">Direction</p>
+          <h2>Building agents that remember, reason, and recover.</h2>
+        </div>
+        <div class="section-body">
+          <p>
+            I am a Ph.D. student at <strong>George Mason University</strong>, advised by
+            <strong>Prof. Xuan Wang</strong>. My current focus is on agent engineering:
+            memory, tool-state reliability, long-context reasoning, and evaluation methods
+            that make model behavior more inspectable and less error-prone.
+          </p>
+          <p>
+            I like projects where a clean modeling idea has to survive real experiments:
+            long-context benchmarks, controlled ablations, GPU training workflows,
+            local-first tools, and products that turn AI into usable learning or decision
+            support experiences.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-kicker">Research Expertise</p>
+        <div class="expertise-grid">
+          <div class="expertise-card agent-card">
+            <h3>Agent Engineering</h3>
+            <p>Agent memory, tool-state tracking, provenance, error prevention, long-context retention, and evaluation for systems that need to act reliably over many steps.</p>
+          </div>
+          <div class="expertise-card sequence-card">
+            <h3>Long-Sequence Modeling</h3>
+            <p>State-space models, spectral sequence modeling, budgeted inference, Mamba-style ideas, and mechanisms for keeping useful information over long inputs.</p>
+          </div>
+          <div class="expertise-card systems-card">
+            <h3>Research Engineering</h3>
+            <p>PyTorch/CUDA experiments, reproducible ablations, structured evaluation pipelines, local/API model judging, and remote GPU execution for research iteration.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="work" class="section split">
+        <div>
+          <p class="section-kicker">Selected Work</p>
+          <h2>Research projects with measurable technical claims.</h2>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <p class="time">2026 · Preprint</p>
+            <h3>Elastic Spectral State Space Models for Budgeted Inference</h3>
+            <p>
+              Developed ES-SSM to train once at full spectral capacity and deploy
+              elastically by activating ordered spectral channels through masked
+              normalization and input-adaptive spectral gating.
+            </p>
+            <p class="stack">PyTorch · CUDA · FFT convolution · Long-context benchmarks</p>
+          </article>
+          <article class="timeline-item">
+            <p class="time">2024–2025 · Publication line</p>
+            <h3>Causal Fingerprinting from fMRI Time-Series Data</h3>
+            <p>
+              Reconstructed brain causal dynamics for subject and task fingerprints,
+              connecting causal time-series modeling with interpretable neural signatures.
+            </p>
+            <p class="stack">fMRI · Causal dynamics · Time-series modeling · Health AI</p>
+          </article>
+          <article class="timeline-item">
+            <p class="time">2023 · Master project</p>
+            <h3>Machine Learning for EEG Brain Activity Patterns</h3>
+            <p>
+              Built a deep learning pipeline combining CNN spatial extraction, LSTM temporal
+              modeling, attention, autoencoder pretraining, and transfer learning.
+            </p>
+            <p class="stack">CNN · LSTM · Attention · Autoencoder · ResNet50</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="publications" class="section">
+        <div class="section-heading">
+          <p class="section-kicker">Publications</p>
+          <h2>Selected papers</h2>
+        </div>
+        <div class="publication-list">
+          <article class="publication">
+            <p class="time">arXiv · 2026</p>
+            <h3>Elastic Spectral State Space Models for Budgeted Inference</h3>
+            <p>Dachuan Song, Xuan Wang</p>
+            <p class="paper-id">arXiv:2601.22488</p>
+          </article>
+          <article class="publication">
+            <p class="time">Health Information Science and Systems · 2025</p>
+            <h3>Reconstructing brain causal dynamics for subject and task fingerprints using fMRI time-series data</h3>
+            <p>Dachuan Song, Li Shen, Duy Duong-Tran, Xuan Wang</p>
+            <p class="paper-id">DOI: 10.1007/s13755-025-00388-w</p>
+          </article>
+          <article class="publication">
+            <p class="time">ACM BCB · 2024 · Oral Presentation</p>
+            <h3>Causality-based Subject and Task Fingerprints using fMRI Time-series Data</h3>
+            <p>Dachuan Song, Li Shen, Duy Duong-Tran, Xuan Wang</p>
+            <p class="paper-id">DOI: 10.1145/3698587.3701342</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="projects" class="section split">
+        <div>
+          <p class="section-kicker">Code & Builds</p>
+          <h2>Research code, local-first products, and learning tools.</h2>
+        </div>
+        <div class="project-grid">
+          <article class="project-card code-card">
+            <h3>ES-SSM</h3>
+            <p>Budget-aware state-space modeling with elastic spectral capacity for efficient inference.</p>
+            <a href="https://github.com/songdc98/ES-SSM-Elastic-Spectral-State-Space-Models-for-budgeted-inference" target="_blank" rel="noreferrer">Research code</a>
+          </article>
+          <article class="project-card product-card">
+            <h3>HealthPlanner</h3>
+            <p>Local-only iOS health and training planner using personal baselines, recovery state, and workout history.</p>
+            <a href="https://github.com/songdc98/HealthPlanner" target="_blank" rel="noreferrer">Project page</a>
+          </article>
+          <article class="project-card learning-card">
+            <h3>StoryVocab</h3>
+            <p>English learning product concept that turns vocabulary into story-based daily practice.</p>
+            <a href="https://github.com/songdc98/storyvocab" target="_blank" rel="noreferrer">Project page</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="education" class="section split">
+        <div>
+          <p class="section-kicker">Education & Service</p>
+          <h2>Academic foundation across ECE, agent research, and software systems.</h2>
+        </div>
+        <div class="education-list">
+          <article>
+            <h3>George Mason University</h3>
+            <p>Ph.D. in Electrical and Computer Engineering · 2024–Present</p>
+            <p class="muted">Linear systems, random processes, Kalman filtering, distributed control and optimization, system identification.</p>
+          </article>
+          <article>
+            <h3>University of Southampton</h3>
+            <p>Master's study in AI-related coursework</p>
+            <p class="muted">Advanced machine learning, deep learning, computer vision, Bayesian learning, active and reinforcement learning.</p>
+          </article>
+          <article>
+            <h3>Academic Service</h3>
+            <p>ICML 2026 Silver Reviewer</p>
+            <p class="muted">Recognized for review quality evaluated by Area Chairs.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact" class="footer">
+      <div>
+        <p class="section-kicker">Contact</p>
+        <h2>Open to research collaborations in agent engineering and AI research engineering.</h2>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:dsong25@gmu.edu">dsong25@gmu.edu</a>
+        <a href="https://github.com/songdc98" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://scholar.google.com/citations?user=GhRcPq0AAAAJ&hl=en&oi=ao" target="_blank" rel="noreferrer">Google Scholar</a>
+        <a href="https://linkedin.com/in/dachuan-song-354554252" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+      <p class="copyright">© <span id="year"></span> Dachuan Song.</p>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
