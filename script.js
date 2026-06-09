@@ -108,7 +108,7 @@ const translations = {
     "education.gmu.degree": "Ph.D. in Electrical and Computer Engineering · 2024–Present",
     "education.gmu.body":
       "Linear systems, random processes, Kalman filtering, distributed control and optimization, system identification.",
-    "education.southampton.degree": "Master's study in AI-related coursework",
+    "education.southampton.degree": "Master of Science (MSc)",
     "education.southampton.body":
       "Advanced machine learning, deep learning, computer vision, Bayesian learning, active and reinforcement learning.",
     "education.service.title": "Academic Service",
@@ -222,7 +222,7 @@ const translations = {
     "education.title": "教育背景。",
     "education.gmu.degree": "电子与计算机工程博士研究生 · 2024 至今",
     "education.gmu.body": "线性系统、随机过程、卡尔曼滤波、分布式控制与优化、系统辨识。",
-    "education.southampton.degree": "AI 相关硕士课程学习",
+    "education.southampton.degree": "理学硕士（MSc）",
     "education.southampton.body": "高级机器学习、深度学习、计算机视觉、贝叶斯学习、主动学习与强化学习。",
     "education.service.title": "学术服务",
     "education.service.body": "ICML 2026 Silver Reviewer，评审质量获得 Area Chairs 认可。",
