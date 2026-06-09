@@ -89,7 +89,7 @@ const translations = {
       "Built a deep learning pipeline combining CNN spatial extraction, LSTM temporal modeling, attention, autoencoder pretraining, and transfer learning.",
     "work.eeg.stack": "CNN · LSTM · Attention · Autoencoder · ResNet50",
     "publications.kicker": "Publications",
-    "publications.title": "Selected papers",
+    "publications.title": "Published papers",
     "publications.es.title": "Elastic Spectral State Space Models for Budgeted Inference",
     "publications.fmri.title":
       "Reconstructing brain causal dynamics for subject and task fingerprints using fMRI time-series data",
@@ -206,7 +206,7 @@ const translations = {
       "构建结合 CNN 空间特征提取、LSTM 时序建模、注意力、自编码器预训练和迁移学习的深度学习流程。",
     "work.eeg.stack": "CNN · LSTM · 注意力 · 自编码器 · ResNet50",
     "publications.kicker": "论文",
-    "publications.title": "代表论文",
+    "publications.title": "发表文章",
     "publications.es.title": "用于预算推理的弹性谱状态空间模型",
     "publications.fmri.title": "使用 fMRI 时间序列数据重建用于主体和任务指纹识别的大脑因果动态",
     "publications.bcb.time": "ACM BCB · 2024 · 口头报告",
