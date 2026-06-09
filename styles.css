@@ -158,7 +158,8 @@ a {
 .publication-list,
 .education-list,
 .project-grid,
-.expertise-grid {
+.expertise-grid,
+.skills-grid {
   min-width: 0;
 }
 
@@ -347,6 +348,60 @@ h3 {
   gap: 18px;
 }
 
+.skills-band {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 18% 18%, rgba(158, 184, 223, 0.08), transparent 30vw),
+    radial-gradient(circle at 84% 34%, rgba(215, 189, 126, 0.055), transparent 28vw),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.028), rgba(156, 199, 188, 0.025));
+}
+
+.skills-inner {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 76px 28px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.skill-card {
+  min-height: 190px;
+  padding: 20px;
+  border: 1px solid rgba(241, 237, 230, 0.12);
+  border-radius: 8px;
+  background: rgba(17, 17, 15, 0.58);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 16px 0 0;
+  list-style: none;
+}
+
+.skill-list li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 6px 10px;
+  border: 1px solid rgba(241, 237, 230, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.035);
+  color: #bdb6ac;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
 .expertise-grid > div,
 .project-grid > article,
 .publication,
@@ -424,10 +479,22 @@ h3 {
   font-weight: 800;
 }
 
+.publication h3 a {
+  color: #e2ddd4;
+}
+
+.publication h3 a:hover {
+  color: #d5ebe5;
+}
+
 .paper-id {
   color: #b8d5cd !important;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 13.5px;
+}
+
+.paper-id:hover {
+  color: #edf8f5 !important;
 }
 
 .project-card a {
@@ -521,7 +588,8 @@ h3 {
   }
 
   .expertise-grid,
-  .project-grid {
+  .project-grid,
+  .skills-grid {
     grid-template-columns: 1fr;
   }
 
@@ -541,7 +609,8 @@ h3 {
 
 @media (max-width: 600px) {
   .section,
-  .footer {
+  .footer,
+  .skills-inner {
     width: 390px;
     max-width: 100%;
     margin-left: 0;

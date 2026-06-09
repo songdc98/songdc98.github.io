@@ -17,6 +17,7 @@
         <nav class="nav" aria-label="Primary navigation">
           <a href="#about" data-i18n="nav.about">About</a>
           <a href="#work" data-i18n="nav.work">Work</a>
+          <a href="#skills" data-i18n="nav.skills">Skills</a>
           <a href="#publications" data-i18n="nav.papers">Papers</a>
           <a href="#projects" data-i18n="nav.code">Code</a>
           <a href="#education" data-i18n="nav.cv">CV</a>
@@ -66,12 +67,11 @@
             I am a Ph.D. student at <strong>George Mason University</strong>, advised by
             <strong>Prof. Xuan Wang</strong>. My current interests include intelligent
             agents, memory mechanisms, long-context reasoning, state-space and sequence
-            modeling, and AI for health data.
+            modeling.
           </p>
           <p data-i18n="about.p2">
-            I like projects where a clean modeling idea has to survive real experiments:
-            long-context benchmarks, controlled ablations, GPU training workflows,
-            and software that turns research ideas into usable systems.
+            I focus on research problems where modeling ideas, implementation details,
+            and empirical evaluation need to support each other.
           </p>
         </div>
       </section>
@@ -90,6 +90,71 @@
           <div class="expertise-card systems-card">
             <h3 data-i18n="areas.health.title">AI for Health</h3>
             <p data-i18n="areas.health.body">Causal and temporal modeling for fMRI, EEG, and other health data, with emphasis on interpretable signals and robust evaluation.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="skills-band">
+        <div class="skills-inner">
+          <div class="section-heading">
+            <p class="section-kicker" data-i18n="skills.kicker">Skills</p>
+            <h2 data-i18n="skills.title">Technical toolkit.</h2>
+          </div>
+          <div class="skills-grid">
+            <article class="skill-card">
+              <h3 data-i18n="skills.ml.title">Machine Learning</h3>
+              <ul class="skill-list">
+                <li data-i18n="skills.ml.1">Linear and logistic regression</li>
+                <li data-i18n="skills.ml.2">SVM, trees, and ensembles</li>
+                <li data-i18n="skills.ml.3">PCA and k-means</li>
+                <li data-i18n="skills.ml.4">Cross-validation and regularization</li>
+              </ul>
+            </article>
+            <article class="skill-card">
+              <h3 data-i18n="skills.dl.title">Deep Learning</h3>
+              <ul class="skill-list">
+                <li data-i18n="skills.dl.1">CNNs and residual blocks</li>
+                <li data-i18n="skills.dl.2">RNN, LSTM, and attention</li>
+                <li data-i18n="skills.dl.3">Transformers and GNNs</li>
+                <li data-i18n="skills.dl.4">Contrastive and triplet losses</li>
+              </ul>
+            </article>
+            <article class="skill-card">
+              <h3 data-i18n="skills.sequence.title">Sequence & Control</h3>
+              <ul class="skill-list">
+                <li data-i18n="skills.sequence.1">State-space models</li>
+                <li data-i18n="skills.sequence.2">Kalman filtering and smoothing</li>
+                <li data-i18n="skills.sequence.3">AR and VAR modeling</li>
+                <li data-i18n="skills.sequence.4">LQR and MPC concepts</li>
+              </ul>
+            </article>
+            <article class="skill-card">
+              <h3 data-i18n="skills.agent.title">Agents & Evaluation</h3>
+              <ul class="skill-list">
+                <li data-i18n="skills.agent.1">Tool-use workflows</li>
+                <li data-i18n="skills.agent.2">Long-context memory</li>
+                <li data-i18n="skills.agent.3">Error analysis</li>
+                <li data-i18n="skills.agent.4">Benchmark design</li>
+              </ul>
+            </article>
+            <article class="skill-card">
+              <h3 data-i18n="skills.engineering.title">Research Engineering</h3>
+              <ul class="skill-list">
+                <li data-i18n="skills.engineering.1">PyTorch experiments</li>
+                <li data-i18n="skills.engineering.2">CUDA-aware workflows</li>
+                <li data-i18n="skills.engineering.3">Reproducible ablations</li>
+                <li data-i18n="skills.engineering.4">Remote GPU execution</li>
+              </ul>
+            </article>
+            <article class="skill-card">
+              <h3 data-i18n="skills.software.title">Software</h3>
+              <ul class="skill-list">
+                <li data-i18n="skills.software.1">Python</li>
+                <li data-i18n="skills.software.2">JavaScript and TypeScript</li>
+                <li data-i18n="skills.software.3">Swift and iOS prototypes</li>
+                <li data-i18n="skills.software.4">Git, Linux, and data pipelines</li>
+              </ul>
+            </article>
           </div>
         </div>
       </section>
@@ -139,21 +204,27 @@
         <div class="publication-list">
           <article class="publication">
             <p class="time">arXiv · 2026</p>
-            <h3 data-i18n="publications.es.title">Elastic Spectral State Space Models for Budgeted Inference</h3>
+            <h3>
+              <a href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer" data-i18n="publications.es.title">Elastic Spectral State Space Models for Budgeted Inference</a>
+            </h3>
             <p>Dachuan Song, Xuan Wang</p>
-            <p class="paper-id">arXiv:2601.22488</p>
+            <p><a class="paper-id" href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer">arXiv:2601.22488</a></p>
           </article>
           <article class="publication">
             <p class="time">Health Information Science and Systems · 2025</p>
-            <h3 data-i18n="publications.fmri.title">Reconstructing brain causal dynamics for subject and task fingerprints using fMRI time-series data</h3>
+            <h3>
+              <a href="https://doi.org/10.1007/s13755-025-00388-w" target="_blank" rel="noreferrer" data-i18n="publications.fmri.title">Reconstructing brain causal dynamics for subject and task fingerprints using fMRI time-series data</a>
+            </h3>
             <p>Dachuan Song, Li Shen, Duy Duong-Tran, Xuan Wang</p>
-            <p class="paper-id">DOI: 10.1007/s13755-025-00388-w</p>
+            <p><a class="paper-id" href="https://doi.org/10.1007/s13755-025-00388-w" target="_blank" rel="noreferrer">DOI: 10.1007/s13755-025-00388-w</a></p>
           </article>
           <article class="publication">
             <p class="time" data-i18n="publications.bcb.time">ACM BCB · 2024 · Oral Presentation</p>
-            <h3 data-i18n="publications.bcb.title">Causality-based Subject and Task Fingerprints using fMRI Time-series Data</h3>
+            <h3>
+              <a href="https://doi.org/10.1145/3698587.3701342" target="_blank" rel="noreferrer" data-i18n="publications.bcb.title">Causality-based Subject and Task Fingerprints using fMRI Time-series Data</a>
+            </h3>
             <p>Dachuan Song, Li Shen, Duy Duong-Tran, Xuan Wang</p>
-            <p class="paper-id">DOI: 10.1145/3698587.3701342</p>
+            <p><a class="paper-id" href="https://doi.org/10.1145/3698587.3701342" target="_blank" rel="noreferrer">DOI: 10.1145/3698587.3701342</a></p>
           </article>
         </div>
       </section>
