@@ -22,7 +22,7 @@ const translations = {
     "profile.role": "Ph.D. Student",
     "profile.program": "Electrical & Computer Engineering",
     "profile.university": "George Mason University",
-    "profile.location": "Fairfax, Virginia",
+    "profile.location": "Fairfax, Virginia, USA",
     "about.kicker": "Direction",
     "about.title": "AI, Agents, and Sequence Modeling.",
     "about.p1":
@@ -139,7 +139,7 @@ const translations = {
     "profile.role": "博士研究生",
     "profile.program": "电子与计算机工程",
     "profile.university": "George Mason University",
-    "profile.location": "Fairfax, Virginia",
+    "profile.location": "Fairfax, Virginia, USA",
     "about.kicker": "方向",
     "about.title": "AI、智能体与序列建模。",
     "about.p1":

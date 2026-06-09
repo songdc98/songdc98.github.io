@@ -320,6 +320,15 @@ h3 {
   color: var(--muted);
 }
 
+.location-link {
+  color: var(--muted);
+  transition: color 160ms ease;
+}
+
+.location-link:hover {
+  color: var(--accent-ink);
+}
+
 .split {
   display: grid;
   grid-template-columns: minmax(240px, 0.42fr) minmax(0, 0.58fr);
