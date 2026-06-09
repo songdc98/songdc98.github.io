@@ -5,150 +5,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Dachuan Song is a Ph.D. student in Electrical and Computer Engineering at George Mason University working on agent engineering, long-context memory, state-space models, and reliable AI evaluation."
+      content="Dachuan Song is a Ph.D. student in Electrical and Computer Engineering at George Mason University working on AI, intelligent agents, long-sequence modeling, and health AI."
     />
-    <title>Dachuan Song | Agent Engineering & Research Engineering</title>
+    <title>Dachuan Song | AI Research & Engineering</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="Dachuan Song home">Dachuan Song</a>
-      <nav class="nav" aria-label="Primary navigation">
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
-        <a href="#publications">Papers</a>
-        <a href="#projects">Code</a>
-        <a href="#education">CV</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <div class="header-controls">
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="#about" data-i18n="nav.about">About</a>
+          <a href="#work" data-i18n="nav.work">Work</a>
+          <a href="#publications" data-i18n="nav.papers">Papers</a>
+          <a href="#projects" data-i18n="nav.code">Code</a>
+          <a href="#education" data-i18n="nav.cv">CV</a>
+          <a href="#contact" data-i18n="nav.contact">Contact</a>
+        </nav>
+        <button class="language-toggle" type="button" data-lang-toggle aria-label="Switch to Chinese">中文</button>
+      </div>
     </header>
 
     <main id="top">
       <section class="hero section">
         <div class="hero-copy">
-          <p class="eyebrow">Agent Engineering · Long-Context Memory · Research Engineering</p>
+          <p class="eyebrow" data-i18n="hero.eyebrow">AI Research · Intelligent Agents · Long-Sequence Modeling · Health AI</p>
           <h1>Dachuan Song</h1>
-          <p class="lead">
-            I build agents that remember, reason, use tools, and recover from errors over
-            long contexts, connecting research ideas with reproducible experiments and
-            working software.
+          <p class="lead" data-i18n="hero.lead">
+            I work across AI, intelligent agents, memory mechanisms, long-sequence modeling,
+            and health AI, with an emphasis on clear modeling ideas, reproducible experiments,
+            and useful software.
           </p>
-          <div class="hero-actions" aria-label="Profile links">
-            <a class="button primary" href="mailto:dsong25@gmu.edu">Email</a>
+          <div class="hero-actions" aria-label="Profile links" data-i18n-aria="hero.linksLabel">
+            <a class="button primary" href="mailto:dsong25@gmu.edu" data-i18n="links.email">Email</a>
             <a class="button" href="https://github.com/songdc98" target="_blank" rel="noreferrer">GitHub</a>
-            <a class="button" href="https://scholar.google.com/citations?user=GhRcPq0AAAAJ&hl=en&oi=ao" target="_blank" rel="noreferrer">Scholar</a>
+            <a class="button" href="https://scholar.google.com/citations?user=GhRcPq0AAAAJ&hl=en&oi=ao" target="_blank" rel="noreferrer" data-i18n="links.scholar">Scholar</a>
             <a class="button" href="https://linkedin.com/in/dachuan-song-354554252" target="_blank" rel="noreferrer">LinkedIn</a>
           </div>
         </div>
-        <aside class="profile-panel" aria-label="Profile summary">
+        <aside class="profile-panel" aria-label="Profile summary" data-i18n-aria="profile.summaryLabel">
           <div class="portrait-ring">
             <img src="./assets/dachuan-song.png" alt="Portrait of Dachuan Song" />
           </div>
           <div>
-            <p class="role">Ph.D. in Electrical and Computer Engineering</p>
-            <p>George Mason University</p>
-            <p class="muted">Fairfax, Virginia</p>
+            <p class="role" data-i18n="profile.role">Ph.D. Student</p>
+            <p class="program" data-i18n="profile.program">Electrical &amp; Computer Engineering</p>
+            <p data-i18n="profile.university">George Mason University</p>
+            <p class="muted" data-i18n="profile.location">Fairfax, Virginia</p>
           </div>
         </aside>
       </section>
 
       <section id="about" class="section split">
         <div>
-          <p class="section-kicker">Direction</p>
-          <h2>Building agents that remember, reason, and recover.</h2>
+          <p class="section-kicker" data-i18n="about.kicker">Direction</p>
+          <h2 data-i18n="about.title">AI, Agents, and Sequence Modeling.</h2>
         </div>
         <div class="section-body">
-          <p>
+          <p data-i18n-html="about.p1">
             I am a Ph.D. student at <strong>George Mason University</strong>, advised by
-            <strong>Prof. Xuan Wang</strong>. My current focus is on agent engineering:
-            memory, tool-state reliability, long-context reasoning, and evaluation methods
-            that make model behavior more inspectable and less error-prone.
+            <strong>Prof. Xuan Wang</strong>. My current interests include intelligent
+            agents, memory mechanisms, long-context reasoning, state-space and sequence
+            modeling, and AI for health data.
           </p>
-          <p>
+          <p data-i18n="about.p2">
             I like projects where a clean modeling idea has to survive real experiments:
             long-context benchmarks, controlled ablations, GPU training workflows,
-            local-first tools, and products that turn AI into usable learning or decision
-            support experiences.
+            and software that turns research ideas into usable systems.
           </p>
         </div>
       </section>
 
       <section class="section">
-        <p class="section-kicker">Research Expertise</p>
+        <p class="section-kicker" data-i18n="areas.kicker">Research Areas</p>
         <div class="expertise-grid">
           <div class="expertise-card agent-card">
-            <h3>Agent Engineering</h3>
-            <p>Agent memory, tool-state tracking, provenance, error prevention, long-context retention, and evaluation for systems that need to act reliably over many steps.</p>
+            <h3 data-i18n="areas.agent.title">Intelligent Agents</h3>
+            <p data-i18n="areas.agent.body">Memory, tool-use reliability, long-context reasoning, and evaluation methods for models that need to plan, call tools, and avoid avoidable errors.</p>
           </div>
           <div class="expertise-card sequence-card">
-            <h3>Long-Sequence Modeling</h3>
-            <p>State-space models, spectral sequence modeling, budgeted inference, Mamba-style ideas, and mechanisms for keeping useful information over long inputs.</p>
+            <h3 data-i18n="areas.sequence.title">Long-Sequence Modeling</h3>
+            <p data-i18n="areas.sequence.body">State-space models, spectral sequence modeling, budgeted inference, Mamba-style ideas, and mechanisms for keeping useful information over long inputs.</p>
           </div>
           <div class="expertise-card systems-card">
-            <h3>Research Engineering</h3>
-            <p>PyTorch/CUDA experiments, reproducible ablations, structured evaluation pipelines, local/API model judging, and remote GPU execution for research iteration.</p>
+            <h3 data-i18n="areas.health.title">AI for Health</h3>
+            <p data-i18n="areas.health.body">Causal and temporal modeling for fMRI, EEG, and other health data, with emphasis on interpretable signals and robust evaluation.</p>
           </div>
         </div>
       </section>
 
       <section id="work" class="section split">
         <div>
-          <p class="section-kicker">Selected Work</p>
-          <h2>Research projects with measurable technical claims.</h2>
+          <p class="section-kicker" data-i18n="work.kicker">Selected Work</p>
+          <h2 data-i18n="work.title">Research projects with measurable technical claims.</h2>
         </div>
         <div class="timeline">
           <article class="timeline-item">
-            <p class="time">2026 · Preprint</p>
-            <h3>Elastic Spectral State Space Models for Budgeted Inference</h3>
-            <p>
+            <p class="time" data-i18n="work.es.time">2026 · Preprint</p>
+            <h3 data-i18n="work.es.title">Elastic Spectral State Space Models for Budgeted Inference</h3>
+            <p data-i18n="work.es.body">
               Developed ES-SSM to train once at full spectral capacity and deploy
               elastically by activating ordered spectral channels through masked
               normalization and input-adaptive spectral gating.
             </p>
-            <p class="stack">PyTorch · CUDA · FFT convolution · Long-context benchmarks</p>
+            <p class="stack" data-i18n="work.es.stack">PyTorch · CUDA · FFT convolution · Long-context benchmarks</p>
           </article>
           <article class="timeline-item">
-            <p class="time">2024–2025 · Publication line</p>
-            <h3>Causal Fingerprinting from fMRI Time-Series Data</h3>
-            <p>
+            <p class="time" data-i18n="work.fmri.time">2024–2025 · Publication line</p>
+            <h3 data-i18n="work.fmri.title">Causal Fingerprinting from fMRI Time-Series Data</h3>
+            <p data-i18n="work.fmri.body">
               Reconstructed brain causal dynamics for subject and task fingerprints,
               connecting causal time-series modeling with interpretable neural signatures.
             </p>
-            <p class="stack">fMRI · Causal dynamics · Time-series modeling · Health AI</p>
+            <p class="stack" data-i18n="work.fmri.stack">fMRI · Causal dynamics · Time-series modeling · Health AI</p>
           </article>
           <article class="timeline-item">
-            <p class="time">2023 · Master project</p>
-            <h3>Machine Learning for EEG Brain Activity Patterns</h3>
-            <p>
+            <p class="time" data-i18n="work.eeg.time">2023 · Master project</p>
+            <h3 data-i18n="work.eeg.title">Machine Learning for EEG Brain Activity Patterns</h3>
+            <p data-i18n="work.eeg.body">
               Built a deep learning pipeline combining CNN spatial extraction, LSTM temporal
               modeling, attention, autoencoder pretraining, and transfer learning.
             </p>
-            <p class="stack">CNN · LSTM · Attention · Autoencoder · ResNet50</p>
+            <p class="stack" data-i18n="work.eeg.stack">CNN · LSTM · Attention · Autoencoder · ResNet50</p>
           </article>
         </div>
       </section>
 
       <section id="publications" class="section">
         <div class="section-heading">
-          <p class="section-kicker">Publications</p>
-          <h2>Selected papers</h2>
+          <p class="section-kicker" data-i18n="publications.kicker">Publications</p>
+          <h2 data-i18n="publications.title">Selected papers</h2>
         </div>
         <div class="publication-list">
           <article class="publication">
             <p class="time">arXiv · 2026</p>
-            <h3>Elastic Spectral State Space Models for Budgeted Inference</h3>
+            <h3 data-i18n="publications.es.title">Elastic Spectral State Space Models for Budgeted Inference</h3>
             <p>Dachuan Song, Xuan Wang</p>
             <p class="paper-id">arXiv:2601.22488</p>
           </article>
           <article class="publication">
             <p class="time">Health Information Science and Systems · 2025</p>
-            <h3>Reconstructing brain causal dynamics for subject and task fingerprints using fMRI time-series data</h3>
+            <h3 data-i18n="publications.fmri.title">Reconstructing brain causal dynamics for subject and task fingerprints using fMRI time-series data</h3>
             <p>Dachuan Song, Li Shen, Duy Duong-Tran, Xuan Wang</p>
             <p class="paper-id">DOI: 10.1007/s13755-025-00388-w</p>
           </article>
           <article class="publication">
-            <p class="time">ACM BCB · 2024 · Oral Presentation</p>
-            <h3>Causality-based Subject and Task Fingerprints using fMRI Time-series Data</h3>
+            <p class="time" data-i18n="publications.bcb.time">ACM BCB · 2024 · Oral Presentation</p>
+            <h3 data-i18n="publications.bcb.title">Causality-based Subject and Task Fingerprints using fMRI Time-series Data</h3>
             <p>Dachuan Song, Li Shen, Duy Duong-Tran, Xuan Wang</p>
             <p class="paper-id">DOI: 10.1145/3698587.3701342</p>
           </article>
@@ -157,48 +160,48 @@
 
       <section id="projects" class="section split">
         <div>
-          <p class="section-kicker">Code & Builds</p>
-          <h2>Research code, local-first products, and learning tools.</h2>
+          <p class="section-kicker" data-i18n="projects.kicker">Open Code</p>
+          <h2 data-i18n="projects.title">Open research code.</h2>
         </div>
         <div class="project-grid">
           <article class="project-card code-card">
             <h3>ES-SSM</h3>
-            <p>Budget-aware state-space modeling with elastic spectral capacity for efficient inference.</p>
-            <a href="https://github.com/songdc98/ES-SSM-Elastic-Spectral-State-Space-Models-for-budgeted-inference" target="_blank" rel="noreferrer">Research code</a>
+            <p data-i18n="projects.es.body">Budget-aware state-space modeling with elastic spectral capacity for efficient inference.</p>
+            <a href="https://github.com/songdc98/ES-SSM-Elastic-Spectral-State-Space-Models-for-budgeted-inference" target="_blank" rel="noreferrer" data-i18n="projects.researchCode">Research code</a>
           </article>
           <article class="project-card product-card">
             <h3>HealthPlanner</h3>
-            <p>Local-only iOS health and training planner using personal baselines, recovery state, and workout history.</p>
-            <a href="https://github.com/songdc98/HealthPlanner" target="_blank" rel="noreferrer">Project page</a>
+            <p data-i18n="projects.health.body">Local-only iOS health and training planner using personal baselines, recovery state, and workout history.</p>
+            <a href="https://github.com/songdc98/HealthPlanner" target="_blank" rel="noreferrer" data-i18n="projects.projectPage">Project page</a>
           </article>
           <article class="project-card learning-card">
             <h3>StoryVocab</h3>
-            <p>English learning product concept that turns vocabulary into story-based daily practice.</p>
-            <a href="https://github.com/songdc98/storyvocab" target="_blank" rel="noreferrer">Project page</a>
+            <p data-i18n="projects.story.body">English learning product concept that turns vocabulary into story-based daily practice.</p>
+            <a href="https://github.com/songdc98/storyvocab" target="_blank" rel="noreferrer" data-i18n="projects.projectPage">Project page</a>
           </article>
         </div>
       </section>
 
       <section id="education" class="section split">
         <div>
-          <p class="section-kicker">Education & Service</p>
-          <h2>Academic foundation across ECE, agent research, and software systems.</h2>
+          <p class="section-kicker" data-i18n="education.kicker">Education & Service</p>
+          <h2 data-i18n="education.title">Academic Background.</h2>
         </div>
         <div class="education-list">
           <article>
             <h3>George Mason University</h3>
-            <p>Ph.D. in Electrical and Computer Engineering · 2024–Present</p>
-            <p class="muted">Linear systems, random processes, Kalman filtering, distributed control and optimization, system identification.</p>
+            <p data-i18n="education.gmu.degree">Ph.D. in Electrical and Computer Engineering · 2024–Present</p>
+            <p class="muted" data-i18n="education.gmu.body">Linear systems, random processes, Kalman filtering, distributed control and optimization, system identification.</p>
           </article>
           <article>
             <h3>University of Southampton</h3>
-            <p>Master's study in AI-related coursework</p>
-            <p class="muted">Advanced machine learning, deep learning, computer vision, Bayesian learning, active and reinforcement learning.</p>
+            <p data-i18n="education.southampton.degree">Master's study in AI-related coursework</p>
+            <p class="muted" data-i18n="education.southampton.body">Advanced machine learning, deep learning, computer vision, Bayesian learning, active and reinforcement learning.</p>
           </article>
           <article>
-            <h3>Academic Service</h3>
+            <h3 data-i18n="education.service.title">Academic Service</h3>
             <p>ICML 2026 Silver Reviewer</p>
-            <p class="muted">Recognized for review quality evaluated by Area Chairs.</p>
+            <p class="muted" data-i18n="education.service.body">Recognized for review quality evaluated by Area Chairs.</p>
           </article>
         </div>
       </section>
@@ -206,8 +209,8 @@
 
     <footer id="contact" class="footer">
       <div>
-        <p class="section-kicker">Contact</p>
-        <h2>Open to research collaborations in agent engineering and AI research engineering.</h2>
+        <p class="section-kicker" data-i18n="contact.kicker">Contact</p>
+        <h2 data-i18n="contact.title">Open to AI research engineering collaborations.</h2>
       </div>
       <div class="footer-links">
         <a href="mailto:dsong25@gmu.edu">dsong25@gmu.edu</a>
