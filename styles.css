@@ -470,15 +470,83 @@ h3 {
   gap: 28px;
 }
 
+.publication-meta {
+  grid-column: 1;
+  grid-row: 1 / span 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  min-width: 0;
+}
+
 .publication h3,
 .publication p,
 .publication a {
   grid-column: 2;
 }
 
-.publication .time {
-  grid-column: 1;
-  grid-row: 1 / span 3;
+.publication-meta .time {
+  display: block;
+  line-height: 1.35;
+}
+
+.paper-type,
+.highlight-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 28px;
+  padding: 5px 10px;
+  border: 1px solid rgba(241, 237, 230, 0.16);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.paper-type {
+  background: rgba(156, 199, 188, 0.1);
+  border-color: rgba(156, 199, 188, 0.35);
+  color: #d8eee8;
+}
+
+.paper-type.journal {
+  background: rgba(158, 184, 223, 0.11);
+  border-color: rgba(158, 184, 223, 0.34);
+  color: #dce9fb;
+}
+
+.paper-type.conference {
+  background: rgba(215, 161, 154, 0.1);
+  border-color: rgba(215, 161, 154, 0.34);
+  color: #f2d5d1;
+}
+
+.highlight-badge {
+  background: rgba(215, 189, 126, 0.14);
+  border-color: rgba(215, 189, 126, 0.48);
+  color: #f2dfa6;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 18px rgba(215, 189, 126, 0.08);
+}
+
+.highlight-badge-inline {
+  position: relative;
+  top: -1px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.service-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
 }
 
 .publication a,
@@ -610,9 +678,13 @@ h3 {
   .publication h3,
   .publication p,
   .publication a,
-  .publication .time {
+  .publication-meta {
     grid-column: 1;
     grid-row: auto;
+  }
+
+  .publication-meta {
+    gap: 8px;
   }
 }
 
