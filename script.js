@@ -5,6 +5,7 @@ const translations = {
       "Dachuan Song is a Ph.D. student in Electrical and Computer Engineering at George Mason University working on AI, intelligent agents, long-sequence modeling, and health AI.",
     "language.button": "中文",
     "language.aria": "Switch to Chinese",
+    "cat.label": "Interactive cat companion",
     "nav.about": "About",
     "nav.work": "Work",
     "nav.skills": "Skills",
@@ -122,6 +123,15 @@ const translations = {
     "education.service.body": "Recognized for review quality evaluated by Area Chairs.",
     "contact.kicker": "Contact",
     "contact.title": "Open to AI research engineering collaborations.",
+    "visitors.kicker": "Visitors",
+    "visitors.title": "Visitor regions",
+    "visitors.note": "Country-level counts only. No IP addresses are displayed.",
+    "visitors.loading": "Loading visitor regions...",
+    "visitors.empty": "Visitor regions will appear after the first recorded visit.",
+    "visitors.unavailable": "Visitor stats will appear after deployment.",
+    "visitors.totalLabel": "total visits",
+    "visitors.localRegion": "Local preview",
+    "visitors.unknownRegion": "Unknown region",
   },
   zh: {
     "meta.title": "Dachuan Song | AI 研究与工程",
@@ -129,6 +139,7 @@ const translations = {
       "Dachuan Song 是 George Mason University 电子与计算机工程博士研究生，研究方向包括 AI、智能体、长序列建模和健康 AI。",
     "language.button": "EN",
     "language.aria": "Switch to English",
+    "cat.label": "互动小猫",
     "nav.about": "关于",
     "nav.work": "研究",
     "nav.skills": "技能",
@@ -242,13 +253,27 @@ const translations = {
     "education.service.body": "评审质量获得 Area Chairs 认可。",
     "contact.kicker": "联系",
     "contact.title": "欢迎交流 AI 研究工程合作。",
+    "visitors.kicker": "访客",
+    "visitors.title": "国家/地区访问统计",
+    "visitors.note": "只显示国家/地区级别计数，不展示 IP 地址。",
+    "visitors.loading": "正在加载访问地区...",
+    "visitors.empty": "记录到第一次访问后，这里会显示国家/地区统计。",
+    "visitors.unavailable": "部署后会显示访问统计。",
+    "visitors.totalLabel": "总访问次数",
+    "visitors.localRegion": "本地预览",
+    "visitors.unknownRegion": "未知地区",
   },
 };
 
 const languageStorageKey = "dachuan-site-language";
+const visitSessionStorageKey = "dachuan-site-visit-counted";
+const catCompanion = document.querySelector("[data-cat-companion]");
 const languageToggle = document.querySelector("[data-lang-toggle]");
 const descriptionMeta = document.querySelector('meta[name="description"]');
+const visitorStatsElement = document.querySelector("[data-visitor-stats]");
 let currentLanguage = "en";
+let visitorStatsData = null;
+let visitorStatusKey = "visitors.loading";
 
 const getTranslation = (language, key) => translations[language]?.[key] ?? translations.en[key] ?? "";
 
@@ -278,6 +303,12 @@ function setLanguage(language) {
     languageToggle.setAttribute("aria-label", getTranslation(currentLanguage, "language.aria"));
   }
 
+  if (visitorStatsData) {
+    renderVisitorStats(visitorStatsData);
+  } else if (visitorStatsElement) {
+    setVisitorStatus(visitorStatusKey);
+  }
+
   localStorage.setItem(languageStorageKey, currentLanguage);
 }
 
@@ -290,6 +321,148 @@ function getInitialLanguage() {
   return "en";
 }
 
+function setVisitorStatus(key) {
+  if (!visitorStatsElement) return;
+  visitorStatusKey = key;
+  const status = document.createElement("p");
+  status.className = "visitor-status";
+  status.textContent = getTranslation(currentLanguage, key);
+  visitorStatsElement.replaceChildren(status);
+}
+
+function getRegionName(code) {
+  if (code === "LOCAL") return getTranslation(currentLanguage, "visitors.localRegion");
+  if (code === "ZZ") return getTranslation(currentLanguage, "visitors.unknownRegion");
+
+  try {
+    const displayNames = new Intl.DisplayNames([currentLanguage === "zh" ? "zh-CN" : "en"], { type: "region" });
+    return displayNames.of(code) || code;
+  } catch {
+    return code;
+  }
+}
+
+function renderVisitorStats(data) {
+  if (!visitorStatsElement) return;
+
+  const countries = Array.isArray(data?.countries) ? data.countries : [];
+
+  if (countries.length === 0) {
+    setVisitorStatus("visitors.empty");
+    return;
+  }
+
+  const maxCount = Math.max(...countries.map((country) => Number(country.count) || 0), 1);
+  const fragment = document.createDocumentFragment();
+  const summary = document.createElement("div");
+  const total = document.createElement("span");
+  const label = document.createElement("span");
+  const list = document.createElement("div");
+
+  summary.className = "visitor-summary";
+  total.className = "visitor-total";
+  label.className = "visitor-total-label";
+  list.className = "visitor-list";
+
+  total.textContent = String(Number(data.total) || 0);
+  label.textContent = getTranslation(currentLanguage, "visitors.totalLabel");
+  summary.append(total, label);
+
+  countries.forEach((country) => {
+    const count = Number(country.count) || 0;
+    const row = document.createElement("div");
+    const region = document.createElement("span");
+    const bar = document.createElement("span");
+    const fill = document.createElement("span");
+    const countElement = document.createElement("span");
+
+    row.className = "visitor-row";
+    region.className = "visitor-region";
+    bar.className = "visitor-bar";
+    fill.className = "visitor-bar-fill";
+    countElement.className = "visitor-count";
+
+    region.textContent = getRegionName(String(country.code || "ZZ").toUpperCase());
+    fill.style.width = `${Math.max(8, Math.round((count / maxCount) * 100))}%`;
+    countElement.textContent = String(count);
+
+    bar.append(fill);
+    row.append(region, bar, countElement);
+    list.append(row);
+  });
+
+  fragment.append(summary, list);
+  visitorStatsElement.replaceChildren(fragment);
+}
+
+async function loadVisitorStats() {
+  if (!visitorStatsElement) return;
+
+  setVisitorStatus("visitors.loading");
+
+  let countedThisSession = false;
+  try {
+    countedThisSession = sessionStorage.getItem(visitSessionStorageKey) === "1";
+  } catch {
+    countedThisSession = false;
+  }
+
+  try {
+    const response = await fetch("/api/visits", {
+      method: countedThisSession ? "GET" : "POST",
+      headers: { accept: "application/json" },
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      throw new Error(`Visitor stats request failed: ${response.status}`);
+    }
+
+    visitorStatsData = await response.json();
+
+    if (!countedThisSession) {
+      try {
+        sessionStorage.setItem(visitSessionStorageKey, "1");
+      } catch {
+        // Session storage can be blocked; the stats component still works.
+      }
+    }
+
+    renderVisitorStats(visitorStatsData);
+  } catch {
+    setVisitorStatus("visitors.unavailable");
+  }
+}
+
+function initCatCompanion() {
+  if (!catCompanion) return;
+
+  const resetCat = () => {
+    catCompanion.classList.remove("is-awake");
+    catCompanion.style.setProperty("--cat-look-x", "0px");
+    catCompanion.style.setProperty("--cat-look-y", "0px");
+    catCompanion.style.setProperty("--cat-tilt", "0deg");
+  };
+
+  catCompanion.addEventListener("pointermove", (event) => {
+    const rect = catCompanion.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+
+    catCompanion.classList.add("is-awake");
+    catCompanion.style.setProperty("--cat-look-x", `${Math.max(-1, Math.min(1, x)) * 5}px`);
+    catCompanion.style.setProperty("--cat-look-y", `${Math.max(-1, Math.min(1, y)) * 3}px`);
+    catCompanion.style.setProperty("--cat-tilt", `${Math.max(-1, Math.min(1, x)) * 5}deg`);
+  });
+
+  catCompanion.addEventListener("pointerleave", resetCat);
+  catCompanion.addEventListener("blur", resetCat);
+  catCompanion.addEventListener("click", () => {
+    document.body.classList.add("cat-is-playing");
+    window.setTimeout(() => document.body.classList.remove("cat-is-playing"), 620);
+  });
+}
+
 document.getElementById("year").textContent = new Date().getFullYear();
 
 if (languageToggle) {
@@ -299,3 +472,5 @@ if (languageToggle) {
 }
 
 setLanguage(getInitialLanguage());
+initCatCompanion();
+loadVisitorStats();
