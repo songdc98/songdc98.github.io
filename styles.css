@@ -419,6 +419,15 @@ h3 {
   color: var(--accent);
 }
 
+.institution-link {
+  color: inherit;
+  transition: color 160ms ease;
+}
+
+.institution-link:hover {
+  color: var(--accent);
+}
+
 .split {
   display: grid;
   grid-template-columns: minmax(240px, 0.42fr) minmax(0, 0.58fr);
