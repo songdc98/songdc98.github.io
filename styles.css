@@ -240,6 +240,15 @@ h1 {
   font-weight: 720;
 }
 
+.han-name {
+  display: inline-block;
+  margin-left: 12px;
+  color: var(--muted);
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 h2 {
   margin-bottom: 16px;
   font-size: clamp(27px, 3.4vw, 38px);
@@ -314,13 +323,13 @@ h3 {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 16px;
-  width: 220px;
-  max-width: 220px;
+  width: 240px;
+  max-width: 240px;
 }
 
 .portrait-ring {
   position: relative;
-  width: 150px;
+  width: 176px;
   max-width: 100%;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -507,7 +516,7 @@ h3 {
 
 .publication {
   display: grid;
-  grid-template-columns: 170px minmax(0, 1fr) minmax(280px, 360px);
+  grid-template-columns: 160px minmax(0, 1fr) minmax(320px, 420px);
   column-gap: 30px;
   row-gap: 8px;
 }
@@ -682,6 +691,10 @@ h3 {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: contain;
+}
+
+.paper-thumbnail-wide img {
+  aspect-ratio: 141 / 41;
 }
 
 .work-links {
