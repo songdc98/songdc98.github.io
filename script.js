@@ -15,7 +15,7 @@ const translations = {
     "nav.contact": "Contact",
     "hero.eyebrow": "Deep Learning · Long-Context Modeling · LLM-Based Agents · Model Evaluation",
     "hero.lead":
-      "I work across deep learning, long-context and sequence modeling, model evaluation, and LLM-based agents. My research emphasizes mechanism-level questions, controlled experiments, and reproducible empirical evidence.",
+      "I work across deep learning, long-context and sequence modeling, model evaluation, and LLM-based agents. I study how models generalize, retain information, and fail under controlled experimental settings.",
     "hero.linksLabel": "Profile links",
     "links.email": "Email",
     "links.scholar": "Scholar",
@@ -145,7 +145,7 @@ const translations = {
     "nav.contact": "联系",
     "hero.eyebrow": "深度学习 · 长上下文建模 · 基于大语言模型的智能体 · 模型评估",
     "hero.lead":
-      "我的研究覆盖深度学习、长上下文与序列建模、模型评估，以及基于大语言模型的智能体。我关注机制层面的研究问题、受控实验和可复现的实证证据。",
+      "我的研究覆盖深度学习、长上下文与序列建模、模型评估，以及基于大语言模型的智能体。我研究模型如何泛化、保留信息，以及在受控实验设置下如何失败。",
     "hero.linksLabel": "个人链接",
     "links.email": "邮箱",
     "links.scholar": "学术主页",
