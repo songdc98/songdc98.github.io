@@ -64,11 +64,24 @@ a {
   padding: 0;
   border: 0;
   background: transparent;
-  pointer-events: none;
+  pointer-events: auto;
   transform-origin: 50% 80%;
   opacity: 0.34;
-  filter: none;
   filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.08));
+  transition: opacity 160ms ease, filter 160ms ease;
+}
+
+.coin-companion:hover {
+  --coin-border: rgba(139, 96, 16, 0.86);
+  --coin-highlight: rgba(255, 255, 255, 0.72);
+  --coin-ring: rgba(255, 238, 157, 0.52);
+  --coin-shadow: rgba(112, 72, 14, 0.2);
+  --coin-a: #fff1a8;
+  --coin-b: #ffe68a;
+  --coin-c: #d69a22;
+  --coin-d: #9f6511;
+  opacity: 0.86;
+  filter: drop-shadow(0 12px 18px rgba(112, 72, 14, 0.14));
 }
 
 .coin-sprite {
@@ -214,7 +227,7 @@ a {
 
 .hero-copy {
   order: 2;
-  padding-left: clamp(24px, 3vw, 44px);
+  margin-left: clamp(72px, 9vw, 132px);
 }
 
 .hero-copy,
@@ -844,6 +857,10 @@ h3 {
   .hero-copy,
   .profile-panel {
     order: initial;
+  }
+
+  .hero-copy {
+    margin-left: 0;
   }
 
   .profile-panel {
