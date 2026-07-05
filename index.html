@@ -23,7 +23,6 @@
           <a href="#publications" data-i18n="nav.papers">Papers</a>
           <a href="#skills" data-i18n="nav.skills">Skills</a>
           <a href="#work" data-i18n="nav.work">Work</a>
-          <a href="#projects" data-i18n="nav.code">Code</a>
           <a href="#education" data-i18n="nav.cv">CV</a>
           <a href="#contact" data-i18n="nav.contact">Contact</a>
         </nav>
@@ -72,14 +71,13 @@
           <p data-i18n-html="about.p1">
             I am a Ph.D. student at <strong>George Mason University</strong>, advised by
             <strong>Prof. Xuan Wang</strong>. My current interests include deep learning,
-            long-context and sequence modeling, LLM-based agents, agent memory and
-            reliability, and evaluation methods that separate real capability from
-            measurement artifacts.
+            long-context and sequence modeling, LLM-based agents, and methods for
+            understanding and improving model capabilities.
           </p>
           <p data-i18n="about.p2">
-            I focus on problems that connect model mechanisms, implementation details,
-            and empirical evaluation: how models generalize to longer inputs, aggregate
-            information, reveal benchmark artifacts, and use memory safely in agent workflows.
+            I focus on model generalization, long-context modeling, reliable information
+            aggregation, and agent workflows where evaluation and diagnosis help improve
+            model behavior.
           </p>
         </div>
       </section>
@@ -135,8 +133,8 @@
             <p data-i18n="areas.sequence.body">Mechanisms for preserving, aggregating, and using information over long inputs, including sequence operators, state-space ideas, and length generalization.</p>
           </div>
           <div class="expertise-card systems-card">
-            <h3 data-i18n="areas.health.title">Evaluation &amp; Diagnostics</h3>
-            <p data-i18n="areas.health.body">Controlled ablations, benchmark audits, multi-seed analysis, and null-calibrated tests for distinguishing real model behavior from artifacts.</p>
+            <h3 data-i18n="areas.health.title">Model Evaluation &amp; Improvement</h3>
+            <p data-i18n="areas.health.body">Evaluation and diagnostic methods for understanding model capabilities, exposing biases or artifacts, and guiding better model design.</p>
           </div>
           <div class="expertise-card agent-card">
             <h3 data-i18n="areas.agent.title">LLM-Based Agents</h3>
@@ -213,7 +211,7 @@
       <section id="work" class="section split">
         <div>
           <p class="section-kicker" data-i18n="work.kicker">Selected Work</p>
-          <h2 data-i18n="work.title">Research projects grounded in mechanisms and evaluation.</h2>
+          <h2 data-i18n="work.title">Research papers and project lines.</h2>
         </div>
         <div class="timeline">
           <article class="timeline-item">
@@ -225,48 +223,34 @@
               normalization and input-adaptive spectral gating.
             </p>
             <p class="stack" data-i18n="work.es.stack">PyTorch · CUDA · FFT convolution · Long-context benchmarks</p>
+            <div class="work-links" aria-label="Elastic Spectral State Space Models links" data-i18n-aria="work.links.es">
+              <a href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer" data-i18n="work.link.paper">Paper</a>
+              <a href="https://github.com/songdc98/ES-SSM-Elastic-Spectral-State-Space-Models-for-budgeted-inference" target="_blank" rel="noreferrer" data-i18n="work.link.code">Code</a>
+            </div>
           </article>
           <article class="timeline-item">
-            <p class="time" data-i18n="work.fmri.time">2024–2025 · Publication line</p>
-            <h3 data-i18n="work.fmri.title">Causal Fingerprinting from fMRI Time-Series Data</h3>
+            <p class="time" data-i18n="work.fmri.time">2025 · Journal Article</p>
+            <h3 data-i18n="work.fmri.title">Reconstructing brain causal dynamics for subject and task fingerprints using fMRI time-series data</h3>
             <p data-i18n="work.fmri.body">
               Reconstructed brain causal dynamics for subject and task fingerprints,
               connecting causal time-series modeling with interpretable neural signatures.
             </p>
             <p class="stack" data-i18n="work.fmri.stack">fMRI · Causal dynamics · Time-series modeling · Health AI</p>
+            <div class="work-links" aria-label="fMRI journal article links" data-i18n-aria="work.links.fmri">
+              <a href="https://doi.org/10.1007/s13755-025-00388-w" target="_blank" rel="noreferrer" data-i18n="work.link.paper">Paper</a>
+            </div>
           </article>
           <article class="timeline-item">
-            <p class="time" data-i18n="work.eeg.time">2023 · Master project</p>
-            <h3 data-i18n="work.eeg.title">Machine Learning for EEG Brain Activity Patterns</h3>
-            <p data-i18n="work.eeg.body">
-              Built a deep learning pipeline combining CNN spatial extraction, LSTM temporal
-              modeling, attention, autoencoder pretraining, and transfer learning.
+            <p class="time" data-i18n="work.bcb.time">2024 · Conference Paper · Oral Presentation</p>
+            <h3 data-i18n="work.bcb.title">Causality-based Subject and Task Fingerprints using fMRI Time-series Data</h3>
+            <p data-i18n="work.bcb.body">
+              Studied subject and task fingerprints from fMRI time-series data through
+              causal modeling, with an oral presentation at ACM BCB 2024.
             </p>
-            <p class="stack" data-i18n="work.eeg.stack">CNN · LSTM · Attention · Autoencoder · ResNet50</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="projects" class="section split">
-        <div>
-          <p class="section-kicker" data-i18n="projects.kicker">Open Code</p>
-          <h2 data-i18n="projects.title">Open research code.</h2>
-        </div>
-        <div class="project-grid">
-          <article class="project-card code-card">
-            <h3>ES-SSM</h3>
-            <p data-i18n="projects.es.body">Budget-aware state-space modeling with elastic spectral capacity for efficient inference.</p>
-            <a href="https://github.com/songdc98/ES-SSM-Elastic-Spectral-State-Space-Models-for-budgeted-inference" target="_blank" rel="noreferrer" data-i18n="projects.researchCode">Research code</a>
-          </article>
-          <article class="project-card product-card">
-            <h3>HealthPlanner</h3>
-            <p data-i18n="projects.health.body">Local-only iOS health and training planner using personal baselines, recovery state, and workout history.</p>
-            <a href="https://github.com/songdc98/HealthPlanner" target="_blank" rel="noreferrer" data-i18n="projects.projectPage">Project page</a>
-          </article>
-          <article class="project-card learning-card">
-            <h3>StoryVocab</h3>
-            <p data-i18n="projects.story.body">English learning product concept that turns vocabulary into story-based daily practice.</p>
-            <a href="https://github.com/songdc98/storyvocab" target="_blank" rel="noreferrer" data-i18n="projects.projectPage">Project page</a>
+            <p class="stack" data-i18n="work.bcb.stack">ACM BCB · Causal modeling · fMRI · Health AI</p>
+            <div class="work-links" aria-label="ACM BCB conference paper links" data-i18n-aria="work.links.bcb">
+              <a href="https://doi.org/10.1145/3698587.3701342" target="_blank" rel="noreferrer" data-i18n="work.link.paper">Paper</a>
+            </div>
           </article>
         </div>
       </section>

@@ -634,6 +634,35 @@ h3 {
   color: #edf8f5 !important;
 }
 
+.work-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.work-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 7px 13px;
+  border: 1px solid rgba(156, 199, 188, 0.24);
+  border-radius: 999px;
+  background: rgba(156, 199, 188, 0.07);
+  color: #d8eee8;
+  font-size: 13px;
+  font-weight: 850;
+  line-height: 1;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.work-links a:hover {
+  border-color: rgba(156, 199, 188, 0.52);
+  background: rgba(156, 199, 188, 0.13);
+  color: #f1fffb;
+}
+
 .project-card a {
   display: inline-flex;
   margin-top: 8px;
