@@ -5,7 +5,6 @@ const translations = {
       "Dachuan Song is a Ph.D. student in Electrical and Computer Engineering at George Mason University working on deep learning, long-context and sequence modeling, LLM-based agents, and model evaluation.",
     "language.button": "中文",
     "language.aria": "Switch to Chinese",
-    "cat.label": "Interactive black cat companion",
     "nav.about": "About",
     "nav.skills": "Skills",
     "nav.papers": "Papers",
@@ -121,7 +120,6 @@ const translations = {
       "Dachuan Song 是 George Mason University 电子与计算机工程博士研究生，研究方向包括深度学习、长上下文与序列建模、基于大语言模型的智能体和模型评估。",
     "language.button": "EN",
     "language.aria": "Switch to English",
-    "cat.label": "互动黑猫",
     "nav.about": "关于",
     "nav.skills": "技能",
     "nav.papers": "论文",
@@ -231,7 +229,6 @@ const translations = {
 };
 
 const languageStorageKey = "dachuan-site-language";
-const catCompanion = document.querySelector("[data-cat-companion]");
 const languageToggle = document.querySelector("[data-lang-toggle]");
 const descriptionMeta = document.querySelector('meta[name="description"]');
 let currentLanguage = "en";
@@ -276,35 +273,6 @@ function getInitialLanguage() {
   return "en";
 }
 
-function initCatCompanion() {
-  if (!catCompanion) return;
-
-  const resetCat = () => {
-    catCompanion.classList.remove("is-awake");
-    catCompanion.style.setProperty("--cat-look-x", "0px");
-    catCompanion.style.setProperty("--cat-look-y", "0px");
-    catCompanion.style.setProperty("--cat-tilt", "0deg");
-  };
-
-  catCompanion.addEventListener("pointermove", (event) => {
-    const rect = catCompanion.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-
-    catCompanion.classList.add("is-awake");
-    catCompanion.style.setProperty("--cat-look-x", `${Math.max(-1, Math.min(1, x)) * 5}px`);
-    catCompanion.style.setProperty("--cat-look-y", `${Math.max(-1, Math.min(1, y)) * 3}px`);
-    catCompanion.style.setProperty("--cat-tilt", `${Math.max(-1, Math.min(1, x)) * 5}deg`);
-  });
-
-  catCompanion.addEventListener("pointerleave", resetCat);
-  catCompanion.addEventListener("blur", resetCat);
-  catCompanion.addEventListener("click", () => {
-    document.body.classList.add("cat-is-playing");
-    window.setTimeout(() => document.body.classList.remove("cat-is-playing"), 620);
-  });
-}
-
 document.getElementById("year").textContent = new Date().getFullYear();
 
 if (languageToggle) {
@@ -314,4 +282,3 @@ if (languageToggle) {
 }
 
 setLanguage(getInitialLanguage());
-initCatCompanion();

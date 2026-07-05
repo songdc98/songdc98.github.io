@@ -41,19 +41,20 @@ body {
   overflow-x: hidden;
 }
 
-body.cat-is-playing .cat-image {
-  animation: cat-tap 620ms ease-in-out;
-}
-
 a {
   color: inherit;
   text-decoration: none;
 }
 
-.cat-companion {
-  --cat-look-x: 0px;
-  --cat-look-y: 0px;
-  --cat-tilt: 0deg;
+.coin-companion {
+  --coin-border: rgba(126, 126, 126, 0.34);
+  --coin-highlight: rgba(255, 255, 255, 0.42);
+  --coin-ring: rgba(145, 145, 145, 0.24);
+  --coin-shadow: rgba(110, 110, 110, 0.12);
+  --coin-a: #f7f7f7;
+  --coin-b: #dddddd;
+  --coin-c: #bdbdbd;
+  --coin-d: #949494;
   position: fixed;
   right: 16px;
   bottom: 18px;
@@ -63,38 +64,53 @@ a {
   padding: 0;
   border: 0;
   background: transparent;
-  cursor: pointer;
-  transform: rotate(var(--cat-tilt));
-  transform-origin: 50% 80%;
-  opacity: 0.08;
-  filter: none;
-  transition: opacity 180ms ease, transform 180ms ease, filter 180ms ease;
-  animation: cat-float 4.8s ease-in-out infinite;
-}
-
-.cat-companion:hover,
-.cat-companion:focus-visible,
-.cat-companion.is-awake {
-  opacity: 0.78;
-  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.14));
-}
-
-.cat-companion:focus-visible {
-  outline: 2px solid rgba(40, 120, 189, 0.42);
-  outline-offset: 6px;
-  border-radius: 999px;
-}
-
-.cat-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  user-select: none;
   pointer-events: none;
-  transform: translate(calc(var(--cat-look-x) * 0.45), calc(var(--cat-look-y) * 0.35));
-  transform-origin: 50% 82%;
-  transition: transform 160ms ease;
+  transform-origin: 50% 80%;
+  opacity: 0.34;
+  filter: none;
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.08));
+}
+
+.coin-sprite {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  width: 54px;
+  aspect-ratio: 1;
+  border: 2px solid var(--coin-border);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 28%, var(--coin-highlight) 0 9%, transparent 10%),
+    radial-gradient(circle at 54% 56%, var(--coin-b) 0 30%, var(--coin-c) 61%, var(--coin-d) 100%);
+  box-shadow:
+    inset 0 0 0 4px var(--coin-ring),
+    inset 0 -8px 12px rgba(80, 80, 80, 0.18),
+    0 12px 18px var(--coin-shadow);
+  opacity: 1;
+  pointer-events: none;
+  transform: translate(-50%, -50%) translateY(0) scale(0.86) rotate(0deg);
+  transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.coin-sprite::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 2px solid var(--coin-ring);
+  border-radius: 50%;
+}
+
+.coin-sprite::after {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 10px;
+  width: 11px;
+  height: 26px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0));
+  transform: rotate(28deg);
 }
 
 .site-header {
@@ -198,6 +214,7 @@ a {
 
 .hero-copy {
   order: 2;
+  padding-left: clamp(24px, 3vw, 44px);
 }
 
 .hero-copy,
@@ -771,44 +788,17 @@ h3 {
   font-size: 14px;
 }
 
-@keyframes cat-float {
-  0%,
-  100% {
-    margin-top: 0;
-  }
-
-  50% {
-    margin-top: -7px;
-  }
-}
-
-@keyframes cat-tap {
-  0%,
-  100% {
-    transform: translate(calc(var(--cat-look-x) * 0.45), calc(var(--cat-look-y) * 0.35)) scale(1);
-  }
-
-  30% {
-    transform: translate(calc(var(--cat-look-x) * 0.45), calc(var(--cat-look-y) * 0.35)) scale(1.06) rotate(-2deg);
-  }
-
-  65% {
-    transform: translate(calc(var(--cat-look-x) * 0.45), calc(var(--cat-look-y) * 0.35)) scale(0.98) rotate(2deg);
-  }
-}
-
 @media (max-width: 1180px) {
-  .cat-companion {
+  .coin-companion {
     right: 12px;
     bottom: 22px;
     width: 68px;
     height: 80px;
-    transform: rotate(var(--cat-tilt));
   }
 }
 
 @media (max-width: 860px) {
-  .cat-companion {
+  .coin-companion {
     right: 12px;
     bottom: 18px;
     width: 64px;
@@ -943,7 +933,7 @@ h3 {
 }
 
 @media (max-width: 420px) {
-  .cat-companion {
+  .coin-companion {
     right: 8px;
     bottom: 10px;
     width: 82px;
@@ -970,12 +960,5 @@ h3 {
 
   .portrait-ring {
     width: 150px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cat-companion,
-  body.cat-is-playing .cat-image {
-    animation: none;
   }
 }
