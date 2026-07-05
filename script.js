@@ -2,7 +2,7 @@ const translations = {
   en: {
     "meta.title": "Dachuan Song | AI Research & Engineering",
     "meta.description":
-      "Dachuan Song is a Ph.D. student in Electrical and Computer Engineering at George Mason University working on deep learning, long-context and sequence modeling, LLM-based agents, and AI evaluation.",
+      "Dachuan Song is a Ph.D. student in Electrical and Computer Engineering at George Mason University working on deep learning, long-context and sequence modeling, LLM-based agents, and model evaluation.",
     "language.button": "中文",
     "language.aria": "Switch to Chinese",
     "cat.label": "Interactive black cat companion",
@@ -13,9 +13,9 @@ const translations = {
     "nav.code": "Code",
     "nav.cv": "CV",
     "nav.contact": "Contact",
-    "hero.eyebrow": "Deep Learning · Long-Context Modeling · LLM-Based Agents · AI Evaluation",
+    "hero.eyebrow": "Deep Learning · Long-Context Modeling · LLM-Based Agents · Model Evaluation",
     "hero.lead":
-      "I work across deep learning, long-context and sequence modeling, AI evaluation, and LLM-based agents. My research emphasizes mechanism-level questions, controlled experiments, and reproducible empirical evidence.",
+      "I work across deep learning, long-context and sequence modeling, model evaluation, and LLM-based agents. My research emphasizes mechanism-level questions, controlled experiments, and reproducible empirical evidence.",
     "hero.linksLabel": "Profile links",
     "links.email": "Email",
     "links.scholar": "Scholar",
@@ -127,12 +127,12 @@ const translations = {
     "education.service.line": "ICML 2026 <span class=\"highlight-badge highlight-badge-inline\">Silver Reviewer</span>",
     "education.service.body": "Recognized for review quality evaluated by Area Chairs.",
     "contact.kicker": "Contact",
-    "contact.title": "Open to collaborations on deep learning, long-context modeling, LLM-based agents, and AI evaluation.",
+    "contact.title": "Open to collaborations on deep learning, long-context modeling, LLM-based agents, and model evaluation.",
   },
   zh: {
     "meta.title": "Dachuan Song | AI 研究与工程",
     "meta.description":
-      "Dachuan Song 是 George Mason University 电子与计算机工程博士研究生，研究方向包括深度学习、长上下文与序列建模、基于大语言模型的智能体和 AI 评估。",
+      "Dachuan Song 是 George Mason University 电子与计算机工程博士研究生，研究方向包括深度学习、长上下文与序列建模、基于大语言模型的智能体和模型评估。",
     "language.button": "EN",
     "language.aria": "Switch to English",
     "cat.label": "互动黑猫",
@@ -143,9 +143,9 @@ const translations = {
     "nav.code": "代码",
     "nav.cv": "简历",
     "nav.contact": "联系",
-    "hero.eyebrow": "深度学习 · 长上下文建模 · 基于大语言模型的智能体 · AI 评估",
+    "hero.eyebrow": "深度学习 · 长上下文建模 · 基于大语言模型的智能体 · 模型评估",
     "hero.lead":
-      "我的研究覆盖深度学习、长上下文与序列建模、AI 评估，以及基于大语言模型的智能体。我关注机制层面的研究问题、受控实验和可复现的实证证据。",
+      "我的研究覆盖深度学习、长上下文与序列建模、模型评估，以及基于大语言模型的智能体。我关注机制层面的研究问题、受控实验和可复现的实证证据。",
     "hero.linksLabel": "个人链接",
     "links.email": "邮箱",
     "links.scholar": "学术主页",
@@ -253,7 +253,7 @@ const translations = {
     "education.service.line": "ICML 2026 <span class=\"highlight-badge highlight-badge-inline\">Silver Reviewer</span>",
     "education.service.body": "评审质量获得 Area Chairs 认可。",
     "contact.kicker": "联系",
-    "contact.title": "欢迎交流深度学习、长上下文建模、基于大语言模型的智能体和 AI 评估方向的合作。",
+    "contact.title": "欢迎交流深度学习、长上下文建模、基于大语言模型的智能体和模型评估方向的合作。",
   },
 };
 
