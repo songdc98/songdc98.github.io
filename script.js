@@ -110,7 +110,7 @@ const translations = {
       "Advanced machine learning, deep learning, computer vision, Bayesian learning, active and reinforcement learning.",
     "education.xju.degree": "B.Eng. in Software Engineering · 2017–2021",
     "education.xju.body":
-      "C programming, object-oriented programming in C++, data structures, operating systems, machine learning, software architecture, Linux/UNIX, Java EE and middleware.",
+      "C programming, C++, Python, data structures and algorithms, operating systems, compiler principles, machine learning, deep learning, software architecture, Linux/UNIX, Java EE and middleware.",
     "awards.label": "Personal Academic Awards",
     "awards.title": "Personal Academic Awards",
     "awards.icml.line": "ICML 2026 <span class=\"highlight-badge highlight-badge-inline\">Silver Reviewer</span>",
@@ -225,7 +225,7 @@ const translations = {
     "education.southampton.degree": "计算机科学理学硕士（MSc）",
     "education.southampton.body": "高级机器学习、深度学习、计算机视觉、贝叶斯学习、主动学习与强化学习。",
     "education.xju.degree": "软件工程工学学士 · 2017–2021",
-    "education.xju.body": "C 语言程序设计、C++ 面向对象编程、数据结构、操作系统、机器学习、软件架构、Linux/UNIX、Java EE 与中间件。",
+    "education.xju.body": "C 语言程序设计、C++、Python、数据结构与算法、操作系统、编译原理、机器学习、深度学习、软件架构、Linux/UNIX、Java EE 与中间件。",
     "awards.label": "个人学术奖项",
     "awards.title": "个人学术奖项",
     "awards.icml.line": "ICML 2026 <span class=\"highlight-badge highlight-badge-inline\">Silver Reviewer</span>",
