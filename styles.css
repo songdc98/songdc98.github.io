@@ -234,7 +234,7 @@ a {
 
 .hero-copy {
   order: 2;
-  margin-left: clamp(72px, 9vw, 132px);
+  margin-left: clamp(84px, 10.5vw, 154px);
 }
 
 .hero-copy,
