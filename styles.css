@@ -555,6 +555,12 @@ h3 {
   gap: 28px;
 }
 
+.education-content,
+.award-list {
+  display: grid;
+  gap: 28px;
+}
+
 .section-heading {
   max-width: 640px;
   margin-bottom: 32px;
@@ -661,6 +667,44 @@ h3 {
   flex-wrap: wrap;
   align-items: center;
   gap: 0;
+}
+
+.award-list {
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+}
+
+.award-list h3 {
+  margin-bottom: 2px;
+}
+
+.award-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 118px;
+  gap: 22px;
+  align-items: center;
+}
+
+.award-copy {
+  min-width: 0;
+}
+
+.award-thumbnail {
+  display: block;
+  width: 118px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid #d8d8d8;
+  border-radius: 6px;
+  background: #f6f6f6;
+}
+
+.award-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 42% 26%;
+  filter: saturate(0.92) contrast(1.02);
 }
 
 .publication a,
@@ -907,6 +951,14 @@ h3 {
   .publication-meta {
     grid-column: 1;
     grid-row: auto;
+  }
+
+  .award-card {
+    grid-template-columns: 1fr;
+  }
+
+  .award-thumbnail {
+    width: min(180px, 100%);
   }
 
   .publication-meta {
