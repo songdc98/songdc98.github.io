@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Dachuan Song is a Ph.D. student in Electrical and Computer Engineering at George Mason University working on agent memory, long-context reasoning, sequence modeling, and AI evaluation."
+      content="Dachuan Song is a Ph.D. student in Electrical and Computer Engineering at George Mason University working on deep learning, long-context and sequence modeling, LLM-based agents, and AI evaluation."
     />
     <title>Dachuan Song | AI Research & Engineering</title>
     <link rel="stylesheet" href="./styles.css" />
@@ -34,12 +34,12 @@
     <main id="top">
       <section class="hero section">
         <div class="hero-copy">
-          <p class="eyebrow" data-i18n="hero.eyebrow">Agent Memory · Long-Context Reasoning · Sequence Modeling · AI Evaluation</p>
+          <p class="eyebrow" data-i18n="hero.eyebrow">Deep Learning · Long-Context Modeling · LLM-Based Agents · AI Evaluation</p>
           <h1>Dachuan Song</h1>
           <p class="lead" data-i18n="hero.lead">
-            I work on AI agents and memory: how models store, retrieve, validate, and act on
-            information over long contexts. My research connects long-sequence modeling,
-            controlled evaluation, and reproducible experiments for reliable AI systems.
+            I work across deep learning, long-context and sequence modeling, AI evaluation,
+            and LLM-based agents. My research emphasizes mechanism-level questions,
+            controlled experiments, and reproducible empirical evidence.
           </p>
           <div class="hero-actions" aria-label="Profile links" data-i18n-aria="hero.linksLabel">
             <a class="button primary" href="mailto:dsong25@gmu.edu" data-i18n="links.email">Email</a>
@@ -66,19 +66,20 @@
       <section id="about" class="section split">
         <div>
           <p class="section-kicker" data-i18n="about.kicker">Direction</p>
-          <h2 data-i18n="about.title">Agent Memory, Long Contexts, and Evaluation.</h2>
+          <h2 data-i18n="about.title">Deep Learning, Long Contexts, and LLM-Based Agents.</h2>
         </div>
         <div class="section-body">
           <p data-i18n-html="about.p1">
             I am a Ph.D. student at <strong>George Mason University</strong>, advised by
-            <strong>Prof. Xuan Wang</strong>. My current interests center on agent
-            memory, long-context reasoning, sequence modeling, and evaluation methods
-            that separate real capability from measurement artifacts.
+            <strong>Prof. Xuan Wang</strong>. My current interests include deep learning,
+            long-context and sequence modeling, LLM-based agents, agent memory and
+            reliability, and evaluation methods that separate real capability from
+            measurement artifacts.
           </p>
           <p data-i18n="about.p2">
-            My current work is centered on AI-system questions: when an agent should
-            trust memory, how long-context models preserve useful state, and how
-            controlled experiments make these claims testable.
+            I focus on problems that connect model mechanisms, implementation details,
+            and empirical evaluation: how models generalize to longer inputs, aggregate
+            information, reveal benchmark artifacts, and use memory safely in agent workflows.
           </p>
         </div>
       </section>
@@ -129,17 +130,17 @@
       <section class="section">
         <p class="section-kicker" data-i18n="areas.kicker">Research Areas</p>
         <div class="expertise-grid">
-          <div class="expertise-card agent-card">
-            <h3 data-i18n="areas.agent.title">Agent Memory &amp; Reliability</h3>
-            <p data-i18n="areas.agent.body">Memory interfaces for agents that must retrieve facts, validate their current use, track provenance, and avoid stale or unsafe actions.</p>
-          </div>
           <div class="expertise-card sequence-card">
             <h3 data-i18n="areas.sequence.title">Long-Context &amp; Sequence Modeling</h3>
             <p data-i18n="areas.sequence.body">Mechanisms for preserving, aggregating, and using information over long inputs, including sequence operators, state-space ideas, and length generalization.</p>
           </div>
           <div class="expertise-card systems-card">
-            <h3 data-i18n="areas.health.title">Evaluation &amp; Research Engineering</h3>
-            <p data-i18n="areas.health.body">Controlled ablations, benchmark audits, multi-seed analysis, and reproducible GPU workflows for distinguishing real model behavior from artifacts.</p>
+            <h3 data-i18n="areas.health.title">Evaluation &amp; Diagnostics</h3>
+            <p data-i18n="areas.health.body">Controlled ablations, benchmark audits, multi-seed analysis, and null-calibrated tests for distinguishing real model behavior from artifacts.</p>
+          </div>
+          <div class="expertise-card agent-card">
+            <h3 data-i18n="areas.agent.title">LLM-Based Agents</h3>
+            <p data-i18n="areas.agent.body">Research on large-language-model-based agents, including memory use, tool-use reliability, provenance, and current-use validity in agent workflows.</p>
           </div>
         </div>
       </section>
@@ -151,15 +152,6 @@
             <h2 data-i18n="skills.title">Technical toolkit.</h2>
           </div>
           <div class="skills-grid">
-            <article class="skill-card">
-              <h3 data-i18n="skills.agent.title">Agent &amp; Memory Systems</h3>
-              <ul class="skill-list">
-                <li data-i18n="skills.agent.1">Memory validity and provenance</li>
-                <li data-i18n="skills.agent.2">Long-context agent workflows</li>
-                <li data-i18n="skills.agent.3">Tool-use reliability</li>
-                <li data-i18n="skills.agent.4">Failure and stale-use analysis</li>
-              </ul>
-            </article>
             <article class="skill-card">
               <h3 data-i18n="skills.sequence.title">Long-Context Modeling</h3>
               <ul class="skill-list">
@@ -179,12 +171,21 @@
               </ul>
             </article>
             <article class="skill-card">
-              <h3 data-i18n="skills.engineering.title">Research Engineering</h3>
+              <h3 data-i18n="skills.dl.title">Deep Learning</h3>
               <ul class="skill-list">
-                <li data-i18n="skills.engineering.1">PyTorch experiments</li>
-                <li data-i18n="skills.engineering.2">CUDA-aware workflows</li>
-                <li data-i18n="skills.engineering.3">Reproducible ablations</li>
-                <li data-i18n="skills.engineering.4">Remote GPU execution</li>
+                <li data-i18n="skills.dl.1">Transformers and attention</li>
+                <li data-i18n="skills.dl.2">CNN, RNN, and LSTM models</li>
+                <li data-i18n="skills.dl.3">GNN and temporal modeling</li>
+                <li data-i18n="skills.dl.4">Optimization and loss design</li>
+              </ul>
+            </article>
+            <article class="skill-card">
+              <h3 data-i18n="skills.agent.title">LLM-Based Agents</h3>
+              <ul class="skill-list">
+                <li data-i18n="skills.agent.1">Agent memory and provenance</li>
+                <li data-i18n="skills.agent.2">Long-context agent workflows</li>
+                <li data-i18n="skills.agent.3">Tool-use reliability</li>
+                <li data-i18n="skills.agent.4">Failure and stale-use analysis</li>
               </ul>
             </article>
             <article class="skill-card">
@@ -197,12 +198,12 @@
               </ul>
             </article>
             <article class="skill-card">
-              <h3 data-i18n="skills.dl.title">Deep Learning Foundations</h3>
+              <h3 data-i18n="skills.engineering.title">Research Engineering</h3>
               <ul class="skill-list">
-                <li data-i18n="skills.dl.1">Transformers and attention</li>
-                <li data-i18n="skills.dl.2">CNN, RNN, and LSTM models</li>
-                <li data-i18n="skills.dl.3">GNN and temporal modeling</li>
-                <li data-i18n="skills.dl.4">Optimization and loss design</li>
+                <li data-i18n="skills.engineering.1">PyTorch experiments</li>
+                <li data-i18n="skills.engineering.2">CUDA-aware workflows</li>
+                <li data-i18n="skills.engineering.3">Reproducible ablations</li>
+                <li data-i18n="skills.engineering.4">Remote GPU execution</li>
               </ul>
             </article>
           </div>
@@ -298,7 +299,7 @@
     <footer id="contact" class="footer">
       <div>
         <p class="section-kicker" data-i18n="contact.kicker">Contact</p>
-        <h2 data-i18n="contact.title">Open to collaborations on agent memory, long-context reasoning, and AI evaluation.</h2>
+        <h2 data-i18n="contact.title">Open to collaborations on deep learning, long-context modeling, LLM-based agents, and AI evaluation.</h2>
       </div>
       <div class="footer-links">
         <a href="mailto:dsong25@gmu.edu">dsong25@gmu.edu</a>
