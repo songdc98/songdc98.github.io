@@ -105,7 +105,7 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 20px max(28px, calc((100vw - 960px) / 2));
+  padding: 20px max(28px, calc((100vw - 1180px) / 2));
   background: rgba(255, 255, 255, 0.94);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(18px);
@@ -181,14 +181,14 @@ a {
 
 .section {
   width: 100%;
-  max-width: 960px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 54px 28px;
 }
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(170px, 205px) minmax(0, 1fr);
+  grid-template-columns: minmax(200px, 220px) minmax(0, 1fr);
   gap: clamp(34px, 5vw, 64px);
   align-items: start;
   min-height: auto;
@@ -234,7 +234,7 @@ p {
 h1 {
   max-width: 780px;
   margin-bottom: 16px;
-  font-size: clamp(36px, 5vw, 56px);
+  font-size: clamp(34px, 4.4vw, 48px);
   line-height: 1.04;
   color: var(--heading);
   font-weight: 720;
@@ -312,19 +312,23 @@ h3 {
   order: 1;
   justify-self: start;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
-  max-width: 205px;
+  width: 220px;
+  max-width: 220px;
 }
 
 .portrait-ring {
   position: relative;
-  width: 100%;
+  width: 150px;
+  max-width: 100%;
   aspect-ratio: 1;
   border-radius: 50%;
   padding: 3px;
   background: #ffffff;
   border: 1px solid #dcdcdc;
   box-shadow: none;
+  overflow: hidden;
 }
 
 .portrait-ring::after {
@@ -405,7 +409,7 @@ h3 {
 
 .skills-inner {
   width: 100%;
-  max-width: 960px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 54px 28px;
 }
@@ -503,13 +507,14 @@ h3 {
 
 .publication {
   display: grid;
-  grid-template-columns: 210px minmax(0, 1fr);
-  gap: 28px;
+  grid-template-columns: 170px minmax(0, 1fr) minmax(280px, 360px);
+  column-gap: 30px;
+  row-gap: 8px;
 }
 
 .publication-meta {
   grid-column: 1;
-  grid-row: 1 / span 4;
+  grid-row: 1 / span 6;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -519,8 +524,16 @@ h3 {
 
 .publication h3,
 .publication p,
-.publication a {
+.publication a,
+.publication .paper-links {
   grid-column: 2;
+}
+
+.publication.no-thumbnail h3,
+.publication.no-thumbnail p,
+.publication.no-thumbnail a,
+.publication.no-thumbnail .paper-links {
+  grid-column: 2 / -1;
 }
 
 .publication-meta .time {
@@ -610,6 +623,38 @@ h3 {
   color: var(--accent);
 }
 
+.publication-summary {
+  max-width: 680px;
+}
+
+.publication-keywords {
+  margin-bottom: 0;
+}
+
+.paper-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  align-items: center;
+  margin: 2px 0 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.paper-links a {
+  display: inline-flex;
+  width: auto;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.paper-links a + a::before {
+  content: "|";
+  margin: 0 8px;
+  color: #b2b2b2;
+  font-weight: 500;
+}
+
 .paper-id {
   color: var(--accent) !important;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -618,6 +663,25 @@ h3 {
 
 .paper-id:hover {
   color: #0f4d82 !important;
+}
+
+.paper-thumbnail {
+  grid-column: 3;
+  grid-row: 1 / span 6;
+  align-self: start;
+  width: 100%;
+  margin: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.paper-thumbnail img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
 }
 
 .work-links {
@@ -669,7 +733,7 @@ h3 {
   grid-template-columns: minmax(320px, 0.56fr) minmax(320px, 0.44fr);
   gap: 54px;
   align-items: start;
-  max-width: 960px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 54px 28px 44px;
   border-top: 1px solid var(--line);
@@ -780,7 +844,12 @@ h3 {
   }
 
   .profile-panel {
-    max-width: 320px;
+    width: 180px;
+    max-width: 180px;
+  }
+
+  .portrait-ring {
+    width: 150px;
   }
 
   .expertise-grid,
@@ -797,6 +866,8 @@ h3 {
   .publication h3,
   .publication p,
   .publication a,
+  .publication .paper-links,
+  .publication .paper-thumbnail,
   .publication-meta {
     grid-column: 1;
     grid-row: auto;
@@ -872,15 +943,20 @@ h3 {
   }
 
   .lead {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   h1 {
-    font-size: 44px;
+    font-size: 38px;
   }
 
   .profile-panel {
-    max-width: 260px;
+    width: 160px;
+    max-width: 160px;
+  }
+
+  .portrait-ring {
+    width: 138px;
   }
 }
 

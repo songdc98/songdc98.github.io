@@ -22,7 +22,6 @@
           <a href="#about" data-i18n="nav.about">About</a>
           <a href="#publications" data-i18n="nav.papers">Papers</a>
           <a href="#skills" data-i18n="nav.skills">Skills</a>
-          <a href="#work" data-i18n="nav.work">Work</a>
           <a href="#education" data-i18n="nav.cv">CV</a>
           <a href="#contact" data-i18n="nav.contact">Contact</a>
         </nav>
@@ -87,7 +86,7 @@
           <h2 data-i18n="publications.title">Published papers</h2>
         </div>
         <div class="publication-list">
-          <article class="publication">
+          <article class="publication no-thumbnail">
             <div class="publication-meta">
               <span class="paper-type preprint" data-i18n="publications.es.type">Preprint</span>
               <span class="time" data-i18n="publications.es.venue">arXiv · 2026</span>
@@ -96,7 +95,15 @@
               <a href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer" data-i18n="publications.es.title">Elastic Spectral State Space Models for Budgeted Inference</a>
             </h3>
             <p>Dachuan Song, Xuan Wang</p>
-            <p><a class="paper-id" href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer">arXiv:2601.22488</a></p>
+            <p class="publication-summary" data-i18n="publications.es.summary">
+              Developed ES-SSM to train once at full spectral capacity and deploy
+              elastically through masked normalization and input-adaptive spectral gating.
+            </p>
+            <div class="paper-links" aria-label="Elastic Spectral State Space Models links" data-i18n-aria="publications.links.es">
+              <a class="paper-id" href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer">arXiv:2601.22488</a>
+              <a href="https://github.com/songdc98/ES-SSM-Elastic-Spectral-State-Space-Models-for-budgeted-inference" target="_blank" rel="noreferrer" data-i18n="publications.link.code">Code</a>
+            </div>
+            <p class="stack publication-keywords" data-i18n="publications.es.keywords">PyTorch · CUDA · FFT convolution · Long-context benchmarks</p>
           </article>
           <article class="publication">
             <div class="publication-meta">
@@ -107,7 +114,17 @@
               <a href="https://link.springer.com/article/10.1007/s13755-025-00388-w" target="_blank" rel="noreferrer" data-i18n="publications.fmri.title">Reconstructing brain causal dynamics for subject and task fingerprints using fMRI time-series data</a>
             </h3>
             <p>Dachuan Song, Li Shen, Duy Duong-Tran, Xuan Wang</p>
-            <p><a class="paper-id" href="https://link.springer.com/article/10.1007/s13755-025-00388-w" target="_blank" rel="noreferrer">DOI: 10.1007/s13755-025-00388-w</a></p>
+            <p class="publication-summary" data-i18n="publications.fmri.summary">
+              Reconstructed brain causal dynamics for subject and task fingerprints,
+              connecting causal time-series modeling with interpretable neural signatures.
+            </p>
+            <div class="paper-links" aria-label="fMRI journal article links" data-i18n-aria="publications.links.fmri">
+              <a class="paper-id" href="https://link.springer.com/article/10.1007/s13755-025-00388-w" target="_blank" rel="noreferrer">DOI: 10.1007/s13755-025-00388-w</a>
+            </div>
+            <p class="stack publication-keywords" data-i18n="publications.fmri.keywords">fMRI · Causal dynamics · Time-series modeling · Health AI</p>
+            <figure class="paper-thumbnail">
+              <img src="./assets/journal-brain-figure.png" alt="Functional brain areas and selected Schaefer parcellation regions" />
+            </figure>
           </article>
           <article class="publication">
             <div class="publication-meta">
@@ -119,7 +136,17 @@
               <a href="https://dl.acm.org/doi/abs/10.1145/3698587.3701342" target="_blank" rel="noreferrer" data-i18n="publications.bcb.title">Causality-based Subject and Task Fingerprints using fMRI Time-series Data</a>
             </h3>
             <p>Dachuan Song, Li Shen, Duy Duong-Tran, Xuan Wang</p>
-            <p><a class="paper-id" href="https://dl.acm.org/doi/abs/10.1145/3698587.3701342" target="_blank" rel="noreferrer">DOI: 10.1145/3698587.3701342</a></p>
+            <p class="publication-summary" data-i18n="publications.bcb.summary">
+              Studied subject and task fingerprints from fMRI time-series data through
+              causal modeling, with an oral presentation at ACM BCB 2024.
+            </p>
+            <div class="paper-links" aria-label="ACM BCB conference paper links" data-i18n-aria="publications.links.bcb">
+              <a class="paper-id" href="https://dl.acm.org/doi/abs/10.1145/3698587.3701342" target="_blank" rel="noreferrer">DOI: 10.1145/3698587.3701342</a>
+            </div>
+            <p class="stack publication-keywords" data-i18n="publications.bcb.keywords">ACM BCB · Causal modeling · fMRI · Health AI</p>
+            <figure class="paper-thumbnail">
+              <img src="./assets/conference-brain-figure.jpg" alt="Brain-region association strengths across fMRI tasks" />
+            </figure>
           </article>
         </div>
       </section>
@@ -204,53 +231,6 @@
               </ul>
             </article>
           </div>
-        </div>
-      </section>
-
-      <section id="work" class="section split">
-        <div>
-          <p class="section-kicker" data-i18n="work.kicker">Selected Work</p>
-          <h2 data-i18n="work.title">Research papers and project lines.</h2>
-        </div>
-        <div class="timeline">
-          <article class="timeline-item">
-            <p class="time" data-i18n="work.es.time">2026 · Preprint</p>
-            <h3 data-i18n="work.es.title">Elastic Spectral State Space Models for Budgeted Inference</h3>
-            <p data-i18n="work.es.body">
-              Developed ES-SSM to train once at full spectral capacity and deploy
-              elastically by activating ordered spectral channels through masked
-              normalization and input-adaptive spectral gating.
-            </p>
-            <p class="stack" data-i18n="work.es.stack">PyTorch · CUDA · FFT convolution · Long-context benchmarks</p>
-            <div class="work-links" aria-label="Elastic Spectral State Space Models links" data-i18n-aria="work.links.es">
-              <a href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer" data-i18n="work.link.paper">Paper</a>
-              <a href="https://github.com/songdc98/ES-SSM-Elastic-Spectral-State-Space-Models-for-budgeted-inference" target="_blank" rel="noreferrer" data-i18n="work.link.code">Code</a>
-            </div>
-          </article>
-          <article class="timeline-item">
-            <p class="time" data-i18n="work.fmri.time">2025 · Journal Article</p>
-            <h3 data-i18n="work.fmri.title">Reconstructing brain causal dynamics for subject and task fingerprints using fMRI time-series data</h3>
-            <p data-i18n="work.fmri.body">
-              Reconstructed brain causal dynamics for subject and task fingerprints,
-              connecting causal time-series modeling with interpretable neural signatures.
-            </p>
-            <p class="stack" data-i18n="work.fmri.stack">fMRI · Causal dynamics · Time-series modeling · Health AI</p>
-            <div class="work-links" aria-label="fMRI journal article links" data-i18n-aria="work.links.fmri">
-              <a href="https://link.springer.com/article/10.1007/s13755-025-00388-w" target="_blank" rel="noreferrer" data-i18n="work.link.paper">Paper</a>
-            </div>
-          </article>
-          <article class="timeline-item">
-            <p class="time" data-i18n="work.bcb.time">2024 · Conference Paper · Oral Presentation</p>
-            <h3 data-i18n="work.bcb.title">Causality-based Subject and Task Fingerprints using fMRI Time-series Data</h3>
-            <p data-i18n="work.bcb.body">
-              Studied subject and task fingerprints from fMRI time-series data through
-              causal modeling, with an oral presentation at ACM BCB 2024.
-            </p>
-            <p class="stack" data-i18n="work.bcb.stack">ACM BCB · Causal modeling · fMRI · Health AI</p>
-            <div class="work-links" aria-label="ACM BCB conference paper links" data-i18n-aria="work.links.bcb">
-              <a href="https://dl.acm.org/doi/abs/10.1145/3698587.3701342" target="_blank" rel="noreferrer" data-i18n="work.link.paper">Paper</a>
-            </div>
-          </article>
         </div>
       </section>
 
