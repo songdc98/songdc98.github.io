@@ -328,35 +328,44 @@ function closeWechatDialog() {
   } else {
     wechatDialog.removeAttribute("open");
   }
+
+  coinEasterEgg?.setAttribute("aria-expanded", "false");
 }
 
 if (coinEasterEgg && wechatDialog) {
   coinEasterEgg.addEventListener("click", () => {
+    if (wechatDialog.open) {
+      closeWechatDialog();
+      return;
+    }
+
     coinClickCount += 1;
 
     if (coinClickCount < 5) return;
 
     coinClickCount = 0;
-    if (typeof wechatDialog.showModal === "function") {
-      wechatDialog.showModal();
+    if (typeof wechatDialog.show === "function") {
+      wechatDialog.show();
     } else {
       wechatDialog.setAttribute("open", "");
     }
+
+    coinEasterEgg.setAttribute("aria-expanded", "true");
+    wechatDialogClose?.focus({ preventScroll: true });
   });
 
   wechatDialogClose?.addEventListener("click", closeWechatDialog);
 
-  wechatDialog.addEventListener("click", (event) => {
-    if (event.target !== wechatDialog) return;
+  document.addEventListener("pointerdown", (event) => {
+    if (!wechatDialog.open) return;
+    if (wechatDialog.contains(event.target) || coinEasterEgg.contains(event.target)) return;
+    closeWechatDialog();
+  });
 
-    const bounds = wechatDialog.getBoundingClientRect();
-    const clickedBackdrop =
-      event.clientX < bounds.left ||
-      event.clientX > bounds.right ||
-      event.clientY < bounds.top ||
-      event.clientY > bounds.bottom;
-
-    if (clickedBackdrop) closeWechatDialog();
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !wechatDialog.open) return;
+    event.preventDefault();
+    closeWechatDialog();
   });
 
   wechatDialog.addEventListener("close", () => {

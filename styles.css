@@ -142,44 +142,42 @@ a {
 }
 
 .wechat-dialog {
+  position: fixed;
+  inset: auto 96px 110px auto;
+  z-index: 20;
   width: fit-content;
-  max-width: calc(100vw - 32px);
-  max-height: calc(100vh - 32px);
-  max-height: calc(100dvh - 32px);
-  margin: auto;
+  max-width: calc(100vw - 112px);
+  max-height: calc(100vh - 128px);
+  max-height: calc(100dvh - 128px);
+  margin: 0;
   padding: 0;
   overflow: hidden;
   border: 1px solid rgba(18, 24, 32, 0.2);
   border-radius: 8px;
   background: #ffffff;
-  box-shadow: 0 24px 64px rgba(18, 24, 32, 0.24);
+  box-shadow: 0 14px 36px rgba(18, 24, 32, 0.2);
   color-scheme: light;
-}
-
-.wechat-dialog::backdrop {
-  background: rgba(18, 24, 32, 0.58);
-  backdrop-filter: blur(2px);
 }
 
 .wechat-qr {
   display: block;
   width: auto;
   height: auto;
-  max-width: min(430px, calc(100vw - 32px));
-  max-height: calc(100vh - 32px);
-  max-height: calc(100dvh - 32px);
+  max-width: min(280px, calc(100vw - 112px));
+  max-height: calc(100vh - 128px);
+  max-height: calc(100dvh - 128px);
   object-fit: contain;
   background: #ffffff;
 }
 
 .wechat-dialog-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 7px;
+  right: 7px;
   z-index: 1;
   display: grid;
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   padding: 0;
   place-items: center;
   border: 1px solid rgba(18, 24, 32, 0.18);
@@ -189,7 +187,7 @@ a {
   box-shadow: 0 4px 14px rgba(18, 24, 32, 0.12);
   cursor: pointer;
   font: inherit;
-  font-size: 26px;
+  font-size: 23px;
   line-height: 1;
 }
 
@@ -943,6 +941,10 @@ h3 {
     width: 68px;
     height: 80px;
   }
+
+  .wechat-dialog {
+    right: 88px;
+  }
 }
 
 @media (max-width: 860px) {
@@ -952,6 +954,11 @@ h3 {
     width: 64px;
     height: 76px;
     transform: none;
+  }
+
+  .wechat-dialog {
+    right: 84px;
+    bottom: 102px;
   }
 
   .site-header {
@@ -1099,6 +1106,10 @@ h3 {
     width: 82px;
     height: 96px;
     transform: scale(0.82);
+  }
+
+  .wechat-dialog {
+    bottom: 97px;
   }
 
   .nav {
