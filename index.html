@@ -8,12 +8,43 @@
       content="Dachuan Song is a Ph.D. student in Electrical and Computer Engineering at George Mason University working on deep learning, long-context and sequence modeling, LLM-based agents, and model evaluation."
     />
     <title>Dachuan Song | AI Research & Engineering</title>
-    <link rel="stylesheet" href="./styles.css?v=publications-20260803" />
+    <link rel="stylesheet" href="./styles.css?v=wechat-easter-egg-20260803" />
   </head>
   <body>
-    <div class="coin-companion" aria-hidden="true">
+    <button
+      class="coin-companion"
+      type="button"
+      data-coin-easter-egg
+      aria-label="Hidden contact easter egg"
+      data-i18n-aria="easterEgg.coinLabel"
+    >
       <span class="coin-sprite" aria-hidden="true"></span>
-    </div>
+    </button>
+
+    <dialog
+      class="wechat-dialog"
+      data-wechat-dialog
+      aria-label="WeChat QR code"
+      data-i18n-aria="easterEgg.dialogLabel"
+    >
+      <button
+        class="wechat-dialog-close"
+        type="button"
+        data-wechat-dialog-close
+        aria-label="Close WeChat QR code"
+        data-i18n-aria="easterEgg.closeLabel"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <img
+        class="wechat-qr"
+        src="./assets/wechat-qr.png"
+        width="888"
+        height="1137"
+        alt="WeChat QR code for Dachuan Song"
+        data-i18n-alt="easterEgg.qrAlt"
+      />
+    </dialog>
 
     <header class="site-header">
       <a class="brand" href="#top" aria-label="Dachuan Song home">Dachuan Song</a>
@@ -316,6 +347,6 @@
       <p class="copyright">© <span id="year"></span> Dachuan Song.</p>
     </footer>
 
-    <script src="./script.js?v=publications-20260803"></script>
+    <script src="./script.js?v=wechat-easter-egg-20260803"></script>
   </body>
 </html>

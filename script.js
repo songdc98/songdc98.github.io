@@ -5,6 +5,10 @@ const translations = {
       "Dachuan Song is a Ph.D. student in Electrical and Computer Engineering at George Mason University working on deep learning, long-context and sequence modeling, LLM-based agents, and model evaluation.",
     "language.button": "中文",
     "language.aria": "Switch to Chinese",
+    "easterEgg.coinLabel": "Hidden contact easter egg",
+    "easterEgg.dialogLabel": "WeChat QR code",
+    "easterEgg.closeLabel": "Close WeChat QR code",
+    "easterEgg.qrAlt": "WeChat QR code for Dachuan Song",
     "nav.about": "About",
     "nav.skills": "Skills",
     "nav.papers": "Papers",
@@ -132,6 +136,10 @@ const translations = {
       "Dachuan Song 是 George Mason University 电子与计算机工程博士研究生，研究方向包括深度学习、长上下文与序列建模、基于大语言模型的智能体和模型评估。",
     "language.button": "EN",
     "language.aria": "Switch to English",
+    "easterEgg.coinLabel": "隐藏联系彩蛋",
+    "easterEgg.dialogLabel": "微信二维码",
+    "easterEgg.closeLabel": "关闭微信二维码",
+    "easterEgg.qrAlt": "宋大川的微信二维码",
     "nav.about": "关于",
     "nav.skills": "技能",
     "nav.papers": "论文",
@@ -254,7 +262,11 @@ const translations = {
 const languageStorageKey = "dachuan-site-language";
 const languageToggle = document.querySelector("[data-lang-toggle]");
 const descriptionMeta = document.querySelector('meta[name="description"]');
+const coinEasterEgg = document.querySelector("[data-coin-easter-egg]");
+const wechatDialog = document.querySelector("[data-wechat-dialog]");
+const wechatDialogClose = document.querySelector("[data-wechat-dialog-close]");
 let currentLanguage = "en";
+let coinClickCount = 0;
 
 const getTranslation = (language, key) => translations[language]?.[key] ?? translations.en[key] ?? "";
 
@@ -279,6 +291,10 @@ function setLanguage(language) {
     element.setAttribute("aria-label", getTranslation(currentLanguage, element.dataset.i18nAria));
   });
 
+  document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+    element.setAttribute("alt", getTranslation(currentLanguage, element.dataset.i18nAlt));
+  });
+
   if (languageToggle) {
     languageToggle.textContent = getTranslation(currentLanguage, "language.button");
     languageToggle.setAttribute("aria-label", getTranslation(currentLanguage, "language.aria"));
@@ -301,6 +317,50 @@ document.getElementById("year").textContent = new Date().getFullYear();
 if (languageToggle) {
   languageToggle.addEventListener("click", () => {
     setLanguage(currentLanguage === "en" ? "zh" : "en");
+  });
+}
+
+function closeWechatDialog() {
+  if (!wechatDialog) return;
+
+  if (typeof wechatDialog.close === "function") {
+    wechatDialog.close();
+  } else {
+    wechatDialog.removeAttribute("open");
+  }
+}
+
+if (coinEasterEgg && wechatDialog) {
+  coinEasterEgg.addEventListener("click", () => {
+    coinClickCount += 1;
+
+    if (coinClickCount < 5) return;
+
+    coinClickCount = 0;
+    if (typeof wechatDialog.showModal === "function") {
+      wechatDialog.showModal();
+    } else {
+      wechatDialog.setAttribute("open", "");
+    }
+  });
+
+  wechatDialogClose?.addEventListener("click", closeWechatDialog);
+
+  wechatDialog.addEventListener("click", (event) => {
+    if (event.target !== wechatDialog) return;
+
+    const bounds = wechatDialog.getBoundingClientRect();
+    const clickedBackdrop =
+      event.clientX < bounds.left ||
+      event.clientX > bounds.right ||
+      event.clientY < bounds.top ||
+      event.clientY > bounds.bottom;
+
+    if (clickedBackdrop) closeWechatDialog();
+  });
+
+  wechatDialog.addEventListener("close", () => {
+    coinClickCount = 0;
   });
 }
 
