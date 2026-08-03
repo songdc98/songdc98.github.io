@@ -787,6 +787,10 @@ h3 {
   aspect-ratio: 141 / 41;
 }
 
+.paper-thumbnail-stack img {
+  aspect-ratio: 5 / 3;
+}
+
 .work-links {
   display: flex;
   flex-wrap: wrap;
