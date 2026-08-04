@@ -33,11 +33,7 @@ const translations = {
     "about.p1":
       "I am a Ph.D. student at <strong>George Mason University</strong>, advised by <strong>Prof. Xuan Wang</strong>. I study learning systems that must process long and evolving information under practical constraints on computation, memory, and latency.",
     "about.p2":
-      "<strong>State space models.</strong> I investigate sequence architectures that can adapt computation to available resources, helping long-sequence models run efficiently across different hardware and deployment settings.",
-    "about.p3":
-      "<strong>Long-context learning.</strong> I study how models can retain and integrate useful evidence from large documents and data streams without storing or repeatedly processing the entire history.",
-    "about.p4":
-      "<strong>LLM-based agents.</strong> I study memory and information provenance so multi-step systems can distinguish current evidence from stale information and use external tools more reliably.",
+      "My research spans state space models, long-context learning, and LLM-based agents. Across these areas, I aim to make learning systems more efficient under resource constraints, better able to use long and evolving information, and more reliable in practical multi-step tasks.",
     "areas.kicker": "Research Areas",
     "areas.agent.title": "Reliable LLM Agents",
     "areas.agent.body":
@@ -152,11 +148,7 @@ const translations = {
     "about.p1":
       "我是 <strong>乔治梅森大学</strong> 电子与计算机工程博士研究生，导师为 <strong>Xuan Wang 教授</strong>。我研究学习系统如何在计算、内存和延迟等实际约束下处理长序列与持续变化的信息。",
     "about.p2":
-      "<strong>状态空间模型。</strong>我研究能够根据可用资源调整计算量的序列架构，使长序列模型可以在不同硬件和部署环境中高效运行。",
-    "about.p3":
-      "<strong>长上下文学习。</strong>我研究模型如何从大型文档和数据流中保留并整合有用证据，而不必存储或反复处理全部历史信息。",
-    "about.p4":
-      "<strong>基于大语言模型的智能体。</strong>我研究记忆与信息来源追踪，使多步系统能够区分当前证据与过期信息，并更可靠地调用外部工具。",
+      "我的研究涵盖状态空间模型、长上下文学习与基于大语言模型的智能体。我希望提升学习系统在资源约束下的效率、对长序列与持续变化信息的利用能力，以及在实际多步任务中的可靠性。",
     "areas.kicker": "研究方向",
     "areas.agent.title": "可靠的大语言模型智能体",
     "areas.agent.body":
