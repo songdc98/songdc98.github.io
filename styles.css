@@ -224,24 +224,19 @@ a {
 }
 
 .brand-colors {
-  display: inline-flex;
-  align-items: baseline;
+  display: inline-block;
+  color: #7c3aed;
+  background: linear-gradient(90deg, #2563eb 0%, #7c3aed 50%, #be185d 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.brand-tone-blue {
-  color: #365e7d;
-}
-
-.brand-tone-teal {
-  color: #487a70;
-}
-
-.brand-tone-terracotta {
-  color: #a35d46;
-}
-
-.brand-space {
-  width: 0.32em;
+@media (forced-colors: active) {
+  .brand-colors {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+  }
 }
 
 .header-controls {
