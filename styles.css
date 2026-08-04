@@ -228,24 +228,16 @@ a {
   align-items: baseline;
 }
 
-.brand-colors > span:nth-child(5n + 1) {
-  color: #c13f4f;
+.brand-tone-blue {
+  color: #365e7d;
 }
 
-.brand-colors > span:nth-child(5n + 2) {
-  color: #986a00;
+.brand-tone-teal {
+  color: #487a70;
 }
 
-.brand-colors > span:nth-child(5n + 3) {
-  color: #19734a;
-}
-
-.brand-colors > span:nth-child(5n + 4) {
-  color: #1769aa;
-}
-
-.brand-colors > span:nth-child(5n) {
-  color: #6f4aa1;
+.brand-tone-terracotta {
+  color: #a35d46;
 }
 
 .brand-space {
