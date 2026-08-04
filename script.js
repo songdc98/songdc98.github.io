@@ -2,7 +2,7 @@ const translations = {
   en: {
     "meta.title": "Dachuan Song | AI Research & Engineering",
     "meta.description":
-      "Dachuan Song is a Ph.D. student at George Mason University researching efficient sequence models, spectral state-space methods, long-context aggregation, and reliable LLM agents.",
+      "Dachuan Song is a Ph.D. student at George Mason University researching deep learning, sequence modeling, state space models, long-context learning, and LLM-based systems.",
     "language.button": "中文",
     "language.aria": "Switch to Chinese",
     "easterEgg.coinLabel": "Hidden contact easter egg",
@@ -14,9 +14,9 @@ const translations = {
     "nav.papers": "Papers",
     "nav.cv": "CV",
     "nav.contact": "Contact",
-    "hero.eyebrow": "Deep Learning · Spectral State Space Models · Long Contexts · LLM Agents",
+    "hero.eyebrow": "Deep Learning · State Space Models · Long Contexts · LLM Agents",
     "hero.lead":
-      "I build efficient sequence models for long-context aggregation, elastic inference, and reliable tool-using agents.",
+      "I study how learning systems can process long sequences efficiently and use accumulated information reliably in complex tasks.",
     "hero.linksLabel": "Profile links",
     "links.email": "Email",
     "links.emailCopyAria": "Copy email address",
@@ -29,11 +29,15 @@ const translations = {
     "profile.university": "George Mason University",
     "profile.location": "Fairfax, Virginia, USA",
     "about.kicker": "Direction",
-    "about.title": "Efficient Sequence Models, Long-Context Aggregation, and Reliable LLM Agents.",
+    "about.title": "Deep Learning, Sequence Modeling, and LLM-Based Systems.",
     "about.p1":
-      "I am a Ph.D. student at <strong>George Mason University</strong>, advised by <strong>Prof. Xuan Wang</strong>. I study how neural sequence models can preserve and combine information over long inputs while adapting computation to task demands and inference budgets.",
+      "I am a Ph.D. student at <strong>George Mason University</strong>, advised by <strong>Prof. Xuan Wang</strong>. I study learning systems that must process long and evolving information under practical constraints on computation, memory, and latency.",
     "about.p2":
-      "My work develops spectral state-space models for elastic inference, mergeable model-side states for fixed-budget aggregation, and memory and provenance mechanisms for reliable tool-using agents.",
+      "<strong>State space models.</strong> I investigate sequence architectures that can adapt computation to available resources, helping long-sequence models run efficiently across different hardware and deployment settings.",
+    "about.p3":
+      "<strong>Long-context learning.</strong> I study how models can retain and integrate useful evidence from large documents and data streams without storing or repeatedly processing the entire history.",
+    "about.p4":
+      "<strong>LLM-based agents.</strong> I study memory and information provenance so multi-step systems can distinguish current evidence from stale information and use external tools more reliably.",
     "areas.kicker": "Research Areas",
     "areas.agent.title": "Reliable LLM Agents",
     "areas.agent.body":
@@ -111,13 +115,13 @@ const translations = {
     "awards.icml.line": "ICML 2026 <span class=\"highlight-badge highlight-badge-inline\">Silver Reviewer</span>",
     "awards.icml.body": "Recognized for review quality evaluated by Area Chairs.",
     "contact.kicker": "Contact",
-    "contact.title": "Open to collaborations on spectral state-space models, long-context aggregation, and reliable LLM agents.",
+    "contact.title": "Open to collaborations across deep learning, sequence modeling, and large language model research.",
     "contact.email": "dsong25@gmu.edu",
   },
   zh: {
     "meta.title": "Dachuan Song | AI 研究与工程",
     "meta.description":
-      "Dachuan Song 是乔治梅森大学电子与计算机工程博士研究生，研究高效序列模型、谱状态空间方法、长上下文聚合与可靠的大语言模型智能体。",
+      "Dachuan Song 是乔治梅森大学电子与计算机工程博士研究生，研究深度学习、序列建模、状态空间模型、长上下文学习与大语言模型系统。",
     "language.button": "EN",
     "language.aria": "Switch to English",
     "easterEgg.coinLabel": "隐藏联系彩蛋",
@@ -129,9 +133,9 @@ const translations = {
     "nav.papers": "论文",
     "nav.cv": "简历",
     "nav.contact": "联系",
-    "hero.eyebrow": "深度学习 · 谱状态空间模型 · 长上下文 · 大语言模型智能体",
+    "hero.eyebrow": "深度学习 · 状态空间模型 · 长上下文 · 大语言模型智能体",
     "hero.lead":
-      "我研究面向长上下文聚合、弹性推理与可靠工具调用智能体的高效序列模型。",
+      "我研究学习系统如何高效处理长序列，并在复杂任务中可靠地使用累积信息。",
     "hero.linksLabel": "个人链接",
     "links.email": "邮箱",
     "links.emailCopyAria": "复制邮箱地址",
@@ -144,11 +148,15 @@ const translations = {
     "profile.university": "George Mason University",
     "profile.location": "Fairfax, Virginia, USA",
     "about.kicker": "方向",
-    "about.title": "高效序列模型、长上下文聚合与可靠的大语言模型智能体。",
+    "about.title": "深度学习、序列建模与大语言模型系统。",
     "about.p1":
-      "我是 <strong>乔治梅森大学</strong> 电子与计算机工程博士研究生，导师为 <strong>王璇教授</strong>。我研究神经序列模型如何在长输入中保留并组合关键信息，并根据任务需求和推理预算动态分配计算。",
+      "我是 <strong>乔治梅森大学</strong> 电子与计算机工程博士研究生，导师为 <strong>王璇教授</strong>。我研究学习系统如何在计算、内存和延迟等实际约束下处理长序列与持续变化的信息。",
     "about.p2":
-      "我的工作包括面向弹性推理的谱状态空间模型、面向固定预算信息聚合的可合并模型侧状态，以及提升工具调用智能体可靠性的记忆与来源追踪机制。",
+      "<strong>状态空间模型。</strong>我研究能够根据可用资源调整计算量的序列架构，使长序列模型可以在不同硬件和部署环境中高效运行。",
+    "about.p3":
+      "<strong>长上下文学习。</strong>我研究模型如何从大型文档和数据流中保留并整合有用证据，而不必存储或反复处理全部历史信息。",
+    "about.p4":
+      "<strong>基于大语言模型的智能体。</strong>我研究记忆与信息来源追踪，使多步系统能够区分当前证据与过期信息，并更可靠地调用外部工具。",
     "areas.kicker": "研究方向",
     "areas.agent.title": "可靠的大语言模型智能体",
     "areas.agent.body":
@@ -225,7 +233,7 @@ const translations = {
     "awards.icml.line": "ICML 2026 <span class=\"highlight-badge highlight-badge-inline\">Silver Reviewer</span>",
     "awards.icml.body": "评审质量获得 Area Chairs 认可。",
     "contact.kicker": "联系",
-    "contact.title": "欢迎围绕谱状态空间模型、长上下文聚合与可靠的大语言模型智能体开展合作。",
+    "contact.title": "欢迎围绕深度学习、序列建模与大语言模型研究开展合作。",
     "contact.email": "dsong25@gmu.edu",
   },
 };
