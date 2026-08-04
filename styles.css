@@ -311,7 +311,7 @@ a {
 .section-body,
 .timeline,
 .publication-list,
-.education-list,
+.education-summary,
 .project-grid,
 .expertise-grid,
 .skills-grid {
@@ -508,7 +508,6 @@ h3 {
 .timeline-item p,
 .publication p,
 .project-grid p,
-.education-list p,
 .expertise-grid p {
   color: var(--body);
 }
@@ -579,7 +578,6 @@ h3 {
 .expertise-grid > div,
 .project-grid > article,
 .publication,
-.education-list > article,
 .timeline-item {
   border-top: 1px solid var(--line);
   padding-top: 20px;
@@ -618,10 +616,51 @@ h3 {
 }
 
 .timeline,
-.publication-list,
-.education-list {
+.publication-list {
   display: grid;
   gap: 28px;
+}
+
+.education-summary {
+  display: grid;
+  gap: 12px;
+  padding-top: 18px;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.education-entry {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+}
+
+.education-entry dt {
+  color: var(--heading);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.education-entry dd {
+  min-width: 0;
+  margin: 0;
+  color: var(--body);
+  line-height: 1.5;
+}
+
+.education-entry .institution-link {
+  color: var(--heading);
+  font-weight: 760;
+}
+
+.education-divider {
+  margin: 0 6px;
+  color: var(--muted);
+}
+
+.education-program {
+  color: var(--muted);
 }
 
 .education-content,
@@ -987,6 +1026,10 @@ h3 {
   .split,
   .footer {
     grid-template-columns: 1fr;
+  }
+
+  .education-section {
+    gap: 24px;
   }
 
   .hero {

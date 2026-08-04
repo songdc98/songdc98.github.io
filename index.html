@@ -302,29 +302,38 @@
         </div>
       </section>
 
-      <section id="education" class="section split">
+      <section id="education" class="section split education-section">
         <div>
           <p class="section-kicker" data-i18n="education.kicker">Education</p>
           <h2 data-i18n="education.title">Academic Background.</h2>
         </div>
         <div class="education-content">
-          <div class="education-list">
-            <article>
-              <h3><a class="institution-link" href="https://ece.gmu.edu/" target="_blank" rel="noreferrer">George Mason University</a></h3>
-              <p data-i18n="education.gmu.degree">Ph.D. in Electrical and Computer Engineering · 2024–Present</p>
-              <p class="muted" data-i18n="education.gmu.body">Linear systems, random processes, Kalman filtering, distributed control and optimization, system identification, Advanced Learning from Data.</p>
-            </article>
-            <article>
-              <h3><a class="institution-link" href="https://www.southampton.ac.uk/student-life/campuses/highfield" target="_blank" rel="noreferrer">University of Southampton</a></h3>
-              <p data-i18n="education.southampton.degree">M.Sc. in Computer Science</p>
-              <p class="muted" data-i18n="education.southampton.body">Advanced machine learning, deep learning, computer vision, Bayesian learning, active and reinforcement learning.</p>
-            </article>
-            <article>
-              <h3><a class="institution-link" href="https://english.xju.edu.cn/" target="_blank" rel="noreferrer">Xinjiang University</a></h3>
-              <p data-i18n="education.xju.degree">B.Eng. in Software Engineering · 2017–2021</p>
-              <p class="muted" data-i18n="education.xju.body">C programming, C++, Python, data structures and algorithms, operating systems, compiler principles, machine learning, deep learning, software architecture, Linux/UNIX, Java EE and middleware.</p>
-            </article>
-          </div>
+          <dl class="education-summary">
+            <div class="education-entry">
+              <dt data-i18n="education.gmu.level">Ph.D.</dt>
+              <dd>
+                <a class="institution-link" href="https://ece.gmu.edu/" target="_blank" rel="noreferrer" data-i18n="education.gmu.school">George Mason University</a>
+                <span class="education-divider" aria-hidden="true">·</span>
+                <span class="education-program" data-i18n="education.gmu.program">Electrical and Computer Engineering</span>
+              </dd>
+            </div>
+            <div class="education-entry">
+              <dt data-i18n="education.southampton.level">M.Sc.</dt>
+              <dd>
+                <a class="institution-link" href="https://www.southampton.ac.uk/student-life/campuses/highfield" target="_blank" rel="noreferrer" data-i18n="education.southampton.school">University of Southampton</a>
+                <span class="education-divider" aria-hidden="true">·</span>
+                <span class="education-program" data-i18n="education.southampton.program">Computer Science</span>
+              </dd>
+            </div>
+            <div class="education-entry">
+              <dt data-i18n="education.xju.level">B.Eng.</dt>
+              <dd>
+                <a class="institution-link" href="https://english.xju.edu.cn/" target="_blank" rel="noreferrer" data-i18n="education.xju.school">Xinjiang University</a>
+                <span class="education-divider" aria-hidden="true">·</span>
+                <span class="education-program" data-i18n="education.xju.program">Software Engineering</span>
+              </dd>
+            </div>
+          </dl>
 
           <section class="award-list" aria-label="Personal Academic Awards" data-i18n-aria="awards.label">
             <h3 data-i18n="awards.title">Personal Academic Awards</h3>
