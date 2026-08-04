@@ -127,7 +127,7 @@ const translations = {
     "easterEgg.coinLabel": "隐藏联系彩蛋",
     "easterEgg.dialogLabel": "微信二维码",
     "easterEgg.closeLabel": "关闭微信二维码",
-    "easterEgg.qrAlt": "宋大川的微信二维码",
+    "easterEgg.qrAlt": "Dachuan Song 的微信二维码",
     "nav.about": "关于",
     "nav.skills": "技能",
     "nav.papers": "论文",
@@ -150,7 +150,7 @@ const translations = {
     "about.kicker": "方向",
     "about.title": "深度学习、序列建模与大语言模型系统。",
     "about.p1":
-      "我是 <strong>乔治梅森大学</strong> 电子与计算机工程博士研究生，导师为 <strong>王璇教授</strong>。我研究学习系统如何在计算、内存和延迟等实际约束下处理长序列与持续变化的信息。",
+      "我是 <strong>乔治梅森大学</strong> 电子与计算机工程博士研究生，导师为 <strong>Xuan Wang 教授</strong>。我研究学习系统如何在计算、内存和延迟等实际约束下处理长序列与持续变化的信息。",
     "about.p2":
       "<strong>状态空间模型。</strong>我研究能够根据可用资源调整计算量的序列架构，使长序列模型可以在不同硬件和部署环境中高效运行。",
     "about.p3":
