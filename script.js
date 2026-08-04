@@ -2,7 +2,7 @@ const translations = {
   en: {
     "meta.title": "Dachuan Song | AI Research & Engineering",
     "meta.description":
-      "Dachuan Song is a Ph.D. student at George Mason University researching deep learning, sequence modeling, state space models, long-context learning, and LLM-based systems.",
+      "Dachuan Song is a Ph.D. student at George Mason University researching deep learning, state space models, long-sequence modeling, and LLM-based systems.",
     "language.button": "中文",
     "language.aria": "Switch to Chinese",
     "easterEgg.coinLabel": "Hidden contact easter egg",
@@ -33,7 +33,7 @@ const translations = {
     "about.p1":
       "I am a Ph.D. student at <strong>George Mason University</strong>, advised by <strong>Prof. Xuan Wang</strong>. I study learning systems that must process long and evolving information under practical constraints on computation, memory, and latency.",
     "about.p2":
-      "My research spans state space models, long-context learning, and LLM-based agents. Across these areas, I aim to make learning systems more efficient under resource constraints, better able to use long and evolving information, and more reliable in practical multi-step tasks.",
+      "My research focuses on state space models, long-sequence modeling, and LLM-based agents, with an emphasis on efficient and reliable learning systems.",
     "areas.kicker": "Research Areas",
     "areas.agent.title": "Reliable LLM Agents",
     "areas.agent.body":
@@ -117,7 +117,7 @@ const translations = {
   zh: {
     "meta.title": "Dachuan Song | AI 研究与工程",
     "meta.description":
-      "Dachuan Song 是乔治梅森大学电子与计算机工程博士研究生，研究深度学习、序列建模、状态空间模型、长上下文学习与大语言模型系统。",
+      "Dachuan Song 是乔治梅森大学电子与计算机工程博士研究生，研究深度学习、状态空间模型、长序列建模与大语言模型系统。",
     "language.button": "EN",
     "language.aria": "Switch to English",
     "easterEgg.coinLabel": "隐藏联系彩蛋",
@@ -148,7 +148,7 @@ const translations = {
     "about.p1":
       "我是 <strong>乔治梅森大学</strong> 电子与计算机工程博士研究生，导师为 <strong>Xuan Wang 教授</strong>。我研究学习系统如何在计算、内存和延迟等实际约束下处理长序列与持续变化的信息。",
     "about.p2":
-      "我的研究涵盖状态空间模型、长上下文学习与基于大语言模型的智能体。我希望提升学习系统在资源约束下的效率、对长序列与持续变化信息的利用能力，以及在实际多步任务中的可靠性。",
+      "我的研究方向包括状态空间模型、长序列建模与基于大语言模型的智能体，重点关注学习系统的效率与可靠性。",
     "areas.kicker": "研究方向",
     "areas.agent.title": "可靠的大语言模型智能体",
     "areas.agent.body":
