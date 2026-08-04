@@ -19,6 +19,9 @@ const translations = {
       "I work across deep learning, long-context and sequence modeling, model evaluation, and LLM-based agents.",
     "hero.linksLabel": "Profile links",
     "links.email": "Email",
+    "links.emailCopyAria": "Copy email address",
+    "links.emailCopied": "Copied",
+    "links.emailCopyFailed": "Copy failed",
     "links.scholar": "Scholar",
     "profile.summaryLabel": "Profile summary",
     "profile.role": "Ph.D. Student",
@@ -129,6 +132,7 @@ const translations = {
     "awards.icml.body": "Recognized for review quality evaluated by Area Chairs.",
     "contact.kicker": "Contact",
     "contact.title": "Open to collaborations on deep learning, long-context modeling, LLM-based agents, and model evaluation.",
+    "contact.email": "dsong25@gmu.edu",
   },
   zh: {
     "meta.title": "Dachuan Song | AI 研究与工程",
@@ -150,6 +154,9 @@ const translations = {
       "我的研究覆盖深度学习、长上下文与序列建模、模型评估，以及基于大语言模型的智能体。",
     "hero.linksLabel": "个人链接",
     "links.email": "邮箱",
+    "links.emailCopyAria": "复制邮箱地址",
+    "links.emailCopied": "已复制",
+    "links.emailCopyFailed": "复制失败",
     "links.scholar": "学术主页",
     "profile.summaryLabel": "个人简介",
     "profile.role": "博士研究生",
@@ -259,6 +266,7 @@ const translations = {
     "awards.icml.body": "评审质量获得 Area Chairs 认可。",
     "contact.kicker": "联系",
     "contact.title": "欢迎交流深度学习、长上下文建模、基于大语言模型的智能体和模型评估方向的合作。",
+    "contact.email": "dsong25@gmu.edu",
   },
 };
 
@@ -268,8 +276,10 @@ const descriptionMeta = document.querySelector('meta[name="description"]');
 const coinEasterEgg = document.querySelector("[data-coin-easter-egg]");
 const wechatDialog = document.querySelector("[data-wechat-dialog]");
 const wechatDialogClose = document.querySelector("[data-wechat-dialog-close]");
+const emailCopyButtons = document.querySelectorAll("[data-copy-email]");
 let currentLanguage = "en";
 let coinClickCount = 0;
+const emailFeedbackTimers = new WeakMap();
 
 const getTranslation = (language, key) => translations[language]?.[key] ?? translations.en[key] ?? "";
 
@@ -322,6 +332,58 @@ if (languageToggle) {
     setLanguage(currentLanguage === "en" ? "zh" : "en");
   });
 }
+
+function copyWithFallback(text) {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.append(textarea);
+  textarea.select();
+  const copied = document.execCommand("copy");
+  textarea.remove();
+
+  if (!copied) throw new Error("Clipboard copy failed");
+}
+
+async function copyText(text) {
+  if (navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return;
+    } catch {
+      copyWithFallback(text);
+      return;
+    }
+  }
+
+  copyWithFallback(text);
+}
+
+emailCopyButtons.forEach((button) => {
+  button.addEventListener("click", async () => {
+    const defaultKey = button.dataset.i18n;
+    const existingTimer = emailFeedbackTimers.get(button);
+    if (existingTimer) window.clearTimeout(existingTimer);
+
+    try {
+      await copyText(button.dataset.copyEmail);
+      button.textContent = getTranslation(currentLanguage, "links.emailCopied");
+      button.dataset.copyState = "success";
+    } catch {
+      button.textContent = getTranslation(currentLanguage, "links.emailCopyFailed");
+      button.dataset.copyState = "error";
+    }
+
+    const timer = window.setTimeout(() => {
+      button.textContent = getTranslation(currentLanguage, defaultKey);
+      button.removeAttribute("data-copy-state");
+      emailFeedbackTimers.delete(button);
+    }, 1600);
+    emailFeedbackTimers.set(button, timer);
+  });
+});
 
 function closeWechatDialog() {
   if (!wechatDialog) return;
