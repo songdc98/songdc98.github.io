@@ -696,7 +696,8 @@ h3 {
   line-height: 1.5;
 }
 
-.education-entry .institution-link {
+.education-entry .institution-link,
+.education-entry .institution-name {
   color: var(--heading);
   font-weight: 760;
 }
