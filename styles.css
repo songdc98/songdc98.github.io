@@ -385,7 +385,7 @@ h1 {
 
 h2 {
   margin-bottom: 16px;
-  font-size: clamp(27px, 3.4vw, 38px);
+  font-size: clamp(24px, 2.8vw, 32px);
   line-height: 1.12;
   color: var(--heading);
   font-weight: 760;
@@ -973,7 +973,7 @@ h3 {
 
 .footer h2 {
   max-width: 640px;
-  font-size: clamp(24px, 3.2vw, 36px);
+  font-size: clamp(22px, 2.6vw, 30px);
 }
 
 .footer-links a,
