@@ -664,7 +664,10 @@ h3 {
   background: #2878bd;
 }
 
-.sequence-card::before,
+.sequence-card::before {
+  background: #b87547;
+}
+
 .product-card::before {
   background: #5f7f9f;
 }
