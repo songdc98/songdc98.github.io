@@ -8,6 +8,8 @@
   --body: #3f3f3f;
   --muted: #6f6f6f;
   --line: #e8e8e8;
+  --divider-major: #d7dadd;
+  --divider-minor: #e0e3e6;
   --accent: #2878bd;
   --accent-soft: #5b95c7;
   --blue: #2878bd;
@@ -221,6 +223,10 @@ a {
 
 main {
   padding-top: var(--header-height);
+}
+
+main > section + section {
+  border-top: 4px solid var(--divider-major);
 }
 
 .brand {
@@ -545,7 +551,6 @@ h3 {
   display: grid;
   grid-template-columns: minmax(240px, 0.42fr) minmax(0, 0.58fr);
   gap: 56px;
-  border-top: 1px solid var(--line);
 }
 
 .section-body p,
@@ -569,9 +574,7 @@ h3 {
 }
 
 .skills-band {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  background: #fafafa;
+  background: #ffffff;
 }
 
 .skills-inner {
@@ -633,7 +636,7 @@ h3 {
 .project-grid > article,
 .publication,
 .timeline-item {
-  border-top: 1px solid var(--line);
+  border-top: 2px solid var(--divider-minor);
   padding-top: 20px;
 }
 
@@ -680,7 +683,7 @@ h3 {
   gap: 12px;
   padding-top: 18px;
   margin: 0;
-  border-top: 1px solid var(--line);
+  border-top: 2px solid var(--divider-minor);
 }
 
 .education-entry {
@@ -827,7 +830,7 @@ h3 {
 }
 
 .award-list {
-  border-top: 1px solid var(--line);
+  border-top: 2px solid var(--divider-minor);
   padding-top: 22px;
 }
 
@@ -988,7 +991,7 @@ h3 {
   max-width: 1180px;
   margin: 0 auto;
   padding: 54px 28px 44px;
-  border-top: 1px solid var(--line);
+  border-top: 4px solid var(--divider-major);
 }
 
 .footer h2 {
