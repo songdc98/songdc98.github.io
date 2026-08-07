@@ -101,11 +101,11 @@ const translations = {
     "publications.internship.title": "Surgical Video Understanding and Efficient Depth Estimation",
     "publications.internship.role": "Machine Learning Engineer Intern",
     "publications.internship.summary":
-      "Designed video models to recognize surgical phases and instrument actions from endoscopic footage, helping downstream robotic systems track procedure state. Separately compressed Depth Anything 3 into a smaller depth model and used teacher-guided fine-tuning to recover surgical-scene depth estimation quality under a much lower parameter budget.",
+      "Built video models to recognize surgical phases and instrument actions for robot-assisted procedures. Compressed and fine-tuned a smaller Depth Anything 3 model that performs nearly as well as the full model.",
     "publications.internship.keywords":
       "Surgical phase recognition · Robot-assisted surgery · Model compression · Monocular depth estimation",
     "publications.internship.imageAlt":
-      "Non-graphic surgical instrument-action illustrations followed by a cropped endoscopic frame and its predicted depth map",
+      "Combined non-graphic surgical grasper and clip-applier illustration beside the full repaired small-model depth prediction",
     "education.kicker": "Education",
     "education.title": "Academic Background.",
     "education.gmu.level": "Ph.D.",
@@ -225,11 +225,11 @@ const translations = {
     "publications.internship.title": "手术视频理解与高效深度估计",
     "publications.internship.role": "机器学习工程师实习生",
     "publications.internship.summary":
-      "设计视频模型，从内窥镜画面识别手术阶段以及抓取、切割等器械动作，帮助下游手术机器人系统判断当前流程状态。另一项工作将 Depth Anything 3 压缩为小型深度模型，并通过教师模型指导的微调，在更低参数量下恢复其手术场景深度估计效果。",
+      "构建视频模型，识别机器人辅助手术中的手术阶段和器械动作；压缩并微调小型 Depth Anything 3，使其性能与完整模型几乎一致。",
     "publications.internship.keywords":
       "手术阶段识别 · 机器人辅助手术 · 模型压缩 · 单目深度估计",
     "publications.internship.imageAlt":
-      "非血腥的手术器械动作示意，以及裁切后的内窥镜画面与对应深度预测图",
+      "合成的非血腥手术夹持与施夹器械示意，以及完整的修复后小模型深度预测图",
     "education.kicker": "教育",
     "education.title": "教育背景。",
     "education.gmu.level": "博士",
