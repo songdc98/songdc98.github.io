@@ -38,9 +38,9 @@ const translations = {
     "areas.agent.title": "Reliable LLM Agents",
     "areas.agent.body":
       "Agent memory, provenance tracking, and tool-use mechanisms designed to reduce stale information use and improve workflow reliability.",
-    "areas.sequence.title": "Long-Context Aggregation",
+    "areas.sequence.title": "Efficient Long-Sequence Modeling",
     "areas.sequence.body":
-      "Model-side mechanisms that preserve, compress, and merge information from long inputs under fixed memory and inference budgets.",
+      "Efficient state-space and hybrid sequence architectures that use attention selectively and adapt computation to each input, reducing inference cost while preserving model quality.",
     "areas.ssm.title": "Spectral State Space Models",
     "areas.ssm.body":
       "State-space sequence models with spectral structure and elastic capacity for efficient, budget-aware inference.",
@@ -163,9 +163,9 @@ const translations = {
     "areas.agent.title": "可靠的大语言模型智能体",
     "areas.agent.body":
       "研究智能体记忆、来源追踪与工具调用机制，减少过期信息使用并提升工作流可靠性。",
-    "areas.sequence.title": "长上下文聚合",
+    "areas.sequence.title": "高效长序列建模",
     "areas.sequence.body":
-      "研究在固定记忆与推理预算下，对长输入信息进行保留、压缩与合并的模型侧机制。",
+      "研究高效的状态空间与混合序列架构，通过选择性使用注意力并根据输入自适应分配计算，在保持模型性能的同时降低推理成本。",
     "areas.ssm.title": "谱状态空间模型",
     "areas.ssm.body":
       "研究具有谱结构与弹性容量的状态空间序列模型，实现高效、预算感知的推理。",
