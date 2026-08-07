@@ -29,7 +29,7 @@ const translations = {
     "profile.university": "George Mason University",
     "profile.location": "Fairfax, Virginia, USA",
     "about.kicker": "Direction",
-    "about.title": "Deep Learning, Sequence Modeling, and LLM-Based Systems.",
+    "about.title": "Deep Learning,<br>Sequence Modeling.",
     "about.p1":
       "I am a Ph.D. student at <strong>George Mason University</strong>, advised by <strong>Prof. Xuan Wang</strong>. I study learning systems that must process long and evolving information under practical constraints on computation, memory, and latency.",
     "about.p2":
@@ -154,7 +154,7 @@ const translations = {
     "profile.university": "George Mason University",
     "profile.location": "Fairfax, Virginia, USA",
     "about.kicker": "方向",
-    "about.title": "深度学习、序列建模与大语言模型系统。",
+    "about.title": "深度学习，<br>序列建模。",
     "about.p1":
       "我是 <strong>乔治梅森大学</strong> 电子与计算机工程博士研究生，导师为 <strong>Xuan Wang 教授</strong>。我研究学习系统如何在计算、内存和延迟等实际约束下处理长序列与持续变化的信息。",
     "about.p2":
