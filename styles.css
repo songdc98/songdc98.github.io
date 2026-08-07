@@ -851,6 +851,15 @@ h3 {
   max-width: 680px;
 }
 
+.internship-role {
+  margin-left: 4px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
 .publication-keywords {
   margin-bottom: 0;
 }
