@@ -101,11 +101,11 @@ const translations = {
     "publications.internship.title": "Surgical Video Understanding and Efficient Depth Estimation",
     "publications.internship.role": "Machine Learning Engineer Intern",
     "publications.internship.summary":
-      "Built video models to recognize surgical phases and instrument actions for robot-assisted procedures. Compressed and fine-tuned a smaller Depth Anything 3 model that performs nearly as well as the full model.",
+      "Built video models to recognize surgical phases and instrument actions for robot-assisted procedures. Compressed and fine-tuned Depth Anything 3 to 29% of its original size while retaining nearly the full model's performance.",
     "publications.internship.keywords":
       "Surgical phase recognition · Robot-assisted surgery · Model compression · Monocular depth estimation",
     "publications.internship.imageAlt":
-      "Combined non-graphic surgical grasper and clip-applier illustration beside the full repaired small-model depth prediction",
+      "Combined non-graphic surgical grasper and clip-applier illustration beside a masked small-model depth prediction",
     "education.kicker": "Education",
     "education.title": "Academic Background.",
     "education.gmu.level": "Ph.D.",
@@ -225,11 +225,11 @@ const translations = {
     "publications.internship.title": "手术视频理解与高效深度估计",
     "publications.internship.role": "机器学习工程师实习生",
     "publications.internship.summary":
-      "构建视频模型，识别机器人辅助手术中的手术阶段和器械动作；压缩并微调小型 Depth Anything 3，使其性能与完整模型几乎一致。",
+      "构建视频模型，识别机器人辅助手术中的手术阶段和器械动作；将 Depth Anything 3 压缩并微调至原模型约 29% 的规模，性能与完整模型几乎一致。",
     "publications.internship.keywords":
       "手术阶段识别 · 机器人辅助手术 · 模型压缩 · 单目深度估计",
     "publications.internship.imageAlt":
-      "合成的非血腥手术夹持与施夹器械示意，以及完整的修复后小模型深度预测图",
+      "合成的非血腥手术夹持与施夹器械示意，以及视野外区域为黑色的小模型深度预测图",
     "education.kicker": "教育",
     "education.title": "教育背景。",
     "education.gmu.level": "博士",
