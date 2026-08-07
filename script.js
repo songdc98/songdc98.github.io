@@ -96,6 +96,16 @@ const translations = {
     "publications.bcb.summary":
       "Studied subject and task fingerprints from fMRI time-series data through causal modeling, with an oral presentation at ACM BCB 2024.",
     "publications.bcb.keywords": "ACM BCB · Causal modeling · fMRI · Health AI",
+    "publications.internship.type": "Internship",
+    "publications.internship.venue": "Optosurgical · Summer 2026",
+    "publications.internship.title": "Surgical Video Understanding and Efficient Depth Estimation",
+    "publications.internship.role": "Research Intern",
+    "publications.internship.summary":
+      "Designed video models to recognize surgical phases and instrument actions from endoscopic footage, helping downstream robotic systems track procedure state. Separately compressed Depth Anything 3 into a smaller depth model and used teacher-guided fine-tuning to recover surgical-scene depth estimation quality under a much lower parameter budget.",
+    "publications.internship.keywords":
+      "Surgical phase recognition · Robot-assisted surgery · Model compression · Monocular depth estimation",
+    "publications.internship.imageAlt":
+      "Surgical action examples followed by an endoscopic RGB frame and its predicted depth map",
     "education.kicker": "Education",
     "education.title": "Academic Background.",
     "education.gmu.level": "Ph.D.",
@@ -210,6 +220,16 @@ const translations = {
     "publications.bcb.summary":
       "通过因果建模研究 fMRI 时间序列中的主体与任务指纹识别，并在 ACM BCB 2024 作口头报告。",
     "publications.bcb.keywords": "ACM BCB · 因果建模 · fMRI · 健康 AI",
+    "publications.internship.type": "实习",
+    "publications.internship.venue": "Optosurgical · 2026 夏季",
+    "publications.internship.title": "手术视频理解与高效深度估计",
+    "publications.internship.role": "研究实习生",
+    "publications.internship.summary":
+      "设计视频模型，从内窥镜画面识别手术阶段以及抓取、切割等器械动作，帮助下游手术机器人系统判断当前流程状态。另一项工作将 Depth Anything 3 压缩为小型深度模型，并通过教师模型指导的微调，在更低参数量下恢复其手术场景深度估计效果。",
+    "publications.internship.keywords":
+      "手术阶段识别 · 机器人辅助手术 · 模型压缩 · 单目深度估计",
+    "publications.internship.imageAlt":
+      "手术动作示例，以及内窥镜 RGB 画面与对应的深度预测图",
     "education.kicker": "教育",
     "education.title": "教育背景。",
     "education.gmu.level": "博士",
