@@ -215,7 +215,7 @@ a {
   justify-content: space-between;
   gap: 24px;
   height: var(--header-height);
-  padding: 20px max(28px, calc((100vw - 1180px) / 2 + 28px));
+  padding: 20px max(28px, calc((100vw - 1180px) / 2));
   background: rgba(255, 255, 255, 0.94);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(18px);
@@ -230,6 +230,7 @@ main > section + section {
 }
 
 .brand {
+  margin-left: clamp(0px, calc((100vw - 1180px) / 4), 14px);
   font-size: 16px;
   font-weight: 800;
   letter-spacing: 0;
