@@ -226,7 +226,7 @@ main {
 }
 
 main > section + section {
-  border-top: 4px solid var(--divider-major);
+  border-top: 3px solid var(--divider-major);
 }
 
 .brand {
@@ -575,6 +575,7 @@ h3 {
 }
 
 .skills-band {
+  border-top: 0;
   background: #ffffff;
 }
 
@@ -583,6 +584,7 @@ h3 {
   max-width: 1180px;
   margin: 0 auto;
   padding: 46px 28px;
+  border-top: 3px solid var(--divider-major);
 }
 
 .skills-grid {
@@ -992,7 +994,7 @@ h3 {
   max-width: 1180px;
   margin: 0 auto;
   padding: 54px 28px 44px;
-  border-top: 4px solid var(--divider-major);
+  border-top: 3px solid var(--divider-major);
 }
 
 .footer h2 {
