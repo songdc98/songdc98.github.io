@@ -370,8 +370,6 @@ emailCopyButtons.forEach((button) => {
 function resetPortraitInteraction() {
   if (!portraitRing) return;
 
-  portraitRing.style.setProperty("--portrait-light-x", "50%");
-  portraitRing.style.setProperty("--portrait-light-y", "35%");
   portraitRing.style.setProperty("--portrait-shadow-x", "0px");
   portraitRing.style.setProperty("--portrait-shadow-y", "5px");
   portraitRing.style.setProperty("--portrait-tilt-x", "0deg");
@@ -389,8 +387,6 @@ if (portraitRing) {
     const normalizedX = x * 2 - 1;
     const normalizedY = y * 2 - 1;
 
-    portraitRing.style.setProperty("--portrait-light-x", `${(x * 100).toFixed(1)}%`);
-    portraitRing.style.setProperty("--portrait-light-y", `${(y * 100).toFixed(1)}%`);
     portraitRing.style.setProperty("--portrait-shadow-x", `${(-normalizedX * 3).toFixed(2)}px`);
     portraitRing.style.setProperty("--portrait-shadow-y", `${(6 - normalizedY * 1.5).toFixed(2)}px`);
     portraitRing.style.setProperty("--portrait-tilt-x", `${(-normalizedY * 4).toFixed(2)}deg`);

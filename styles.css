@@ -257,6 +257,7 @@ main > section + section {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  transform: translateX(1px);
 }
 
 @media (forced-colors: active) {
@@ -511,8 +512,6 @@ h3 {
 }
 
 .portrait-ring {
-  --portrait-light-x: 50%;
-  --portrait-light-y: 35%;
   --portrait-shadow-x: 0px;
   --portrait-shadow-y: 5px;
   --portrait-tilt-x: 0deg;
@@ -535,35 +534,10 @@ h3 {
   will-change: transform;
 }
 
-.portrait-ring::after {
-  position: absolute;
-  inset: 3px;
-  border-radius: 50%;
-  background:
-    radial-gradient(
-      circle at var(--portrait-light-x) var(--portrait-light-y),
-      rgba(255, 255, 255, 0.42),
-      rgba(255, 255, 255, 0.12) 22%,
-      transparent 48%
-    );
-  box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.5),
-    inset -1px -1px 0 rgba(0, 0, 0, 0.045);
-  content: "";
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 140ms ease-out;
-}
-
 .portrait-ring:hover {
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.05),
-    var(--portrait-shadow-x) var(--portrait-shadow-y) 18px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.94);
-}
-
-.portrait-ring:hover::after {
-  opacity: 0.72;
+    var(--portrait-shadow-x) var(--portrait-shadow-y) 18px rgba(0, 0, 0, 0.1);
 }
 
 .portrait-ring.is-pressed {
@@ -1338,8 +1312,7 @@ a.paper-thumbnail:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   .paper-thumbnail,
-  .portrait-ring,
-  .portrait-ring::after {
+  .portrait-ring {
     transition: none;
   }
 
