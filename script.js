@@ -31,7 +31,7 @@ const translations = {
     "about.kicker": "Direction",
     "about.title": "Deep Learning,<br>Sequence Modeling.",
     "about.p1":
-      "I am a Ph.D. student at <strong>George Mason University</strong>, advised by <strong>Prof. Xuan Wang</strong>. I study learning systems that must process long and evolving information under practical constraints on computation, memory, and latency.",
+      "I am a Ph.D. student at <strong>George Mason University</strong>, advised by <strong>Prof. Xuan Wang</strong>.<br>I study learning systems that must process long and evolving information under practical constraints on computation, memory, and latency.",
     "about.p2":
       "My research focuses on state space models, long-sequence modeling, and LLM-based agents, with an emphasis on efficient and reliable learning systems.",
     "areas.kicker": "Research Areas",
@@ -371,7 +371,7 @@ function resetPortraitInteraction() {
   if (!portraitRing) return;
 
   portraitRing.style.setProperty("--portrait-shadow-x", "0px");
-  portraitRing.style.setProperty("--portrait-shadow-y", "5px");
+  portraitRing.style.setProperty("--portrait-shadow-y", "7px");
   portraitRing.style.setProperty("--portrait-tilt-x", "0deg");
   portraitRing.style.setProperty("--portrait-tilt-y", "0deg");
   portraitRing.classList.remove("is-pressed");
@@ -387,10 +387,10 @@ if (portraitRing) {
     const normalizedX = x * 2 - 1;
     const normalizedY = y * 2 - 1;
 
-    portraitRing.style.setProperty("--portrait-shadow-x", `${(-normalizedX * 3).toFixed(2)}px`);
-    portraitRing.style.setProperty("--portrait-shadow-y", `${(6 - normalizedY * 1.5).toFixed(2)}px`);
-    portraitRing.style.setProperty("--portrait-tilt-x", `${(-normalizedY * 4).toFixed(2)}deg`);
-    portraitRing.style.setProperty("--portrait-tilt-y", `${(normalizedX * 4).toFixed(2)}deg`);
+    portraitRing.style.setProperty("--portrait-shadow-x", `${(-normalizedX * 4).toFixed(2)}px`);
+    portraitRing.style.setProperty("--portrait-shadow-y", `${(7 - normalizedY * 2).toFixed(2)}px`);
+    portraitRing.style.setProperty("--portrait-tilt-x", `${(-normalizedY * 5.5).toFixed(2)}deg`);
+    portraitRing.style.setProperty("--portrait-tilt-y", `${(normalizedX * 5.5).toFixed(2)}deg`);
   });
 
   portraitRing.addEventListener("pointerdown", (event) => {
