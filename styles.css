@@ -17,6 +17,10 @@
   --rose: #94524d;
   --accent-ink: #155a95;
   --shadow: none;
+  --relief-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.05),
+    0 5px 14px rgba(0, 0, 0, 0.075),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
   color-scheme: light;
 }
 
@@ -443,10 +447,7 @@ h3 {
   border: 1px solid rgba(0, 0, 0, 0.035);
   border-radius: 8px;
   background: #ffffff;
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.05),
-    0 5px 14px rgba(0, 0, 0, 0.075),
-    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  box-shadow: var(--relief-shadow);
   color: #333;
   font-family: inherit;
   font-size: 14px;
@@ -517,8 +518,8 @@ h3 {
   border-radius: 50%;
   padding: 3px;
   background: #ffffff;
-  border: 1px solid #dcdcdc;
-  box-shadow: none;
+  border: 1px solid rgba(0, 0, 0, 0.035);
+  box-shadow: var(--relief-shadow);
   overflow: hidden;
 }
 
@@ -948,9 +949,10 @@ h3 {
   width: 100%;
   margin: 0;
   padding: 8px;
-  border: 1px solid var(--line);
-  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.035);
+  border-radius: 8px;
   background: #ffffff;
+  box-shadow: var(--relief-shadow);
 }
 
 .paper-thumbnail img {
