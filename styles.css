@@ -511,6 +511,12 @@ h3 {
 }
 
 .portrait-ring {
+  --portrait-light-x: 50%;
+  --portrait-light-y: 35%;
+  --portrait-shadow-x: 0px;
+  --portrait-shadow-y: 5px;
+  --portrait-tilt-x: 0deg;
+  --portrait-tilt-y: 0deg;
   position: relative;
   width: 196px;
   max-width: 100%;
@@ -521,10 +527,48 @@ h3 {
   border: 1px solid rgba(0, 0, 0, 0.035);
   box-shadow: var(--relief-shadow);
   overflow: hidden;
+  transform: perspective(700px) rotateX(var(--portrait-tilt-x)) rotateY(var(--portrait-tilt-y));
+  transform-style: preserve-3d;
+  transition:
+    transform 140ms ease-out,
+    box-shadow 140ms ease-out;
+  will-change: transform;
 }
 
 .portrait-ring::after {
-  content: none;
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at var(--portrait-light-x) var(--portrait-light-y),
+      rgba(255, 255, 255, 0.42),
+      rgba(255, 255, 255, 0.12) 22%,
+      transparent 48%
+    );
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.5),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.045);
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 140ms ease-out;
+}
+
+.portrait-ring:hover {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.05),
+    var(--portrait-shadow-x) var(--portrait-shadow-y) 18px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94);
+}
+
+.portrait-ring:hover::after {
+  opacity: 0.72;
+}
+
+.portrait-ring.is-pressed {
+  transform: perspective(700px) rotateX(var(--portrait-tilt-x)) rotateY(var(--portrait-tilt-y)) scale(0.985);
+  transition-duration: 70ms;
 }
 
 .profile-panel img {
@@ -943,6 +987,7 @@ h3 {
 }
 
 .paper-thumbnail {
+  position: relative;
   grid-column: 3;
   grid-row: 1 / span 6;
   align-self: start;
@@ -953,6 +998,36 @@ h3 {
   border-radius: 8px;
   background: #ffffff;
   box-shadow: var(--relief-shadow);
+  transition:
+    transform 180ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 180ms ease;
+  will-change: transform;
+}
+
+a.paper-thumbnail {
+  grid-column: 3;
+  cursor: pointer;
+}
+
+a.paper-thumbnail:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .paper-thumbnail:hover {
+    z-index: 1;
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.055),
+      0 10px 24px rgba(0, 0, 0, 0.11),
+      inset 0 1px 0 rgba(255, 255, 255, 0.96);
+    transform: translateY(-3px) scale(1.01);
+  }
+
+  a.paper-thumbnail:active {
+    box-shadow: var(--relief-shadow);
+    transform: translateY(-1px) scale(0.995);
+  }
 }
 
 .paper-thumbnail img {
@@ -1258,5 +1333,20 @@ h3 {
 
   .portrait-ring {
     width: 150px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper-thumbnail,
+  .portrait-ring,
+  .portrait-ring::after {
+    transition: none;
+  }
+
+  .paper-thumbnail:hover,
+  a.paper-thumbnail:active,
+  .portrait-ring,
+  .portrait-ring.is-pressed {
+    transform: none;
   }
 }

@@ -257,6 +257,8 @@ const coinEasterEgg = document.querySelector("[data-coin-easter-egg]");
 const wechatDialog = document.querySelector("[data-wechat-dialog]");
 const wechatDialogClose = document.querySelector("[data-wechat-dialog-close]");
 const emailCopyButtons = document.querySelectorAll("[data-copy-email]");
+const portraitRing = document.querySelector(".portrait-ring");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 let currentLanguage = "en";
 let coinClickCount = 0;
 const emailFeedbackTimers = new WeakMap();
@@ -364,6 +366,48 @@ emailCopyButtons.forEach((button) => {
     emailFeedbackTimers.set(button, timer);
   });
 });
+
+function resetPortraitInteraction() {
+  if (!portraitRing) return;
+
+  portraitRing.style.setProperty("--portrait-light-x", "50%");
+  portraitRing.style.setProperty("--portrait-light-y", "35%");
+  portraitRing.style.setProperty("--portrait-shadow-x", "0px");
+  portraitRing.style.setProperty("--portrait-shadow-y", "5px");
+  portraitRing.style.setProperty("--portrait-tilt-x", "0deg");
+  portraitRing.style.setProperty("--portrait-tilt-y", "0deg");
+  portraitRing.classList.remove("is-pressed");
+}
+
+if (portraitRing) {
+  portraitRing.addEventListener("pointermove", (event) => {
+    if (event.pointerType === "touch" || prefersReducedMotion.matches) return;
+
+    const bounds = portraitRing.getBoundingClientRect();
+    const x = Math.min(1, Math.max(0, (event.clientX - bounds.left) / bounds.width));
+    const y = Math.min(1, Math.max(0, (event.clientY - bounds.top) / bounds.height));
+    const normalizedX = x * 2 - 1;
+    const normalizedY = y * 2 - 1;
+
+    portraitRing.style.setProperty("--portrait-light-x", `${(x * 100).toFixed(1)}%`);
+    portraitRing.style.setProperty("--portrait-light-y", `${(y * 100).toFixed(1)}%`);
+    portraitRing.style.setProperty("--portrait-shadow-x", `${(-normalizedX * 3).toFixed(2)}px`);
+    portraitRing.style.setProperty("--portrait-shadow-y", `${(6 - normalizedY * 1.5).toFixed(2)}px`);
+    portraitRing.style.setProperty("--portrait-tilt-x", `${(-normalizedY * 4).toFixed(2)}deg`);
+    portraitRing.style.setProperty("--portrait-tilt-y", `${(normalizedX * 4).toFixed(2)}deg`);
+  });
+
+  portraitRing.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "touch" || prefersReducedMotion.matches) return;
+    portraitRing.classList.add("is-pressed");
+  });
+
+  portraitRing.addEventListener("pointerup", () => {
+    portraitRing.classList.remove("is-pressed");
+  });
+  portraitRing.addEventListener("pointercancel", resetPortraitInteraction);
+  portraitRing.addEventListener("pointerleave", resetPortraitInteraction);
+}
 
 function closeWechatDialog() {
   if (!wechatDialog) return;
