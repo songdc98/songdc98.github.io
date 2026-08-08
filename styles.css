@@ -672,7 +672,10 @@ h3 {
   background: #5f7f9f;
 }
 
-.systems-card::before,
+.systems-card::before {
+  background: #3f9d68;
+}
+
 .learning-card::before {
   background: #8a6a22;
 }
