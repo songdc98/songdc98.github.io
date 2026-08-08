@@ -596,7 +596,7 @@ h3 {
 .skill-card {
   min-height: 148px;
   padding: 16px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid transparent;
   border-radius: 4px;
   background: #ffffff;
   box-shadow: none;
