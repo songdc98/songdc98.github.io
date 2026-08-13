@@ -854,10 +854,10 @@ h3 {
   width: fit-content;
   min-height: 28px;
   padding: 5px 10px;
-  border: 1px solid #ead8a5;
+  border: 1px solid #c9cdd2;
   border-radius: 999px;
-  background: #fff8e7;
-  color: #85640f;
+  background: transparent;
+  color: #4f5358;
   font-size: 12px;
   font-weight: 850;
   letter-spacing: 0.06em;
