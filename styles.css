@@ -199,6 +199,31 @@ a {
   line-height: 1;
 }
 
+.wechat-dialog-close span {
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+  font-size: 0;
+}
+
+.wechat-dialog-close span::before,
+.wechat-dialog-close span::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.wechat-dialog-close span::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
 .wechat-dialog-close:hover {
   background: #ffffff;
   border-color: rgba(15, 77, 130, 0.5);
