@@ -631,9 +631,20 @@ h3 {
   color: var(--body);
 }
 
-.section-body strong {
+.direction-link {
   color: var(--heading);
   font-weight: 760;
+  transition: color 160ms ease;
+}
+
+.direction-link:hover {
+  color: var(--accent-ink);
+}
+
+.direction-link:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .expertise-grid,

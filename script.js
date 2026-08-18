@@ -31,7 +31,7 @@ const translations = {
     "about.kicker": "Direction",
     "about.title": "Deep Learning,<br>Sequence Modeling.",
     "about.p1":
-      "I am a Ph.D. student at <strong>George Mason University</strong>, advised by <strong>Prof. Xuan Wang</strong>.<br>I study learning systems that must process long and evolving information under practical constraints on computation, memory, and latency.",
+      "I am a Ph.D. student at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>.<br>I study learning systems that must process long and evolving information under practical constraints on computation, memory, and latency.",
     "about.p2":
       "My research focuses on state space models, long-sequence modeling, and LLM-based agents, with an emphasis on efficient and reliable learning systems.",
     "areas.kicker": "Research Areas",
@@ -156,7 +156,7 @@ const translations = {
     "about.kicker": "方向",
     "about.title": "深度学习，<br>序列建模。",
     "about.p1":
-      "我是 <strong>乔治梅森大学</strong> 电子与计算机工程博士研究生，导师为 <strong>Xuan Wang 教授</strong>。我研究学习系统如何在计算、内存和延迟等实际约束下处理长序列与持续变化的信息。",
+      "我是 <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a> 电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。我研究学习系统如何在计算、内存和延迟等实际约束下处理长序列与持续变化的信息。",
     "about.p2":
       "我的研究方向包括状态空间模型、长序列建模与基于大语言模型的智能体，重点关注学习系统的效率与可靠性。",
     "areas.kicker": "研究方向",
