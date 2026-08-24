@@ -1,5 +1,5 @@
 :root {
-  --header-height: 58px;
+  --header-height: 46px;
   --bg: #ffffff;
   --panel: #ffffff;
   --panel-soft: #f7f7f7;
@@ -338,9 +338,9 @@ main > section + section {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 34px;
+  min-height: 26px;
   min-width: 58px;
-  padding: 6px 12px;
+  padding: 4px 12px;
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -1219,7 +1219,7 @@ a.paper-thumbnail:focus-visible {
 
 @media (max-width: 860px) {
   :root {
-    --header-height: 96px;
+    --header-height: 90px;
   }
 
   .coin-companion {
@@ -1239,9 +1239,9 @@ a.paper-thumbnail:focus-visible {
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    gap: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     max-width: 100vw;
   }
 
@@ -1259,6 +1259,10 @@ a.paper-thumbnail:focus-visible {
 
   .nav::-webkit-scrollbar {
     display: none;
+  }
+
+  .nav a {
+    padding: 7px 8px;
   }
 
   .hero,
@@ -1356,10 +1360,6 @@ a.paper-thumbnail:focus-visible {
   .nav {
     max-width: 100%;
     font-size: 12.5px;
-  }
-
-  .nav a {
-    padding: 7px 8px;
   }
 
   .language-toggle {
