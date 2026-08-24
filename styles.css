@@ -1,5 +1,5 @@
 :root {
-  --header-height: 75px;
+  --header-height: 58px;
   --bg: #ffffff;
   --panel: #ffffff;
   --panel-soft: #f7f7f7;
@@ -251,7 +251,7 @@ a {
   justify-content: space-between;
   gap: 24px;
   height: var(--header-height);
-  padding: 20px max(28px, calc((100vw - 1180px) / 2));
+  padding: 0 max(28px, calc((100vw - 1180px) / 2));
   background: rgba(255, 255, 255, 0.94);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(18px);
@@ -1219,7 +1219,7 @@ a.paper-thumbnail:focus-visible {
 
 @media (max-width: 860px) {
   :root {
-    --header-height: 124px;
+    --header-height: 96px;
   }
 
   .coin-companion {
@@ -1238,6 +1238,10 @@ a.paper-thumbnail:focus-visible {
   .site-header {
     align-items: flex-start;
     flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     max-width: 100vw;
   }
 
