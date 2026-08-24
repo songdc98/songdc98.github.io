@@ -714,12 +714,6 @@ h3 {
   border-top: 1px solid var(--divider-minor);
 }
 
-.skills-panel {
-  padding: 44px 44px 46px;
-  border-radius: 22px;
-  background: var(--fill);
-}
-
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1268,11 +1262,6 @@ a.paper-thumbnail:focus-visible {
   .footer {
     grid-template-columns: 1fr;
     gap: 30px;
-  }
-
-  .skills-panel {
-    padding: 30px 26px 32px;
-    border-radius: 18px;
   }
 
   .education-section {
