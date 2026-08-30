@@ -14,7 +14,7 @@ const translations = {
     "nav.papers": "Papers",
     "nav.cv": "CV",
     "nav.contact": "Contact",
-    "hero.eyebrow": "Deep Learning · State Space Models · Long Contexts · LLM Agents",
+    "hero.eyebrow": "Deep Learning · State Space Models · Long Contexts · LLM Agents · Efficient Inference",
     "hero.lead":
       "I study how learning systems can process long sequences efficiently and use accumulated information reliably in complex tasks.",
     "hero.availability": "Seeking Summer 2027 research internships.",
@@ -141,7 +141,7 @@ const translations = {
     "nav.papers": "论文",
     "nav.cv": "简历",
     "nav.contact": "联系",
-    "hero.eyebrow": "深度学习 · 状态空间模型 · 长上下文 · 大语言模型智能体",
+    "hero.eyebrow": "深度学习 · 状态空间模型 · 长上下文 · 大语言模型智能体 · 高效推理",
     "hero.lead":
       "我研究学习系统如何高效处理长序列，并在复杂任务中可靠地使用累积信息。",
     "hero.availability": "正在寻找 2027 年暑期研究实习。",
