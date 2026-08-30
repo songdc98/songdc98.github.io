@@ -512,18 +512,19 @@ h3 {
 .cv-link {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 10px;
   color: var(--accent);
-  font-size: 17px;
+  font-size: clamp(24px, 2.8vw, 32px);
   font-weight: 700;
-  letter-spacing: -0.004em;
+  letter-spacing: -0.021em;
+  line-height: 1.12;
   transition: color 160ms ease;
 }
 
 .cv-link::after {
-  content: "\2197";
-  font-size: 15px;
+  font-size: 0.72em;
   line-height: 1;
+  content: "\2197";
 }
 
 .cv-link:hover {
