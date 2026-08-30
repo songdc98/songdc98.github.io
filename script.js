@@ -17,6 +17,7 @@ const translations = {
     "hero.eyebrow": "Deep Learning · State Space Models · Long Contexts · LLM Agents",
     "hero.lead":
       "I study how learning systems can process long sequences efficiently and use accumulated information reliably in complex tasks.",
+    "hero.availability": "Seeking Summer 2027 research internships.",
     "hero.linksLabel": "Profile links",
     "links.email": "Email",
     "links.emailCopyAria": "Copy email address",
@@ -108,6 +109,7 @@ const translations = {
       "Combined non-graphic surgical grasper and clip-applier illustration beside a masked small-model depth prediction",
     "education.kicker": "Education",
     "education.title": "Academic Background.",
+    "education.cv": "View CV (PDF)",
     "education.gmu.level": "Ph.D.",
     "education.gmu.school": "George Mason University",
     "education.gmu.program": "Electrical and Computer Engineering",
@@ -142,6 +144,7 @@ const translations = {
     "hero.eyebrow": "深度学习 · 状态空间模型 · 长上下文 · 大语言模型智能体",
     "hero.lead":
       "我研究学习系统如何高效处理长序列，并在复杂任务中可靠地使用累积信息。",
+    "hero.availability": "正在寻找 2027 年暑期研究实习。",
     "hero.linksLabel": "个人链接",
     "links.email": "邮箱",
     "links.emailCopyAria": "复制邮箱地址",
@@ -232,6 +235,7 @@ const translations = {
       "合成的非血腥手术夹持与施夹器械示意，以及视野外区域为黑色的小模型深度预测图",
     "education.kicker": "教育",
     "education.title": "教育背景。",
+    "education.cv": "查看简历（PDF）",
     "education.gmu.level": "博士",
     "education.gmu.school": "乔治梅森大学",
     "education.gmu.program": "电子与计算机工程",

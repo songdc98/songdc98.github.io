@@ -486,6 +486,45 @@ h3 {
   margin-top: 28px;
 }
 
+.hero-availability {
+  margin-top: 18px;
+  margin-bottom: 0;
+  color: var(--heading);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+.cv-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.004em;
+  transition: color 160ms ease;
+}
+
+.cv-link::after {
+  content: "\2197";
+  font-size: 14px;
+  line-height: 1;
+}
+
+.cv-link:hover {
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.cv-link:focus-visible {
+  border-radius: 3px;
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .footer-links {
   align-self: start;
   display: grid;
