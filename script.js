@@ -30,7 +30,7 @@ const translations = {
     "profile.university": "George Mason University",
     "profile.location": "Fairfax, Virginia, USA",
     "about.kicker": "Direction",
-    "about.title": "Deep Learning,<br>Sequence Modeling,<br>State Space Models,<br>Long Contexts,<br>LLM Agents,<br>Efficient Inference.",
+    "about.title": "State Space Models,<br>Long Contexts,<br>Efficient Inference.",
     "about.p1":
       "I am a Ph.D. student at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>.<br>I study learning systems that must process long and evolving information under practical constraints on computation, memory, and latency.",
     "about.p2":
@@ -123,7 +123,7 @@ const translations = {
     "awards.icml.line": "ICML 2026 <span class=\"highlight-badge highlight-badge-inline\">Silver Reviewer</span>",
     "awards.icml.body": "Recognized for review quality evaluated by Area Chairs.",
     "contact.kicker": "Contact",
-    "contact.title": "Open to collaborations across deep learning, sequence modeling, and large language model research.",
+    "contact.title": "Open to collaborations across deep learning, sequence modeling, state space models, long-context modeling, efficient inference, and LLM agents.",
     "contact.email": "dsong25@gmu.edu",
   },
   zh: {
@@ -157,7 +157,7 @@ const translations = {
     "profile.university": "George Mason University",
     "profile.location": "Fairfax, Virginia, USA",
     "about.kicker": "方向",
-    "about.title": "深度学习，<br>序列建模，<br>状态空间模型，<br>长上下文，<br>大语言模型智能体，<br>高效推理。",
+    "about.title": "状态空间模型，<br>长上下文，<br>高效推理。",
     "about.p1":
       "我是 <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a> 电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。我研究学习系统如何在计算、内存和延迟等实际约束下处理长序列与持续变化的信息。",
     "about.p2":
@@ -249,7 +249,7 @@ const translations = {
     "awards.icml.line": "ICML 2026 <span class=\"highlight-badge highlight-badge-inline\">Silver Reviewer</span>",
     "awards.icml.body": "评审质量获得 Area Chairs 认可。",
     "contact.kicker": "联系",
-    "contact.title": "欢迎围绕深度学习、序列建模与大语言模型研究开展合作。",
+    "contact.title": "欢迎围绕深度学习、序列建模、状态空间模型、长上下文建模、高效推理与大语言模型智能体开展合作。",
     "contact.email": "dsong25@gmu.edu",
   },
 };
