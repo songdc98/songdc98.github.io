@@ -14,7 +14,7 @@ const translations = {
     "nav.papers": "Papers",
     "nav.cv": "CV",
     "nav.contact": "Contact",
-    "hero.eyebrow": "Deep Learning · State Space Models · Long Contexts · LLM Agents · Efficient Inference",
+    "hero.eyebrow": "State Space Models · Long Contexts · LLM Agents · Efficient Inference",
     "hero.lead":
       "I study how learning systems can process long sequences efficiently and use accumulated information reliably in complex tasks.",
     "hero.availability": "Seeking Summer 2027 research internships.",
@@ -30,7 +30,7 @@ const translations = {
     "profile.university": "George Mason University",
     "profile.location": "Fairfax, Virginia, USA",
     "about.kicker": "Direction",
-    "about.title": "Deep Learning,<br>Sequence Modeling.",
+    "about.title": "Deep Learning,<br>Sequence Modeling,<br>State Space Models,<br>Long Contexts,<br>LLM Agents,<br>Efficient Inference.",
     "about.p1":
       "I am a Ph.D. student at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>.<br>I study learning systems that must process long and evolving information under practical constraints on computation, memory, and latency.",
     "about.p2":
@@ -141,7 +141,7 @@ const translations = {
     "nav.papers": "论文",
     "nav.cv": "简历",
     "nav.contact": "联系",
-    "hero.eyebrow": "深度学习 · 状态空间模型 · 长上下文 · 大语言模型智能体 · 高效推理",
+    "hero.eyebrow": "状态空间模型 · 长上下文 · 大语言模型智能体 · 高效推理",
     "hero.lead":
       "我研究学习系统如何高效处理长序列，并在复杂任务中可靠地使用累积信息。",
     "hero.availability": "正在寻找 2027 年暑期研究实习。",
@@ -157,7 +157,7 @@ const translations = {
     "profile.university": "George Mason University",
     "profile.location": "Fairfax, Virginia, USA",
     "about.kicker": "方向",
-    "about.title": "深度学习，<br>序列建模。",
+    "about.title": "深度学习，<br>序列建模，<br>状态空间模型，<br>长上下文，<br>大语言模型智能体，<br>高效推理。",
     "about.p1":
       "我是 <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a> 电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。我研究学习系统如何在计算、内存和延迟等实际约束下处理长序列与持续变化的信息。",
     "about.p2":
