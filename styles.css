@@ -1042,6 +1042,11 @@ h3 {
   min-width: 0;
 }
 
+.award-copy .service-entry {
+  margin-top: 14px;
+  margin-bottom: 0;
+}
+
 .publication a,
 .project-card a {
   width: fit-content;
