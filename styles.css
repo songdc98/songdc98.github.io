@@ -976,8 +976,8 @@ h3 {
   display: block;
   width: fit-content;
   padding-bottom: 2px;
-  border-bottom: 2px solid #d2a64d;
-  color: #a46a00;
+  border-bottom: 2px solid rgba(217, 138, 36, 0.5);
+  color: #d98a24;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -987,6 +987,9 @@ h3 {
 }
 
 .publication-note.neurips-note {
+  color: var(--heading);
+  border-bottom: 0;
+  padding-bottom: 0;
   line-height: 1.34;
 }
 
@@ -999,6 +1002,12 @@ h3 {
 .neurips-note .neurips-year {
   font-size: 15px;
   font-weight: 900;
+  text-transform: none;
+}
+
+.neurips-note .neurips-track {
+  color: var(--heading);
+  text-transform: none;
 }
 
 .paper-type {
