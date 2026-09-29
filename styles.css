@@ -252,6 +252,7 @@ a {
   gap: 24px;
   height: var(--header-height);
   padding: 0 max(28px, calc((100vw - 1180px) / 2));
+  padding-left: max(28px, calc((100% - 1180px) / 2 + 28px));
   background: rgba(255, 255, 255, 0.94);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(18px);
@@ -266,7 +267,6 @@ main > section + section {
 }
 
 .brand {
-  margin-left: clamp(0px, calc((100vw - 1180px) / 4), 14px);
   font-size: 16px;
   font-weight: 800;
   letter-spacing: -0.014em;
@@ -289,7 +289,6 @@ main > section + section {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  transform: translateX(1px);
 }
 
 @media (forced-colors: active) {
