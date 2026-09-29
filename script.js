@@ -75,7 +75,7 @@ const translations = {
     "publications.sketchops.venue": "arXiv · 2026",
     "publications.sketchops.title": "Mergeable Model-Side Aggregation States for Long-Context Language Models",
     "publications.sketchops.summary":
-      "Language models struggle to aggregate counts and set relations over long histories. SketchOps adds a fixed 2 KiB state that merges across chunks; on 3,969 aggregate-then-reason tasks it reached 99.2% accuracy without rereading the full context.",
+      "Language models struggle to aggregate counts and set relations over long histories. SketchOps adds a fixed 2 KiB state that merges across chunks; on 3,969 aggregate-then-reason tasks with Gemma 4 (31B), it reached 99.2% accuracy without rereading the full context.",
     "publications.sketchops.keywords":
       "SketchOps · HyperLogLog · Long-context reasoning · Fixed-budget aggregation",
     "publications.es.type": "Conference Paper",
@@ -213,7 +213,7 @@ const translations = {
     "publications.sketchops.venue": "arXiv · 2026",
     "publications.sketchops.title": "面向长上下文语言模型的可合并模型侧聚合状态",
     "publications.sketchops.summary":
-      "语言模型在长历史中很难稳定完成计数和集合关系聚合。SketchOps 在冻结模型旁维护固定 2 KiB、可跨片段合并的状态；在 3,969 道聚合后推理任务上达到 99.2% 准确率，无需重读完整上下文。",
+      "语言模型在长历史中很难稳定完成计数和集合关系聚合。SketchOps 在冻结模型旁维护固定 2 KiB、可跨片段合并的状态；在 Gemma 4 (31B) 的 3,969 道聚合后推理任务上达到 99.2% 准确率，无需重读完整上下文。",
     "publications.sketchops.keywords":
       "SketchOps · HyperLogLog · 长上下文推理 · 固定预算聚合",
     "publications.es.type": "会议论文",
