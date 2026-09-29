@@ -2,7 +2,7 @@ const translations = {
   en: {
     "meta.title": "Dachuan Song | AI Research & Engineering",
     "meta.description":
-      "Dachuan Song is a Ph.D. student at George Mason University developing spectral state space models, selective hybrids, and compact aggregation states for efficient long-context processing.",
+      "Dachuan Song is a Ph.D. student at George Mason University researching efficient sequence architectures, long-context memory, and budget-aware inference.",
     "language.button": "中文",
     "language.aria": "Switch to Chinese",
     "easterEgg.coinLabel": "Hidden contact easter egg",
@@ -16,7 +16,7 @@ const translations = {
     "nav.contact": "Contact",
     "hero.eyebrow": "State Space Models · Long Contexts · LLM Agents · Efficient Inference",
     "hero.lead":
-      "I design sequence models that can be trained once and exported for different inference budgets, and compact aggregation states for long-context language tasks.",
+      "I develop sequence architectures and memory mechanisms for long contexts, aiming to improve model quality while keeping inference efficient across compute budgets.",
     "hero.availability": "Seeking Summer 2027 research internships.",
     "hero.linksLabel": "Profile links",
     "links.email": "Email",
@@ -32,9 +32,9 @@ const translations = {
     "about.kicker": "Direction",
     "about.title": "State Space Models,<br>Long Contexts,<br>Efficient Inference.",
     "about.p1":
-      "I am a Ph.D. student at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>.<br>My research uses spectral state space structure and input-dependent recurrence to train one sequence model and export compact variants for different inference budgets.",
+      "I am a Ph.D. student at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>.<br>My research focuses on state space models and long-context memory, with the goal of using distant information more effectively at a practical inference cost.",
     "about.p2":
-      "I also build compact, mergeable aggregation states for frozen language models, so evidence from long histories remains available without reprocessing the full context.",
+      "I study spectral structure, selective state updates, and budget-aware deployment. Recent work has produced compact models from one training run and mergeable aggregation states that carry evidence across long contexts.",
     "areas.kicker": "Research Areas",
     "areas.agent.title": "Reliable LLM Agents",
     "areas.agent.body":
@@ -139,7 +139,7 @@ const translations = {
   zh: {
     "meta.title": "Dachuan Song | AI 研究与工程",
     "meta.description":
-      "Dachuan Song 是乔治梅森大学博士研究生，研究可按预算导出的谱状态空间模型、选择性混合架构与长上下文聚合状态。",
+      "Dachuan Song 是乔治梅森大学博士研究生，研究高效序列架构、长上下文记忆与预算约束推理。",
     "language.button": "EN",
     "language.aria": "Switch to English",
     "easterEgg.coinLabel": "隐藏联系彩蛋",
@@ -153,7 +153,7 @@ const translations = {
     "nav.contact": "联系",
     "hero.eyebrow": "状态空间模型 · 长上下文 · 大语言模型智能体 · 高效推理",
     "hero.lead":
-      "我设计一次训练即可适配不同推理预算的序列模型，也构建面向长上下文语言任务的紧凑聚合状态。",
+      "我研究长上下文的序列架构与记忆机制，目标是在不同计算预算下提升建模能力，同时控制推理成本。",
     "hero.availability": "正在寻找 2027 年暑期研究实习。",
     "hero.linksLabel": "个人链接",
     "links.email": "邮箱",
@@ -169,9 +169,9 @@ const translations = {
     "about.kicker": "方向",
     "about.title": "状态空间模型，<br>长上下文，<br>高效推理。",
     "about.p1":
-      "我是 <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a> 电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。<br>我利用谱状态空间结构和输入自适应递归，训练一个模型并导出适配不同推理预算的紧凑版本。",
+      "我是 <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a> 电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。<br>我的研究聚焦状态空间模型与长上下文记忆，希望模型能更有效地利用远距离信息，同时把推理开销控制在可部署的范围内。",
     "about.p2":
-      "我还为冻结的大语言模型构建紧凑、可合并的聚合状态，让长历史中的信息持续可用，无需反复处理完整上下文。",
+      "我研究谱结构、选择性状态更新和预算感知部署。近期工作已实现一次训练导出多种容量的紧凑模型，并通过可合并的聚合状态保留跨段信息。",
     "areas.kicker": "研究方向",
     "areas.agent.title": "可靠的大语言模型智能体",
     "areas.agent.body":
