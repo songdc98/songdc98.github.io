@@ -32,9 +32,9 @@ const translations = {
     "about.kicker": "Direction",
     "about.title": "State Space Models,<br>Long Contexts,<br>Efficient Inference.",
     "about.p1":
-      "I am a Ph.D. student at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>.<br>I work on how models retain and use information over long sequences, and on the cost of doing so at inference time.",
+      "I am a Ph.D. student at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>.<br>The central question in my work is what a model should carry forward from a long history, and how efficiently it can use that state.",
     "about.p2":
-      "Recent work uses ordered spectral channels to export different model sizes from one checkpoint. I also study input-dependent recurrent memory and mergeable states that let language models carry evidence across context segments.",
+      "I develop spectral state-space models that adapt what they retain and can be deployed at different compute budgets. I also build small, mergeable states that let language models combine information from many chunks without rereading the full history.",
     "areas.kicker": "Research Areas",
     "areas.agent.title": "Reliable LLM Agents",
     "areas.agent.body":
@@ -170,9 +170,9 @@ const translations = {
     "about.kicker": "方向",
     "about.title": "状态空间模型，<br>长上下文，<br>高效推理。",
     "about.p1":
-      "我是 <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a> 电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。<br>我研究模型如何在长序列中保留并使用信息，也关注这些能力在实际推理中的计算开销。",
+      "我是 <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a> 电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。<br>我的研究关注模型应从长历史中保留什么，以及怎样高效地利用这些状态。",
     "about.p2":
-      "近期工作利用有序谱通道，从一个模型导出适配不同预算的版本。我还研究输入自适应递归记忆与可合并状态，让语言模型跨片段保留证据。",
+      "我研究能按输入调整记忆、并适配不同计算预算的谱状态空间模型。也构建可合并的紧凑状态，让语言模型跨片段汇总信息，而不必反复读取整段历史。",
     "areas.kicker": "研究方向",
     "areas.agent.title": "可靠的大语言模型智能体",
     "areas.agent.body":
@@ -288,6 +288,9 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 let currentLanguage = "en";
 let coinClickCount = 0;
 const emailFeedbackTimers = new WeakMap();
+let emailPopover;
+let emailPopoverTimer;
+let emailPopoverButton;
 
 const getTranslation = (language, key) => translations[language]?.[key] ?? translations.en[key] ?? "";
 
@@ -369,11 +372,60 @@ async function copyText(text) {
   copyWithFallback(text);
 }
 
+function hideEmailPopover() {
+  if (emailPopover) emailPopover.hidden = true;
+  if (emailPopoverTimer) window.clearTimeout(emailPopoverTimer);
+  emailPopoverButton?.closest(".footer-links")?.classList.remove("email-popover-open");
+  emailPopoverButton = null;
+  emailPopoverTimer = null;
+}
+
+function positionEmailPopover() {
+  if (!emailPopover || emailPopover.hidden || !emailPopoverButton) return;
+
+  const buttonRect = emailPopoverButton.getBoundingClientRect();
+  const popoverRect = emailPopover.getBoundingClientRect();
+  const left = Math.max(
+    12,
+    Math.min(
+      buttonRect.left + (buttonRect.width - popoverRect.width) / 2,
+      window.innerWidth - popoverRect.width - 12
+    )
+  );
+  const below = buttonRect.bottom + 9;
+  const top = below + popoverRect.height <= window.innerHeight - 8
+    ? below
+    : Math.max(8, buttonRect.top - popoverRect.height - 9);
+
+  emailPopover.style.left = `${left}px`;
+  emailPopover.style.top = `${top}px`;
+}
+
+function showEmailPopover(button) {
+  if (!emailPopover) {
+    emailPopover = document.createElement("div");
+    emailPopover.className = "email-copy-popover";
+    emailPopover.setAttribute("role", "status");
+    emailPopover.setAttribute("aria-live", "polite");
+    emailPopover.hidden = true;
+    document.body.append(emailPopover);
+  }
+
+  hideEmailPopover();
+  emailPopoverButton = button;
+  button.closest(".footer-links")?.classList.add("email-popover-open");
+  emailPopover.textContent = button.dataset.copyEmail;
+  emailPopover.hidden = false;
+  positionEmailPopover();
+  emailPopoverTimer = window.setTimeout(hideEmailPopover, 2800);
+}
+
 emailCopyButtons.forEach((button) => {
   button.addEventListener("click", async () => {
     const defaultKey = button.dataset.i18n;
     const existingTimer = emailFeedbackTimers.get(button);
     if (existingTimer) window.clearTimeout(existingTimer);
+    showEmailPopover(button);
 
     try {
       await copyText(button.dataset.copyEmail);
@@ -391,6 +443,12 @@ emailCopyButtons.forEach((button) => {
     }, 1600);
     emailFeedbackTimers.set(button, timer);
   });
+});
+
+window.addEventListener("scroll", positionEmailPopover, { passive: true });
+window.addEventListener("resize", positionEmailPopover);
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") hideEmailPopover();
 });
 
 function resetPortraitInteraction() {

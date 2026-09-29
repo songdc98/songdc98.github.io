@@ -550,6 +550,14 @@ h3 {
   margin-top: 8px;
 }
 
+.footer-links.email-popover-open > button[data-copy-email] {
+  margin-bottom: 54px;
+}
+
+.footer-links.email-popover-open {
+  align-items: start;
+}
+
 .button,
 .footer-links a,
 .footer-links button {
@@ -606,6 +614,27 @@ h3 {
   box-shadow:
     0 2px 4px rgba(0, 60, 130, 0.2),
     0 10px 24px rgba(0, 90, 190, 0.26);
+}
+
+.email-copy-popover {
+  position: fixed;
+  z-index: 15;
+  max-width: calc(100vw - 24px);
+  padding: 9px 13px;
+  border: 1px solid rgba(0, 113, 227, 0.22);
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 4px 14px rgba(15, 34, 58, 0.13);
+  color: var(--heading);
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  pointer-events: none;
+}
+
+.email-copy-popover[hidden] {
+  display: none;
 }
 
 .button:active,
