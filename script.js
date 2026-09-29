@@ -16,7 +16,7 @@ const translations = {
     "nav.contact": "Contact",
     "hero.eyebrow": "State Space Models · Long Contexts · LLM Agents · Efficient Inference",
     "hero.lead":
-      "I develop sequence architectures and memory mechanisms for long contexts, aiming to improve model quality while keeping inference efficient across compute budgets.",
+      "I build sequence models and compact memory for long contexts, so useful information remains accessible without making inference prohibitively expensive.",
     "hero.availability": "Seeking Summer 2027 research internships.",
     "hero.linksLabel": "Profile links",
     "links.email": "Email",
@@ -32,19 +32,19 @@ const translations = {
     "about.kicker": "Direction",
     "about.title": "State Space Models,<br>Long Contexts,<br>Efficient Inference.",
     "about.p1":
-      "I am a Ph.D. student at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>.<br>My research focuses on state space models and long-context memory, with the goal of using distant information more effectively at a practical inference cost.",
+      "I am a Ph.D. student at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>.<br>I work on how models retain and use information over long sequences, and on the cost of doing so at inference time.",
     "about.p2":
-      "I study spectral structure, selective state updates, and budget-aware deployment. Recent work has produced compact models from one training run and mergeable aggregation states that carry evidence across long contexts.",
+      "Recent work uses ordered spectral channels to export different model sizes from one checkpoint. I also study input-dependent recurrent memory and mergeable states that let language models carry evidence across context segments.",
     "areas.kicker": "Research Areas",
     "areas.agent.title": "Reliable LLM Agents",
     "areas.agent.body":
-      "Agent memory, provenance tracking, and tool-use mechanisms designed to reduce stale information use and improve workflow reliability.",
+      "Study how agent memory and provenance can keep tool-using systems grounded in current evidence instead of stale context.",
     "areas.sequence.title": "Efficient Long-Sequence Modeling",
     "areas.sequence.body":
-      "Efficient state-space and hybrid sequence architectures that use attention selectively and adapt computation to each input, reducing inference cost while preserving model quality.",
+      "Combine input-dependent recurrent memory with local attention to process long sequences at manageable inference cost.",
     "areas.ssm.title": "Spectral State Space Models",
     "areas.ssm.body":
-      "State-space sequence models with spectral structure and elastic capacity for efficient, budget-aware inference.",
+      "Use ordered spectral channels as a capacity axis: truncate a trained model's channel prefix to export smaller, standalone versions.",
     "skills.kicker": "Skills",
     "skills.title": "Core technical areas.",
     "skills.dl.title": "Deep Learning",
@@ -75,7 +75,7 @@ const translations = {
     "publications.sketchops.venue": "arXiv · 2026",
     "publications.sketchops.title": "Mergeable Model-Side Aggregation States for Long-Context Language Models",
     "publications.sketchops.summary":
-      "Introduced SketchOps, a model-side aggregation interface that keeps compact, mergeable sketch states alongside frozen language models for fixed-budget long-context aggregation.",
+      "Language models struggle to aggregate counts and set relations over long histories. SketchOps adds a fixed 2 KiB state that merges across chunks; on 3,969 aggregate-then-reason tasks it reached 99.2% accuracy without rereading the full context.",
     "publications.sketchops.keywords":
       "SketchOps · HyperLogLog · Long-context reasoning · Fixed-budget aggregation",
     "publications.es.type": "Conference Paper",
@@ -83,14 +83,14 @@ const translations = {
     "publications.es.badge": "<span class=\"neurips-year\">NeurIPS 2026</span><span class=\"neurips-track\">Main Track</span>",
     "publications.es.title": "Elastic Spectral State Space Models for Train-Once Budgeted Inference",
     "publications.es.summary":
-      "Trains one spectral state space model and exports compact versions by truncating ordered Hankel channels. Input-adaptive gates and budget dropout support useful predictions across deployment budgets.",
+      "One ES-SSM training run yields standalone models at several compute budgets. Ordered Hankel channels can be truncated directly; adaptive gates and budget dropout train the retained prefixes to remain predictive.",
     "publications.es.keywords": "Spectral state space models · Hankel channels · Budgeted inference",
     "publications.es.imageAlt": "Figure 1 of ES-SSM: spectral channels and compact model export",
     "publications.essh.type": "Preprint",
     "publications.essh.venue": "arXiv · 2026",
     "publications.essh.title": "Elastic Selective Spectral Hybrids for Train-Once, Export-Many Budgeted Inference",
     "publications.essh.summary":
-      "Combines input-dependent recurrent spectral channels with sliding-window attention. One training run yields compact exports with different spectral and feed-forward capacities.",
+      "ESSH makes spectral channels selective: input-dependent recurrent updates control what each channel retains. Paired with sliding-window attention, one training run yields compact language models at several sizes with fast decoding.",
     "publications.essh.keywords": "Selective spectral recurrence · Sliding-window attention · Elastic inference",
     "publications.essh.imageAlt": "Figure 1 of ESSH: selective spectral hybrid and elastic capacity axes",
     "publications.fmri.type": "Journal Article",
@@ -98,21 +98,21 @@ const translations = {
     "publications.fmri.title":
       "Reconstructing brain causal dynamics for subject and task fingerprints using fMRI time-series data",
     "publications.fmri.summary":
-      "Reconstructed brain causal dynamics for subject and task fingerprints, connecting causal time-series modeling with interpretable neural signatures.",
+      "Reconstructed directed interactions and fast and slow activity from fMRI, then used those causal signatures to identify subjects and tasks. A brain reachability map visualizes task-specific regional activation.",
     "publications.fmri.keywords": "fMRI · Causal dynamics · Time-series modeling · Health AI",
     "publications.bcb.type": "Conference Paper",
     "publications.bcb.venue": "ACM BCB · 2024",
     "publications.bcb.badge": "Oral Presentation",
     "publications.bcb.title": "Causality-based Subject and Task Fingerprints using fMRI Time-series Data",
     "publications.bcb.summary":
-      "Studied subject and task fingerprints from fMRI time-series data through causal modeling, with an oral presentation at ACM BCB 2024.",
+      "A two-timescale state-space model extracts directional brain interactions from fMRI. Modal features identify subjects, while a graph neural network classifies tasks.",
     "publications.bcb.keywords": "ACM BCB · Causal modeling · fMRI · Health AI",
     "publications.internship.type": "Internship",
     "publications.internship.venue": "Optosurgical · Summer 2026",
     "publications.internship.title": "Surgical Video Understanding and Efficient Depth Estimation",
     "publications.internship.role": "Machine Learning Engineer Intern",
     "publications.internship.summary":
-      "Built video models to recognize surgical phases and instrument actions for robot-assisted procedures. Compressed and fine-tuned Depth Anything 3 to 29% of its original size while retaining nearly the full model's performance.",
+      "Developed video models that recognize surgical phases and instrument actions, providing procedure-state cues to downstream systems. Fine-tuned a compressed Depth Anything 3 model at 29% of the original size while retaining near-full depth-estimation performance.",
     "publications.internship.keywords":
       "Surgical phase recognition · Robot-assisted surgery · Model compression · Monocular depth estimation",
     "publications.internship.imageAlt":
@@ -154,7 +154,7 @@ const translations = {
     "nav.contact": "联系",
     "hero.eyebrow": "状态空间模型 · 长上下文 · 大语言模型智能体 · 高效推理",
     "hero.lead":
-      "我研究长上下文的序列架构与记忆机制，目标是在不同计算预算下提升建模能力，同时控制推理成本。",
+      "我研究长上下文序列模型与紧凑记忆，让模型持续利用关键信息，同时避免推理成本过高。",
     "hero.availability": "正在寻找 2027 年暑期研究实习。",
     "hero.linksLabel": "个人链接",
     "links.email": "邮箱",
@@ -170,19 +170,19 @@ const translations = {
     "about.kicker": "方向",
     "about.title": "状态空间模型，<br>长上下文，<br>高效推理。",
     "about.p1":
-      "我是 <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a> 电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。<br>我的研究聚焦状态空间模型与长上下文记忆，希望模型能更有效地利用远距离信息，同时把推理开销控制在可部署的范围内。",
+      "我是 <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a> 电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。<br>我研究模型如何在长序列中保留并使用信息，也关注这些能力在实际推理中的计算开销。",
     "about.p2":
-      "我研究谱结构、选择性状态更新和预算感知部署。近期工作已实现一次训练导出多种容量的紧凑模型，并通过可合并的聚合状态保留跨段信息。",
+      "近期工作利用有序谱通道，从一个模型导出适配不同预算的版本。我还研究输入自适应递归记忆与可合并状态，让语言模型跨片段保留证据。",
     "areas.kicker": "研究方向",
     "areas.agent.title": "可靠的大语言模型智能体",
     "areas.agent.body":
-      "研究智能体记忆、来源追踪与工具调用机制，减少过期信息使用并提升工作流可靠性。",
+      "研究智能体记忆与信息来源追踪，让工具调用系统在持续任务中依据当前证据，而非过期上下文。",
     "areas.sequence.title": "高效长序列建模",
     "areas.sequence.body":
-      "研究高效的状态空间与混合序列架构，通过选择性使用注意力并根据输入自适应分配计算，在保持模型性能的同时降低推理成本。",
+      "结合输入自适应的递归记忆与局部注意力，以可控的推理成本处理长序列。",
     "areas.ssm.title": "谱状态空间模型",
     "areas.ssm.body":
-      "研究具有谱结构与弹性容量的状态空间序列模型，实现高效、预算感知的推理。",
+      "以有序谱通道作为容量维度：截取已训练模型的通道前缀，导出可独立部署的小模型。",
     "skills.kicker": "技能",
     "skills.title": "核心技术方向。",
     "skills.dl.title": "深度学习",
@@ -213,7 +213,7 @@ const translations = {
     "publications.sketchops.venue": "arXiv · 2026",
     "publications.sketchops.title": "面向长上下文语言模型的可合并模型侧聚合状态",
     "publications.sketchops.summary":
-      "提出 SketchOps：一种模型侧聚合接口，在冻结语言模型旁维护紧凑、可合并的草图状态，用于固定预算的长上下文聚合。",
+      "语言模型在长历史中很难稳定完成计数和集合关系聚合。SketchOps 在冻结模型旁维护固定 2 KiB、可跨片段合并的状态；在 3,969 道聚合后推理任务上达到 99.2% 准确率，无需重读完整上下文。",
     "publications.sketchops.keywords":
       "SketchOps · HyperLogLog · 长上下文推理 · 固定预算聚合",
     "publications.es.type": "会议论文",
@@ -221,35 +221,35 @@ const translations = {
     "publications.es.badge": "<span class=\"neurips-year\">NeurIPS 2026</span><span class=\"neurips-track\">Main Track</span>",
     "publications.es.title": "可一次训练并按预算导出的弹性谱状态空间模型",
     "publications.es.summary":
-      "训练一个谱状态空间模型，再通过截取有序的 Hankel 谱通道导出紧凑版本。输入自适应门控与预算丢弃训练使不同预算下的模型保持有效预测能力。",
+      "ES-SSM 只训练一次，就能导出适配多档计算预算的独立模型。有序 Hankel 谱通道可直接截断；自适应门控与预算丢弃训练让保留的通道前缀仍能有效预测。",
     "publications.es.keywords": "谱状态空间模型 · Hankel 谱通道 · 预算约束推理",
     "publications.es.imageAlt": "ES-SSM 图 1：谱通道与紧凑模型导出",
     "publications.essh.type": "预印本",
     "publications.essh.venue": "arXiv · 2026",
     "publications.essh.title": "用于一次训练、多预算导出的弹性选择性谱混合模型",
     "publications.essh.summary":
-      "结合输入自适应的递归谱通道与滑窗注意力；一次训练即可按不同谱通道数和前馈层宽度导出紧凑模型。",
+      "ESSH 让谱通道具备选择性：输入自适应的递归更新决定各通道保留什么信息。结合滑窗注意力，一次训练可导出多档紧凑语言模型，并保持高效解码。",
     "publications.essh.keywords": "选择性谱递归 · 滑窗注意力 · 弹性推理",
     "publications.essh.imageAlt": "ESSH 图 1：选择性谱混合架构与弹性容量维度",
     "publications.fmri.type": "期刊论文",
     "publications.fmri.venue": "Health Information Science and Systems · 2025",
     "publications.fmri.title": "使用 fMRI 时间序列数据重建用于主体和任务指纹识别的大脑因果动态",
     "publications.fmri.summary":
-      "重建用于主体和任务指纹识别的大脑因果动态，将因果时序建模与可解释神经信号连接起来。",
+      "从 fMRI 重建脑区间的有向作用与快慢活动模式，再以这些因果特征识别受试者和任务。脑区可达性图展示不同任务下的区域激活范围。",
     "publications.fmri.keywords": "fMRI · 因果动态 · 时序建模 · 健康 AI",
     "publications.bcb.type": "会议论文",
     "publications.bcb.venue": "ACM BCB · 2024",
     "publications.bcb.badge": "口头报告",
     "publications.bcb.title": "基于因果性的 fMRI 时间序列主体与任务指纹识别",
     "publications.bcb.summary":
-      "通过因果建模研究 fMRI 时间序列中的主体与任务指纹识别，并在 ACM BCB 2024 作口头报告。",
+      "双时间尺度状态空间模型从 fMRI 中提取脑区间的有向作用；利用模态特征识别受试者，并用图神经网络识别任务。",
     "publications.bcb.keywords": "ACM BCB · 因果建模 · fMRI · 健康 AI",
     "publications.internship.type": "实习",
     "publications.internship.venue": "Optosurgical · 2026 夏季",
     "publications.internship.title": "手术视频理解与高效深度估计",
     "publications.internship.role": "机器学习工程师实习生",
     "publications.internship.summary":
-      "构建视频模型，识别机器人辅助手术中的手术阶段和器械动作；将 Depth Anything 3 压缩并微调至原模型约 29% 的规模，性能与完整模型几乎一致。",
+      "用视频模型识别手术阶段与器械动作，为下游系统提供流程状态信息；将 Depth Anything 3 压缩并微调至原大小的 29%，深度估计性能接近完整模型。",
     "publications.internship.keywords":
       "手术阶段识别 · 机器人辅助手术 · 模型压缩 · 单目深度估计",
     "publications.internship.imageAlt":

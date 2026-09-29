@@ -8,7 +8,7 @@
       content="Dachuan Song is a Ph.D. student at George Mason University researching efficient sequence architectures, long-context memory, and budget-aware inference."
     />
     <title>Dachuan Song | AI Research & Engineering</title>
-    <link rel="stylesheet" href="./styles.css?v=poster-style-20260929d" />
+    <link rel="stylesheet" href="./styles.css?v=publication-equal-columns-20260929" />
   </head>
   <body>
     <button
@@ -70,8 +70,8 @@
           <p class="eyebrow" data-i18n="hero.eyebrow">State Space Models · Long Contexts · LLM Agents · Efficient Inference</p>
           <h1>Dachuan Song <span class="han-name">宋大川</span></h1>
           <p class="lead" data-i18n="hero.lead">
-            I develop sequence architectures and memory mechanisms for long contexts,
-            aiming to improve model quality while keeping inference efficient across compute budgets.
+            I build sequence models and compact memory for long contexts, so useful
+            information remains accessible without making inference prohibitively expensive.
           </p>
           <p class="hero-availability" data-i18n="hero.availability">Seeking Summer 2027 research internships.</p>
           <div class="hero-actions" aria-label="Profile links" data-i18n-aria="hero.linksLabel">
@@ -118,13 +118,13 @@
             I am a Ph.D. student at
             <a class="direction-link" href="https://www.gmu.edu/" target="_blank" rel="noreferrer">George Mason University</a>, advised by
             <a class="direction-link" href="https://mason.gmu.edu/~xwang64/index.html" target="_blank" rel="noreferrer">Prof. Xuan Wang</a>.<br />
-            My research focuses on state space models and long-context memory, with the goal of
-            using distant information more effectively at a practical inference cost.
+            I work on how models retain and use information over long sequences, and on
+            the cost of doing so at inference time.
           </p>
           <p data-i18n="about.p2">
-            I study spectral structure, selective state updates, and budget-aware deployment.
-            Recent work has produced compact models from one training run and mergeable aggregation
-            states that carry evidence across long contexts.
+            Recent work uses ordered spectral channels to export different model sizes from one
+            checkpoint. I also study input-dependent recurrent memory and mergeable states that
+            let language models carry evidence across context segments.
           </p>
         </div>
       </section>
@@ -146,9 +146,9 @@
             </h3>
             <p>Dachuan Song, Junyu Yin, Zechen Hu, Xuan Wang</p>
             <p class="publication-summary" data-i18n="publications.es.summary">
-              Trains one spectral state space model and exports compact versions by truncating
-              ordered Hankel channels. Input-adaptive gates and budget dropout support useful
-              predictions across deployment budgets.
+              One ES-SSM training run yields standalone models at several compute budgets.
+              Ordered Hankel channels can be truncated directly; adaptive gates and budget
+              dropout train the retained prefixes to remain predictive.
             </p>
             <div class="paper-links" aria-label="Elastic Spectral State Space Models links" data-i18n-aria="publications.links.es">
               <a class="paper-id" href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer">arXiv:2601.22488</a>
@@ -168,8 +168,9 @@
             </h3>
             <p>Dachuan Song, Chuchu Chen, Xuan Wang</p>
             <p class="publication-summary" data-i18n="publications.essh.summary">
-              Combines input-dependent recurrent spectral channels with sliding-window attention.
-              One training run yields compact exports with different spectral and feed-forward capacities.
+              ESSH makes spectral channels selective: input-dependent recurrent updates
+              control what each channel retains. Paired with sliding-window attention, one
+              training run yields compact language models at several sizes with fast decoding.
             </p>
             <div class="paper-links" aria-label="Elastic Selective Spectral Hybrids paper links" data-i18n-aria="publications.links.essh">
               <a class="paper-id" href="https://arxiv.org/abs/2609.32486" target="_blank" rel="noreferrer">arXiv:2609.32486</a>
@@ -189,9 +190,9 @@
             </h3>
             <p>Dachuan Song, Junyu Yin, Zechen Hu, Xuan Wang</p>
             <p class="publication-summary" data-i18n="publications.sketchops.summary">
-              Introduced SketchOps, a model-side aggregation interface that keeps compact,
-              mergeable sketch states alongside frozen language models for fixed-budget
-              long-context aggregation.
+              Language models struggle to aggregate counts and set relations over long histories.
+              SketchOps adds a fixed 2 KiB state that merges across chunks; on 3,969
+              aggregate-then-reason tasks it reached 99.2% accuracy without rereading the full context.
             </p>
             <div class="paper-links" aria-label="SketchOps paper links" data-i18n-aria="publications.links.sketchops">
               <a class="paper-id" href="https://arxiv.org/abs/2607.26448" target="_blank" rel="noreferrer">arXiv:2607.26448</a>
@@ -213,8 +214,8 @@
             </h3>
             <p>Dachuan Song, Li Shen, Duy Duong-Tran, Xuan Wang</p>
             <p class="publication-summary" data-i18n="publications.bcb.summary">
-              Studied subject and task fingerprints from fMRI time-series data through
-              causal modeling, with an oral presentation at ACM BCB 2024.
+              A two-timescale state-space model extracts directional brain interactions from
+              fMRI. Modal features identify subjects, while a graph neural network classifies tasks.
             </p>
             <div class="paper-links" aria-label="ACM BCB conference paper links" data-i18n-aria="publications.links.bcb">
               <a class="paper-id" href="https://dl.acm.org/doi/abs/10.1145/3698587.3701342" target="_blank" rel="noreferrer">DOI: 10.1145/3698587.3701342</a>
@@ -237,8 +238,9 @@
             </h3>
             <p>Dachuan Song, Li Shen, Duy Duong-Tran, Xuan Wang</p>
             <p class="publication-summary" data-i18n="publications.fmri.summary">
-              Reconstructed brain causal dynamics for subject and task fingerprints,
-              connecting causal time-series modeling with interpretable neural signatures.
+              Reconstructed directed interactions and fast and slow activity from fMRI,
+              then used those causal signatures to identify subjects and tasks.
+              A brain reachability map visualizes task-specific regional activation.
             </p>
             <div class="paper-links" aria-label="fMRI journal article links" data-i18n-aria="publications.links.fmri">
               <a class="paper-id" href="https://link.springer.com/article/10.1007/s13755-025-00388-w" target="_blank" rel="noreferrer">DOI: 10.1007/s13755-025-00388-w</a>
@@ -261,9 +263,10 @@
               <span class="internship-role">(<span data-i18n="publications.internship.role">Machine Learning Engineer Intern</span>)</span>
             </h3>
             <p class="publication-summary" data-i18n="publications.internship.summary">
-              Built video models to recognize surgical phases and instrument actions for
-              robot-assisted procedures. Compressed and fine-tuned Depth Anything 3 to 29% of
-              its original size while retaining nearly the full model's performance.
+              Developed video models that recognize surgical phases and instrument actions,
+              providing procedure-state cues to downstream systems. Fine-tuned a compressed
+              Depth Anything 3 model at 29% of the original size while retaining near-full
+              depth-estimation performance.
             </p>
             <p class="stack publication-keywords" data-i18n="publications.internship.keywords">Surgical phase recognition · Robot-assisted surgery · Model compression · Monocular depth estimation</p>
             <a class="paper-thumbnail internship-thumbnail" href="https://www.optosurgical.com/" target="_blank" rel="noreferrer" aria-labelledby="internship-title-link">
@@ -282,15 +285,15 @@
         <div class="expertise-grid">
           <div class="expertise-card sequence-card">
             <h3 data-i18n="areas.sequence.title">Efficient Long-Sequence Modeling</h3>
-            <p data-i18n="areas.sequence.body">Efficient state-space and hybrid sequence architectures that use attention selectively and adapt computation to each input, reducing inference cost while preserving model quality.</p>
+            <p data-i18n="areas.sequence.body">Combine input-dependent recurrent memory with local attention to process long sequences at manageable inference cost.</p>
           </div>
           <div class="expertise-card systems-card">
             <h3 data-i18n="areas.ssm.title">Spectral State Space Models</h3>
-            <p data-i18n="areas.ssm.body">State-space sequence models with spectral structure and elastic capacity for efficient, budget-aware inference.</p>
+            <p data-i18n="areas.ssm.body">Use ordered spectral channels as a capacity axis: truncate a trained model's channel prefix to export smaller, standalone versions.</p>
           </div>
           <div class="expertise-card agent-card">
             <h3 data-i18n="areas.agent.title">Reliable LLM Agents</h3>
-            <p data-i18n="areas.agent.body">Agent memory, provenance tracking, and tool-use mechanisms designed to reduce stale information use and improve workflow reliability.</p>
+            <p data-i18n="areas.agent.body">Study how agent memory and provenance can keep tool-using systems grounded in current evidence instead of stale context.</p>
           </div>
         </div>
       </section>
@@ -343,7 +346,7 @@
           <h2 data-i18n="education.title">Academic Background.</h2>
           <a
             class="cv-link"
-            href="./assets/Dachuan_Song_CV.pdf?v=20260929-spaced"
+            href="./assets/Dachuan_Song_CV.pdf?v=research-copy-20260929"
             target="_blank"
             rel="noreferrer"
             data-i18n="education.cv"
@@ -413,6 +416,6 @@
       <p class="copyright">© <span id="year"></span> Dachuan Song.</p>
     </footer>
 
-    <script src="./script.js?v=essh-link-20260929"></script>
+    <script src="./script.js?v=research-copy-20260929"></script>
   </body>
 </html>

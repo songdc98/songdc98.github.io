@@ -933,7 +933,7 @@ h3 {
 
 .publication {
   display: grid;
-  grid-template-columns: 176px minmax(0, 1fr) minmax(320px, 420px);
+  grid-template-columns: 176px minmax(0, 1fr) minmax(0, 1fr);
   column-gap: 30px;
   row-gap: 10px;
 }
