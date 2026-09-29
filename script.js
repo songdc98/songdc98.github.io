@@ -68,6 +68,7 @@ const translations = {
     "publications.link.code": "Code",
     "publications.links.sketchops": "SketchOps paper links",
     "publications.links.es": "Elastic Spectral State Space Models links",
+    "publications.links.essh": "Elastic Selective Spectral Hybrids paper links",
     "publications.links.fmri": "fMRI journal article links",
     "publications.links.bcb": "ACM BCB conference paper links",
     "publications.sketchops.type": "Preprint",
@@ -79,7 +80,7 @@ const translations = {
       "SketchOps · HyperLogLog · Long-context reasoning · Fixed-budget aggregation",
     "publications.es.type": "Conference Paper",
     "publications.es.venue": "Accepted · Poster",
-    "publications.es.badge": "NeurIPS 2026 Main Track",
+    "publications.es.badge": "<span class=\"neurips-year\">NeurIPS 2026</span><span class=\"neurips-track\">Main Track</span>",
     "publications.es.title": "Elastic Spectral State Space Models for Train-Once Budgeted Inference",
     "publications.es.summary":
       "Trains one spectral state space model and exports compact versions by truncating ordered Hankel channels. Input-adaptive gates and budget dropout support useful predictions across deployment budgets.",
@@ -205,6 +206,7 @@ const translations = {
     "publications.link.code": "代码",
     "publications.links.sketchops": "SketchOps 论文相关链接",
     "publications.links.es": "弹性谱状态空间模型相关链接",
+    "publications.links.essh": "弹性选择性谱混合模型论文链接",
     "publications.links.fmri": "fMRI 期刊论文相关链接",
     "publications.links.bcb": "ACM BCB 会议论文相关链接",
     "publications.sketchops.type": "预印本",
@@ -216,7 +218,7 @@ const translations = {
       "SketchOps · HyperLogLog · 长上下文推理 · 固定预算聚合",
     "publications.es.type": "会议论文",
     "publications.es.venue": "已接收 · 海报展示",
-    "publications.es.badge": "NeurIPS 2026 Main Track",
+    "publications.es.badge": "<span class=\"neurips-year\">NeurIPS 2026</span><span class=\"neurips-track\">Main Track</span>",
     "publications.es.title": "可一次训练并按预算导出的弹性谱状态空间模型",
     "publications.es.summary":
       "训练一个谱状态空间模型，再通过截取有序的 Hankel 谱通道导出紧凑版本。输入自适应门控与预算丢弃训练使不同预算下的模型保持有效预测能力。",
