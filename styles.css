@@ -986,6 +986,12 @@ h3 {
   overflow-wrap: anywhere;
 }
 
+.publication-note.neurips-note {
+  border-bottom-color: #d6ad5e;
+  color: #956211;
+  font-weight: 900;
+}
+
 .paper-type {
   display: block;
   color: var(--heading);
@@ -1180,6 +1186,11 @@ a.paper-thumbnail:focus-visible {
 
 .paper-thumbnail-wide img {
   aspect-ratio: 141 / 41;
+}
+
+.paper-thumbnail-figure1 img {
+  height: auto;
+  aspect-ratio: auto;
 }
 
 .paper-thumbnail-stack img {

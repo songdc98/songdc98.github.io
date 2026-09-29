@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Dachuan Song is a Ph.D. student at George Mason University researching deep learning, state space models, long-sequence modeling, and LLM-based systems."
+      content="Dachuan Song is a Ph.D. student at George Mason University developing spectral state space models, selective hybrids, and compact aggregation states for efficient long-context processing."
     />
     <title>Dachuan Song | AI Research & Engineering</title>
-    <link rel="stylesheet" href="./styles.css?v=reviewer-service-20260831" />
+    <link rel="stylesheet" href="./styles.css?v=publications-20260929" />
   </head>
   <body>
     <button
@@ -70,8 +70,8 @@
           <p class="eyebrow" data-i18n="hero.eyebrow">State Space Models · Long Contexts · LLM Agents · Efficient Inference</p>
           <h1>Dachuan Song <span class="han-name">宋大川</span></h1>
           <p class="lead" data-i18n="hero.lead">
-            I study how learning systems can process long sequences efficiently and use
-            accumulated information reliably in complex tasks.
+            I design sequence models that can be trained once and exported for different
+            inference budgets, and compact aggregation states for long-context language tasks.
           </p>
           <p class="hero-availability" data-i18n="hero.availability">Seeking Summer 2027 research internships.</p>
           <div class="hero-actions" aria-label="Profile links" data-i18n-aria="hero.linksLabel">
@@ -118,12 +118,12 @@
             I am a Ph.D. student at
             <a class="direction-link" href="https://www.gmu.edu/" target="_blank" rel="noreferrer">George Mason University</a>, advised by
             <a class="direction-link" href="https://mason.gmu.edu/~xwang64/index.html" target="_blank" rel="noreferrer">Prof. Xuan Wang</a>.<br />
-            I study learning systems that must process long and evolving information under
-            practical constraints on computation, memory, and latency.
+            My research uses spectral state space structure and input-dependent recurrence to
+            train one sequence model and export compact variants for different inference budgets.
           </p>
           <p data-i18n="about.p2">
-            My research focuses on state space models, long-sequence modeling, and LLM-based
-            agents, with an emphasis on efficient and reliable learning systems.
+            I also build compact, mergeable aggregation states for frozen language models,
+            so evidence from long histories remains available without reprocessing the full context.
           </p>
         </div>
       </section>
@@ -134,6 +134,45 @@
           <h2 data-i18n="publications.title">Published papers</h2>
         </div>
         <div class="publication-list">
+          <article class="publication">
+            <div class="publication-meta">
+              <span class="paper-type conference" data-i18n="publications.es.type">Conference Paper</span>
+              <span class="time" data-i18n="publications.es.venue">Accepted · Poster</span>
+              <span class="publication-note neurips-note" data-i18n="publications.es.badge">NeurIPS 2026 Main Track</span>
+            </div>
+            <h3>
+              <a id="paper-es-title" href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer" data-i18n="publications.es.title">Elastic Spectral State Space Models for Train-Once Budgeted Inference</a>
+            </h3>
+            <p>Dachuan Song, Junyu Yin, Zechen Hu, Xuan Wang</p>
+            <p class="publication-summary" data-i18n="publications.es.summary">
+              Trains one spectral state space model and exports compact versions by truncating
+              ordered Hankel channels. Input-adaptive gates and budget dropout support useful
+              predictions across deployment budgets.
+            </p>
+            <div class="paper-links" aria-label="Elastic Spectral State Space Models links" data-i18n-aria="publications.links.es">
+              <a class="paper-id" href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer">arXiv:2601.22488</a>
+            </div>
+            <p class="stack publication-keywords" data-i18n="publications.es.keywords">Spectral state space models · Hankel channels · Budgeted inference</p>
+            <a class="paper-thumbnail paper-thumbnail-figure1" href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer" aria-labelledby="paper-es-title">
+              <img src="./assets/es-ssm-figure1.png" alt="Figure 1 of ES-SSM: spectral channels and compact model export" data-i18n-alt="publications.es.imageAlt" />
+            </a>
+          </article>
+          <article class="publication">
+            <div class="publication-meta">
+              <span class="paper-type preprint" data-i18n="publications.essh.type">Preprint</span>
+              <span class="time" data-i18n="publications.essh.venue">arXiv · 2026</span>
+            </div>
+            <h3 id="paper-essh-title" data-i18n="publications.essh.title">Elastic Selective Spectral Hybrids for Train-Once, Export-Many Budgeted Inference</h3>
+            <p>Dachuan Song, Chuchu Chen, Xuan Wang</p>
+            <p class="publication-summary" data-i18n="publications.essh.summary">
+              Combines input-dependent recurrent spectral channels with sliding-window attention.
+              One training run yields compact exports with different spectral and feed-forward capacities.
+            </p>
+            <p class="stack publication-keywords" data-i18n="publications.essh.keywords">Selective spectral recurrence · Sliding-window attention · Elastic inference</p>
+            <figure class="paper-thumbnail paper-thumbnail-figure1" aria-labelledby="paper-essh-title">
+              <img src="./assets/essh-figure1.png" alt="Figure 1 of ESSH: selective spectral hybrid and elastic capacity axes" data-i18n-alt="publications.essh.imageAlt" />
+            </figure>
+          </article>
           <article class="publication">
             <div class="publication-meta">
               <span class="paper-type preprint" data-i18n="publications.sketchops.type">Preprint</span>
@@ -159,24 +198,27 @@
           </article>
           <article class="publication">
             <div class="publication-meta">
-              <span class="paper-type preprint" data-i18n="publications.es.type">Preprint</span>
-              <span class="time" data-i18n="publications.es.venue">arXiv · 2026</span>
+              <span class="paper-type conference" data-i18n="publications.bcb.type">Conference Paper</span>
+              <span class="time" data-i18n="publications.bcb.venue">ACM BCB · 2024</span>
+              <span class="publication-note" data-i18n="publications.bcb.badge">Oral Presentation</span>
             </div>
             <h3>
-              <a id="paper-es-title" href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer" data-i18n="publications.es.title">Elastic Spectral State Space Models for Budgeted Inference</a>
+              <a id="paper-bcb-title" href="https://dl.acm.org/doi/abs/10.1145/3698587.3701342" target="_blank" rel="noreferrer" data-i18n="publications.bcb.title">Causality-based Subject and Task Fingerprints using fMRI Time-series Data</a>
             </h3>
-            <p>Dachuan Song, Xuan Wang</p>
-            <p class="publication-summary" data-i18n="publications.es.summary">
-              Developed ES-SSM to train once at full spectral capacity and deploy
-              elastically through masked normalization and input-adaptive spectral gating.
+            <p>Dachuan Song, Li Shen, Duy Duong-Tran, Xuan Wang</p>
+            <p class="publication-summary" data-i18n="publications.bcb.summary">
+              Studied subject and task fingerprints from fMRI time-series data through
+              causal modeling, with an oral presentation at ACM BCB 2024.
             </p>
-            <div class="paper-links" aria-label="Elastic Spectral State Space Models links" data-i18n-aria="publications.links.es">
-              <a class="paper-id" href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer">arXiv:2601.22488</a>
-              <a href="https://github.com/songdc98/ES-SSM-Elastic-Spectral-State-Space-Models-for-budgeted-inference" target="_blank" rel="noreferrer" data-i18n="publications.link.code">Code</a>
+            <div class="paper-links" aria-label="ACM BCB conference paper links" data-i18n-aria="publications.links.bcb">
+              <a class="paper-id" href="https://dl.acm.org/doi/abs/10.1145/3698587.3701342" target="_blank" rel="noreferrer">DOI: 10.1145/3698587.3701342</a>
             </div>
-            <p class="stack publication-keywords" data-i18n="publications.es.keywords">PyTorch · CUDA · FFT convolution · Long-context benchmarks</p>
-            <a class="paper-thumbnail paper-thumbnail-wide" href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer" aria-labelledby="paper-es-title">
-              <img src="./assets/essm-model-figure.png" alt="ES-SSM model architecture" />
+            <p class="stack publication-keywords" data-i18n="publications.bcb.keywords">ACM BCB · Causal modeling · fMRI · Health AI</p>
+            <a class="paper-thumbnail" href="https://dl.acm.org/doi/abs/10.1145/3698587.3701342" target="_blank" rel="noreferrer" aria-labelledby="paper-bcb-title">
+              <img
+                src="./assets/conference-figures-1-2.png"
+                alt="Conference Figures 1 and 2: causal dynamics reconstruction and five-layer GNN"
+              />
             </a>
           </article>
           <article class="publication">
@@ -200,31 +242,6 @@
               <img
                 src="./assets/journal-figures-1-3.png"
                 alt="Journal Figures 1 and 3: two-timescale sampling and five-layer GNN architecture"
-              />
-            </a>
-          </article>
-          <article class="publication">
-            <div class="publication-meta">
-              <span class="paper-type conference" data-i18n="publications.bcb.type">Conference Paper</span>
-              <span class="time" data-i18n="publications.bcb.venue">ACM BCB · 2024</span>
-              <span class="publication-note" data-i18n="publications.bcb.badge">Oral Presentation</span>
-            </div>
-            <h3>
-              <a id="paper-bcb-title" href="https://dl.acm.org/doi/abs/10.1145/3698587.3701342" target="_blank" rel="noreferrer" data-i18n="publications.bcb.title">Causality-based Subject and Task Fingerprints using fMRI Time-series Data</a>
-            </h3>
-            <p>Dachuan Song, Li Shen, Duy Duong-Tran, Xuan Wang</p>
-            <p class="publication-summary" data-i18n="publications.bcb.summary">
-              Studied subject and task fingerprints from fMRI time-series data through
-              causal modeling, with an oral presentation at ACM BCB 2024.
-            </p>
-            <div class="paper-links" aria-label="ACM BCB conference paper links" data-i18n-aria="publications.links.bcb">
-              <a class="paper-id" href="https://dl.acm.org/doi/abs/10.1145/3698587.3701342" target="_blank" rel="noreferrer">DOI: 10.1145/3698587.3701342</a>
-            </div>
-            <p class="stack publication-keywords" data-i18n="publications.bcb.keywords">ACM BCB · Causal modeling · fMRI · Health AI</p>
-            <a class="paper-thumbnail" href="https://dl.acm.org/doi/abs/10.1145/3698587.3701342" target="_blank" rel="noreferrer" aria-labelledby="paper-bcb-title">
-              <img
-                src="./assets/conference-figures-1-2.png"
-                alt="Conference Figures 1 and 2: causal dynamics reconstruction and five-layer GNN"
               />
             </a>
           </article>
@@ -320,7 +337,7 @@
           <h2 data-i18n="education.title">Academic Background.</h2>
           <a
             class="cv-link"
-            href="./assets/Dachuan_Song_CV.pdf?v=20260829b"
+            href="./assets/Dachuan_Song_CV.pdf?v=20260929"
             target="_blank"
             rel="noreferrer"
             data-i18n="education.cv"
@@ -390,6 +407,6 @@
       <p class="copyright">© <span id="year"></span> Dachuan Song.</p>
     </footer>
 
-    <script src="./script.js?v=reviewer-service-20260831"></script>
+    <script src="./script.js?v=publications-20260929"></script>
   </body>
 </html>

@@ -2,7 +2,7 @@ const translations = {
   en: {
     "meta.title": "Dachuan Song | AI Research & Engineering",
     "meta.description":
-      "Dachuan Song is a Ph.D. student at George Mason University researching deep learning, state space models, long-sequence modeling, and LLM-based systems.",
+      "Dachuan Song is a Ph.D. student at George Mason University developing spectral state space models, selective hybrids, and compact aggregation states for efficient long-context processing.",
     "language.button": "中文",
     "language.aria": "Switch to Chinese",
     "easterEgg.coinLabel": "Hidden contact easter egg",
@@ -16,7 +16,7 @@ const translations = {
     "nav.contact": "Contact",
     "hero.eyebrow": "State Space Models · Long Contexts · LLM Agents · Efficient Inference",
     "hero.lead":
-      "I study how learning systems can process long sequences efficiently and use accumulated information reliably in complex tasks.",
+      "I design sequence models that can be trained once and exported for different inference budgets, and compact aggregation states for long-context language tasks.",
     "hero.availability": "Seeking Summer 2027 research internships.",
     "hero.linksLabel": "Profile links",
     "links.email": "Email",
@@ -32,9 +32,9 @@ const translations = {
     "about.kicker": "Direction",
     "about.title": "State Space Models,<br>Long Contexts,<br>Efficient Inference.",
     "about.p1":
-      "I am a Ph.D. student at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>.<br>I study learning systems that must process long and evolving information under practical constraints on computation, memory, and latency.",
+      "I am a Ph.D. student at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>.<br>My research uses spectral state space structure and input-dependent recurrence to train one sequence model and export compact variants for different inference budgets.",
     "about.p2":
-      "My research focuses on state space models, long-sequence modeling, and LLM-based agents, with an emphasis on efficient and reliable learning systems.",
+      "I also build compact, mergeable aggregation states for frozen language models, so evidence from long histories remains available without reprocessing the full context.",
     "areas.kicker": "Research Areas",
     "areas.agent.title": "Reliable LLM Agents",
     "areas.agent.body":
@@ -77,12 +77,21 @@ const translations = {
       "Introduced SketchOps, a model-side aggregation interface that keeps compact, mergeable sketch states alongside frozen language models for fixed-budget long-context aggregation.",
     "publications.sketchops.keywords":
       "SketchOps · HyperLogLog · Long-context reasoning · Fixed-budget aggregation",
-    "publications.es.type": "Preprint",
-    "publications.es.venue": "arXiv · 2026",
-    "publications.es.title": "Elastic Spectral State Space Models for Budgeted Inference",
+    "publications.es.type": "Conference Paper",
+    "publications.es.venue": "Accepted · Poster",
+    "publications.es.badge": "NeurIPS 2026 Main Track",
+    "publications.es.title": "Elastic Spectral State Space Models for Train-Once Budgeted Inference",
     "publications.es.summary":
-      "Developed ES-SSM to train once at full spectral capacity and deploy elastically through masked normalization and input-adaptive spectral gating.",
-    "publications.es.keywords": "PyTorch · CUDA · FFT convolution · Long-context benchmarks",
+      "Trains one spectral state space model and exports compact versions by truncating ordered Hankel channels. Input-adaptive gates and budget dropout support useful predictions across deployment budgets.",
+    "publications.es.keywords": "Spectral state space models · Hankel channels · Budgeted inference",
+    "publications.es.imageAlt": "Figure 1 of ES-SSM: spectral channels and compact model export",
+    "publications.essh.type": "Preprint",
+    "publications.essh.venue": "arXiv · 2026",
+    "publications.essh.title": "Elastic Selective Spectral Hybrids for Train-Once, Export-Many Budgeted Inference",
+    "publications.essh.summary":
+      "Combines input-dependent recurrent spectral channels with sliding-window attention. One training run yields compact exports with different spectral and feed-forward capacities.",
+    "publications.essh.keywords": "Selective spectral recurrence · Sliding-window attention · Elastic inference",
+    "publications.essh.imageAlt": "Figure 1 of ESSH: selective spectral hybrid and elastic capacity axes",
     "publications.fmri.type": "Journal Article",
     "publications.fmri.venue": "Health Information Science and Systems · 2025",
     "publications.fmri.title":
@@ -130,7 +139,7 @@ const translations = {
   zh: {
     "meta.title": "Dachuan Song | AI 研究与工程",
     "meta.description":
-      "Dachuan Song 是乔治梅森大学电子与计算机工程博士研究生，研究深度学习、状态空间模型、长序列建模与大语言模型系统。",
+      "Dachuan Song 是乔治梅森大学博士研究生，研究可按预算导出的谱状态空间模型、选择性混合架构与长上下文聚合状态。",
     "language.button": "EN",
     "language.aria": "Switch to English",
     "easterEgg.coinLabel": "隐藏联系彩蛋",
@@ -144,7 +153,7 @@ const translations = {
     "nav.contact": "联系",
     "hero.eyebrow": "状态空间模型 · 长上下文 · 大语言模型智能体 · 高效推理",
     "hero.lead":
-      "我研究学习系统如何高效处理长序列，并在复杂任务中可靠地使用累积信息。",
+      "我设计一次训练即可适配不同推理预算的序列模型，也构建面向长上下文语言任务的紧凑聚合状态。",
     "hero.availability": "正在寻找 2027 年暑期研究实习。",
     "hero.linksLabel": "个人链接",
     "links.email": "邮箱",
@@ -160,9 +169,9 @@ const translations = {
     "about.kicker": "方向",
     "about.title": "状态空间模型，<br>长上下文，<br>高效推理。",
     "about.p1":
-      "我是 <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a> 电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。我研究学习系统如何在计算、内存和延迟等实际约束下处理长序列与持续变化的信息。",
+      "我是 <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a> 电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。<br>我利用谱状态空间结构和输入自适应递归，训练一个模型并导出适配不同推理预算的紧凑版本。",
     "about.p2":
-      "我的研究方向包括状态空间模型、长序列建模与基于大语言模型的智能体，重点关注学习系统的效率与可靠性。",
+      "我还为冻结的大语言模型构建紧凑、可合并的聚合状态，让长历史中的信息持续可用，无需反复处理完整上下文。",
     "areas.kicker": "研究方向",
     "areas.agent.title": "可靠的大语言模型智能体",
     "areas.agent.body":
@@ -205,12 +214,21 @@ const translations = {
       "提出 SketchOps：一种模型侧聚合接口，在冻结语言模型旁维护紧凑、可合并的草图状态，用于固定预算的长上下文聚合。",
     "publications.sketchops.keywords":
       "SketchOps · HyperLogLog · 长上下文推理 · 固定预算聚合",
-    "publications.es.type": "预印本",
-    "publications.es.venue": "arXiv · 2026",
-    "publications.es.title": "用于预算推理的弹性谱状态空间模型",
+    "publications.es.type": "会议论文",
+    "publications.es.venue": "已接收 · 海报展示",
+    "publications.es.badge": "NeurIPS 2026 Main Track",
+    "publications.es.title": "可一次训练并按预算导出的弹性谱状态空间模型",
     "publications.es.summary":
-      "提出 ES-SSM，在完整谱容量下训练一次，并通过掩码归一化和输入自适应谱门控进行弹性部署。",
-    "publications.es.keywords": "PyTorch · CUDA · FFT 卷积 · 长上下文基准",
+      "训练一个谱状态空间模型，再通过截取有序的 Hankel 谱通道导出紧凑版本。输入自适应门控与预算丢弃训练使不同预算下的模型保持有效预测能力。",
+    "publications.es.keywords": "谱状态空间模型 · Hankel 谱通道 · 预算约束推理",
+    "publications.es.imageAlt": "ES-SSM 图 1：谱通道与紧凑模型导出",
+    "publications.essh.type": "预印本",
+    "publications.essh.venue": "arXiv · 2026",
+    "publications.essh.title": "用于一次训练、多预算导出的弹性选择性谱混合模型",
+    "publications.essh.summary":
+      "结合输入自适应的递归谱通道与滑窗注意力；一次训练即可按不同谱通道数和前馈层宽度导出紧凑模型。",
+    "publications.essh.keywords": "选择性谱递归 · 滑窗注意力 · 弹性推理",
+    "publications.essh.imageAlt": "ESSH 图 1：选择性谱混合架构与弹性容量维度",
     "publications.fmri.type": "期刊论文",
     "publications.fmri.venue": "Health Information Science and Systems · 2025",
     "publications.fmri.title": "使用 fMRI 时间序列数据重建用于主体和任务指纹识别的大脑因果动态",
