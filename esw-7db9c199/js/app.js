@@ -116,7 +116,7 @@
   const hooks = {
     entities: () => A.ents, selected: () => A.sel, tool: () => A.tool,
     select: (id) => { A.sel = id; renderEnts(); A.map.draw(); updatePreview(); }, place, remove,
-    changed: (e, what) => { if (what === "done") { renderEnts(); updatePreview(); } recomputeSoon(); A.map.draw(); },
+    changed: (e, what) => { P.FAST = what !== "done"; if (what === "done") { renderEnts(); updatePreview(); recompute(); } else recomputeSoon(); A.map.draw(); },
     cursor: (p) => { $("#cursor").textContent = p ? `x ${fmt(p[0])}  y ${fmt(p[1])} m` + (A.W && A.W.inside(p[0], p[1]) ? `  h ${fmt(A.W.hB[A.W.ij(p[0], p[1])], 1)} m` : "") : "—"; },
   };
 
@@ -209,7 +209,7 @@
     for (const r of rec) {
       const d = ES.DEVICES[r.kind], zr = r.kind === "uav" ? r.z : r.kind === "cp" ? 3 : r.kind === "dog" ? 0.3 : 1.6, floor = P.NOISE_FLOOR(r.kind, amb);
       const gm = A.geoCache.gm || (A.geoCache.gm = P.coarseMask(A.W, 2, 2.5)); const ls = [];
-      for (const s of src) { if (s.self === r.id) continue; const F = (A.geoCache["s" + s.id + ":" + s.x.toFixed(1) + s.y.toFixed(1)] ||= P.geodesic(gm, s.x, s.y)); ls.push({ s, Lp: P.soundAt(A.W, s, r.x, r.y, zr, F).Lp }); }
+      for (const s of src) { if (s.self === r.id) continue; const F = P.FAST ? null : (A.geoCache["s" + s.id + ":" + s.x.toFixed(1) + s.y.toFixed(1)] ||= P.geodesic(gm, s.x, s.y)); ls.push({ s, Lp: P.soundAt(A.W, s, r.x, r.y, zr, F).Lp }); }
       const best = ls.sort((a, b) => b.Lp - a.Lp)[0]; const heard = ls.filter((x) => x.Lp - floor >= 0);
       rows += `<tr><td>${esc(r.name)}</td><td class="mono">${fmt(floor, 0)}</td><td>${heard.length ? heard.slice(0, 3).map((x) => `<span class="ok">${esc(x.s.name)}</span> <span class="mono">${fmt(x.Lp, 0)}${x.s.speech && x.Lp - floor >= 10 ? " ✓听清" : ""}</span>`).join("<br>") : `<span class="bad">没听到</span>${best ? ` <span class="muted mono">最大 ${fmt(best.Lp, 0)}</span>` : ""}`}</td></tr>`;
     }
@@ -241,13 +241,13 @@
   }
   function findRelay() {
     const cp = A.ents.find((e) => e.kind === "cp"), others = agents().filter((e) => e.kind !== "cp" && e.kind !== "uav"); if (!cp || !others.length) { A.par.relay = { txt: "需要一个指挥站和至少一台地面智能体。" }; recompute(); return; }
-    const tgt = others[0], z = 28, best = { rate: -1 }, W = A.W; const base = (() => { const l = P.network(W, [node(cp), node(tgt)]); return l[0] ? l[0].rate : 0; })();
+    const tgt = others[0], z = 28, best = { rate: -1 }, W = A.W; const base = (() => { const l = P.network(W, [node(cp), node(tgt)]); return l[0] ? l[0].good : 0; })();
     const uavR = ES.DEVICES.uav.radios;
     for (let x = 6; x < W.S; x += 6) for (let y = 6; y < W.S; y += 6) {
       const u = { id: -1, name: "中继", x, y, z, radios: uavR, kind: "uav" }, nodes = [node(cp), node(tgt), u], links = P.network(W, nodes), r = P.route(nodes, links, 1, 0, 262144);
       if (r && r.rate > best.rate) { best.rate = r.rate; best.x = x; best.y = y; best.r = r; }
     }
-    A.par.relay = { txt: best.rate > 0 ? `无人机悬停在 (${best.x}, ${best.y}),高 ${z} m:${esc(tgt.name)} → 指挥站瓶颈速率 <span class="mono">${fmt(best.rate, 1)} Mbit/s</span>(无中继时 ${fmt(base, 1)}),256 KB 激光雷达扫描 ${fmt(best.r.latency_s * 1e3, 0)} ms。 <button class="btn" id="btn-place-relay">放置到此处</button>` : "没有找到能改善连通的位置。" };
+    A.par.relay = { txt: best.rate > 0 ? `无人机悬停在 (${best.x}, ${best.y}),高 ${z} m:${esc(tgt.name)} → 指挥站瓶颈速率 <span class="mono">${fmt(best.rate, 1)} Mbit/s</span>(直连吞吐 ${fmt(base, 1)}),256 KB 激光雷达扫描 ${fmt(best.r.latency_s * 1e3, 0)} ms。 <button class="btn" id="btn-place-relay">放置到此处</button>` : "没有找到能改善连通的位置。" };
     recompute(); const b = $("#btn-place-relay"); if (b) b.addEventListener("click", () => { A.ents.push(mk("uav", best.x, best.y, { z, name: "中继无人机" })); A.sel = null; renderEnts(); recompute(); });
     if (best.rate > 0) A.map.overlays.push({ type: "marker", x: best.x, y: best.y, color: "#cc79a7", r: 11, text: "最佳中继" }), A.map.draw();
   }
@@ -312,6 +312,43 @@
     try { const f = await ES.loadJSON(ES.DATA_DIR + "/fidelity.json"); A.fid = f; $("#fidelity").innerHTML = ES.fidelityHTML ? ES.fidelityHTML(f) : ""; } catch (e) { $("#fidelity").innerHTML = `<div class="note">与 Python 完整引擎的对照结果尚未生成。</div>`; }
   }
 
+  /* ================= share link: the whole layout travels in ?s= ================= */
+  const b64 = (t) => btoa(unescape(encodeURIComponent(t))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  const unb64 = (t) => decodeURIComponent(escape(atob(t.replace(/-/g, "+").replace(/_/g, "/"))));
+  function shareState() {
+    const r = (v, n = 2) => +(+v).toFixed(n);
+    return { sc: A.name, v: A.variant, l: A.look, e: A.exp, g: A.par.route.goal, a: A.par.route.agent, tx: A.par.tx, r: A.par.radio, h: A.par.heat, c: A.par.cov,
+      en: A.ents.map((e) => [e.id, e.kind, r(e.x), r(e.y), r(e.z), e.yaw === undefined ? null : r(e.yaw, 3), e.pitch === undefined ? null : r(e.pitch, 3), e.hfov === undefined ? null : r(e.hfov, 0), e.sound || null, e.name]) };
+  }
+  async function applyShare(st) {
+    A.look = st.l || "day"; $$("#seg-time button").forEach((x) => x.setAttribute("aria-pressed", x.dataset.v === A.look));
+    await loadScene(st.sc, st.v); A.ents = []; A.nid = 1;
+    for (const [id, kind, x, y, z, yaw, pitch, hfov, sound, name] of st.en) { const e = { id, kind, x, y, z, name }; if (yaw !== null) e.yaw = yaw; if (pitch !== null) e.pitch = pitch; if (hfov !== null) e.hfov = hfov; if (sound) e.sound = sound; A.ents.push(e); A.nid = Math.max(A.nid, id + 1); }
+    A.sel = null; A.par.route.goal = st.g || null; A.par.route.agent = st.a ?? A.par.route.agent; A.par.tx = st.tx ?? null; A.par.radio = st.r || null; A.par.heat = st.h || A.par.heat; A.par.cov = st.c || A.par.cov;
+    A.exp = st.e || "view"; $$("#seg-exp button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.e === A.exp)); $("#expdesc").textContent = EXPS[A.exp][1]; expParams(); renderEnts(); syncTool(); recompute();
+  }
+  async function copyShare() {
+    const url = location.origin + location.pathname + "?s=" + b64(JSON.stringify(shareState())), out = $("#renderout");
+    try { await navigator.clipboard.writeText(url); out.innerHTML = `<div class="note ok">分享链接已复制(${url.length} 字符)。</div>`; }
+    catch (e) { out.innerHTML = `<div class="card"><b>分享链接</b><textarea readonly rows="3" id="share-txt" style="width:100%;font:12px/1.4 var(--mono);border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)"></textarea></div>`; $("#share-txt").value = url; $("#share-txt").select(); }
+  }
+
+  /* ================= map snapshot (figure-ready PNG with legend) ================= */
+  function saveMap() {
+    const src = $("#map"), W = src.width, H = src.height, c = document.createElement("canvas"); c.width = W; c.height = H; const g = c.getContext("2d"); g.drawImage(src, 0, 0);
+    const lg = $("#legend");
+    if (lg.style.display !== "none") {                                    // legend is HTML in the page; draw it into the picture
+      const k = A.map.dpr, bx = 14 * k, by = H - 74 * k, bw = 240 * k;
+      g.fillStyle = "rgba(255,255,255,.92)"; g.fillRect(bx - 6 * k, by - 22 * k, bw + 12 * k, 62 * k); g.strokeStyle = "rgba(0,0,0,.35)"; g.strokeRect(bx - 6 * k, by - 22 * k, bw + 12 * k, 62 * k);
+      g.fillStyle = "#000"; g.font = `${12 * k}px "Source Sans 3", sans-serif`; g.fillText($("#legtitle").textContent, bx, by - 6 * k);
+      const lb = $("#legbar"); g.drawImage(lb, bx, by, bw, 12 * k);
+      g.font = `${11 * k}px "JetBrains Mono", monospace`; const t = [...$("#legticks").children].map((x) => x.textContent); g.textAlign = "left"; g.fillText(t[0] || "", bx, by + 30 * k); g.textAlign = "center"; g.fillText(t[1] || "", bx + bw / 2, by + 30 * k); g.textAlign = "right"; g.fillText(t[2] || "", bx + bw, by + 30 * k);
+    }
+    const url = c.toDataURL("image/png"), out = $("#renderout");
+    out.innerHTML = `<figure><img src="${url}" alt="地图截图" style="width:100%;border:1px solid var(--line)"><figcaption>${W}×${H} 像素。右键(或长按)保存图片。</figcaption></figure>`;
+    try { const a = document.createElement("a"); a.href = url; a.download = `es-world-${A.name}-${A.exp}.png`; document.body.appendChild(a); a.click(); a.remove(); } catch (e) {}
+  }
+
   /* ================= local engine (serve_lab.py) ================= */
   const payload = () => A.ents.map((e) => ({ id: e.id, kind: e.kind, x: e.x, y: e.y, z: e.z, yaw: e.yaw, pitch: e.pitch, hfov: e.hfov, sound: e.sound, name: e.name }));
   async function api(path, body) {
@@ -362,7 +399,11 @@
   }
   function exportSpec() {
     const spec = { app: "es-world-lab", version: 1, scene: A.name, variant: A.variant, look: A.look, experiment: A.exp, params: A.par, entities: payload(), occluders: A.occ };
-    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(spec, null, 1)], { type: "application/json" })); a.download = `es-world-${A.name}-${A.exp}.json`; a.click();
+    const txt = JSON.stringify(spec, null, 1), out = $("#renderout");
+    out.innerHTML = `<div class="card"><b>实验配置(JSON)</b><textarea id="spec-txt" readonly rows="6" style="width:100%;font:12px/1.4 var(--mono);border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)"></textarea>
+      <div class="row"><button class="btn" id="spec-copy">复制</button><span class="muted" style="font-size:.8rem">保存为 .json 后:<code>python scripts/run_spec.py 文件.json</code></span></div></div>`;
+    $("#spec-txt").value = txt;
+    $("#spec-copy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(txt); $("#spec-copy").textContent = "已复制"; } catch (e) { $("#spec-txt").select(); $("#spec-copy").textContent = "已选中,请按 Ctrl/⌘+C"; } });
   }
   ES.bus.on("engine", () => { $("#btn-engine").hidden = false; $("#btn-render").disabled = false; $("#btn-render").title = "用本机 Blender 渲染选中智能体的视角"; });
 
@@ -398,11 +439,13 @@
     $("#presets").innerHTML = PRESETS.map((p, i) => `<button class="chip" data-p="${i}" title="${esc(p.d)}">${esc(p.n)}</button>`).join("");
     $$("#presets .chip").forEach((c) => c.addEventListener("click", () => runPreset(PRESETS[+c.dataset.p])));
     buildTools(); $("#btn-default").addEventListener("click", () => { defaultConfig(); }); $("#btn-clear").addEventListener("click", () => { A.ents = []; A.sel = null; A.par.relay = null; A.par.route.goal = null; renderEnts(); recompute(); });
-    $("#btn-engine").addEventListener("click", engineRecompute); $("#btn-render").addEventListener("click", engineRender); $("#btn-export").addEventListener("click", exportSpec);
+    $("#btn-engine").addEventListener("click", engineRecompute); $("#btn-render").addEventListener("click", engineRender); $("#btn-export").addEventListener("click", exportSpec); $("#btn-share").addEventListener("click", copyShare); $("#btn-png").addEventListener("click", saveMap);
     $("#z-in").addEventListener("click", () => A.map.zoom(1.3)); $("#z-out").addEventListener("click", () => A.map.zoom(1 / 1.3)); $("#z-fit").addEventListener("click", () => A.map.fit());
     $("#expdesc").textContent = EXPS.view[1]; expParams();
     const q = new URLSearchParams(location.search), first = q.get("scene") && A.index.scenes.find((s) => s.name === q.get("scene")) ? q.get("scene") : "suburb";
-    await loadScene(first, q.get("variant") || "day"); await defaultConfig(); syncTool(); loadFidelity();
+    let shared = null; try { if (q.get("s")) shared = JSON.parse(unb64(q.get("s"))); } catch (e) { shared = null; }
+    if (shared && A.index.scenes.find((s) => s.name === shared.sc)) { await applyShare(shared); syncTool(); loadFidelity(); }
+    else { await loadScene(first, q.get("variant") || "day"); await defaultConfig(); syncTool(); loadFidelity(); }
     ES.bus.emit("ready", A);
   }
   ES.appBoot = boot; ES.recompute = recompute;

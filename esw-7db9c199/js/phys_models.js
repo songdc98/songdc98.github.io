@@ -68,6 +68,7 @@
   const GROUND_DB = 2.3;           // hard-ground reflection gain on direct paths, fitted to acoustics.AcousticSimulator (rms 0.1 dB spread across 5 scenes)
   const maekawa = (delta, lam = 0.343) => { const N = (2 * delta) / lam; return N < -0.2 ? 0 : 10 * log10(3 + 20 * N); };
   const eSum = (...ls) => 10 * log10(ls.reduce((a, l) => a + Math.pow(10, l / 10), 0) + 1e-30);
+  P.FAST = false;                  // while a marker is being dragged the fields use a coarser grid; the full-resolution result follows on release
   P.AMBIENT = { day: 45, night: 36 };
   P.NOISE_FLOOR = (dev, ambient) => eSum(ambient, (ES.DEVICES[dev] || {}).ego || 0);
   /* sound level (dB(A)) of source s at receiver (x,y,z); F = geodesic field of the source (coarse 1 m mask), returns {Lp, direct, path} */
@@ -88,8 +89,9 @@
   };
   /* A-weighted level field of several sources on a coarse grid (step fine cells), receiver height zr */
   P.soundField = function (W, sources, zr = 1.6, step = 4) {
+    if (P.FAST) step *= 2;
     const N = Math.floor(W.N / step), out = new Float32Array(N * N).fill(-20);
-    const gm = P.coarseMask(W, 2, 2.5);
+    const gm = P.coarseMask(W, P.FAST ? 4 : 2, 2.5);
     const geo = sources.map((s) => P.geodesic(gm, s.x, s.y));
     for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) {
       const x = W.x0 + (i + 0.5) * step * W.res, y = W.y0 + (j + 0.5) * step * W.res;
@@ -142,8 +144,9 @@
   };
   /* coverage map of a transmitter (node + radio key) toward ground receivers at zr */
   P.coverage = function (W, node, rKey, zr = 1.2, step = 4) {
+    if (P.FAST) step *= 2;
     const R = ES.RADIOS[rKey], N = Math.floor(W.N / step), snr = new Float32Array(N * N).fill(NaN), rate = new Float32Array(N * N);
-    const gm = P.coarseMask(W, 2, 2.5), F = node.z < 8 ? P.geodesic(gm, node.x, node.y) : null;
+    const gm = P.coarseMask(W, P.FAST ? 4 : 2, 2.5), F = node.z < 8 ? P.geodesic(gm, node.x, node.y) : null;
     for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) {
       const x = W.x0 + (i + 0.5) * step * W.res, y = W.y0 + (j + 0.5) * step * W.res;
       if (x < -5 || y < -5 || x > W.S + 5 || y > W.S + 5) continue;
@@ -156,7 +159,7 @@
   };
   /* widest-path routing over node links: nodes = [{id, x,y,z, radios:[keys]}]; returns links list + best route src->dst (bottleneck rate, hops, latency for payload bytes) */
   P.network = function (W, nodes) {
-    const gm = P.coarseMask(W, 2, 2.5), Fs = nodes.map((n) => (n.z < 8 ? P.geodesic(gm, n.x, n.y) : null));
+    const gm = P.coarseMask(W, P.FAST ? 4 : 2, 2.5), Fs = nodes.map((n) => (n.z < 8 ? P.geodesic(gm, n.x, n.y) : null));
     const links = [];
     for (let a = 0; a < nodes.length; a++) for (let b = a + 1; b < nodes.length; b++) {
       let best = null;
