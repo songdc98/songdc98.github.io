@@ -44,7 +44,7 @@ const translations = {
       "Combine input-dependent recurrent memory with local attention to process long sequences at manageable inference cost.",
     "areas.ssm.title": "Spectral State Space Models",
     "areas.ssm.body":
-      "Use ordered spectral channels as a capacity axis: truncate a trained model's channel prefix to export smaller, standalone versions.",
+      "Retain fewer ordered spectral channels to export smaller, standalone versions of one trained model.",
     "skills.kicker": "Skills",
     "skills.title": "Core technical areas.",
     "skills.dl.title": "Deep Learning",
@@ -83,7 +83,7 @@ const translations = {
     "publications.es.badge": "<span class=\"neurips-year\">NeurIPS 2026</span><span class=\"neurips-track\">Main Track</span>",
     "publications.es.title": "Elastic Spectral State Space Models for Train-Once Budgeted Inference",
     "publications.es.summary":
-      "One ES-SSM training run yields standalone models at several compute budgets. Ordered Hankel channels can be truncated directly; adaptive gates and budget dropout train the retained prefixes to remain predictive.",
+      "One ES-SSM training run yields standalone models at several compute budgets. Ordered Hankel channels can be truncated directly; adaptive gates and budget dropout train the smaller models to remain predictive.",
     "publications.es.keywords": "Spectral state space models · Hankel channels · Budgeted inference",
     "publications.es.imageAlt": "Figure 1 of ES-SSM: spectral channels and compact model export",
     "publications.essh.type": "Preprint",
@@ -182,7 +182,7 @@ const translations = {
       "结合输入自适应的递归记忆与局部注意力，以可控的推理成本处理长序列。",
     "areas.ssm.title": "谱状态空间模型",
     "areas.ssm.body":
-      "以有序谱通道作为容量维度：截取已训练模型的通道前缀，导出可独立部署的小模型。",
+      "从已训练模型中保留较少的有序谱通道，导出可独立部署的小模型。",
     "skills.kicker": "技能",
     "skills.title": "核心技术方向。",
     "skills.dl.title": "深度学习",
@@ -221,7 +221,7 @@ const translations = {
     "publications.es.badge": "<span class=\"neurips-year\">NeurIPS 2026</span><span class=\"neurips-track\">Main Track</span>",
     "publications.es.title": "可一次训练并按预算导出的弹性谱状态空间模型",
     "publications.es.summary":
-      "ES-SSM 只训练一次，就能导出适配多档计算预算的独立模型。有序 Hankel 谱通道可直接截断；自适应门控与预算丢弃训练让保留的通道前缀仍能有效预测。",
+      "ES-SSM 只训练一次，就能导出适配多档计算预算的独立模型。有序 Hankel 谱通道可直接截断；自适应门控与预算丢弃训练让小模型仍能有效预测。",
     "publications.es.keywords": "谱状态空间模型 · Hankel 谱通道 · 预算约束推理",
     "publications.es.imageAlt": "ES-SSM 图 1：谱通道与紧凑模型导出",
     "publications.essh.type": "预印本",
