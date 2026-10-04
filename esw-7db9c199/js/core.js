@@ -2,6 +2,7 @@
 (function () {
   const ES = (window.ES = window.ES || {});
   ES.VERSION = "0.1";
+  ES.DATA_DIR = "sim";                                   // the hosted copy renames it ("data/" is blocked by a global gitignore rule)
   ES.clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
   ES.lerp = (a, b, t) => a + (b - a) * t;
   ES.deg = (r) => (r * 180) / Math.PI;

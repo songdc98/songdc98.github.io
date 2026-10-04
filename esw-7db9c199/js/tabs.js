@@ -30,7 +30,7 @@
   const win = () => (RP.ep ? RP.ep.window : [22, 34]); const inWin = (t) => t >= win()[0] && t <= win()[1];
   async function replayScene(s) {
     RP.scene = s; $$("#rp-scenes button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.s === s));
-    const [sc, ep] = await Promise.all([ES.loadJSON(`data/scene_${s}.json`), ES.loadJSON(`data/episode_${s}.json`)]); RP.sc = sc; RP.ep = ep; RP.W = new ES.World(sc, "day"); RP.map.setScene(sc, RP.W);
+    const [sc, ep] = await Promise.all([ES.loadJSON(`${ES.DATA_DIR}/scene_${s}.json`), ES.loadJSON(`${ES.DATA_DIR}/episode_${s}.json`)]); RP.sc = sc; RP.ep = ep; RP.W = new ES.World(sc, "day"); RP.map.setScene(sc, RP.W);
     const T = Math.max(...Object.values(ep.agents).map((a) => (a.n - 1) * ep.dt)); const sl = $("#rp-t"); sl.max = Math.min(T, 300); RP.t = ep.window[0]; sl.value = RP.t;
     const v = $("#rp-video"); RP.hasVideo = await exists(videoOf(s)); v.style.display = RP.hasVideo ? "block" : "none"; if (RP.hasVideo) { v.src = videoOf(s); v.playbackRate = RP.speed; }
     $("#rp-vcap").textContent = RP.hasVideo ? `六路相机(总览、狗跟拍、无人机跟拍、无人机云台、狗机载、头盔),${ep.window[0]}–${ep.window[1]} s,5 fps。` : "这个场景的渲染视频还在生成中;左侧地图回放来自同一份回合轨迹。";

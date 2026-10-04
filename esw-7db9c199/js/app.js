@@ -29,9 +29,9 @@
   async function loadScene(name, variant) {
     A.name = name; A.variant = variant || (A.variant === "quake" && ES.sceneHas(name, "quake") ? "quake" : "day");
     if (!A.scenes) A.scenes = {};
-    if (!A.scenes[name]) A.scenes[name] = await ES.loadJSON(`data/scene_${name}.json`);
+    if (!A.scenes[name]) A.scenes[name] = await ES.loadJSON(`${ES.DATA_DIR}/scene_${name}.json`);
     A.scene = A.scenes[name]; rebuildWorld();
-    if (!A.episodes[name]) A.episodes[name] = ES.loadJSON(`data/episode_${name}.json`).catch(() => null);
+    if (!A.episodes[name]) A.episodes[name] = ES.loadJSON(`${ES.DATA_DIR}/episode_${name}.json`).catch(() => null);
     $$("#scenes .scene").forEach((b) => b.setAttribute("aria-pressed", b.dataset.name === name));
     $("#scenedesc").textContent = A.scene.desc + `(${A.scene.size} m 见方,${A.scene.buildings.length} 栋建筑,${A.scene.trees.length} 棵树)`;
     $$("#seg-variant button").forEach((b) => { const ok = A.scene.variants[b.dataset.v]; b.disabled = !ok; b.style.opacity = ok ? 1 : 0.4; b.setAttribute("aria-pressed", b.dataset.v === A.variant); });
@@ -309,7 +309,7 @@
 
   /* ================= engine status / fidelity ================= */
   async function loadFidelity() {
-    try { const f = await ES.loadJSON("data/fidelity.json"); A.fid = f; $("#fidelity").innerHTML = ES.fidelityHTML ? ES.fidelityHTML(f) : ""; } catch (e) { $("#fidelity").innerHTML = `<div class="note">与 Python 完整引擎的对照结果尚未生成。</div>`; }
+    try { const f = await ES.loadJSON(ES.DATA_DIR + "/fidelity.json"); A.fid = f; $("#fidelity").innerHTML = ES.fidelityHTML ? ES.fidelityHTML(f) : ""; } catch (e) { $("#fidelity").innerHTML = `<div class="note">与 Python 完整引擎的对照结果尚未生成。</div>`; }
   }
 
   /* ================= local engine (serve_lab.py) ================= */
@@ -385,7 +385,7 @@
 
   /* ================= boot ================= */
   async function boot() {
-    A.index = await ES.loadJSON("data/index.json");
+    A.index = await ES.loadJSON(ES.DATA_DIR + "/index.json");
     A.map = new ES.MapView($("#map"), hooks);
     $("#scenes").innerHTML = A.index.scenes.map((s) => `<button class="scene" data-name="${s.name}" aria-pressed="false" title="${esc(s.title)}"><img src="img/${s.name}_day_day_cloud_aerial.jpg" alt="${esc(s.title)}" loading="lazy"><span>${esc(s.title)}</span></button>`).join("");
     $$("#scenes .scene").forEach((b) => b.addEventListener("click", async () => { await loadScene(b.dataset.name, "day"); ES.sceneChanged(); }));

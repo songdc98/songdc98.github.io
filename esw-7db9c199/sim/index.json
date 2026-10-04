@@ -1,0 +1,116 @@
+{
+ "scenes": [
+  {
+   "name": "suburb",
+   "title": "郊区住宅街",
+   "desc": "8 栋不同样式的独栋住宅(平房、殖民式、小屋、平顶现代、四坡带侧翼、都铎),围栏、车道、院子、泳池、社区绿地与步道。",
+   "size": 160.0,
+   "buildings": 8,
+   "trees": 139,
+   "lamps": 10,
+   "variants": [
+    "day",
+    "quake"
+   ],
+   "agents": [
+    "dog_0",
+    "rover_0",
+    "uav_0",
+    "human_0",
+    "human_1",
+    "human_2",
+    "human_3",
+    "human_4"
+   ]
+  },
+  {
+   "name": "courtyard",
+   "title": "公寓庭院",
+   "desc": "公寓与联排围合的庭院,游乐场、停车场、行道树。",
+   "size": 150.0,
+   "buildings": 4,
+   "trees": 131,
+   "lamps": 12,
+   "variants": [
+    "day"
+   ],
+   "agents": [
+    "dog_0",
+    "rover_0",
+    "uav_0",
+    "human_0",
+    "human_1",
+    "human_2",
+    "human_3",
+    "human_4"
+   ]
+  },
+  {
+   "name": "mainstreet",
+   "title": "商业街",
+   "desc": "两侧 14 间商铺,十字路口、斑马线、红绿灯、停放车辆。",
+   "size": 150.0,
+   "buildings": 14,
+   "trees": 112,
+   "lamps": 12,
+   "variants": [
+    "day",
+    "quake"
+   ],
+   "agents": [
+    "dog_0",
+    "rover_0",
+    "uav_0",
+    "human_0",
+    "human_1",
+    "human_2",
+    "human_3",
+    "human_4"
+   ]
+  },
+  {
+   "name": "campus",
+   "title": "校园",
+   "desc": "四栋教学楼围着中央草坪,池塘、步道。",
+   "size": 170.0,
+   "buildings": 4,
+   "trees": 234,
+   "lamps": 6,
+   "variants": [
+    "day"
+   ],
+   "agents": [
+    "dog_0",
+    "rover_0",
+    "uav_0",
+    "human_0",
+    "human_1",
+    "human_2",
+    "human_3",
+    "human_4"
+   ]
+  },
+  {
+   "name": "industrial",
+   "title": "工厂区",
+   "desc": "厂房、仓库、储罐、集装箱堆场、烟囱,铁丝网围场。",
+   "size": 170.0,
+   "buildings": 3,
+   "trees": 111,
+   "lamps": 4,
+   "variants": [
+    "day"
+   ],
+   "agents": [
+    "dog_0",
+    "rover_0",
+    "uav_0",
+    "human_0",
+    "human_1",
+    "human_2",
+    "human_3",
+    "human_4"
+   ]
+  }
+ ]
+}
