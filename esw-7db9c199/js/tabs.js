@@ -115,7 +115,7 @@
       <h3>在你的电脑上跑完整引擎</h3><pre class="code">cd sim_env
 tools/venv/bin/python scripts/serve_lab.py          # 浏览器打开 http://127.0.0.1:8765</pre>
       <p class="muted" style="font-size:.88rem">本机服务启动后,这个页面右上角会显示\"本机引擎已连接\",实验台多出两个按钮:\"用完整引擎重算\"(Python 声学/无线电/几何)与\"Blender 渲染此视角\"(路径追踪出一张真实图像)。</p>
-      <h3>已知限制</h3><ul class="muted" style="font-size:.9rem"><li>网页版是简化模型:声场不含地面干涉与风;无线电不含阴影与小尺度衰落;树冠按半透明圆盘处理。</li><li>室内不可进入;语义掩膜对树略偏胖;地形与远景树只铺到 ±1.7 km。</li><li>交通模块有 2 项验证超容差;Skydio X2 续航模型偏短(13 min 对 35 min)。</li></ul>`;
+      <h3>已知限制</h3><ul class="muted" style="font-size:.9rem"><li>网页版是简化模型:声场不含地面干涉与风;无线电不含阴影与小尺度衰落;树冠按半透明圆盘处理。</li><li>室内不可进入;语义掩膜对树略偏胖;地形与远景树只铺到 ±1.7 km。</li><li>震后静帧只渲染了建筑的损坏与废墟,火、烟和幸存者在地图与实验里有,还没接进渲染。</li><li>交通模块有 2 项验证超容差;Skydio X2 续航模型偏短(13 min 对 35 min)。</li></ul>`;
   }
   ES.fidelityHTML = (f) => `<table class="big" style="min-width:0;font-size:.8rem"><tr><th>项目</th><th>样本</th><th>差异</th></tr>${(f.cases || []).map((c) => `<tr><td>${esc(c.name)}</td><td class="mono">${c.n}</td><td class="mono">${esc(c.result)}</td></tr>`).join("")}</table><div class="note">${esc(f.note || "")}</div>`;
 

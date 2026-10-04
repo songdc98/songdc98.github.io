@@ -151,7 +151,7 @@
       <div class="row"><button class="btn" id="btn-relay">找最佳中继位置(无人机)</button></div>`; }
     else if (A.exp === "route") { const mv = agents().filter((e) => e.kind !== "cp"); if (!byId(A.par.route.agent)) A.par.route.agent = mv[0] ? mv[0].id : null;
       h = `<div class="row"><label>出发 <select id="p-ragent">${mv.map((e) => `<option value="${e.id}" ${e.id === A.par.route.agent ? "selected" : ""}>${esc(e.name)}</option>`).join("")}</select></label><button class="btn primary" id="btn-goal">设终点(点地图)</button></div><label class="row"><input type="checkbox" id="p-iso" ${A.par.route.iso ? "checked" : ""}> 显示可达时间场(等时圈)</label>`; }
-    else if (A.exp === "lidar") { const L = agents().filter((e) => e.kind !== "cp"); if (!byId(A.par.lidar)) A.par.lidar = L[0] ? L[0].id : null;
+    else if (A.exp === "lidar") { const L = agents().filter((e) => e.kind === "dog" || e.kind === "rover");   /* only these carry a LiDAR */ if (!byId(A.par.lidar)) A.par.lidar = L[0] ? L[0].id : null;
       h = `<label class="row">传感器所在智能体 <select id="p-lagent">${L.map((e) => `<option value="${e.id}" ${e.id === A.par.lidar ? "selected" : ""}>${esc(e.name)}</option>`).join("")}</select></label><label class="row">量程 <input type="range" id="p-lr" min="10" max="60" value="${A.par.lrange || 30}"><output id="p-lro">${A.par.lrange || 30} m</output></label>`; }
     el.innerHTML = h;
     const on = (id, ev, f) => { const x = $(id); if (x) x.addEventListener(ev, f); };
@@ -270,7 +270,7 @@
 
   /* ---- 5. lidar ---- */
   function expLidar() {
-    const e = byId(A.par.lidar); if (!e) { R(`<div class="note">放置一个智能体。</div>`); return; }
+    const e = byId(A.par.lidar); if (!e) { R(`<div class="note">放置一台带激光雷达的智能体:机械狗(4D 激光雷达)或配送机器人(16 线)。</div>`); return; }
     const range = A.par.lrange || 30, o = { x: e.x, y: e.y, z: e.kind === "uav" ? e.z : e.kind === "dog" ? 0.57 : e.kind === "rover" ? 0.7 : 1.6 };
     const pts = T(() => P.lidar(A.W, o, { range, azStep: 0.8 })); const col = { 0: "rgba(120,120,120,.5)", 1: "#d55e00", 2: "#0072b2" };
     A.map.overlays.push({ type: "points", pts: pts.filter((p) => p[4] !== 0 || p[3] < range * 0.6).map((p) => [p[0], p[1], col[p[4]], p[4] === 0 ? 0.9 : 1.7]) });
