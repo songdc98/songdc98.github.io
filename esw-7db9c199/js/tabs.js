@@ -103,6 +103,15 @@
     const D = ES.DEVICES, rows = Object.entries(D).map(([k, d]) => `<tr><td><b>${d.label}</b></td><td>${d.sensors}</td><td class="mono">${d.tops} TOPS · ${d.tier}(${d.modes} 模式)</td><td>${d.radios.map((r) => ES.RADIOS[r].label).join("<br>")}</td></tr>`).join("");
     $("#ref-root").innerHTML = `<h3>参考</h3>
       <div class="note">这个页面里所有交互计算都在你的浏览器里完成,使用的是 Python 完整物理引擎的"紧凑版"。精度对照见实验台右下角"这些数字有多可信?"。</div>
+      <h3>第一视角漫游怎么操作</h3><div class="tw"><table class="big"><tr><th>操作</th><th>作用</th></tr>
+        <tr><td>地图上点"🚶 第一视角漫游"再点一处(或双击地图)</td><td>站到那里,朝向你点的方向</td></tr>
+        <tr><td>拖动鼠标 / 手指</td><td>环顾(像街景一样"抓住世界")</td></tr>
+        <tr><td>W A S D(或 ↑ ↓ 配合 A D)· Shift</td><td>前进 / 后退 / 左右平移 · 跑</td></tr>
+        <tr><td>Q E(或 ← →)</td><td>原地转身</td></tr>
+        <tr><td>点地面</td><td>走过去(中间被墙或围栏挡住会提示,要从门洞绕)</td></tr>
+        <tr><td>滚轮</td><td>缩放视角</td></tr>
+        <tr><td>空格 / C(无人机身份)</td><td>升高 / 降低</td></tr>
+        <tr><td>小地图点一下</td><td>传送;Esc 返回俯视图</td></tr></table></div>
       <h3>设备与 嵌套模型 档位</h3><div class="tw"><table class="big"><tr><th>设备</th><th>传感器</th><th>算力 / 档位</th><th>无线电</th></tr>${rows}</table></div>
       <p class="muted" style="font-size:.85rem">算力为公开资料级的近似值;嵌套模型 档位指嵌套模型只保留前 2、8 或 32 个模式。</p>
       <h3>物理模块与验证</h3><div class="tw"><table class="big"><tr><th>模块</th><th>做了什么</th><th>验证</th></tr>

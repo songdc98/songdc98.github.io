@@ -27,6 +27,7 @@
 
   /* ================= scene loading ================= */
   async function loadScene(name, variant) {
+    if (ES.view3d && ES.view3d.walk.active) ES.walkui.exit();
     A.name = name; A.variant = variant || (A.variant === "quake" && ES.sceneHas(name, "quake") ? "quake" : "day");
     if (!A.scenes) A.scenes = {};
     if (!A.scenes[name]) A.scenes[name] = await ES.loadJSON(`${ES.DATA_DIR}/scene_${name}.json`);
@@ -56,9 +57,10 @@
   function syncTool() {
     $$("#tools .tool").forEach((b) => b.setAttribute("aria-pressed", b.dataset.tool === A.tool));
     $("#map").style.cursor = A.tool && A.tool !== "select" ? "crosshair" : "default";
-    $("#hint").textContent = A.tool && A.tool !== "select" ? "点击地图放置:" + (TOOLS.find((t) => t[0] === A.tool) || [0, ""])[1] + "(再点一次工具取消)" : A.exp === "route" && !A.par.route.goal ? "路径实验:先选一个智能体,再点\"设终点\"后点地图。" : "拖动实体移动;拖动白色圆点改朝向。";
+    $("#hint").textContent = A.tool === "walk" ? "点击地图上要站的位置(第一视角)" : A.tool && A.tool !== "select" ? "点击地图放置:" + (TOOLS.find((t) => t[0] === A.tool) || [0, ""])[1] + "(再点一次工具取消)" : A.exp === "route" && !A.par.route.goal ? "路径实验:先选一个智能体,再点\"设终点\"后点地图。" : "拖动实体移动;拖动白色圆点改朝向。";
   }
   function place(x, y) {
+    if (A.tool === "walk") { A.tool = null; syncTool(); ES.walkui.enter(x, y); return; }
     if (A.tool === "goal") { A.par.route.goal = [x, y]; A.tool = null; syncTool(); recompute(); return; }
     if (!A.tool || A.tool === "select") return;
     const e = mk(A.tool, x, y); if (e.kind === "sound") e.sound = $("#soundtype") ? $("#soundtype").value : "speech_shout";
@@ -106,7 +108,9 @@
     el.innerHTML = `<div class="row" style="justify-content:space-between"><h3>${esc(e.name)}</h3><span class="pill muted">${d ? "嵌套模型 " + d.tier + "·" + d.modes + " 模式" : ""}</span></div>
       ${d ? `<div class="note">${d.label}<br>${d.sensors}</div>` : ""}
       ${(d && e.kind !== "uav" && A.W.solidAt(e.x, e.y, 1.0)) || (e.kind.startsWith("t:") && A.W.solidAt(e.x, e.y, e.z)) ? `<div class="note warn">这个位置在建筑或实体内部,结果可能不合理。</div>` : ""}
+      ${d && d.cam && e.kind !== "cp" ? `<button class="btn" id="btn-enter-walk">🚶 走进去(用它的视角)</button>` : ""}
       <div class="prop">${rows.join("")}<label>位置</label><span class="mono" style="grid-column:2/4;font-size:.8rem">x ${fmt(e.x)} m · y ${fmt(e.y)} m</span></div>`;
+    const bw = $("#btn-enter-walk"); if (bw) bw.addEventListener("click", () => ES.walkui.enter(e.x, e.y, { entity: e }));
     $$("[data-k]", el).forEach((inp) => inp.addEventListener("input", () => {
       const k = inp.dataset.k, v = inp.type === "range" ? +inp.value : inp.value;
       if (k === "heading") e.yaw = ES.rad(v); else if (k === "pitch") e.pitch = ES.rad(v); else if (k === "sound") { e.sound = v; e.name = ES.SOUNDS[v].label; } else e[k] = v;
@@ -117,6 +121,7 @@
     entities: () => A.ents, selected: () => A.sel, tool: () => A.tool,
     select: (id) => { A.sel = id; renderEnts(); A.map.draw(); updatePreview(); }, place, remove,
     changed: (e, what) => { P.FAST = what !== "done"; if (what === "done") { renderEnts(); updatePreview(); recompute(); } else recomputeSoon(); A.map.draw(); },
+    dblclick: (x, y) => { if (!A.tool || A.tool === "select") ES.walkui.enter(x, y); },
     cursor: (p) => { $("#cursor").textContent = p ? `x ${fmt(p[0])}  y ${fmt(p[1])} m` + (A.W && A.W.inside(p[0], p[1]) ? `  h ${fmt(A.W.hB[A.W.ij(p[0], p[1])], 1)} m` : "") : "—"; },
   };
 
@@ -138,6 +143,7 @@
     if (!A.W) return;
     A.map.overlays = []; setLegend(null);
     try { ({ view: expView, sound: expSound, rf: expRF, route: expRoute, lidar: expLidar, fusion: expFusion })[A.exp](); } catch (err) { console.error(err); R(`<div class="note bad">计算出错:${esc(err.message)}</div>`); }
+    if (A.walker) A.map.overlays.push({ type: "marker", x: A.walker.x, y: A.walker.y, color: "#e11d48", r: 11, text: "你" });
     A.map.draw(); drawPreviewSoon();
   }
   function expParams() {
@@ -413,6 +419,7 @@
     { n: "夜里谁听得见喊叫", d: "夜晚更安静:同一声源在白天和夜晚被谁听见?试着把声源挪到楼后面。", scene: "suburb", variant: "day", look: "night", exp: "sound", sound: [60, 62] },
     { n: "中继无人机放哪", d: "商业街里楼挡住了地面设备的通信:让无人机找最佳中继位置。", scene: "mainstreet", variant: "day", look: "day", exp: "rf" },
     { n: "同一条路,四种载体", d: "庭院里从 A 到 B:人、狗、机器人、无人机各自怎么走、要多久。", scene: "courtyard", variant: "day", look: "day", exp: "route", goal: [0.82, 0.3] },
+    { n: "走进街区看看", d: "第一视角:拖动环顾,WASD 行走,点地面走过去。左下角会告诉你这个位置谁看得见你、能不能连上指挥站。", scene: "suburb", variant: "day", look: "day", exp: "view", walk: [30, 77, 0] },
     { n: "无人机飞多高", d: "校园里看地面目标:高度、俯仰角、视角怎样改变覆盖面积(拖动无人机、改高度滑块)。", scene: "campus", variant: "day", look: "day", exp: "view" },
   ];
   async function runPreset(pr) {
@@ -422,6 +429,7 @@
     if (pr.goal) A.par.route.goal = [pr.goal[0] * A.scene.size, pr.goal[1] * A.scene.size];
     $$("#seg-exp button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.e === pr.exp)); A.exp = pr.exp; $("#expdesc").textContent = EXPS[A.exp][1]; expParams(); renderEnts(); syncTool(); recompute();
     $("#hint").textContent = pr.d;
+    if (pr.walk) ES.walkui.enter(pr.walk[0], pr.walk[1], { yaw: pr.walk[2], body: "human" });
   }
 
   /* ================= boot ================= */
@@ -434,7 +442,7 @@
     $("#occ").innerHTML = [["fences", "围栏"], ["trees", "树木"], ["vehicles", "停放车辆"]].map(([k, n]) => `<button class="chip" data-occ="${k}" aria-pressed="true">${n}</button>`).join("");
     $$("#occ .chip").forEach((c) => c.addEventListener("click", () => { A.occ[c.dataset.occ] = !A.occ[c.dataset.occ]; c.setAttribute("aria-pressed", A.occ[c.dataset.occ]); rebuildWorld(); }));
     $$("#seg-variant button").forEach((b) => b.addEventListener("click", async () => { if (b.disabled) return; await loadScene(A.name, b.dataset.v); ES.sceneChanged(); }));
-    $$("#seg-time button").forEach((b) => b.addEventListener("click", () => { A.look = b.dataset.v; $$("#seg-time button").forEach((x) => x.setAttribute("aria-pressed", x === b)); recompute(); updatePreview(); }));
+    $$("#seg-time button").forEach((b) => b.addEventListener("click", () => { A.look = b.dataset.v; $$("#seg-time button").forEach((x) => x.setAttribute("aria-pressed", x === b)); recompute(); updatePreview(); if (ES.view3d.walk.active) ES.view3d.refresh(A); }));
     $$("#seg-exp button").forEach((b) => b.addEventListener("click", () => { A.exp = b.dataset.e; $$("#seg-exp button").forEach((x) => x.setAttribute("aria-pressed", x === b)); $("#expdesc").textContent = EXPS[A.exp][1]; expParams(); syncTool(); recompute(); }));
     $("#presets").innerHTML = PRESETS.map((p, i) => `<button class="chip" data-p="${i}" title="${esc(p.d)}">${esc(p.n)}</button>`).join("");
     $$("#presets .chip").forEach((c) => c.addEventListener("click", () => runPreset(PRESETS[+c.dataset.p])));
@@ -449,4 +457,5 @@
     ES.bus.emit("ready", A);
   }
   ES.appBoot = boot; ES.recompute = recompute;
+  ES.lab = { A, viewData, seen, mk, renderEnts, byId, node, agents, ambient, syncTool, get recompute() { return recompute; } };
 })();

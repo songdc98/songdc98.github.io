@@ -17,7 +17,7 @@
       const n = this.N * this.N;
       this.hB = new Float32Array(n); this.hT = new Float32Array(n);
       this.cLo = new Float32Array(n); this.cHi = new Float32Array(n); this.cDen = new Float32Array(n);
-      this.rub = new Float32Array(n); this.navBlk = new Uint8Array(n); this.bid = new Int16Array(n); this.park = new Float32Array(n);   // park: vegetation zone density (RF foliage, as in the Python engine)
+      this.rub = new Float32Array(n); this.navBlk = new Uint8Array(n); this.bid = new Int16Array(n); this.gz = new Float32Array(n); this.park = new Float32Array(n);   // gz: height of the walkable surface (road 0.012, lawn 0.14, park 0.15, sidewalk 0.16, path 0.164); park: vegetation zone density (RF foliage, as in the Python engine)
       this.variantData = scene.variants[variant] || scene.variants.day;
       this.vehicles = this.variantData.vehicles; this.damage = this.variantData.damage || {};
       this._build();
@@ -93,6 +93,13 @@
         else if (o.type === "post") this.fillCircle(o.xy[0], o.xy[1], 0.2, (id) => mx(hT, id, o.h));
         else if (o.type === "pool") this.fillPoly(o.ring, (id) => { this.navBlk[id] = 1; });
       }
+      const setz = (ring, z) => this.fillPoly(ring, (id) => { this.gz[id] = z; });
+      for (const b of sc.blocks) setz(b.ring, 0.14);
+      for (const pk of sc.parks) setz(pk, 0.15);
+      for (const p of sc.plazas) setz(p, 0.15);
+      for (const p of sc.road_poly) setz(p.ring, 0.012);
+      for (const p of sc.sidewalk_poly) setz(p.ring, 0.16);
+      for (const p of sc.path_poly) setz(p.ring, 0.164);
       if (this.opts.parks) for (const pk of sc.parks) this.fillPoly(pk, (id) => { this.park[id] = 0.5; });
       for (const l of sc.lamps) this.fillCircle(l[0], l[1], 0.2, (id) => mx(hT, id, 7.0));
       if (this.opts.vehicles) for (const v of this.vehicles) this.fillPoly(this.boxRing(v.xy[0], v.xy[1], v.dims[0], v.dims[1], ES.rad(v.yaw)), (id) => mx(hB, id, v.dims[2]));
@@ -106,6 +113,7 @@
       }
     }
     /* clamp a requested position into the grid; true when over a building / solid object cell at the given height */
+    groundZ(x, y) { const id = this.ij(x, y); return id >= 0 ? this.gz[id] : 0; }
     solidAt(x, y, z = 0.5) { const id = this.ij(x, y); return id >= 0 && this.hB[id] > z; }
     buildingAt(x, y) { const id = this.ij(x, y); return id >= 0 && this.bid[id] ? this.scene.buildings[this.bid[id] - 1] : null; }
   }

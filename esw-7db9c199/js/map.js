@@ -12,6 +12,7 @@
       new ResizeObserver(() => { this.resize(); }).observe(canvas.parentElement);
       canvas.addEventListener("pointerdown", (e) => this.down(e)); canvas.addEventListener("pointermove", (e) => this.move(e));
       canvas.addEventListener("pointerup", (e) => this.up(e)); canvas.addEventListener("pointerleave", () => { this.h.cursor && this.h.cursor(null); });
+      canvas.addEventListener("dblclick", (e) => { const [px, py] = this.local(e), [wx, wy] = this.s2w(px, py); this.h.dblclick && this.h.dblclick(wx, wy); });
       canvas.addEventListener("wheel", (e) => { e.preventDefault(); const r = canvas.getBoundingClientRect(); this.zoomAt(e.clientX - r.left, e.clientY - r.top, Math.exp(-e.deltaY * 0.0015)); }, { passive: false });
       window.addEventListener("keydown", (e) => { if ((e.key === "Delete" || e.key === "Backspace") && !/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName) && this.h.remove) { e.preventDefault(); this.h.remove(); } });
     }

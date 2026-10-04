@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b6e72'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='white' stroke-width='2.4'/%3E%3Ccircle cx='16' cy='16' r='2.4' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/app.css?v=0f5f3236">
+<link rel="stylesheet" href="css/app.css?v=2221038c">
 </head>
 <body>
 
@@ -28,7 +28,7 @@
   <main id="tab-lab" class="tab active" role="tabpanel">
     <aside class="side left" aria-label="场景与放置">
       <details class="note" id="intro" open><summary><b>这是什么?</b></summary>
-        <p style="margin-top:6px">ES-World 是一个异构多智能体仿真环境:无人机、机械狗、人和机器人在 5 个常见的小场景里运动,各自看到、听到、收到的信息都服从物理(遮挡、声音传播、无线电链路)。在地图上放置它们、挑一个地点,右侧立刻给出结果。先点下面的"快速示例"。</p></details>
+        <p style="margin-top:6px">ES-World 是一个异构多智能体仿真环境:无人机、机械狗、人和机器人在 5 个常见的小场景里运动,各自看到、听到、收到的信息都服从物理(遮挡、声音传播、无线电链路)。在地图上放置它们、挑一个地点,右侧立刻给出结果;也可以点"第一视角漫游"直接站进场景里走动。先点下面的"快速示例"。</p></details>
       <div class="sec"><h4>场景</h4><div class="scenes" id="scenes"></div>
         <p class="muted" id="scenedesc" style="font-size:.82rem"></p></div>
       <div class="sec"><h4>快速示例</h4><div class="chips" id="presets"></div></div>
@@ -46,6 +46,19 @@
 
     <section class="stage" aria-label="地图">
       <div class="mapwrap"><canvas id="map" aria-label="场景俯视图,可点击放置智能体"></canvas><div class="cursor mono" id="cursor">—</div>
+        <button class="btn primary mapwalk" id="btn-walk" title="点击后再点地图上的任意位置,站到那里去看(也可以双击地图)">🚶 第一视角漫游</button>
+        <div id="walkstage" hidden></div>
+        <div id="fphud" hidden>
+          <div class="fp-top"><button class="btn" id="fp-exit">← 返回俯视图(Esc)</button>
+            <label>身份 <select id="fp-body"><option value="human">人 · 1.6 m</option><option value="dog">机械狗 · 0.45 m</option><option value="uav">无人机 · 飞行</option></select></label>
+            <label class="row"><input type="checkbox" id="fp-live" checked> 回合里的人和车在走动</label>
+            <button class="btn" id="fp-drop" title="把你现在的位置和朝向放成一个实体">放下为实体</button>
+            <button class="btn" id="fp-render" disabled title="需要在本机运行 scripts/serve_lab.py">📷 Blender 渲染此处</button></div>
+          <div class="fp-hint" id="fp-hint">拖动鼠标环顾 · W/A/S/D 行走(Shift 跑) · Q/E 转身 · 点地面走过去 · 滚轮缩放 · 小地图点一下可传送</div>
+          <div class="fp-info" id="fp-info"></div>
+          <canvas id="fp-mini" width="360" height="360" aria-label="小地图,点击传送"></canvas>
+          <div class="fp-dpad" id="fp-dpad"><button data-k="q">⟲</button><button data-k="w">▲</button><button data-k="e">⟳</button><button data-k="a">◀</button><button data-k="s">▼</button><button data-k="d">▶</button></div>
+          <div class="fp-toast" id="fp-toast" hidden></div></div>
         <div class="legend" id="legend"><div id="legtitle"></div><canvas id="legbar" width="180" height="10"></canvas><div class="ticks" id="legticks"></div></div>
         <div class="maptools"><button id="z-in" title="放大" aria-label="放大">+</button><button id="z-out" title="缩小" aria-label="缩小">−</button><button id="z-fit" title="适应窗口" aria-label="适应窗口">⤢</button></div></div>
       <div class="hintbar" id="hint">选择一个实验,在地图上放置智能体或目标,结果实时更新。</div>
@@ -70,15 +83,16 @@
   <section id="tab-gallery" class="tab" role="tabpanel"><div id="gallery-root"></div></section>
   <section id="tab-ref" class="tab" role="tabpanel"><div id="ref-root"></div></section>
 </div>
-<script src="js/core.js?v=0f5f3236"></script>
-<script src="js/devices.js?v=0f5f3236"></script>
-<script src="js/world.js?v=0f5f3236"></script>
-<script src="js/phys_core.js?v=0f5f3236"></script>
-<script src="js/phys_models.js?v=0f5f3236"></script>
-<script src="js/map.js?v=0f5f3236"></script>
-<script src="js/app.js?v=0f5f3236"></script>
-<script src="js/tabs.js?v=0f5f3236"></script>
-<script src="js/view3d.js?v=0f5f3236"></script>
-<script src="js/main.js?v=0f5f3236"></script>
+<script src="js/core.js?v=2221038c"></script>
+<script src="js/devices.js?v=2221038c"></script>
+<script src="js/world.js?v=2221038c"></script>
+<script src="js/phys_core.js?v=2221038c"></script>
+<script src="js/phys_models.js?v=2221038c"></script>
+<script src="js/map.js?v=2221038c"></script>
+<script src="js/app.js?v=2221038c"></script>
+<script src="js/tabs.js?v=2221038c"></script>
+<script src="js/view3d.js?v=2221038c"></script>
+<script src="js/walkui.js?v=2221038c"></script>
+<script src="js/main.js?v=2221038c"></script>
 </body>
 </html>
