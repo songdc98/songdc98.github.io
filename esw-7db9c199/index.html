@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ES-World 实验台</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<div id="app">
+  <header class="bar">
+    <div class="brand"><b>ES-World</b><span>异构多智能体仿真 · 交互实验台</span></div>
+    <nav class="tabs" role="tablist" aria-label="页面">
+      <button role="tab" data-tab="lab" aria-selected="true">实验台</button>
+      <button role="tab" data-tab="replay" aria-selected="false">回合回放</button>
+      <button role="tab" data-tab="gallery" aria-selected="false">画廊与画质</button>
+      <button role="tab" data-tab="ref" aria-selected="false">参考</button>
+    </nav>
+    <div class="status" id="engine"><span class="dot" id="engdot"></span><span id="engtxt">浏览器内置物理模型</span></div>
+    <button class="iconbtn" id="theme" title="切换明暗主题" aria-label="切换明暗主题">◐</button>
+  </header>
+
+  <main id="tab-lab" class="tab active" role="tabpanel">
+    <aside class="side left" aria-label="场景与放置">
+      <details class="note" id="intro" open><summary><b>这是什么?</b></summary>
+        <p style="margin-top:6px">ES-World 是一个异构多智能体仿真环境:无人机、机械狗、人和机器人在 5 个常见的小场景里运动,各自看到、听到、收到的信息都服从物理(遮挡、声音传播、无线电链路)。在地图上放置它们、挑一个地点,右侧立刻给出结果。先点下面的"快速示例"。</p></details>
+      <div class="sec"><h4>场景</h4><div class="scenes" id="scenes"></div>
+        <p class="muted" id="scenedesc" style="font-size:.82rem"></p></div>
+      <div class="sec"><h4>快速示例</h4><div class="chips" id="presets"></div></div>
+      <div class="sec"><h4>状态与环境</h4>
+        <div class="seg" id="seg-variant"><button data-v="day" aria-pressed="true">日常</button><button data-v="quake" aria-pressed="false">震后</button></div>
+        <div class="seg" id="seg-time"><button data-v="day" aria-pressed="true">白天</button><button data-v="night" aria-pressed="false">夜晚</button></div>
+        <div class="chips" id="occ"></div>
+        <div class="note" id="occnote">遮挡物决定谁能看见、听见、连上谁。关掉围栏或树，可以看到它们各自的影响。</div></div>
+      <div class="sec"><h4>放置(点工具,再点地图)</h4>
+        <div class="tools" id="tools"></div>
+        <div class="row"><button class="btn" id="btn-default">载入示例配置</button><button class="btn" id="btn-clear">清空</button></div>
+        <div class="note" id="toolhint">不选工具时:拖动实体移动,拖动圆点改朝向,滚轮缩放,拖空白处平移,Delete 删除。</div></div>
+      <div class="sec"><h4>已放置</h4><div class="ents" id="ents"></div><div class="card" id="props" hidden></div></div>
+    </aside>
+
+    <section class="stage" aria-label="地图">
+      <div class="mapwrap"><canvas id="map" aria-label="场景俯视图,可点击放置智能体"></canvas><div class="cursor mono" id="cursor">—</div>
+        <div class="legend" id="legend"><div id="legtitle"></div><canvas id="legbar" width="180" height="10"></canvas><div class="ticks" id="legticks"></div></div>
+        <div class="maptools"><button id="z-in" title="放大" aria-label="放大">+</button><button id="z-out" title="缩小" aria-label="缩小">−</button><button id="z-fit" title="适应窗口" aria-label="适应窗口">⤢</button></div></div>
+      <div class="hintbar" id="hint">选择一个实验,在地图上放置智能体或目标,结果实时更新。</div>
+    </section>
+
+    <aside class="side right" aria-label="实验与结果">
+      <div class="sec"><h4>实验</h4>
+        <div class="seg" id="seg-exp" style="flex-wrap:wrap">
+          <button data-e="view" aria-pressed="true">视野</button><button data-e="sound" aria-pressed="false">声场</button><button data-e="rf" aria-pressed="false">通信</button>
+          <button data-e="route" aria-pressed="false">路径</button><button data-e="lidar" aria-pressed="false">雷达</button><button data-e="fusion" aria-pressed="false">综合</button></div>
+        <div id="expdesc" class="note"></div><div id="expparams" class="sec"></div>
+        <div class="row"><button class="btn" id="btn-engine" hidden>用完整引擎重算并对照</button></div></div>
+      <div class="sec res"><h4>结果</h4><div id="results" class="sec"></div><div id="engineout" class="sec"></div></div>
+      <div class="sec"><h4>视角预览</h4><div class="preview" id="preview"><canvas id="v3d"></canvas><div class="cap" id="v3dcap">选中一个带相机的智能体</div></div>
+        <div class="row"><button class="btn" id="btn-render" disabled title="需要在本机运行 scripts/serve_lab.py">Blender 渲染此视角</button><select id="render-q" title="渲染质量"><option value="preview">预览 960×540(约 15 s)</option><option value="hd">高清 1920×1080(约 1.5 min)</option></select><button class="btn" id="btn-export">导出实验配置</button></div>
+        <div id="renderout"></div></div>
+      <details class="note"><summary>这些数字有多可信?</summary><div id="fidelity" class="sec" style="margin-top:6px"></div></details>
+    </aside>
+  </main>
+
+  <section id="tab-replay" class="tab" role="tabpanel"><div id="replay-root"></div></section>
+  <section id="tab-gallery" class="tab" role="tabpanel"><div id="gallery-root"></div></section>
+  <section id="tab-ref" class="tab" role="tabpanel"><div id="ref-root"></div></section>
+</div>
+<script src="js/core.js"></script>
+<script src="js/devices.js"></script>
+<script src="js/world.js"></script>
+<script src="js/phys_core.js"></script>
+<script src="js/phys_models.js"></script>
+<script src="js/map.js"></script>
+<script src="js/app.js"></script>
+<script src="js/tabs.js"></script>
+<script src="js/view3d.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
