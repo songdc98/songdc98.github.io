@@ -1,0 +1,187 @@
+{
+ "clips": {
+  "walk": [
+   0.4,
+   0.7,
+   1.0,
+   1.4,
+   1.8
+  ],
+  "run": [
+   2.3,
+   3.0,
+   4.0
+  ],
+  "fps": 60
+ },
+ "people": {
+  "resp_m": {
+   "src": "Construction_Male_02",
+   "height": 1.7,
+   "role": "responder",
+   "scale": 0.9227,
+   "bytes": 790316,
+   "leg": {
+    "l1": 0.368,
+    "l2": 0.366,
+    "a0": 0.095,
+    "Lh": 0.07,
+    "Lb": 0.123,
+    "Lt": 0.198
+   },
+   "parts": {
+    "total": 716380,
+    "animations": 222560,
+    "images": 202755,
+    "geometry+skin": 333892
+   }
+  },
+  "resp_f": {
+   "src": "Construction_Female_01",
+   "height": 1.66,
+   "role": "responder",
+   "scale": 0.9366,
+   "bytes": 903072,
+   "leg": {
+    "l1": 0.399,
+    "l2": 0.375,
+    "a0": 0.094,
+    "Lh": 0.059,
+    "Lb": 0.123,
+    "Lt": 0.193
+   },
+   "parts": {
+    "total": 829580,
+    "animations": 222560,
+    "images": 238699,
+    "geometry+skin": 411148
+   }
+  },
+  "civ_m1": {
+   "src": "Male_Adult_03",
+   "height": 1.78,
+   "role": "civilian",
+   "scale": 0.9849,
+   "bytes": 862332,
+   "leg": {
+    "l1": 0.393,
+    "l2": 0.391,
+    "a0": 0.101,
+    "Lh": 0.081,
+    "Lb": 0.132,
+    "Lt": 0.214
+   },
+   "parts": {
+    "total": 792930,
+    "animations": 222560,
+    "images": 331767,
+    "geometry+skin": 281436
+   }
+  },
+  "civ_f1": {
+   "src": "Female_Adult_02",
+   "height": 1.64,
+   "role": "civilian",
+   "scale": 0.9452,
+   "bytes": 899136,
+   "leg": {
+    "l1": 0.403,
+    "l2": 0.378,
+    "a0": 0.099,
+    "Lh": 0.039,
+    "Lb": 0.124,
+    "Lt": 0.18
+   },
+   "parts": {
+    "total": 829631,
+    "animations": 222560,
+    "images": 296512,
+    "geometry+skin": 353392
+   }
+  },
+  "civ_m2": {
+   "src": "Male_Adult_06",
+   "height": 1.82,
+   "role": "civilian",
+   "scale": 0.9938,
+   "bytes": 910452,
+   "leg": {
+    "l1": 0.397,
+    "l2": 0.394,
+    "a0": 0.102,
+    "Lh": 0.088,
+    "Lb": 0.133,
+    "Lt": 0.221
+   },
+   "parts": {
+    "total": 839859,
+    "animations": 222560,
+    "images": 306718,
+    "geometry+skin": 353408
+   }
+  },
+  "civ_f2": {
+   "src": "Female_Adult_05",
+   "height": 1.58,
+   "role": "civilian",
+   "scale": 0.91,
+   "bytes": 1001636,
+   "leg": {
+    "l1": 0.388,
+    "l2": 0.364,
+    "a0": 0.091,
+    "Lh": 0.038,
+    "Lb": 0.119,
+    "Lt": 0.172
+   },
+   "parts": {
+    "total": 931360,
+    "animations": 222560,
+    "images": 340748,
+    "geometry+skin": 410880
+   }
+  },
+  "civ_m3": {
+   "src": "Business_Male_01",
+   "height": 1.9,
+   "role": "civilian",
+   "scale": 1.0518,
+   "bytes": 767096,
+   "leg": {
+    "l1": 0.42,
+    "l2": 0.417,
+    "a0": 0.108,
+    "Lh": 0.077,
+    "Lb": 0.141,
+    "Lt": 0.232
+   },
+   "parts": {
+    "total": 697138,
+    "animations": 222560,
+    "images": 222756,
+    "geometry+skin": 294650
+   }
+  },
+  "civ_f3": {
+   "src": "Female_Adult_07",
+   "height": 1.55,
+   "role": "civilian",
+   "scale": 0.8998,
+   "bytes": 937552,
+   "leg": {
+    "l1": 0.383,
+    "l2": 0.36,
+    "a0": 0.09,
+    "Lh": 0.054,
+    "Lb": 0.118,
+    "Lt": 0.169
+   },
+   "parts": {
+    "total": 867316,
+    "animations": 222560,
+    "images": 284456,
+    "geometry+skin": 403128
+   }
+  }
+ }
+}

@@ -1,0 +1,149 @@
+{
+ "lamps": {
+  "tail": [
+   -0.125,
+   0,
+   0.068
+  ],
+  "strobe": [
+   -0.09,
+   0,
+   0.1035
+  ],
+  "status": [
+   0.03,
+   0,
+   0.1004
+  ],
+  "nav_port": {
+   "arm": "FL",
+   "pos": [
+    0.057,
+    0.1372,
+    -0.002
+   ]
+  },
+  "nav_starboard": {
+   "arm": "FR",
+   "pos": [
+    0.057,
+    -0.1372,
+    -0.002
+   ]
+  }
+ },
+ "mounts": {
+  "nav_L": [
+   0.1265,
+   0.0205,
+   0.0745
+  ],
+  "nav_R": [
+   0.1265,
+   -0.0205,
+   0.0745
+  ],
+  "nav_front": [
+   0.1265,
+   0.0,
+   0.0745
+  ],
+  "gimbal_cam": [
+   0.1135,
+   0.0075,
+   0.024
+  ]
+ },
+ "arms": {
+  "FL": {
+   "node": "arm_FL",
+   "rotor": "rotor_FL",
+   "prop": "prop_FL",
+   "fold": 1.815,
+   "spin": 1,
+   "arm_dir": 1.1639,
+   "hinge": [
+    0.062,
+    0.042,
+    0.088
+   ],
+   "rotor_pos": [
+    0.115,
+    0.165,
+    0.11
+   ]
+  },
+  "FR": {
+   "node": "arm_FR",
+   "rotor": "rotor_FR",
+   "prop": "prop_FR",
+   "fold": -1.815,
+   "spin": -1,
+   "arm_dir": -1.1639,
+   "hinge": [
+    0.062,
+    -0.042,
+    0.088
+   ],
+   "rotor_pos": [
+    0.115,
+    -0.165,
+    0.11
+   ]
+  },
+  "RL": {
+   "node": "arm_RL",
+   "rotor": "rotor_RL",
+   "prop": "prop_RL",
+   "fold": 1.089,
+   "spin": -1,
+   "arm_dir": 2.0098,
+   "hinge": [
+    -0.072,
+    0.04,
+    0.062
+   ],
+   "rotor_pos": [
+    -0.126,
+    0.155,
+    0.084
+   ]
+  },
+  "RR": {
+   "node": "arm_RR",
+   "rotor": "rotor_RR",
+   "prop": "prop_RR",
+   "fold": -1.089,
+   "spin": 1,
+   "arm_dir": -2.0098,
+   "hinge": [
+    -0.072,
+    -0.04,
+    0.062
+   ],
+   "rotor_pos": [
+    -0.126,
+    -0.155,
+    0.084
+   ]
+  }
+ },
+ "frame": "glTF Y-up; node 'x2' origin = plane of the feet under the body centre; three = FLU (x, z, -y); +x = nose",
+ "prop_r": 0.098,
+ "cg_height": 0.07,
+ "tip_radius": 0.2991,
+ "span_tip_to_tip": 0.5982,
+ "gimbal": {
+  "yaw": "gimbal_yaw",
+  "roll": "gimbal_roll",
+  "pitch": "gimbal_pitch",
+  "limits": {
+   "yaw": 1.75,
+   "roll": 0.6,
+   "pitch_up": 0.5,
+   "pitch_down": -1.65
+  }
+ },
+ "triangles_rendered": 5900,
+ "bytes": 202964
+}

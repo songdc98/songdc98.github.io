@@ -4,6 +4,32 @@
   const L = () => ES.lab, A = () => ES.lab.A, esc = (t) => String(t).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
   const st = { active: false, mini: null, miniS: 0, lastInfo: 0, entity: null, toastT: 0 };
 
+  const HINT = { human: "拖动鼠标环顾 · 点地面走过去 · 滚轮缩放视野 · 小地图点一下传送", dog: "拖动鼠标低头抬头 · 点地面自动走过去 · 滚轮缩放视野 · 小地图点一下传送", uav: "拖动鼠标转云台 · 滚轮变焦 · 窗户打开才飞得进去 · 小地图点一下传送" };
+
+  /* ---- identity list + key legend (both drawn from ES.controls.IDENT, the table the keyboard handler uses) ---- */
+  const ID = () => ES.controls.IDENT;
+  function buildIdent() {
+    const box = $("#fp-idlist"); if (box.children.length) return;
+    for (const [id, I] of Object.entries(ID())) {
+      const b = document.createElement("button"); b.type = "button"; b.className = "idcard"; b.dataset.id = id; b.setAttribute("role", "radio"); b.style.setProperty("--idc", I.color);
+      b.innerHTML = `<span class="ico" aria-hidden="true">${I.icon}</span><b>${esc(I.title)}</b><span class="tag">当前身份 ✓</span><span class="go">点击切换为 ${esc(I.name)}</span><small>${esc(I.spec)}</small><small>传感器:${esc(I.sensors)}</small>`;
+      b.addEventListener("click", () => { b.blur(); setIdentity(id); });
+      box.appendChild(b);
+    }
+  }
+  function renderKeys(body) {
+    const I = ID()[body]; $("#fp-keys-h").innerHTML = `操作按键<span>你现在是 <b style="color:${I.color}">${esc(I.name)}</b>,用下面这些键</span>`;
+    $("#fp-keys").innerHTML = ES.controls.groupsFor(body).map((g) => `<div class="kg"><h5>${esc(g.title)}</h5>${g.items.map((it) => `<div class="kr"><span class="kcs">${it.keys.map((lab, i) => { const code = (it.codes || [])[i]; return `<span class="kc${code ? "" : " mouse"}"${code ? ` data-code="${code}"` : ""}>${esc(lab)}</span>`; }).join("")}</span><span class="kd">${esc(it.desc)}</span></div>`).join("")}</div>`).join("");
+    $$("#fp-keys .kc[data-code]").forEach((el) => el.addEventListener("click", () => { const code = el.dataset.code; window.dispatchEvent(new KeyboardEvent("keydown", { code })); setTimeout(() => window.dispatchEvent(new KeyboardEvent("keyup", { code })), 140); }));
+  }
+  function showIdentity(body) {
+    buildIdent(); $$("#fp-idlist .idcard").forEach((c) => c.setAttribute("aria-checked", c.dataset.id === body ? "true" : "false"));
+    renderKeys(body); $("#fp-own-who").textContent = `· ${ID()[body].name}`; $("#fp-hint").textContent = HINT[body]; ES.bus.emit("fpbody", body);
+  }
+  function setIdentity(body) { ES.view3d.walk.setBody(body); showIdentity(body); info({ ...ES.view3d.walk.state, z: ES.view3d.walk.state.z }); toast(`你现在是:${ID()[body].name}`); }
+  ES.controls.onPress((code, down) => { $$(`#fp-keys .kc[data-code="${code}"]`).forEach((el) => el.classList.toggle("on", down)); });
+  /* the own-device readouts (speed, heading, battery, link, GNSS, IMU, light ...) are drawn by hudpanels.js (ES.hud) from the walk:frame hook */
+  const tele = (s) => { if (ES.hud && ES.hud.tele) ES.hud.tele(s); };
   const toast = (msg) => { const t = $("#fp-toast"); t.textContent = msg; t.hidden = false; clearTimeout(st.toastT); st.toastT = setTimeout(() => (t.hidden = true), 1800); };
 
   /* a square snapshot of the map (base layer only) for the mini-map */
@@ -50,11 +76,11 @@
     if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
     snapMini();
     $("#map").style.visibility = "hidden"; $("#btn-walk").hidden = true; $("#legend").style.display = "none"; $("#cursor").hidden = true; $(".maptools").hidden = true; $("#fphud").hidden = false; document.documentElement.classList.add("fpmode");
-    $("#fp-body").value = body; $("#fp-render").disabled = !ES.api; st.entity = e; st.active = true;
-    $("#hint").textContent = "第一视角漫游中:拖动环顾,WASD 行走,点地面走过去;小地图点一下可传送。";
-    const ep = await a.episodes[a.name].catch(() => null);
+    showIdentity(body); $("#fp-render").disabled = !ES.api; st.entity = e; st.active = true;
+    $("#hint").textContent = HINT[body] || HINT.human; $("#fp-view").textContent = "跟随视角";
+    const ep = await (a.lives && a.lives[a.name] || a.episodes[a.name]).catch(() => null);
     const ok = await ES.view3d.walk.enter(a, { x, y, yaw, body, z: e && e.kind === "uav" ? e.z : 28, pitch: e ? e.pitch : undefined, fov: e && e.hfov, hideId: e ? e.id : null,
-      hooks: { onMove: (s) => { a.walker = { x: s.x, y: s.y }; drawMini(s); const now = performance.now(); if (now - st.lastInfo > 600) { st.lastInfo = now; info({ ...s, z: ES.view3d.walk.state.z }); } }, toast, requestExit: exit } });
+      hooks: { onView: (v) => { $("#fp-view").textContent = v === "chase" ? "第一人称" : "跟随视角"; }, onMove: (s) => { a.walker = { x: s.x, y: s.y }; drawMini(s); tele(s); const now = performance.now(); if (now - st.lastInfo > 600) { st.lastInfo = now; info({ ...s, z: ES.view3d.walk.state.z }); } }, toast, requestExit: exit } });
     if (!ok) { exit(); toast("无法启动 3D(浏览器不支持 WebGL?)"); return; }
     ES.view3d.walk.setLive(ep, $("#fp-live").checked, 1); $("#v3dcap").textContent = "第一视角漫游中"; a.walker = { x, y };
   }
@@ -68,8 +94,9 @@
   function wire() {
     $("#btn-walk").addEventListener("click", () => { const a = A(); a.tool = a.tool === "walk" ? null : "walk"; L().syncTool(); });
     $("#fp-exit").addEventListener("click", exit);
-    $("#fp-body").addEventListener("change", (e) => { e.target.blur(); ES.view3d.walk.setBody(e.target.value); info({ ...ES.view3d.walk.state, z: ES.view3d.walk.state.z }); });
-    $("#fp-live").addEventListener("change", async (e) => { e.target.blur(); const a = A(), ep = await a.episodes[a.name].catch(() => null); ES.view3d.walk.setLive(ep, e.target.checked, 1); });
+    $("#fp-view").addEventListener("click", (e) => { e.target.blur(); const W = ES.view3d.walk; W.setView(W.state.view === "chase" ? "fpv" : "chase"); });
+    $("#fp-door").addEventListener("click", (e) => { e.target.blur(); ES.view3d.walk.toggleDoor(); });
+    $("#fp-live").addEventListener("change", async (e) => { e.target.blur(); const a = A(), ep = await (a.lives && a.lives[a.name] || a.episodes[a.name]).catch(() => null); ES.view3d.walk.setLive(ep, e.target.checked, 1); });
     $("#fp-drop").addEventListener("click", () => {
       const a = A(), s = ES.view3d.walk.state, kind = s.body === "uav" ? "uav" : s.body === "dog" ? "dog" : "human", e = L().mk(kind, s.x, s.y, { yaw: s.yaw, pitch: s.body === "uav" ? s.pitch : undefined, z: kind === "uav" ? s.z : undefined });
       a.ents.push(e); a.sel = e.id; L().renderEnts(); toast(`已放下:${e.name}(返回俯视图后可做实验)`);
@@ -87,6 +114,6 @@
     $$("#fp-dpad button").forEach((b) => { const k = b.dataset.k; b.addEventListener("pointerdown", (e) => { e.preventDefault(); ES.view3d.walk.setKey(k, true); }); for (const ev of ["pointerup", "pointerleave", "pointercancel"]) b.addEventListener(ev, () => ES.view3d.walk.setKey(k, false)); });
     ES.bus.on("engine", () => { $("#fp-render").disabled = false; });
   }
-  ES.walkui = { enter, exit, wire, info };
+  ES.walkui = { enter, exit, wire, info, setIdentity };
   ES.bus.on("ready", wire);
 })();

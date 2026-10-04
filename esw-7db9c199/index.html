@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b6e72'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='white' stroke-width='2.4'/%3E%3Ccircle cx='16' cy='16' r='2.4' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/app.css?v=2221038c">
+<link rel="stylesheet" href="css/app.css?v=5a7d2955">
 </head>
 <body>
 
@@ -49,15 +49,40 @@
         <button class="btn primary mapwalk" id="btn-walk" title="点击后再点地图上的任意位置,站到那里去看(也可以双击地图)">🚶 第一视角漫游</button>
         <div id="walkstage" hidden></div>
         <div id="fphud" hidden>
-          <div class="fp-top"><button class="btn" id="fp-exit">← 返回俯视图(Esc)</button>
-            <label>身份 <select id="fp-body"><option value="human">人 · 1.6 m</option><option value="dog">机械狗 · 0.45 m</option><option value="uav">无人机 · 飞行</option></select></label>
-            <label class="row"><input type="checkbox" id="fp-live" checked> 回合里的人和车在走动</label>
-            <button class="btn" id="fp-drop" title="把你现在的位置和朝向放成一个实体">放下为实体</button>
-            <button class="btn" id="fp-render" disabled title="需要在本机运行 scripts/serve_lab.py">📷 Blender 渲染此处</button></div>
-          <div class="fp-hint" id="fp-hint">拖动鼠标环顾 · W/A/S/D 行走(Shift 跑) · Q/E 转身 · 点地面走过去 · 滚轮缩放 · 小地图点一下可传送</div>
+          <div class="fp-col fp-left" id="fp-left">
+            <button class="btn fp-exit" id="fp-exit" title="Esc">← 返回俯视图(Esc)</button>
+            <section class="fp-panel fp-ident" aria-label="身份选择">
+              <h4>身份<span>点一下切换 · 高亮的就是你现在的身份</span></h4>
+              <div class="idlist" id="fp-idlist" role="radiogroup" aria-label="选择身份"></div>
+            </section>
+            <section class="fp-panel fp-keys" aria-label="当前身份的操作按键">
+              <h4 id="fp-keys-h">操作按键</h4>
+              <div id="fp-keys"></div>
+              <div class="fp-acts">
+                <button class="btn" id="fp-view" title="V 键:第一人称 / 跟随视角(看到你操控的机器)">跟随视角</button>
+                <button class="btn" id="fp-door" title="F 键:开关最近的门或窗">开/关门窗</button>
+                <button class="btn" id="fp-drop" title="把你现在的位置和朝向放成一个实体">放下为实体</button>
+                <button class="btn" id="fp-render" disabled title="需要在本机运行 scripts/serve_lab.py">📷 Blender 渲染此处</button>
+                <label class="row"><input type="checkbox" id="fp-live" checked> 回合里的人和车在走动</label>
+              </div>
+            </section>
+            <div class="fp-near" id="fp-near-l" aria-label="左侧附近设备采集的信息"></div>
+          </div>
+          <div class="fp-col fp-right" id="fp-right">
+            <section class="fp-panel fp-own" id="fp-own" aria-label="我的设备采集的信息">
+              <h4>我的设备<span id="fp-own-who"></span></h4>
+              <div class="own-sens" id="fp-own-sens">
+                <figure class="own-cam"><canvas id="fp-own-cam" width="320" height="180"></canvas><figcaption id="fp-own-cam-cap">摄像头</figcaption></figure>
+                <figure class="own-lidar"><canvas id="fp-own-lidar" width="320" height="240"></canvas><figcaption id="fp-own-lidar-cap">激光雷达</figcaption></figure>
+              </div>
+              <div class="fp-tele" id="fp-tele"></div>
+            </section>
+            <div class="fp-near" id="fp-near-r" aria-label="右侧附近设备采集的信息"></div>
+          </div>
           <div class="fp-info" id="fp-info"></div>
           <canvas id="fp-mini" width="360" height="360" aria-label="小地图,点击传送"></canvas>
           <div class="fp-dpad" id="fp-dpad"><button data-k="q">⟲</button><button data-k="w">▲</button><button data-k="e">⟳</button><button data-k="a">◀</button><button data-k="s">▼</button><button data-k="d">▶</button></div>
+          <div class="fp-hint" id="fp-hint">拖动鼠标环顾 · 点地面走过去 · 滚轮缩放视野</div>
           <div class="fp-toast" id="fp-toast" hidden></div></div>
         <div class="legend" id="legend"><div id="legtitle"></div><canvas id="legbar" width="180" height="10"></canvas><div class="ticks" id="legticks"></div></div>
         <div class="maptools"><button id="z-in" title="放大" aria-label="放大">+</button><button id="z-out" title="缩小" aria-label="缩小">−</button><button id="z-fit" title="适应窗口" aria-label="适应窗口">⤢</button></div></div>
@@ -83,16 +108,35 @@
   <section id="tab-gallery" class="tab" role="tabpanel"><div id="gallery-root"></div></section>
   <section id="tab-ref" class="tab" role="tabpanel"><div id="ref-root"></div></section>
 </div>
-<script src="js/core.js?v=2221038c"></script>
-<script src="js/devices.js?v=2221038c"></script>
-<script src="js/world.js?v=2221038c"></script>
-<script src="js/phys_core.js?v=2221038c"></script>
-<script src="js/phys_models.js?v=2221038c"></script>
-<script src="js/map.js?v=2221038c"></script>
-<script src="js/app.js?v=2221038c"></script>
-<script src="js/tabs.js?v=2221038c"></script>
-<script src="js/view3d.js?v=2221038c"></script>
-<script src="js/walkui.js?v=2221038c"></script>
-<script src="js/main.js?v=2221038c"></script>
+<script src="js/core.js?v=5a7d2955"></script>
+<script src="js/devices.js?v=5a7d2955"></script>
+<script src="js/world.js?v=5a7d2955"></script>
+<script src="js/phys_core.js?v=5a7d2955"></script>
+<script src="js/phys_models.js?v=5a7d2955"></script>
+<script src="js/map.js?v=5a7d2955"></script>
+<script src="js/app.js?v=5a7d2955"></script>
+<script src="js/tabs.js?v=5a7d2955"></script>
+<script src="js/controls.js?v=5a7d2955"></script>
+<script src="js/pbr.js?v=5a7d2955"></script>
+<script src="js/env.js?v=5a7d2955"></script>
+<script src="js/bimcol.js?v=5a7d2955"></script>
+<script src="js/bim3d.js?v=5a7d2955"></script>
+<script src="js/models.js?v=5a7d2955"></script>
+<script src="js/humans.js?v=5a7d2955"></script>
+<script src="js/robots.js?v=5a7d2955"></script>
+<script src="js/vehicles.js?v=5a7d2955"></script>
+<script src="js/props.js?v=5a7d2955"></script>
+<script src="js/raycast.js?v=5a7d2955"></script>
+<script src="js/lidar.js?v=5a7d2955"></script>
+<script src="js/telemetry.js?v=5a7d2955"></script>
+<script src="js/camfeed.js?v=5a7d2955"></script>
+<script src="js/lmkernel.js?v=5a7d2955"></script>
+<script src="js/lightmap.js?v=5a7d2955"></script>
+<script src="js/interior.js?v=5a7d2955"></script>
+<script src="js/audio.js?v=5a7d2955"></script>
+<script src="js/view3d.js?v=5a7d2955"></script>
+<script src="js/hudpanels.js?v=5a7d2955"></script>
+<script src="js/walkui.js?v=5a7d2955"></script>
+<script src="js/main.js?v=5a7d2955"></script>
 </body>
 </html>

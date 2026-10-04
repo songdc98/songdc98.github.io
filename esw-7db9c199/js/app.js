@@ -33,6 +33,7 @@
     if (!A.scenes[name]) A.scenes[name] = await ES.loadJSON(`${ES.DATA_DIR}/scene_${name}.json`);
     A.scene = A.scenes[name]; rebuildWorld();
     if (!A.episodes[name]) A.episodes[name] = ES.loadJSON(`${ES.DATA_DIR}/episode_${name}.json`).catch(() => null);
+    A.lives = A.lives || {}; if (!A.lives[name]) A.lives[name] = ES.loadJSON(`${ES.DATA_DIR}/live_${name}.json`).catch(() => A.episodes[name]);
     $$("#scenes .scene").forEach((b) => b.setAttribute("aria-pressed", b.dataset.name === name));
     $("#scenedesc").textContent = A.scene.desc + `(${A.scene.size} m 见方,${A.scene.buildings.length} 栋建筑,${A.scene.trees.length} 棵树)`;
     $$("#seg-variant button").forEach((b) => { const ok = A.scene.variants[b.dataset.v]; b.disabled = !ok; b.style.opacity = ok ? 1 : 0.4; b.setAttribute("aria-pressed", b.dataset.v === A.variant); });
@@ -70,7 +71,7 @@
   function remove() { if (A.sel == null) return; A.ents = A.ents.filter((e) => e.id !== A.sel); A.sel = null; renderEnts(); recompute(); }
   async function defaultConfig() {
     const sc = A.scene, ep = await A.episodes[A.name]; A.ents = []; A.nid = 1;
-    A.ents.push(mk("cp", sc.cp[0], sc.cp[1], { name: "指挥站", yaw: 0.2 }));
+    A.ents.push(mk("cp", sc.cp[0], sc.cp[1], { name: "指挥站", yaw: ES.rad(sc.cp_yaw || 0) }));
     if (ep) {
       const k = Math.min(Math.round(28 / ep.dt), ep.agents.dog_0.n - 1), a = ep.agents;
       const pos = (id) => { const g = a[id]; const i = Math.min(k, g.n - 1); return [g.pos[i][0], g.pos[i][1], g.pos[i][2], g.yaw[i]]; };

@@ -4,13 +4,13 @@
   /* kind -> placeable agent. cam: horizontal FOV [deg], resolution, mount height above ground [m] (UAVs use their own altitude). */
   ES.DEVICES = {
     uav: { label: "无人机 Skydio X2 级", short: "无人机", color: "#cc79a7", tier: "XS", modes: 2, tops: 2.6, z: 28, cam: { hfov: 84, res: [1280, 720], pitch: -55 },
-      radios: ["fpv5g8", "ism900"], ego: 92, speed: 5.0, antH: 0, sensors: "云台相机 1280×720 · 前视相机 · 气压计 · IMU · GNSS · 麦克风" },
+      radios: ["fpv5g8", "ism900"], ego: 92, speed: 5.0, antH: 0, sensors: "云台相机 1280×720 · 前视相机 · 激光雷达 Mid-360 · 气压计 · IMU · GNSS · 麦克风", lidar: { model: "livox_mid360", mount: [0.0, 0, -0.06], rpy: [Math.PI, 0, 0], rate_hz: 10.0 }, battery_wh: 62 },
     dog: { label: "机械狗 Unitree Go2 级", short: "机械狗", color: "#d55e00", tier: "S", modes: 8, tops: 100, z: 0.45, cam: { hfov: 100, res: [1280, 720], pitch: 0 },
-      radios: ["wifi6", "ism900", "nr_ue"], ego: 78, speed: 1.0, antH: 0.45, sensors: "前后相机 · 4D 激光雷达(30 m) · 4 麦阵列 · IMU · GNSS" },
+      radios: ["wifi6", "ism900", "nr_ue"], ego: 78, speed: 1.0, antH: 0.45, sensors: "前后相机 · 4D 激光雷达(30 m) · 4 麦阵列 · IMU · GNSS", lidar: { model: "unitree_l1", mount: [0.28, 0, 0.12], rate_hz: 10.0 }, battery_wh: 216 },
     human: { label: "应急人员(头盔相机)", short: "人员", color: "#009e73", tier: "S", modes: 8, tops: 40, z: 1.6, cam: { hfov: 90, res: [1280, 720], pitch: 0 },
-      radios: ["nr_ue", "wifi6", "ble5"], ego: 42, speed: 1.4, antH: 1.4, sensors: "头盔相机 · 双耳麦克风 · 手表" },
+      radios: ["nr_ue", "wifi6", "ble5"], ego: 42, speed: 1.4, antH: 1.4, sensors: "头盔相机 · 双耳麦克风 · 手表", lidar: null, battery_wh: 17 },
     rover: { label: "配送机器人", short: "机器人", color: "#e69f00", tier: "XS", modes: 2, tops: 8, z: 0.7, cam: { hfov: 110, res: [1280, 720], pitch: 0 },
-      radios: ["wifi6", "lte_ue"], ego: 62, speed: 1.4, antH: 0.6, sensors: "前相机 · 16 线激光雷达 · 麦克风" },
+      radios: ["wifi6", "lte_ue"], ego: 62, speed: 1.4, antH: 0.6, sensors: "前相机 · 16 线激光雷达 · 麦克风", lidar: { model: "velodyne_vlp16", mount: [0.0, 0, 0.45], rate_hz: 10.0 }, battery_wh: 300 },
     cp: { label: "指挥站(桅杆)", short: "指挥站", color: "#0072b2", tier: "L", modes: 32, tops: 700, z: 6.0, cam: { hfov: 110, res: [1920, 1080], pitch: -10 },
       radios: ["nr_gnb", "wifi6", "ism900"], ego: 35, speed: 0, antH: 6.0, sensors: "桅杆相机 1920×1080 · 麦克风 · 基站" },
   };

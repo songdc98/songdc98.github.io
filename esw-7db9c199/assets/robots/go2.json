@@ -1,0 +1,148 @@
+{
+ "lamps": {
+  "eye_L": [
+   0.3085,
+   0.027,
+   0.041
+  ],
+  "eye_R": [
+   0.3093,
+   -0.027,
+   0.041
+  ],
+  "head_lamp": [
+   0.3275,
+   0.0,
+   0.007
+  ],
+  "rear_bar": [
+   -0.13,
+   0.0,
+   0.0205
+  ]
+ },
+ "mounts": {
+  "cam_front": [
+   0.3275,
+   0.0,
+   0.0432
+  ],
+  "lidar": [
+   0.2903,
+   0.0014,
+   -0.0522
+  ],
+  "cam_rear": [
+   -0.1318,
+   0.0,
+   0.041
+  ]
+ },
+ "lidar": {
+  "rim_centre": [
+   0.2903,
+   0.0014,
+   -0.0522
+  ],
+  "axis_up": [
+   -0.2677,
+   0.0134,
+   0.9634
+  ],
+  "rim_radius": 0.0346
+ },
+ "frame": "glTF Y-up; node 'go2' = MJCF base frame (hip plane centre); three = FLU (x, z, -y); +x = head",
+ "legs": {
+  "FL": {
+   "hip": "FL_hip",
+   "thigh": "FL_thigh",
+   "calf": "FL_calf",
+   "foot": "FL_foot",
+   "hip_pos": [
+    0.1934,
+    0.0465,
+    0.0
+   ],
+   "thigh_off": 0.0955
+  },
+  "FR": {
+   "hip": "FR_hip",
+   "thigh": "FR_thigh",
+   "calf": "FR_calf",
+   "foot": "FR_foot",
+   "hip_pos": [
+    0.1934,
+    -0.0465,
+    0.0
+   ],
+   "thigh_off": -0.0955
+  },
+  "RL": {
+   "hip": "RL_hip",
+   "thigh": "RL_thigh",
+   "calf": "RL_calf",
+   "foot": "RL_foot",
+   "hip_pos": [
+    -0.1934,
+    0.0465,
+    0.0
+   ],
+   "thigh_off": 0.0955
+  },
+  "RR": {
+   "hip": "RR_hip",
+   "thigh": "RR_thigh",
+   "calf": "RR_calf",
+   "foot": "RR_foot",
+   "hip_pos": [
+    -0.1934,
+    -0.0465,
+    0.0
+   ],
+   "thigh_off": -0.0955
+  }
+ },
+ "L1": 0.213,
+ "L2": 0.213,
+ "sole": 0.0237,
+ "stand": {
+  "thigh": 0.9,
+  "calf": -1.8,
+  "depth": 0.2648,
+  "hip_height": 0.2885
+ },
+ "head": {
+  "node": "go2_head",
+  "pivot": [
+   0.13,
+   0.0,
+   0.01
+  ]
+ },
+ "scan_node": "go2_lidar_scan",
+ "joint_axes": {
+  "hip": "x (FLU), + = foot to the left",
+  "thigh": "y (FLU), + = foot backwards",
+  "calf": "y (FLU)"
+ },
+ "triangles_rendered": 22749,
+ "cad_triangles": {
+  "base_0": 10130,
+  "base_1": 3962,
+  "base_2": 2005,
+  "base_3": 2320,
+  "base_4": 59511,
+  "calf_0": 6512,
+  "calf_1": 2053,
+  "foot": 4404,
+  "hip_0": 18056,
+  "hip_1": 18972,
+  "thigh_0": 18425,
+  "thigh_1": 11708,
+  "calf_mirror_0": 6512,
+  "calf_mirror_1": 2053,
+  "thigh_mirror_0": 18417,
+  "thigh_mirror_1": 11708
+ },
+ "bytes": 512668
+}
