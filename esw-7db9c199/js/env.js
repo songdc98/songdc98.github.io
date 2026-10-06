@@ -13,12 +13,12 @@
   /* sun: E = direct-normal irradiance in lux (0 = none); sky = horizontal illuminance of the sky dome in lux; ev = EV100 of the (virtual) camera; hdr = sky map; hdrSun = take the sun from the map
      fog: extinction coefficient 1/m near the ground and its height scale (m); haze tint; stars / moon for night skies; elRange: allowed sun elevations of the slider */
   const LOOKS = {
-    day_cloud: { label: "白天", hdr: "day_cloud", sunLux: 88000, skyLux: 30700, ev: 15.4, fog: [1.6e-4, 1800], bloom: 0.10, vig: 0.16, sat: 1.08, con: 0.18, night: false, elRange: [12, 80], sunCol: null },
-    overcast: { label: "阴天", hdr: "overcast", sunLux: 0, skyLux: 18000, ev: 13.0, fog: [4.5e-4, 900], bloom: 0.06, vig: 0.14, sat: 1.0, con: 0.12, night: false, elRange: null },
-    sunset: { label: "日落", hdr: "sunset", sunLux: 12000, skyLux: 2000, ev: 11.2, fog: [2.4e-4, 1500], bloom: 0.16, vig: 0.2, sat: 1.05, night: false, elRange: [2, 14], sunCol: [1.0, 0.56, 0.28], sunEl: 4.0 },
-    dawn: { label: "黎明", hdr: "dawn", sunLux: 0, skyLux: 400, ev: 8.2, fog: [3.0e-4, 1200], bloom: 0.12, vig: 0.2, sat: 1.0, night: false, elRange: null },
-    night: { label: "夜晚", lamps: 1, hdr: "night", sunLux: 0, skyLux: 0.5, ev: 3.0, fog: [1.2e-4, 2500], bloom: 0.22, vig: 0.26, sat: 0.9, night: true, stars: 1, elRange: null, scotopic: 0.55 },
-    moonlit: { label: "月夜", hdr: "moonlit", sunLux: 0.25, skyLux: 0.01, ev: -1.6, fog: [1.0e-4, 2500], bloom: 0.2, vig: 0.24, sat: 0.9, night: true, stars: 0.7, elRange: [10, 80], sunCol: [0.80, 0.88, 1.0], moon: true, scotopic: 0.5 },
+    day_cloud: { label: "Day", hdr: "day_cloud", sunLux: 88000, skyLux: 30700, ev: 15.4, fog: [1.6e-4, 1800], bloom: 0.10, vig: 0.16, sat: 1.08, con: 0.18, night: false, elRange: [12, 80], sunCol: null },
+    overcast: { label: "Overcast", hdr: "overcast", sunLux: 0, skyLux: 18000, ev: 13.0, fog: [4.5e-4, 900], bloom: 0.06, vig: 0.14, sat: 1.0, con: 0.12, night: false, elRange: null },
+    sunset: { label: "Sunset", hdr: "sunset", sunLux: 12000, skyLux: 2000, ev: 11.2, fog: [2.4e-4, 1500], bloom: 0.16, vig: 0.2, sat: 1.05, night: false, elRange: [2, 14], sunCol: [1.0, 0.56, 0.28], sunEl: 4.0 },
+    dawn: { label: "Dawn", hdr: "dawn", sunLux: 0, skyLux: 400, ev: 8.2, fog: [3.0e-4, 1200], bloom: 0.12, vig: 0.2, sat: 1.0, night: false, elRange: null },
+    night: { label: "Night", lamps: 1, hdr: "night", sunLux: 0, skyLux: 0.5, ev: 3.0, fog: [1.2e-4, 2500], bloom: 0.22, vig: 0.26, sat: 0.9, night: true, stars: 1, elRange: null, scotopic: 0.55 },
+    moonlit: { label: "Moonlit", hdr: "moonlit", sunLux: 0.25, skyLux: 0.01, ev: -1.6, fog: [1.0e-4, 2500], bloom: 0.2, vig: 0.24, sat: 0.9, night: true, stars: 0.7, elRange: [10, 80], sunCol: [0.80, 0.88, 1.0], moon: true, scotopic: 0.5 },
   };
   const LOOK_ORDER = ["day_cloud", "overcast", "sunset", "dawn", "night", "moonlit"];
   const lwhite = (ev) => 0.694 * Math.pow(2, ev);                      // cd/m2 that maps to display white at this EV100
@@ -650,7 +650,7 @@ float esCascadeShadow() {
 
   /* ======================================================================== UI ======================================================================== */
   const $ = (s, r = document) => r.querySelector(s);
-  const compass = (b) => ["北", "东北", "东", "东南", "南", "西南", "西", "西北"][Math.round((((b % 360) + 360) % 360) / 45) % 8];
+  const compass = (b) => ["N", "NE", "E", "SE", "S", "SW", "W", "NW"][Math.round((((b % 360) + 360) % 360) / 45) % 8];
   function syncUI() {
     const L = S.L, az = Math.round(S.sunAz == null ? 0 : S.sunAz), el = Math.round(S.sunEl == null ? 0 : S.sunEl), hasSun = !!L.elRange;
     document.querySelectorAll("[data-look]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.look === S.look));
@@ -658,7 +658,7 @@ float esCascadeShadow() {
       const A1 = $(a), E1 = $(e); if (!A1) continue; A1.value = az; E1.value = el; $(ao).textContent = `${az}° ${compass(az)}`; $(eo).textContent = hasSun ? `${el}°` : "—";
       A1.disabled = !(S.sunE > 0 || L.moon || hasSun || S.look === "overcast" || true); E1.disabled = !hasSun; if (hasSun) { E1.min = L.elRange[0]; E1.max = L.elRange[1]; E1.value = clamp(el, L.elRange[0], L.elRange[1]); }
     }
-    const lux = $("#env-lux"); if (lux) lux.textContent = `日照 ${fmtLux(S.sunE * S.lpu)} · 天空 ${fmtLux(S.skyE * S.lpu)} · EV ${S.ev.toFixed(1)}`;
+    const lux = $("#env-lux"); if (lux) lux.textContent = `Sun ${fmtLux(S.sunE * S.lpu)} · Sky ${fmtLux(S.skyE * S.lpu)} · EV ${S.ev.toFixed(1)}`;
     const t = $("#fp-sun-t"); if (t) t.textContent = `${L.label}${hasSun ? ` ${az}°/${el}°` : ""}`;
     const q = $("#env-q"); if (q) q.value = S.quality;
   }
@@ -666,20 +666,20 @@ float esCascadeShadow() {
   function initUI() {
     const seg = $("#seg-time"); if (!seg || $("#env-ui")) return; seg.style.display = "none";
     const box = document.createElement("div"); box.id = "env-ui"; box.className = "envui";
-    box.innerHTML = `<div class="seg envseg" id="env-looks" role="group" aria-label="光照与天空">${LOOK_ORDER.map((k) => `<button data-look="${k}" aria-pressed="false">${LOOKS[k].label}</button>`).join("")}</div>
-      <label class="envrow"><span>太阳方位</span><input type="range" id="env-az" min="0" max="359" step="1" aria-label="太阳方位角"><output id="env-az-o" class="mono"></output></label>
-      <label class="envrow"><span>太阳高度</span><input type="range" id="env-el" min="2" max="85" step="1" aria-label="太阳高度角"><output id="env-el-o" class="mono"></output></label>
+    box.innerHTML = `<div class="seg envseg" id="env-looks" role="group" aria-label="Lighting and sky">${LOOK_ORDER.map((k) => `<button data-look="${k}" aria-pressed="false">${LOOKS[k].label}</button>`).join("")}</div>
+      <label class="envrow"><span>Sun azimuth</span><input type="range" id="env-az" min="0" max="359" step="1" aria-label="Sun azimuth angle"><output id="env-az-o" class="mono"></output></label>
+      <label class="envrow"><span>Sun elevation</span><input type="range" id="env-el" min="2" max="85" step="1" aria-label="Sun elevation angle"><output id="env-el-o" class="mono"></output></label>
       <div class="envinfo mono" id="env-lux"></div>
-      <div class="envrow2"><label><input type="checkbox" id="env-wet"> 潮湿路面</label><select id="env-q" aria-label="画质"><option value="high">画质:高</option><option value="medium">画质:中</option><option value="low">画质:低</option><option value="off">画质:关</option></select></div>`;
+      <div class="envrow2"><label><input type="checkbox" id="env-wet"> Wet road</label><select id="env-q" aria-label="Quality"><option value="high">Quality: high</option><option value="medium">Quality: medium</option><option value="low">Quality: low</option><option value="off">Quality: off</option></select></div>`;
     seg.insertAdjacentElement("afterend", box);
     box.querySelectorAll("[data-look]").forEach((b) => b.addEventListener("click", () => { setLook(b.dataset.look).then(syncUI); }));
     const az = $("#env-az", box), el = $("#env-el", box); az.addEventListener("input", () => { setSun(+az.value, null); syncUI(); }); el.addEventListener("input", () => { setSun(null, +el.value); syncUI(); });
     $("#env-wet", box).addEventListener("change", (e) => env.setWet(e.target.checked ? 0.85 : 0)); $("#env-q", box).addEventListener("change", (e) => { S.auto = false; setQuality(e.target.value); });
     // compact control inside the walk HUD
     const acts = $("#fp-acts") || $(".fp-acts"); if (acts && !$("#fp-sun")) {
-      const b = document.createElement("button"); b.className = "btn envchip"; b.id = "fp-sun"; b.type = "button"; b.title = "太阳方位 / 高度与光照(看迎光、逆光对相机的影响)"; b.innerHTML = `☀ <span id="fp-sun-t"></span>`; acts.appendChild(b);
+      const b = document.createElement("button"); b.className = "btn envchip"; b.id = "fp-sun"; b.type = "button"; b.title = "Sun azimuth / elevation and lighting (see how front light and back light affect the camera)"; b.innerHTML = `☀ <span id="fp-sun-t"></span>`; acts.appendChild(b);
       const pop = document.createElement("div"); pop.id = "fp-sunpop"; pop.className = "fp-panel envpop"; pop.hidden = true;
-      pop.innerHTML = `<div class="seg envseg">${LOOK_ORDER.map((k) => `<button data-look="${k}" aria-pressed="false">${LOOKS[k].label}</button>`).join("")}</div><label class="envrow"><span>方位</span><input type="range" id="fp-sun-az" min="0" max="359" step="1"><output id="fp-sun-az-o" class="mono"></output></label><label class="envrow"><span>高度</span><input type="range" id="fp-sun-el" min="2" max="85" step="1"><output id="fp-sun-el-o" class="mono"></output></label>`;
+      pop.innerHTML = `<div class="seg envseg">${LOOK_ORDER.map((k) => `<button data-look="${k}" aria-pressed="false">${LOOKS[k].label}</button>`).join("")}</div><label class="envrow"><span>Azimuth</span><input type="range" id="fp-sun-az" min="0" max="359" step="1"><output id="fp-sun-az-o" class="mono"></output></label><label class="envrow"><span>Elevation</span><input type="range" id="fp-sun-el" min="2" max="85" step="1"><output id="fp-sun-el-o" class="mono"></output></label>`;
       const hud = $("#fphud"); (hud || document.body).appendChild(pop);
       b.addEventListener("click", (e) => { e.target.blur && e.target.blur(); pop.hidden = !pop.hidden; syncUI(); });
       pop.querySelectorAll("[data-look]").forEach((x) => x.addEventListener("click", () => { x.blur(); setLook(x.dataset.look).then(syncUI); }));

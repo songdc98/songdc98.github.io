@@ -2,8 +2,8 @@
  "scenes": [
   {
    "name": "suburb",
-   "title": "郊区住宅街",
-   "desc": "8 栋不同样式的独栋住宅(平房、殖民式、小屋、平顶现代、四坡带侧翼、都铎),围栏、车道、院子、泳池、社区绿地与步道。",
+   "title": "Suburban houses",
+   "desc": "8 detached houses of different styles (bungalow, colonial, cottage, flat-roof modern, hip roof with wing, Tudor), with fences, driveways, yards, a pool, a community green and footpaths.",
    "size": 160.0,
    "buildings": 8,
    "trees": 139,
@@ -26,8 +26,8 @@
   },
   {
    "name": "courtyard",
-   "title": "公寓庭院",
-   "desc": "公寓与联排围合的庭院,游乐场、停车场、行道树。",
+   "title": "Apartment courtyard",
+   "desc": "A courtyard enclosed by apartment blocks and row houses, with a playground, a car park and street trees.",
    "size": 150.0,
    "buildings": 4,
    "trees": 131,
@@ -49,8 +49,8 @@
   },
   {
    "name": "mainstreet",
-   "title": "商业街",
-   "desc": "两侧 14 间商铺,十字路口、斑马线、红绿灯、停放车辆。",
+   "title": "Main street",
+   "desc": "14 shops along both sides, a crossroads, zebra crossings, traffic lights and parked vehicles.",
    "size": 150.0,
    "buildings": 14,
    "trees": 112,
@@ -73,8 +73,8 @@
   },
   {
    "name": "campus",
-   "title": "校园",
-   "desc": "四栋教学楼围着中央草坪,池塘、步道。",
+   "title": "Campus",
+   "desc": "Four teaching buildings around a central lawn, with a pond and footpaths.",
    "size": 170.0,
    "buildings": 4,
    "trees": 234,
@@ -96,8 +96,8 @@
   },
   {
    "name": "industrial",
-   "title": "工厂区",
-   "desc": "厂房、仓库、储罐、集装箱堆场、烟囱,铁丝网围场。",
+   "title": "Industrial area",
+   "desc": "A factory, warehouses, storage tanks, a container yard and chimneys inside a chain-link compound.",
    "size": 170.0,
    "buildings": 3,
    "trees": 111,

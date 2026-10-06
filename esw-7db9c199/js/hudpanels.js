@@ -13,30 +13,30 @@
 
   /* ------------------------------------------------------------------ device tables (mirror scripts/esworld/agents_cfg.py DEVICES) ------------------------------------------------------------------ */
   const KIND = {
-    dog: { icon: "🐕", zh: "机械狗", model: "Unitree Go2", base: 0.3, color: "#d55e00" },
-    uav: { icon: "🚁", zh: "无人机", model: "Skydio X2", base: 0, color: "#cc79a7" },
-    rover: { icon: "🤖", zh: "配送机器人", model: "配送机器人", base: 0.19, color: "#e69f00" },
-    human: { icon: "🚶", zh: "应急人员", model: "人员", base: 0, color: "#009e73" },
-    cp: { icon: "📡", zh: "指挥站", model: "移动指挥车", base: 0, color: "#0072b2" },
+    dog: { icon: "🐕", zh: "Quadruped robot", model: "Unitree Go2", base: 0.3, color: "#d55e00" },
+    uav: { icon: "🚁", zh: "UAV", model: "Skydio X2", base: 0, color: "#cc79a7" },
+    rover: { icon: "🤖", zh: "Delivery robot", model: "Delivery robot", base: 0.19, color: "#e69f00" },
+    human: { icon: "🚶", zh: "Responder", model: "Person", base: 0, color: "#009e73" },
+    cp: { icon: "📡", zh: "Command post", model: "Mobile command vehicle", base: 0, color: "#0072b2" },
   };
   /* camera mounts: off = [forward, left, up] from the body reference point (base height above the floor / the UAV centre), res = sensor resolution, far = depth max range */
   const CAMS = {
-    dog: [{ key: "front", zh: "前相机", hfov: 100, res: [1280, 720], fps: 15, off: [0.385, 0, 0.06], yaw: 0, far: 30 }, { key: "rear", zh: "后相机", hfov: 100, res: [640, 480], fps: 10, off: [-0.2, 0, 0.08], yaw: Math.PI, far: 20 }],
-    uav: [{ key: "gimbal", zh: "云台相机", hfov: 84, res: [1280, 720], fps: 15, off: [0.1, 0, -0.02], gimbal: true, far: 120 }, { key: "nav", zh: "前视相机", hfov: 110, res: [640, 480], fps: 15, off: [0.12, 0, 0], yaw: 0, far: 40 }],
-    human: [{ key: "helmet", zh: "头盔相机", hfov: 90, res: [1280, 720], fps: 15, off: [0.09, 0, 0], head: true, far: 40, eye: 1.6 }],
-    rover: [{ key: "front", zh: "前相机", hfov: 110, res: [1280, 720], fps: 15, off: [0.34, 0, 0.26], yaw: 0, far: 30 }],
-    cp: [{ key: "mast", zh: "桅杆相机", hfov: 110, res: [1920, 1080], fps: 10, off: [0, 0, 6.0], mast: true, far: 150 }],
+    dog: [{ key: "front", zh: "Front camera", hfov: 100, res: [1280, 720], fps: 15, off: [0.385, 0, 0.06], yaw: 0, far: 30 }, { key: "rear", zh: "Rear camera", hfov: 100, res: [640, 480], fps: 10, off: [-0.2, 0, 0.08], yaw: Math.PI, far: 20 }],
+    uav: [{ key: "gimbal", zh: "Gimbal camera", hfov: 84, res: [1280, 720], fps: 15, off: [0.1, 0, -0.02], gimbal: true, far: 120 }, { key: "nav", zh: "Front-view camera", hfov: 110, res: [640, 480], fps: 15, off: [0.12, 0, 0], yaw: 0, far: 40 }],
+    human: [{ key: "helmet", zh: "Helmet camera", hfov: 90, res: [1280, 720], fps: 15, off: [0.09, 0, 0], head: true, far: 40, eye: 1.6 }],
+    rover: [{ key: "front", zh: "Front camera", hfov: 110, res: [1280, 720], fps: 15, off: [0.34, 0, 0.26], yaw: 0, far: 30 }],
+    cp: [{ key: "mast", zh: "Mast camera", hfov: 110, res: [1920, 1080], fps: 10, off: [0, 0, 6.0], mast: true, far: 150 }],
   };
   const LIDARS = {
     dog: { model: "unitree_l1", zh: "Unitree L1", hfov: 360, vmin: -7, vmax: 52, range: 30, rate: 10, pts: 17280, off: [0.28, 0, 0.12] },
     uav: { model: "livox_mid360", zh: "Livox Mid-360", hfov: 360, vmin: -7, vmax: 52, range: 70, rate: 10, pts: 30720, off: [0, 0, 0] },
     rover: { model: "velodyne_vlp16", zh: "Velodyne VLP-16", hfov: 360, vmin: -15, vmax: 15, range: 100, rate: 10, pts: 28800, off: [0, 0, 0.45] },
   };
-  const SENSORS = { dog: "前 / 后相机 · L1 激光雷达 · IMU · GNSS", uav: "云台 / 前视相机 · 激光雷达载荷 · 气压计 · IMU · GNSS", human: "头盔相机 · 手机无线 · 双耳麦克风" };
-  const MODALITY = [["rgb", "彩色", "Digit1"], ["depth", "深度", "Digit2"], ["sem", "语义", "Digit3"]];
-  const MOD_ZH = { rgb: "彩色", depth: "深度", sem: "语义" };
-  const LMODE = [["top", "俯视"], ["side", "侧视"], ["persp", "三维"]];
-  const COLORBY = [["height", "高度"], ["range", "距离"], ["intensity", "强度"], ["class", "类别"]];
+  const SENSORS = { dog: "Front / rear cameras · L1 LiDAR · IMU · GNSS", uav: "Gimbal / front-view cameras · LiDAR payload · barometer · IMU · GNSS", human: "Helmet camera · phone radio · binaural microphones" };
+  const MODALITY = [["rgb", "Colour", "Digit1"], ["depth", "Depth", "Digit2"], ["sem", "Semantic", "Digit3"]];
+  const MOD_ZH = { rgb: "Colour", depth: "Depth", sem: "Semantic" };
+  const LMODE = [["top", "Top"], ["side", "Side"], ["persp", "3D"]];
+  const COLORBY = [["height", "Height"], ["range", "Range"], ["intensity", "Intensity"], ["class", "Class"]];
   const feedRes = (res, w) => [w, Math.round((w * res[1]) / res[0] / 2) * 2];
 
   const st = {
@@ -76,7 +76,7 @@
   }
   function ownSpecText(body) {
     const K = KIND[body] || KIND.human, cs = camsOf(body), c = cs[Math.min(st.own.cam, cs.length - 1)] || cs[0];
-    return `<b>${esc(K.model)}</b> · ${esc(c.zh)} ${c.hfov}° ${c.res[0]}×${c.res[1]} ${c.fps} fps${body === "human" ? " · 手机无线 · 双耳麦克风" : ""}`;
+    return `<b>${esc(K.model)}</b> · ${esc(c.zh)} ${c.hfov}° ${c.res[0]}×${c.res[1]} ${c.fps} fps${body === "human" ? " · phone radio · binaural microphones" : ""}`;
   }
 
   /* ------------------------------------------------------------------ LiDAR: ES.lidar (sensors-core) ------------------------------------------------------------------ */
@@ -96,18 +96,18 @@
   const kbd = (t) => `<kbd>${t}</kbd>`;
   function buildOwnUi() {
     const box = $("#fp-own"); if (!box) return; const o = st.own, body = o.body, cs = o.cams, hasL = !!LIDARS[body];
-    box.innerHTML = `<h4>我的设备<span id="fp-own-who">· ${esc((ES.controls && ES.controls.IDENT[body] ? ES.controls.IDENT[body].name : body))}</span></h4>
+    box.innerHTML = `<h4>My device<span id="fp-own-who">· ${esc((ES.controls && ES.controls.IDENT[body] ? ES.controls.IDENT[body].name : body))}</span></h4>
       <div class="own-spec" id="own-spec">${ownSpecText(body)}</div>
       <figure class="own-cam wait" id="own-cam"><div class="own-cam-box" id="own-cam-box"></div>
-        <div class="ov tl"><div class="seg sm" id="own-mod">${MODALITY.map(([m, z, c]) => `<button data-m="${m}" aria-pressed="${m === o.mod}" title="按 ${c.slice(-1)} 键">${z}${kbd(c.slice(-1))}</button>`).join("")}</div></div>
-        <div class="ov tr">${cs.length > 1 ? `<div class="seg sm" id="own-sel">${cs.map((c, i) => `<button data-i="${i}" aria-pressed="${i === o.cam}" title="Tab 键切换">${c.zh.replace("相机", "")}</button>`).join("")}${kbd("Tab")}</div>` : `<span class="cap-one">${esc(cs[0].zh)}</span>`}</div>
+        <div class="ov tl"><div class="seg sm" id="own-mod">${MODALITY.map(([m, z, c]) => `<button data-m="${m}" aria-pressed="${m === o.mod}" title="Press key ${c.slice(-1)}">${z}${kbd(c.slice(-1))}</button>`).join("")}</div></div>
+        <div class="ov tr">${cs.length > 1 ? `<div class="seg sm" id="own-sel">${cs.map((c, i) => `<button data-i="${i}" aria-pressed="${i === o.cam}" title="Tab switches">${c.zh.replace("Camera", "")}</button>`).join("")}${kbd("Tab")}</div>` : `<span class="cap-one">${esc(cs[0].zh)}</span>`}</div>
         <span class="cap-bl" id="own-cam-exp"></span><span class="cap-br" id="own-cam-verdict"></span><div class="cam-extra" id="own-cam-extra"></div></figure>
       ${hasL ? `<figure class="own-lidar" id="own-lid"><canvas id="fp-own-lidar" width="320" height="164"></canvas><span class="cap-bl" id="own-lid-pts"></span><span class="cap-br" id="own-lid-near"></span>
         <div class="ov tl"><div class="seg sm" id="own-lmode">${LMODE.map(([m, z]) => `<button data-m="${m}" aria-pressed="${m === st.lid.mode}">${z}</button>`).join("")}${kbd("L")}</div></div>
-        <div class="ov tr"><label class="own-cb">着色<select id="own-cby">${COLORBY.map(([m, z]) => `<option value="${m}"${m === st.lid.colorBy ? " selected" : ""}>${z}</option>`).join("")}</select></label></div></figure>
-        <div class="own-lspec" id="own-lspec"></div>` : `<div class="own-nolid">没有激光雷达:人员带的是头盔相机和手机</div>`}
+        <div class="ov tr"><label class="own-cb">Colour<select id="own-cby">${COLORBY.map(([m, z]) => `<option value="${m}"${m === st.lid.colorBy ? " selected" : ""}>${z}</option>`).join("")}</select></label></div></figure>
+        <div class="own-lspec" id="own-lspec"></div>` : `<div class="own-nolid">No LiDAR: a person carries a helmet camera and a phone</div>`}
       <div class="fp-tele own-grid" id="fp-tele"></div>
-      <div class="own-rec" id="own-rec"><button class="btn rec" id="own-rec-btn" title="把我的设备采集的数据(相机画面、激光雷达每圈点云、位姿 / IMU 表)录成 zip">● 记录</button><select id="own-rec-sec" title="记录时长"><option value="5">5 s</option><option value="10" selected>10 s</option><option value="20">20 s</option><option value="30">30 s</option></select><span id="own-rec-msg" class="rec-msg"></span></div>`;
+      <div class="own-rec" id="own-rec"><button class="btn rec" id="own-rec-btn" title="Record the data my device collects (camera frames, LiDAR sweeps, pose / IMU table) into a zip">● Record</button><select id="own-rec-sec" title="Recording length"><option value="5">5 s</option><option value="10" selected>10 s</option><option value="20">20 s</option><option value="30">30 s</option></select><span id="own-rec-msg" class="rec-msg"></span></div>`;
     $("#own-cam-box").appendChild(o.feed.canvas); o.feed.canvas.id = "fp-own-cam";
     $$("#own-mod button").forEach((b) => b.addEventListener("click", () => { b.blur(); setModality(b.dataset.m); }));
     $$("#own-sel button").forEach((b) => b.addEventListener("click", () => { b.blur(); setCamera(+b.dataset.i); }));
@@ -117,14 +117,14 @@
     uiNow = 0;
   }
   function setModality(m) {
-    const o = st.own; if (!o || !o.feed) return; o.mod = m; o.feed.setModality(m); $$("#own-mod button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.m === m)); const ex = $("#own-cam-extra"); if (ex) ex.innerHTML = ""; uiNow = 0; toast(`相机画面:${MOD_ZH[m]}`);
+    const o = st.own; if (!o || !o.feed) return; o.mod = m; o.feed.setModality(m); $$("#own-mod button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.m === m)); const ex = $("#own-cam-extra"); if (ex) ex.innerHTML = ""; uiNow = 0; toast(`Camera view: ${MOD_ZH[m]}`);
   }
   function setCamera(i) {
     const o = st.own; if (!o || !o.cams.length) return; o.cam = ((i % o.cams.length) + o.cams.length) % o.cams.length; const spec = o.cams[o.cam], [w, h] = feedRes(spec.res, 320);
     o.feed.setSpec({ w, h, hfov: spec.hfov, fps: spec.fps, far: spec.far, device: o.body }); o.feed.hasImage = false; o.feed.last = -1e9; $$("#own-sel button").forEach((b) => b.setAttribute("aria-pressed", +b.dataset.i === o.cam));
-    $("#own-spec").innerHTML = ownSpecText(o.body); uiNow = 0; if (o.cams.length > 1) toast(`相机:${spec.zh}`);
+    $("#own-spec").innerHTML = ownSpecText(o.body); uiNow = 0; if (o.cams.length > 1) toast(`Camera: ${spec.zh}`);
   }
-  function setLidarMode(m) { st.lid.mode = m; $$("#own-lmode button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.m === m)); const mm = LMODE.find((x) => x[0] === m); toast(`激光雷达视图:${mm ? mm[1] : m}`); }
+  function setLidarMode(m) { st.lid.mode = m; $$("#own-lmode button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.m === m)); const mm = LMODE.find((x) => x[0] === m); toast(`LiDAR view: ${mm ? mm[1] : m}`); }
   const toast = (msg) => { const t = $("#fp-toast"); if (!t) return; t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => (t.hidden = true), 1400); };
   let uiNow = 0;
 
@@ -135,7 +135,7 @@
     return T;
   }
   const readTele = () => st.lastTele || null;
-  const compass = (yaw) => { const hd = (((90 - yaw * R2D) % 360) + 360) % 360, n = ["北", "东北", "东", "东南", "南", "西南", "西", "西北"][Math.round(hd / 45) % 8]; return [hd, n]; };
+  const compass = (yaw) => { const hd = (((90 - yaw * R2D) % 360) + 360) % 360, n = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"][Math.round(hd / 45) % 8]; return [hd, n]; };
   function renderTele(now) {
     const el = $("#fp-tele"); if (!el) return; const s = WK(), T = readTele(now), body = s.body, o = st.own, fs = o.feed ? o.feed.stats : {}, [hd, cn] = compass(s.yaw), P = (T && T.pose) || {};
     const rows = [];
@@ -143,21 +143,21 @@
     const wide = (k, v, cls) => `<div class="tc wide${cls ? " " + cls : ""}"><span class="tk">${k}</span><span class="tv">${v}</span></div>`;
     const bld = ES.ray && ES.ray.buildingAt ? ES.ray.buildingAt(s.x, s.y, body === "uav" ? s.z : s.zf + 1) : null, floor = bld && body !== "uav" ? Math.max(1, Math.round((s.zf - (bld.z0 || 0)) / 3.2) + 1) : 0;
     const alt = body === "uav" ? s.z - (ES.app.W ? ES.app.W.groundZ(s.x, s.y) : 0) : 0;
-    rows.push(cell("位置", `${fnum(s.x)}, ${fnum(s.y)} m`), cell("朝向", `${fnum(hd, 0)}° ${cn}`));
-    rows.push(body === "uav" ? cell("高度", `${fnum(alt)} m ${(s.vz || 0) >= 0 ? "↑" : "↓"}${fnum(Math.abs(s.vz || 0))}`) : cell("所在", bld ? `室内 ${floor} 层 · ${fnum(s.zf, 1)} m` : "室外"), cell("速度", `${fnum(s.speed || 0, 2)} m/s`));
+    rows.push(cell("Position", `${fnum(s.x)}, ${fnum(s.y)} m`), cell("Heading", `${fnum(hd, 0)}° ${cn}`));
+    rows.push(body === "uav" ? cell("Height", `${fnum(alt)} m ${(s.vz || 0) >= 0 ? "↑" : "↓"}${fnum(Math.abs(s.vz || 0))}`) : cell("Location", bld ? `Indoors, floor ${floor} · ${fnum(s.zf, 1)} m` : "Outdoors"), cell("Speed", `${fnum(s.speed || 0, 2)} m/s`));
     const pct = Math.round(100 * (s.batt ?? 1)), pw = T && T.power;
-    rows.push(cell("电量", `${pw && Number.isFinite(pw.pct) ? Math.round(pw.pct) : pct}%<i class="mbar"><b style="width:${pct}%;background:${pct < 15 ? "#f87171" : "#4ade80"}"></b></i>`, pct < 15 ? "warn" : ""));
+    rows.push(cell("Battery", `${pw && Number.isFinite(pw.pct) ? Math.round(pw.pct) : pct}%<i class="mbar"><b style="width:${pct}%;background:${pct < 15 ? "#f87171" : "#4ade80"}"></b></i>`, pct < 15 ? "warn" : ""));
     const lk = T && T.link, lnk = lk && Number.isFinite(lk.rate) ? `${lk.rate >= 10 ? Math.round(lk.rate) : fnum(lk.rate, 1)} Mb/s ${esc(lk.tech || "")}` : st.linkMine ? `${fnum(st.linkMine.good, st.linkMine.good < 10 ? 1 : 0)} Mb/s` : "—";
-    rows.push(cell("链路", lnk, lk && lk.rate <= 0 ? "bad" : ""));
-    const gn = T && T.gnss; rows.push(wide("GNSS", gn ? `${({ "3D": "3D 定位", "2D": "2D 定位", none: "无定位" })[gn.fix] || esc(gn.fix || "—")} · ${gn.sats ?? "—"} 星${Number.isFinite(gn.hdop) && gn.hdop < 90 ? " · HDOP " + fnum(gn.hdop, 1) : ""}${gn.indoor ? " · 室内" : ""}` : "—", gn && gn.fix === "none" ? "warn" : ""));
-    const im = T && T.imu; rows.push(wide("IMU", im ? `加速度 ${fnum(im.accMag ?? im.acc_mag ?? (im.acc ? Math.hypot(...im.acc) : NaN), 2)} m/s² · 角速度 ${fnum((im.gyroMag ?? im.gyro_mag ?? (im.gyro ? Math.hypot(...im.gyro) : NaN)) * R2D, 0)}°/s` : "—"));
-    if (body === "uav") { const bp = T && T.baro; rows.push(wide("气压", bp ? `${fnum(bp.pressure ?? bp.hpa, 1)} hPa · 气压高度 ${fnum(bp.alt ?? bp.altitude, 1)} m` : "—")); }
-    if (fs && Number.isFinite(fs.ev)) { const v = fs.verdict; rows.push(wide("光照", `EV ${fnum(fs.ev, 1)} · ${fmtLux(fs.lux)} lx ${v ? `<b class="vd ${v.code}">${v.zh}</b>` : ""}`)); }
-    else rows.push(wide("光照", "—"));
-    const auOn = ES.audio && ES.audio.spl && ES.audio.state && ES.audio.state().on; if (auOn) { const dB = ES.audio.spl(); if (Number.isFinite(dB) && dB > 0) rows.push(wide("声音", `${fnum(dB, 0)} dB(A)<i class="mbar"><b style="width:${clamp(((dB - 20) / 70) * 100, 0, 100)}%;background:#7dd3fc"></b></i>`)); }
+    rows.push(cell("Link", lnk, lk && lk.rate <= 0 ? "bad" : ""));
+    const gn = T && T.gnss; rows.push(wide("GNSS", gn ? `${({ "3D": "3D fix", "2D": "2D fix", none: "No fix" })[gn.fix] || esc(gn.fix || "—")} · ${gn.sats ?? "—"} sats${Number.isFinite(gn.hdop) && gn.hdop < 90 ? " · HDOP " + fnum(gn.hdop, 1) : ""}${gn.indoor ? " · indoors" : ""}` : "—", gn && gn.fix === "none" ? "warn" : ""));
+    const im = T && T.imu; rows.push(wide("IMU", im ? `Acceleration ${fnum(im.accMag ?? im.acc_mag ?? (im.acc ? Math.hypot(...im.acc) : NaN), 2)} m/s² · angular rate ${fnum((im.gyroMag ?? im.gyro_mag ?? (im.gyro ? Math.hypot(...im.gyro) : NaN)) * R2D, 0)}°/s` : "—"));
+    if (body === "uav") { const bp = T && T.baro; rows.push(wide("Pressure", bp ? `${fnum(bp.pressure ?? bp.hpa, 1)} hPa · pressure altitude ${fnum(bp.alt ?? bp.altitude, 1)} m` : "—")); }
+    if (fs && Number.isFinite(fs.ev)) { const v = fs.verdict; rows.push(wide("Light", `EV ${fnum(fs.ev, 1)} · ${fmtLux(fs.lux)} lx ${v ? `<b class="vd ${v.code}">${v.zh}</b>` : ""}`)); }
+    else rows.push(wide("Light", "—"));
+    const auOn = ES.audio && ES.audio.spl && ES.audio.state && ES.audio.state().on; if (auOn) { const dB = ES.audio.spl(); if (Number.isFinite(dB) && dB > 0) rows.push(wide("Sound", `${fnum(dB, 0)} dB(A)<i class="mbar"><b style="width:${clamp(((dB - 20) / 70) * 100, 0, 100)}%;background:#7dd3fc"></b></i>`)); }
     el.innerHTML = rows.join("");
   }
-  const fmtLux = (v) => (!Number.isFinite(v) ? "—" : v >= 10000 ? (v / 10000).toFixed(1) + " 万" : v >= 100 ? Math.round(v).toString() : v.toFixed(1));
+  const fmtLux = (v) => (!Number.isFinite(v) ? "—" : v >= 10000 ? (v / 10000).toFixed(1) + " ×10⁴" : v >= 100 ? Math.round(v).toString() : v.toFixed(1));
 
   /* ------------------------------------------------------------------ own block: per-frame update ------------------------------------------------------------------ */
   function updateOwn(now, dt) {
@@ -169,13 +169,13 @@
       uiNow = now; const fs = o.feed.stats, v = fs.verdict, ex = $("#own-cam-exp"), vd = $("#own-cam-verdict"), extra = $("#own-cam-extra");
       $("#own-cam").classList.toggle("wait", !o.feed.hasImage);
       if (o.mod === "rgb") { ex.textContent = Number.isFinite(fs.ev) ? `EV ${fnum(fs.ev, 1)} · ISO ${Math.round(fs.iso)} · 1/${Math.round(1 / fs.shutter)} s` + (fs.snrDb < 22 ? ` · SNR ${fnum(fs.snrDb, 0)} dB` : "") : ""; vd.textContent = v ? v.zh : ""; vd.className = "cap-br vd " + (v ? v.code : ""); vd.title = v ? v.detail : ""; if (extra.firstChild) extra.innerHTML = ""; }
-      else if (o.mod === "depth") { ex.textContent = Number.isFinite(fs.centre) ? `中心 ${fnum(fs.centre, 2)} m · 最近 ${fnum(fs.nearest, 2)} m` : ""; vd.textContent = `有效 ${Math.round((fs.validFrac || 0) * 100)}%`; vd.className = "cap-br"; if (!extra.firstChild) extra.innerHTML = depthBar(spec.far); }
+      else if (o.mod === "depth") { ex.textContent = Number.isFinite(fs.centre) ? `centre ${fnum(fs.centre, 2)} m · nearest ${fnum(fs.nearest, 2)} m` : ""; vd.textContent = `valid ${Math.round((fs.validFrac || 0) * 100)}%`; vd.className = "cap-br"; if (!extra.firstChild) extra.innerHTML = depthBar(spec.far); }
       else { const cl = fs.classes || {}, top = Object.entries(cl).sort((a, b2) => b2[1] - a[1]).slice(0, 4); ex.textContent = ""; vd.textContent = ""; vd.className = "cap-br"; extra.innerHTML = `<div class="semleg">${top.map(([n, f]) => { const i = ES.camfeed.SEM.id[n], c = ES.camfeed.SEM.rgb[i]; return `<span><i style="background:rgb(${c[0]},${c[1]},${c[2]})"></i>${ES.camfeed.SEM.zh[i]} ${Math.round(f * 100)}%</span>`; }).join("")}</div>`; }
       renderTele(now);
       if (o.scanner) {
         const sw = o.scanner.last, L = LIDARS[body], M = (ES.lidar.MODELS && ES.lidar.MODELS[L.model]) || {}, stt = (sw && sw.stats) || {}, cap = $("#own-lspec"), near = stt.nearestM;
-        if (cap) cap.innerHTML = `<b>${esc(L.zh)}</b> · ${M.h_fov || L.hfov}°×${(M.v_max ?? L.vmax) - (M.v_min ?? L.vmin)}° · ≤${M.max_range || L.range} m · ${M.rate_hz || L.rate} Hz · 每圈 <b>${stt.points != null ? stt.points : "—"}</b> 点 · 最近障碍 <b>${Number.isFinite(near) ? fnum(near, 1) + " m" : "—"}</b>`;
-        o.sweep = sw; const lp = $("#own-lid-pts"), ln = $("#own-lid-near"); if (lp) lp.textContent = stt.points != null ? `${stt.points} 点` : ""; if (ln) ln.textContent = Number.isFinite(near) ? `最近 ${fnum(near, 1)} m` : "";
+        if (cap) cap.innerHTML = `<b>${esc(L.zh)}</b> · ${M.h_fov || L.hfov}°×${(M.v_max ?? L.vmax) - (M.v_min ?? L.vmin)}° · ≤${M.max_range || L.range} m · ${M.rate_hz || L.rate} Hz · <b>${stt.points != null ? stt.points : "—"}</b> points per sweep · nearest obstacle <b>${Number.isFinite(near) ? fnum(near, 1) + " m" : "—"}</b>`;
+        o.sweep = sw; const lp = $("#own-lid-pts"), ln = $("#own-lid-near"); if (lp) lp.textContent = stt.points != null ? `${stt.points} pts` : ""; if (ln) ln.textContent = Number.isFinite(near) ? `nearest ${fnum(near, 1)} m` : "";
       }
     }
     if (st.rec) recTick(now);
@@ -191,7 +191,7 @@
     const V = VV(), A = ES.app, out = [], hid = V && V.hide != null ? V.hide : null;
     if (V && V.live && V.live.userData && V.liveEp) for (const it of V.live.userData.items) {
       const k = it.kind === "dog" ? "dog" : it.kind === "uav" ? "uav" : it.kind === "rover" ? "rover" : it.id === "human_0" ? "human" : null; if (!k || !it.model) continue;
-      out.push({ id: "live:" + it.id, name: ({ dog_0: "机械狗(回合)", uav_0: "无人机(回合)", rover_0: "机器人(回合)", human_0: "应急人员(回合)" })[it.id] || it.id, kind: k, live: true, it, model: it.model });
+      out.push({ id: "live:" + it.id, name: ({ dog_0: "Quadruped robot (episode)", uav_0: "UAV (episode)", rover_0: "Robot (episode)", human_0: "Responder (episode)" })[it.id] || it.id, kind: k, live: true, it, model: it.model });
     }
     for (const e of (A && A.ents) || []) { if (e.id === hid || !KIND[e.kind]) continue; out.push({ id: "ent:" + e.id, name: e.name || KIND[e.kind].zh, kind: e.kind, live: false, e }); }
     return out;
@@ -258,14 +258,14 @@
     const [w, h] = feedRes(cam.res, 160);
     el.innerHTML = `<header><span class="ico">${K.icon}</span><b>${esc(d.name)}</b><small>${esc(K.model)} · ${esc(hasLid ? L.zh : cam.zh)}</small><span class="brg"><i class="arr">➤</i><span class="dist">—</span></span></header>
       <div class="nc-body${hasLid ? " haslid" : ""}"><figure class="nc-cam" style="--ar:${cam.res[0]} / ${cam.res[1]}"><div class="nc-cbox"></div><figcaption>${esc(cam.zh)} ${cam.hfov}°</figcaption></figure>${hasLid ? `<figure class="nc-lid"><canvas width="96" height="96"></canvas></figure>` : ""}
-        <div class="nc-side"><span class="los chip">—</span><span class="seen">视野内 —</span>${hasLid ? `<span class="lidtxt">雷达 —</span><span class="near"></span>` : ""}</div></div>
-      <div class="nc-foot"><span class="lnk">链路 —</span></div>`;
+        <div class="nc-side"><span class="los chip">—</span><span class="seen">In view —</span>${hasLid ? `<span class="lidtxt">LiDAR —</span><span class="near"></span>` : ""}</div></div>
+      <div class="nc-foot"><span class="lnk">Link —</span></div>`;
     (side === "l" ? $("#fp-near-l") : $("#fp-near-r")).appendChild(el); requestAnimationFrame(() => el.classList.remove("fade"));
     const card = { id: d.id, d, el, side, feed: null, order: cardSeq++, scanner: null, lt: 0, stat: {}, tStat: 0, flash: 0 };
     card.feed = ES.camfeed.create({ id: "nc-" + d.id, w, h, hfov: cam.hfov, modality: "rgb", fps: 5, far: cam.far, device: d.kind, ss: 1, hideObject: () => (card.d.live ? card.d.model : devModel(card.d)) });
     $(".nc-cbox", el).appendChild(card.feed.canvas);
     if (hasLid) card.scanner = LID.forDevice(() => card.d);
-    el.addEventListener("click", () => flashDevice(card)); el.title = "点一下:在小地图上闪一下它的位置";
+    el.addEventListener("click", () => flashDevice(card)); el.title = "Click: flash its position on the mini-map";
     return card;
   }
   function devModel(d) { const V = VV(); if (!V || !V.agents) return null; for (const g of V.agents.children) if (g.userData.eid === d.e.id) return g; return null; }
@@ -288,18 +288,18 @@
       $(".dist", el).textContent = dist >= 100 ? Math.round(dist) + " m" : dist.toFixed(dist < 10 ? 1 : 0) + " m"; $(".arr", el).style.transform = `rotate(${-rel * R2D - 90}deg)`;
       // LOS from my eye to its sensor head, link to me / command post
       const hd = [b.x, b.y, d.kind === "uav" ? b.z : b.z + (KIND[d.kind].base || 1) + (d.kind === "human" ? 1.4 : 0.1)], eye = st.meEye, los = !losBlocked(eye, hd);
-      const lc = $(".los", el); lc.textContent = los ? "视距 ✓" : "遮挡 ✗"; lc.className = "los chip " + (los ? "ok" : "no");
+      const lc = $(".los", el); lc.textContent = los ? "LOS ✓" : "Blocked ✗"; lc.className = "los chip " + (los ? "ok" : "no");
       card.los = los;
       // what its camera sees: people / vehicles / machines in its frustum, behind no wall
       const cam = CAMS[d.kind][0], cp0 = card.feed.pose, hfov = card.feed.hfov, vf = (2 * Math.atan(Math.tan((hfov * Math.PI) / 360) / (card.feed.w / card.feed.h))) * R2D;
       const cc = { x: cp0.x, y: cp0.y, z: cp0.z, yaw: cp0.yaw, pitch: cp0.pitch, hfov, aspect: card.feed.w / card.feed.h, res: cam.res, omni: false, range: 300 }, B = P.camBasis(cc), cnt = { person: 0, vehicle: 0, robot: 0, uav: 0 };
       for (const t of tg) { if (t.uid === c.d.id || t.uid === "live:" + (d.it && d.it.id) || t.uid === "ent:" + (d.e && d.e.id)) continue; const rng = Math.min(250, P.detectRange(cc, t.ext)), c2 = Object.assign({}, cc, { range: rng }); if (!P.inFrustum(c2, B, t.x, t.y, t.z)) continue; if (losBlocked([cp0.x, cp0.y, cp0.z], [t.x, t.y, t.z])) continue; cnt[t.cls]++; }
-      card.stat.cnt = cnt; const parts = []; if (cnt.person) parts.push(`人 ${cnt.person}`); if (cnt.vehicle) parts.push(`车 ${cnt.vehicle}`); if (cnt.robot + cnt.uav) parts.push(`机器 ${cnt.robot + cnt.uav}`);
-      $(".seen", el).innerHTML = "<i>视野内</i> " + (parts.length ? parts.join(" · ") : "无目标");
+      card.stat.cnt = cnt; const parts = []; if (cnt.person) parts.push(`person ${cnt.person}`); if (cnt.vehicle) parts.push(`car ${cnt.vehicle}`); if (cnt.robot + cnt.uav) parts.push(`robot ${cnt.robot + cnt.uav}`);
+      $(".seen", el).innerHTML = "<i>In view</i> " + (parts.length ? parts.join(" · ") : "no targets");
       // radio: to me, to the command post
-      let lt = ""; if (W && P && ES.RADIOS) { const nodeD = { x: b.x, y: b.y, z: d.kind === "uav" ? b.z : b.z + (ES.DEVICES[d.kind].antH || 1), radios: ES.DEVICES[d.kind].radios }; const toMe = linkOf(nodeD, meNode), toCp = cp && !(d.e && d.e.id === cp.id) ? linkOf(nodeD, { x: cp.x, y: cp.y, z: (ES.DEVICES.cp.antH || 6) + surf(cp.x, cp.y), radios: ES.DEVICES.cp.radios }) : null; lt = `→我 ${fmtRate(toMe)}` + (toCp ? ` · →站 ${fmtRate(toCp)}` : ""); card.stat.toMe = toMe; card.stat.toCp = toCp; }
-      $(".lnk", el).textContent = lt || "链路 —";
-      if (card.scanner) { const sw = card.scanner.last, s2 = (sw && sw.stats) || {}, pts = s2.points ?? (sw && sw.n), near = s2.nearestM; $(".lidtxt", el).textContent = sw ? `雷达 ${pts} 点` : "雷达 …"; $(".near", el).textContent = sw ? `最近 ${Number.isFinite(near) ? near.toFixed(1) + " m" : "—"}` : ""; card.stat.pts = pts; card.stat.near = near; }
+      let lt = ""; if (W && P && ES.RADIOS) { const nodeD = { x: b.x, y: b.y, z: d.kind === "uav" ? b.z : b.z + (ES.DEVICES[d.kind].antH || 1), radios: ES.DEVICES[d.kind].radios }; const toMe = linkOf(nodeD, meNode), toCp = cp && !(d.e && d.e.id === cp.id) ? linkOf(nodeD, { x: cp.x, y: cp.y, z: (ES.DEVICES.cp.antH || 6) + surf(cp.x, cp.y), radios: ES.DEVICES.cp.radios }) : null; lt = `→me ${fmtRate(toMe)}` + (toCp ? ` · →station ${fmtRate(toCp)}` : ""); card.stat.toMe = toMe; card.stat.toCp = toCp; }
+      $(".lnk", el).textContent = lt || "Link —";
+      if (card.scanner) { const sw = card.scanner.last, s2 = (sw && sw.stats) || {}, pts = s2.points ?? (sw && sw.n), near = s2.nearestM; $(".lidtxt", el).textContent = sw ? `LiDAR ${pts} pts` : "LiDAR …"; $(".near", el).textContent = sw ? `nearest ${Number.isFinite(near) ? near.toFixed(1) + " m" : "—"}` : ""; card.stat.pts = pts; card.stat.near = near; }
     }
     // my own link to the command post for the readout grid
     if (cp && P && ES.RADIOS) st.linkMine = linkOf(meNode, { x: cp.x, y: cp.y, z: (ES.DEVICES.cp.antH || 6) + surf(cp.x, cp.y), radios: ES.DEVICES.cp.radios });
@@ -309,7 +309,7 @@
     for (const [ka, kb] of P.radioGroupPairs(A.radios, B.radios)) { const ab = P.link(W, A, B, ES.RADIOS[ka], ES.RADIOS[kb], null), ba = P.link(W, B, A, ES.RADIOS[kb], ES.RADIOS[ka], null), good = Math.min(ab.good, ba.good); if (!best || good > best.good) best = { good, tech: ka === kb ? ka : ka + "↔" + kb, snr: Math.min(ab.snr, ba.snr), los: ab.los }; }
     return best;
   }
-  const fmtRate = (l) => (!l ? "—" : l.good > 0 ? (l.good >= 10 ? Math.round(l.good) : l.good.toFixed(1)) + " Mb/s" : "断开");
+  const fmtRate = (l) => (!l ? "—" : l.good > 0 ? (l.good >= 10 ? Math.round(l.good) : l.good.toFixed(1)) + " Mb/s" : "disconnected");
   function drawCardLidars(now) {
     for (const card of st.near.values()) { if (!card.scanner || now - card.lt < 500) continue; card.lt = now; const cv = $(".nc-lid canvas", card.el); if (cv) LID.draw(cv, card.scanner.last, { mode: "top", colorBy: "height", range: "auto", rings: false, pointSize: 2 }); }
   }
@@ -330,11 +330,11 @@
 
   /* ------------------------------------------------------------------ recorder (stretch): rgb/depth/sem frames + LiDAR sweeps + pose / IMU csv -> zip ------------------------------------------------------------------ */
   const JSZIP_URL = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"; let zipP = null;
-  const loadZip = () => (window.JSZip ? Promise.resolve() : zipP || (zipP = new Promise((res, rej) => { const s = document.createElement("script"); s.src = JSZIP_URL; s.onload = res; s.onerror = () => rej(new Error("JSZip 加载失败")); document.head.appendChild(s); })));
+  const loadZip = () => (window.JSZip ? Promise.resolve() : zipP || (zipP = new Promise((res, rej) => { const s = document.createElement("script"); s.src = JSZIP_URL; s.onload = res; s.onerror = () => rej(new Error("JSZip failed to load")); document.head.appendChild(s); })));
   function startRecording(sec) {
     const o = st.own; if (!o || !o.feed || st.rec) return; loadZip().catch(() => {});
     const A = ES.app, s = WK(); st.rec = { t0: performance.now(), dur: sec * 1000, frames: [], sweeps: [], csv: ["t_s,x_m,y_m,z_m,yaw_deg,pitch_deg,speed_mps,battery_pct,acc_mag,gyro_dps,cam_ev,cam_iso,cam_shutter_s,gnss_fix,link_mbps"], lastFrame: -1, lastSweep: null, lastRow: 0, busy: 0, body: s.body, cam: o.cams[o.cam], mod: o.mod, scene: A.name, look: A.look, done: false };
-    const b = $("#own-rec-btn"); b.textContent = "■ 停止"; b.classList.add("on"); $("#own-rec-msg").textContent = "记录中…"; $("#own-rec-sec").disabled = true;
+    const b = $("#own-rec-btn"); b.textContent = "■ Stop"; b.classList.add("on"); $("#own-rec-msg").textContent = "Recording…"; $("#own-rec-sec").disabled = true;
   }
   function recTick(now) {
     const r = st.rec; if (!r || r.done) return; const o = st.own, t = now - r.t0, s = WK(), T = readTele(now) || {};
@@ -342,30 +342,30 @@
       if (mod === "depth" && f.depth) r.frames.push({ t, name: `cam/${String(idx).padStart(5, "0")}.f32`, blob: new Blob([f.depth.slice().buffer]) }), r.busy--; else f.canvas.toBlob((bl) => { r.frames.push({ t, name: `cam/${String(idx).padStart(5, "0")}.png`, blob: bl }); r.busy--; }, "image/png"); }
     const o2 = o.scanner && o.scanner.last; if (o2 && o2.rev !== r.lastSweep) { r.lastSweep = o2.rev; const n = o2.n ?? (o2.xyz ? o2.xyz.length / 3 : 0), buf = new Float32Array(n * 5); for (let i = 0; i < n; i++) { buf[5 * i] = o2.xyz[3 * i]; buf[5 * i + 1] = o2.xyz[3 * i + 1]; buf[5 * i + 2] = o2.xyz[3 * i + 2]; buf[5 * i + 3] = o2.intensity ? o2.intensity[i] : 0; buf[5 * i + 4] = o2.cls ? o2.cls[i] : 0; } r.sweeps.push({ t, name: `lidar/${String(r.sweeps.length).padStart(5, "0")}.f32`, blob: new Blob([buf.buffer]), n }); }
     if (now - r.lastRow > 100) { r.lastRow = now; const fs = o.feed.stats, im = T.imu || {}, [hd] = compass(s.yaw); r.csv.push([(t / 1000).toFixed(3), s.x.toFixed(3), s.y.toFixed(3), (s.body === "uav" ? s.z : s.zf).toFixed(3), (hd).toFixed(1), (s.pitch * R2D).toFixed(1), (s.speed || 0).toFixed(3), Math.round(100 * (s.batt ?? 1)), fnum(im.accMag ?? NaN, 3), fnum((im.gyroMag ?? NaN) * R2D, 2), fnum(fs.ev, 2), fnum(fs.iso, 0), fnum(fs.shutter, 6), (T.gnss && T.gnss.fix) || "", st.linkMine ? st.linkMine.good.toFixed(1) : ""].join(",")); }
-    $("#own-rec-msg").textContent = `记录中 ${Math.max(0, (r.dur - t) / 1000).toFixed(1)} s · ${r.frames.length} 帧 · ${r.sweeps.length} 圈`;
+    $("#own-rec-msg").textContent = `Recording ${Math.max(0, (r.dur - t) / 1000).toFixed(1)} s · ${r.frames.length} frames · ${r.sweeps.length} sweeps`;
     if (t >= r.dur) finishRecording();
   }
   async function finishRecording() {
-    const r = st.rec; if (!r || r.done) return; r.done = true; const msg = $("#own-rec-msg"); msg.textContent = "打包中…";
+    const r = st.rec; if (!r || r.done) return; r.done = true; const msg = $("#own-rec-msg"); msg.textContent = "Packing…";
     try {
       await loadZip(); const t1 = performance.now(); while (r.busy > 0 && performance.now() - t1 < 3000) await new Promise((x) => setTimeout(x, 30));
       const z = new window.JSZip(), A = ES.app, tag = `${A.name}_${r.body}_${new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19)}`;
       for (const f of r.frames) z.file(f.name, f.blob); for (const f of r.sweeps) z.file(f.name, f.blob); z.file("pose_imu.csv", r.csv.join("\n"));
       z.file("meta.json", JSON.stringify({ app: "es-world-lab", scene: r.scene, look: r.look, device: r.body, camera: r.cam, modality: r.mod, frames: r.frames.length, lidar_sweeps: r.sweeps.length, duration_s: r.dur / 1000, note: "cam/*.png = camera picture (rgb or semantic class colours); cam/*.f32 = metric depth, float32 little-endian, row-major top-down, NaN = no return; lidar/*.f32 = float32 [x, y, z, intensity, class] per point in the world-aligned frame centred on the sensor", t: new Date().toISOString() }, null, 1));
-      const blob = await z.generateAsync({ type: "blob", compression: "DEFLATE", compressionOptions: { level: 3 } }), url = URL.createObjectURL(blob), a = document.createElement("a"); a.href = url; a.download = `es-world_${tag}.zip`; a.textContent = `下载 zip(${(blob.size / 1048576).toFixed(1)} MB)`; a.className = "btn rec-dl";
-      const box = $("#own-rec"); box.querySelectorAll(".rec-dl").forEach((x) => x.remove()); box.appendChild(a); msg.textContent = `${r.frames.length} 帧 · ${r.sweeps.length} 圈 · ${(blob.size / 1048576).toFixed(1)} MB`; st.recResult = { frames: r.frames.length, sweeps: r.sweeps.length, bytes: blob.size, rows: r.csv.length - 1, name: a.download, url };
-    } catch (e) { msg.textContent = "打包失败:" + e.message; }
+      const blob = await z.generateAsync({ type: "blob", compression: "DEFLATE", compressionOptions: { level: 3 } }), url = URL.createObjectURL(blob), a = document.createElement("a"); a.href = url; a.download = `es-world_${tag}.zip`; a.textContent = `Download zip (${(blob.size / 1048576).toFixed(1)} MB)`; a.className = "btn rec-dl";
+      const box = $("#own-rec"); box.querySelectorAll(".rec-dl").forEach((x) => x.remove()); box.appendChild(a); msg.textContent = `${r.frames.length} frames · ${r.sweeps.length} sweeps · ${(blob.size / 1048576).toFixed(1)} MB`; st.recResult = { frames: r.frames.length, sweeps: r.sweeps.length, bytes: blob.size, rows: r.csv.length - 1, name: a.download, url };
+    } catch (e) { msg.textContent = "Packing failed: " + e.message; }
     resetRecUi(); st.rec = null;
   }
   function stopRecording() { const r = st.rec; if (!r) return; r.dur = performance.now() - r.t0 - 1; }
-  function resetRecUi() { const b = $("#own-rec-btn"); if (b) { b.textContent = "● 记录"; b.classList.remove("on"); } const s = $("#own-rec-sec"); if (s) s.disabled = false; }
+  function resetRecUi() { const b = $("#own-rec-btn"); if (b) { b.textContent = "● Record"; b.classList.remove("on"); } const s = $("#own-rec-sec"); if (s) s.disabled = false; }
 
   /* ------------------------------------------------------------------ keys (legend rows come from ES.controls) ------------------------------------------------------------------ */
   function registerKeys() {
     const C = ES.controls; if (!C || registerKeys.done) return; registerKeys.done = true;
-    C.add({ bodies: "all", group: "传感器", keys: ["1", "2", "3"], codes: ["Digit1", "Digit2", "Digit3"], desc: "相机画面:彩色 / 深度 / 语义", fn: (code, down) => { if (down && st.active) setModality({ Digit1: "rgb", Digit2: "depth", Digit3: "sem" }[code]); } });
-    C.add({ bodies: ["dog", "uav"], group: "传感器", keys: ["Tab"], codes: ["Tab"], desc: "切换相机:前 ⇄ 后(狗)/ 云台 ⇄ 前视(无人机)", fn: (code, down) => { if (down && st.active) setCamera(st.own.cam + 1); } });
-    C.add({ bodies: ["dog", "uav"], group: "传感器", keys: ["L"], codes: ["KeyL"], desc: "激光雷达视图:俯视 / 侧视 / 三维", fn: (code, down) => { if (down && st.active) { const i = LMODE.findIndex((m) => m[0] === st.lid.mode); setLidarMode(LMODE[(i + 1) % LMODE.length][0]); } } });
+    C.add({ bodies: "all", group: "Sensors", keys: ["1", "2", "3"], codes: ["Digit1", "Digit2", "Digit3"], desc: "Camera mode", fn: (code, down) => { if (down && st.active) setModality({ Digit1: "rgb", Digit2: "depth", Digit3: "sem" }[code]); } });
+    C.add({ bodies: ["dog", "uav"], group: "Sensors", keys: ["Tab"], codes: ["Tab"], desc: "Switch camera", fn: (code, down) => { if (down && st.active) setCamera(st.own.cam + 1); } });
+    C.add({ bodies: ["dog", "uav"], group: "Sensors", keys: ["L"], codes: ["KeyL"], desc: "LiDAR view", fn: (code, down) => { if (down && st.active) { const i = LMODE.findIndex((m) => m[0] === st.lid.mode); setLidarMode(LMODE[(i + 1) % LMODE.length][0]); } } });
   }
 
   /* ------------------------------------------------------------------ lifecycle ------------------------------------------------------------------ */

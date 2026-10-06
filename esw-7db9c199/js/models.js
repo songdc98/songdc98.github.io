@@ -5,7 +5,7 @@
   ES.ASSET_DIR = ES.ASSET_DIR || "assets";
   const LOADER_URL = "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js";
   let loaderP = null;
-  const loadLoader = () => (window.THREE && THREE.GLTFLoader ? Promise.resolve() : loaderP || (loaderP = new Promise((res, rej) => { const s = document.createElement("script"); s.src = LOADER_URL; s.onload = res; s.onerror = () => rej(new Error("GLTFLoader 加载失败")); document.head.appendChild(s); })));
+  const loadLoader = () => (window.THREE && THREE.GLTFLoader ? Promise.resolve() : loaderP || (loaderP = new Promise((res, rej) => { const s = document.createElement("script"); s.src = LOADER_URL; s.onload = res; s.onerror = () => rej(new Error("GLTFLoader failed to load")); document.head.appendChild(s); })));
   const CACHE = {}, READY = {}, GLTF = {};
   /* every GLB goes through one queue with at most 4 requests in flight (a burst of 40 files, e.g. the tree LODs, overflows the listen queue of simple static servers);
      `name` may contain a sub-folder ("props/bench"); GLTF[name] keeps the whole parsed glTF (animations, cameras) next to READY[name] = gltf.scene */

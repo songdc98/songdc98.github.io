@@ -223,7 +223,7 @@
   P.route2d = function (W, a, b, embKey) {
     const E = ES.EMB[embKey], F = P.navField(W, embKey), N = W.N;
     const s = nearestFree(W, F, a[0], a[1]), g = nearestFree(W, F, b[0], b[1]);
-    if (s < 0 || g < 0) return { ok: false, reason: "起点或终点附近没有可通行区域" };
+    if (s < 0 || g < 0) return { ok: false, reason: "No passable area near the start or the goal" };
     const gx = g % N, gy = (g - gx) / N, G = new Float32Array(N * N).fill(Infinity), par = new Int32Array(N * N).fill(-1), done = new Uint8Array(N * N);
     const hz = (id) => { const x = id % N, y = (id - x) / N, dx = Math.abs(x - gx), dy = Math.abs(y - gy); return Math.max(dx, dy) + (Math.SQRT2 - 1) * Math.min(dx, dy); };
     const heap = []; const push = (k, v) => { let i = heap.length; heap.push([k, v]); while (i > 0) { const p = (i - 1) >> 1; if (heap[p][0] <= k) break; heap[i] = heap[p]; i = p; } heap[i] = [k, v]; };
@@ -239,7 +239,7 @@
         const c = G[u] + w * F.cost[v]; if (c < G[v]) { G[v] = c; par[v] = u; push(c + hz(v), v); }
       }
     }
-    if (!found) return { ok: false, reason: "没有可通行路径(被建筑、围栏或废墟围住)" };
+    if (!found) return { ok: false, reason: "No passable path (enclosed by buildings, fences or rubble)" };
     let cells = []; for (let v = g; v !== -1; v = par[v]) cells.push(v); cells.reverse();
     // string pulling over the inflated free mask
     const out = [cells[0]]; let anchor = 0;

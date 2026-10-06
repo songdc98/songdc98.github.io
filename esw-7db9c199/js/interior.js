@@ -62,10 +62,10 @@
   /* is fixture `li` (index in the building's lights[]) of building `bid` lit right now? (power cut and room switch; used by the sensor models) */
   I.lightOn = (bid, li, Lr) => { indexRooms(); if (!st.roomOf) return Lr ? !!Lr.on : false; const r = st.roomOf[roomKey(bid, Lr.storey, Lr.room)]; return r ? !!(r.on && st.power) : !!Lr.on; };
   I.toggleHere = () => {
-    const r = I.hereRoom(); if (!r) return toast("你不在房间里");
-    if (!r.nLights) return toast(`${r.name}:这间房没有灯`);
-    if (!st.power) return toast("停电中:先点「来电」");
-    I.setRoom(r.g, !r.on); toast(`${r.name}:灯 ${r.on ? "开" : "关"}`); updateChips();
+    const r = I.hereRoom(); if (!r) return toast("You are not in a room");
+    if (!r.nLights) return toast(`${r.name}: this room has no lights`);
+    if (!st.power) return toast("Power is cut: press \"Restore power\" first");
+    I.setRoom(r.g, !r.on); toast(`${r.name}: lights ${r.on ? "on" : "off"}`); updateChips();
   };
   const toast = (m) => { const t = document.getElementById("fp-toast"); if (!t) return; t.textContent = m; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => (t.hidden = true), 1600); };
 
@@ -73,20 +73,20 @@
   function buildChips() {
     const box = document.getElementById("fp-acts") || document.querySelector(".fp-acts"); if (!box || document.getElementById("fp-lt-room")) return;
     const mk = (id, text, title, fn) => { const b = document.createElement("button"); b.type = "button"; b.className = "btn chip-lt"; b.id = id; b.textContent = text; b.title = title; b.addEventListener("click", () => { b.blur(); fn(); updateChips(); }); box.insertBefore(b, box.querySelector("label")); return b; };
-    mk("fp-lt-room", "本房间灯", "G 键:开 / 关你所在房间的灯", () => I.toggleHere());
-    mk("fp-lt-all", "全部灯", "全部开灯 / 全部关灯", () => { const c = ctx(); if (!c) return; const anyOn = c.rooms.some((r) => r.on && r.nLights); if (!st.power) I.setPower(true); I.setAll(!anyOn); });
-    mk("fp-power", "停电", "全局断电 / 来电(断电后所有房间的灯都灭,各房间的开关状态保留)", () => I.setPower(!st.power));
+    mk("fp-lt-room", "Room lights", "G key: toggle the lights of the room you are in", () => I.toggleHere());
+    mk("fp-lt-all", "All lights", "All on / all off", () => { const c = ctx(); if (!c) return; const anyOn = c.rooms.some((r) => r.on && r.nLights); if (!st.power) I.setPower(true); I.setAll(!anyOn); });
+    mk("fp-power", "Power cut", "Global power cut / restore (after a cut every room's lights go out; each room's switch state is kept)", () => I.setPower(!st.power));
     updateChips();
   }
   function updateChips() {
     const a = document.getElementById("fp-lt-room"), b = document.getElementById("fp-lt-all"), p = document.getElementById("fp-power"); if (!a) return;
     const r = I.hereRoom(), c = ctx();
-    a.textContent = !r ? "本房间灯 —" : !r.nLights ? "本房间灯 无灯" : `本房间灯 ${r.on && st.power ? "开" : "关"}`; a.classList.toggle("on", !!(r && r.on && st.power && r.nLights));
-    if (c) { const n = c.rooms.filter((q) => q.on && q.nLights).length, tot = c.rooms.filter((q) => q.nLights).length; b.textContent = `全部灯 ${n}/${tot} 亮`; b.classList.toggle("on", n > 0 && st.power); }
-    p.textContent = st.power ? "停电" : "来电"; p.classList.toggle("on", !st.power);
+    a.textContent = !r ? "Room lights —" : !r.nLights ? "Room lights none" : `Room lights ${r.on && st.power ? "on" : "off"}`; a.classList.toggle("on", !!(r && r.on && st.power && r.nLights));
+    if (c) { const n = c.rooms.filter((q) => q.on && q.nLights).length, tot = c.rooms.filter((q) => q.nLights).length; b.textContent = `All lights ${n}/${tot} on`; b.classList.toggle("on", n > 0 && st.power); }
+    p.textContent = st.power ? "Power cut" : "Restore power"; p.classList.toggle("on", !st.power);
   }
   ES.bus.on("walk:enter", () => { buildChips(); indexRooms(); updateChips(); });
-  ES.controls.add({ bodies: "all", group: "灯光", keys: ["G"], codes: ["KeyG"], desc: "开 / 关你所在房间的灯(面板里有 全部灯 / 停电)", fn(code, down) { if (down) { I.toggleHere(); updateChips(); } } });
+  ES.controls.add({ bodies: "all", group: "Lighting", keys: ["G"], codes: ["KeyG"], desc: "Toggle room lights", fn(code, down) { if (down) { I.toggleHere(); updateChips(); } } });
 
   /* ---------------------------------------------------------------- sun bounce per room ----------------------------------------------------------------
      First bounce of the sun beams that enter through the windows / open doors (flux through each portal, beam landing surface albedo) spread by the integrating-sphere formula

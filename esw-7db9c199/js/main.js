@@ -18,13 +18,13 @@
   async function detect(manual) {
     const here = new URL(".", location.href).href.replace(/\/$/, "");
     for (const base of [...new Set([...(isLocal || manual ? [here] : []), ...(manual ? ["http://127.0.0.1:8765"] : [])])]) {
-      try { const r = await fetch(base + "/api/ping", { cache: "no-store" }); if (r.ok) { const j = await r.json(); if (j.service === "es-world-lab") { ES.api = base; $("#engdot").classList.add("on"); $("#engtxt").textContent = "本机引擎已连接 · " + (j.engine || "Python"); ES.bus.emit("engine", j); return true; } } } catch (e) {}
+      try { const r = await fetch(base + "/api/ping", { cache: "no-store" }); if (r.ok) { const j = await r.json(); if (j.service === "es-world-lab") { ES.api = base; $("#engdot").classList.add("on"); $("#engtxt").textContent = "Local engine connected · " + (j.engine || "Python"); ES.bus.emit("engine", j); return true; } } } catch (e) {}
     }
-    if (manual) $("#engtxt").textContent = "没有连上本机引擎(见参考页)";
+    if (manual) $("#engtxt").textContent = "No local engine found (see the Reference page)";
     return false;
   }
   $("#engine").style.cursor = "pointer";
-  $("#engine").title = isLocal ? "本机引擎状态" : "点击尝试连接本机引擎(需要在这台电脑上运行 scripts/serve_lab.py;浏览器可能询问是否允许访问本地网络,请选允许)";
+  $("#engine").title = isLocal ? "Local engine status" : "Click to try connecting to the local engine (run scripts/serve_lab.py on this computer; the browser may ask for permission to access the local network: choose Allow)";
   $("#engine").addEventListener("click", () => { if (!ES.api) detect(true); });
-  ES.appBoot().then(() => { if (isLocal) detect(false); const h = location.hash.slice(1); if (h && ["replay", "gallery", "ref"].includes(h)) show(h); }).catch((e) => { console.error(e); document.body.insertAdjacentHTML("afterbegin", `<pre style="padding:16px;color:#a00">启动失败:${e.message}\n请通过 HTTP 访问(不要直接双击 index.html),例如 python3 -m http.server</pre>`); });
+  ES.appBoot().then(() => { if (isLocal) detect(false); const h = location.hash.slice(1); if (h && ["replay", "gallery", "ref"].includes(h)) show(h); }).catch((e) => { console.error(e); document.body.insertAdjacentHTML("afterbegin", `<pre style="padding:16px;color:#a00">Start-up failed: ${e.message}\nOpen the page over HTTP (do not double-click index.html), e.g. python3 -m http.server</pre>`); });
 })();

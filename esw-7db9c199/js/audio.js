@@ -614,7 +614,7 @@
 
   /* ===================================== 7. sources, mixing ===================================== */
   const Q_OF = { omni: 1, speech: 2.2, horn: 5, rotor: 1.3, cardioid: 3 };
-  const TAG = { direct: "直达", same: "同室", wall: "穿墙", diffr: "绕射", portal: "门窗", blocked: "遮挡", self: "自身", bed: "环境" };
+  const TAG = { direct: "Direct", same: "Same room", wall: "Through wall", diffr: "Diffracted", portal: "Door / window", blocked: "Occluded", self: "Self", bed: "Ambient" };
   /* a looping sound source of the scene (one-shots go through Mixer.shot). Behaviours move it and set dyn / rate / active each frame. */
   class Src {
     constructor(o) {
@@ -824,7 +824,7 @@
   const volDb = () => -40 + 60 * S.pref.vol;
   const hash = (a, b = 0) => { const v = Math.sin(a * 12.9898 + b * 78.233) * 43758.5453; return v - Math.floor(v); };
   const gauss = () => { let u = 0; for (let i = 0; i < 4; i++) u += Math.random(); return (u - 2) * 1.7; };
-  const NAMES = { rotor: "无人机旋翼", dog_servo: "机械狗电机", rover: "配送机器人", birds_a: "鸟鸣", birds_b: "鸟鸣", wind_trees: "风吹树叶", traffic: "远处车流", crickets: "夜虫", siren_wail: "救护车警笛", siren_yelp: "警笛", car: "汽车驶过", dog_bark: "狗叫", hvac: "空调风机", fridge: "冰箱嗡嗡", generator: "发电机", transformer: "变压器嗡声", school_bell: "校铃", phone_ring: "手机铃声", horn: "汽车喇叭", fire: "火焰声", creak: "结构吱嘎", speech_help_m: "呼救", speech_help_f: "呼救", speech_anyone_m: "喊\"有人吗\"", speech_anyone_f: "喊\"有人吗\"", speech_conv_m: "说话声", speech_conv_f: "说话声", speech_overhere_m: "喊话", speech_babble: "人群嘈杂", breath_rest: "自己的呼吸", breath_hard: "自己的喘息", cloth: "衣物摩擦", windmic: "麦克风风噪", steps_concrete: "脚步", steps_grass: "脚步(草地)", steps_gravel: "脚步(碎石)", steps_rubble: "脚步(瓦砾)", steps_wood: "脚步(木地板)", steps_tile: "脚步(瓷砖)", steps_carpet: "脚步(地毯)", dog_feet: "机械狗脚步", door_open: "开门", door_close: "关门" };
+  const NAMES = { rotor: "UAV rotors", dog_servo: "Dog motors", rover: "Delivery robot", birds_a: "Birdsong", birds_b: "Birdsong", wind_trees: "Wind in leaves", traffic: "Distant traffic", crickets: "Night insects", siren_wail: "Ambulance siren", siren_yelp: "Siren", car: "Passing car", dog_bark: "Dog barking", hvac: "AC fan", fridge: "Fridge hum", generator: "Generator", transformer: "Transformer hum", school_bell: "School bell", phone_ring: "Phone ringtone", horn: "Car horn", fire: "Fire crackle", creak: "Structural creaking", speech_help_m: "Call for help", speech_help_f: "Call for help", speech_anyone_m: "Shouting \"Anyone there?\"", speech_anyone_f: "Shouting \"Anyone there?\"", speech_conv_m: "Speech", speech_conv_f: "Speech", speech_overhere_m: "Calling out", speech_babble: "Crowd murmur", breath_rest: "Own breathing", breath_hard: "Own panting", cloth: "Clothing rustle", windmic: "Microphone wind noise", steps_concrete: "Footsteps", steps_grass: "Footsteps (grass)", steps_gravel: "Footsteps (gravel)", steps_rubble: "Footsteps (rubble)", steps_wood: "Footsteps (wood floor)", steps_tile: "Footsteps (tile)", steps_carpet: "Footsteps (carpet)", dog_feet: "Robot dog footsteps", door_open: "Door opening", door_close: "Door closing" };
   const ESND = { speech_normal: ["speech_conv_m", 0], speech_shout: ["speech_help_m", 0], footsteps: ["steps", 0], quadruped: ["dog_servo", 0], multicopter: ["rotor", 0], car: ["car", 0], dog_bark: ["dog_bark", 0], car_horn: ["horn", 0], siren: ["siren_wail", 0], generator: ["generator", 0], school_bell: ["school_bell", 0], phone_ring: ["phone_ring", 0] };
   const A_ = () => ES.app, LOOK = () => (A_() && A_().look === "night" ? "night" : "day");
   /* ---- scene binding ---- */
@@ -864,7 +864,7 @@
       const U = S.uavU || (S.uavU = { vx: 0, vy: 0, vz: 0, ax: 0, ay: 0, az: 0 }), uv = W.uav || { vx: 0, vy: 0, vz: W.vz || 0 }, kk = Math.min(1, dt * 6);
       U.ax += ((uv.vx - U.vx) / Math.max(dt, 1e-3) - U.ax) * kk; U.ay += ((uv.vy - U.vy) / Math.max(dt, 1e-3) - U.ay) * kk; U.az += ((uv.vz - U.vz) / Math.max(dt, 1e-3) - U.az) * kk; U.vx = uv.vx; U.vy = uv.vy; U.vz = uv.vz;
       const tau = Math.sqrt(U.ax * U.ax + U.ay * U.ay + Math.pow(9.81 + U.az, 2)) / 9.81, drag = 1 + 0.0009 * v * v, ratio = clamp(Math.sqrt(tau * drag), 0.9, 1.25), U5 = Math.max(v, 0.3);
-      put("self:rotor", { asset: "rotor", name: NAMES.rotor + "(自己)", self: true, selfDist: 0.17, mode: "mono", dyn: 60 * log10(ratio), rate: ratio, prio: 9, noVerb: true, dir: { type: "omni" } });
+      put("self:rotor", { asset: "rotor", name: NAMES.rotor + "(self)", self: true, selfDist: 0.17, mode: "mono", dyn: 60 * log10(ratio), rate: ratio, prio: 9, noVerb: true, dir: { type: "omni" } });
       put("self:wind", { asset: "windmic", name: NAMES.windmic, self: true, selfDist: 1, mode: "mono", dyn: -10 + 55 * log10(U5 / 5), active: v > 0.5, prio: 6, noVerb: true });
     }
   }
@@ -886,8 +886,8 @@
         const sex = (parseInt(id.replace(/\D/g, ""), 10) || 0) % 2 ? "f" : "m", role = a.role, head = it.kind === "t:lying" ? z + 0.3 : z + 1.5;
         if (role === "walk") { const ph = (nowMs / 1000) * 7 + it.phase, k = Math.floor((ph - PI / 2) / PI); if (spd > 0.25) { if (h.k !== undefined && k > h.k && k - h.k < 3) stepAt(x, y, z, clamp(8 * log10(Math.max(spd, 0.3) / 1.4), -8, 6)); h.k = k; } else h.k = undefined; }
         else if (role === "stand") put("live:" + id, Object.assign(base, { asset: "speech_conv_" + sex, name: NAMES.speech_conv_m, pos: [x, y, head], dyn: 0, prio: 3 }));
-        else if (role === "wave") put("live:" + id, Object.assign(base, { asset: (id === res ? "speech_help_" : "speech_anyone_") + (id === res || sex === "f" ? sex : "m"), name: id === res ? "窗口居民呼救" : "喊\"有人吗\"", pos: [x, y, head], prio: 7 }));
-        else if (role === "lie" || it.kind === "t:lying") put("live:" + id, Object.assign(base, { asset: "speech_help_" + sex, name: "倒地者呼救", pos: [x, y, head], dyn: -10, prio: 7 }));
+        else if (role === "wave") put("live:" + id, Object.assign(base, { asset: (id === res ? "speech_help_" : "speech_anyone_") + (id === res || sex === "f" ? sex : "m"), name: id === res ? "Resident calling for help from a window" : "Shouting \"Anyone there?\"", pos: [x, y, head], prio: 7 }));
+        else if (role === "lie" || it.kind === "t:lying") put("live:" + id, Object.assign(base, { asset: "speech_help_" + sex, name: "Person on the ground calling for help", pos: [x, y, head], dyn: -10, prio: 7 }));
       }
     }
   }
@@ -900,10 +900,10 @@
         const m = ESND[e.sound]; if (!m) continue;
         if (m[0] === "steps") { const t = S.ev[id] || (S.ev[id] = { next: now + 0.2 }); if (now >= t.next) { t.next = now + (1 / 1.9) * (1 + 0.04 * gauss()); stepAt(e.x, e.y, e.z - 1.0 > 0 ? e.z - 1.0 : 0, 0); } }
         else put(id, { asset: m[0], name: nm, pos, axis, levelDb: m[1], prio: 4 });
-      } else if (e.kind === "uav" && self) put(id, { asset: "rotor", name: nm + " 旋翼", pos, axis: [0, 0, 1], prio: 4 });
-      else if (e.kind === "dog" && self) put(id, { asset: "dog_servo", name: nm + " 电机", pos: [e.x, e.y, 0.3], dyn: dB(0.15), prio: 3 });
-      else if (e.kind === "t:lying" && !liveOn) put(id, { asset: "speech_help_m", name: nm + " 呼救", pos, axis, dyn: -10, prio: 6 });
-      else if (e.kind === "t:vehicle" && !liveOn) put(id, { asset: "car", name: nm + " 发动机", pos: [e.x, e.y, 0.6], prio: 3 });
+      } else if (e.kind === "uav" && self) put(id, { asset: "rotor", name: nm + " rotors", pos, axis: [0, 0, 1], prio: 4 });
+      else if (e.kind === "dog" && self) put(id, { asset: "dog_servo", name: nm + " motors", pos: [e.x, e.y, 0.3], dyn: dB(0.15), prio: 3 });
+      else if (e.kind === "t:lying" && !liveOn) put(id, { asset: "speech_help_m", name: nm + " calling for help", pos, axis, dyn: -10, prio: 6 });
+      else if (e.kind === "t:vehicle" && !liveOn) put(id, { asset: "car", name: nm + " engine", pos: [e.x, e.y, 0.6], prio: 3 });
     }
   }
   /* ---- ambience: traffic, wind in the trees, birds, crickets, room tones, events on the roads, machines, the quake variant ---- */
@@ -928,7 +928,7 @@
     // traffic: nearest road as a line source (cylindrical spreading, 20 m reference) + a diffuse urban background (two decorrelated copies)
     let best = [0, 0, 1e9]; for (const r of sc.roads || []) { const q = near([L.x, L.y], r.line); if (q[2] < best[2]) best = q; }
     if (best[2] < 1e8) put("amb:traffic", { asset: "traffic", name: NAMES.traffic, pos: [best[0], best[1], 1], spread: "cyl", cylRef: 20, levelDb: mx.lamb - 2 - 45, doppler: false, prio: 1, offset: 0.1 });
-    put("amb:bedL", { asset: "traffic", name: "城市背景声", diffuse: true, mode: "left", levelDb: mx.lamb - 8 - 45, prio: 1, offset: 0.37, doppler: false, noVerb: false }); put("amb:bedR", { asset: "traffic", name: "城市背景声", diffuse: true, mode: "right", levelDb: mx.lamb - 8 - 45, prio: 1, offset: 0.81, doppler: false });
+    put("amb:bedL", { asset: "traffic", name: "City background", diffuse: true, mode: "left", levelDb: mx.lamb - 8 - 45, prio: 1, offset: 0.37, doppler: false, noVerb: false }); put("amb:bedR", { asset: "traffic", name: "City background", diffuse: true, mode: "right", levelDb: mx.lamb - 8 - 45, prio: 1, offset: 0.81, doppler: false });
     if (night) { put("amb:crL", { asset: "crickets", name: NAMES.crickets, diffuse: true, mode: "left", levelDb: 41 - 55.7, prio: 1, offset: 0.2, doppler: false }); put("amb:crR", { asset: "crickets", name: NAMES.crickets, diffuse: true, mode: "right", levelDb: 41 - 55.7, prio: 1, offset: 0.7, doppler: false }); }
     // trees: wind rustle at the two nearest crowns, birds (daytime) in a third of the nearby trees
     if (now - S.tree.t > 1.0) { S.tree.t = now; const tr = sc.trees || []; S.tree.ids = tr.map((t, i) => [i, hyp(t[0] - L.x, t[1] - L.y)]).filter((q) => q[1] < 45).sort((a, b) => a[1] - b[1]).slice(0, 12).map((q) => q[0]); }
@@ -958,12 +958,12 @@
     const cen = (b) => b.fp.reduce((a, p) => [a[0] + p[0] / b.fp.length, a[1] + p[1] / b.fp.length], [0, 0]);
     const homes = bl.filter((b) => /house|rowhouse|apartment/.test(b.kind));
     if (homes.length) { const b = homes[Math.floor(homes.length / 2)], c = cen(b); F.push({ id: "fx:bark", gate: [14, 40], o: { asset: "dog_bark", name: NAMES.dog_bark, pos: [c[0] + 8, c[1], 0.5], axis: [-1, 0, 0], prio: 3, doppler: false } }); }
-    for (const b of bl.filter((b) => /factory|warehouse/.test(b.kind)).slice(0, 2)) { const c = cen(b); F.push({ id: "fx:hvac" + b.id, o: { asset: "hvac", name: "屋顶空调机组", pos: [c[0], c[1], b.h + 1], levelDb: 0, prio: 2, doppler: false } }); }
+    for (const b of bl.filter((b) => /factory|warehouse/.test(b.kind)).slice(0, 2)) { const c = cen(b); F.push({ id: "fx:hvac" + b.id, o: { asset: "hvac", name: "Rooftop AC units", pos: [c[0], c[1], b.h + 1], levelDb: 0, prio: 2, doppler: false } }); }
     const cont = (sc.objects || []).filter((o) => o.name === "container"); if (cont.length) F.push({ id: "fx:gen", o: { asset: "generator", name: NAMES.generator, pos: [cont[0].xy[0] + 4, cont[0].xy[1], 0.8], prio: 3, doppler: false } });
     const tank = (sc.objects || []).find((o) => o.name === "tank"); if (tank) F.push({ id: "fx:trf", o: { asset: "transformer", name: NAMES.transformer, pos: [tank.xy[0], tank.xy[1] + 6, 1.2], prio: 2, doppler: false } });
     const camp = bl.filter((b) => b.kind === "campus"); if (camp.length) { const c = cen(camp[0]); F.push({ id: "fx:bell", gate: [3.5, 150], o: { asset: "school_bell", name: NAMES.school_bell, pos: [c[0], c[1], 6], prio: 3, doppler: false } }); }
     const vd = W.variantData || {}; (vd.fires || []).forEach((f, i) => F.push({ id: "fx:fire" + i, o: { asset: "fire", name: NAMES.fire, pos: [f.xy[0], f.xy[1], 1.5], levelDb: clamp(10 * log10(Math.max(600 * PI * f.r * f.r, 50) / 1000), -10, 8), prio: 4, doppler: false } }));
-    (vd.survivors || []).forEach((s, i) => F.push({ id: "fx:sv" + i, o: { asset: "speech_help_" + "mf"[i % 2], name: "废墟下呼救", pos: [s.xy[0], s.xy[1], (s.z || 0) + 0.4], dyn: -10, prio: 7, doppler: false } }));
+    (vd.survivors || []).forEach((s, i) => F.push({ id: "fx:sv" + i, o: { asset: "speech_help_" + "mf"[i % 2], name: "Calls for help from under the rubble", pos: [s.xy[0], s.xy[1], (s.z || 0) + 0.4], dyn: -10, prio: 7, doppler: false } }));
     for (const b of bl) { const dm = W.damage && W.damage[b.id]; if (dm && dm.state === "partial") { const c = cen(b); F.push({ id: "fx:creak" + b.id, o: { asset: "creak", name: NAMES.creak, pos: [c[0], c[1], 3], prio: 2, doppler: false } }); } }
   }
   /* street reverb: openness of the surroundings from a fan of rays against the building raster */
@@ -998,7 +998,7 @@
   AU.enable = async function (quiet) {
     if (S.loading) return; S.loading = true; S.err = ""; hudUpdate(true);
     try {
-      const AC = window.AudioContext || window.webkitAudioContext; if (!AC) throw new Error("浏览器不支持 Web Audio");
+      const AC = window.AudioContext || window.webkitAudioContext; if (!AC) throw new Error("This browser does not support Web Audio");
       if (!S.ctx) S.ctx = new AC({ latencyHint: "interactive" }); if (S.ctx.state === "suspended") await S.ctx.resume().catch(() => {});
       if (!S.eng) { S.eng = new Engine(S.ctx); await S.eng.load(BASE()); if (S.V && !S.V.col) S.V = null; }
       S.eng.setMuted(S.pref.mute); S.eng.setVolume(volDb()); S.eng.setBody((ES.view3d && ES.view3d.walk.state.body) || "human"); S.on = true; S.scnKey = ""; if (!quiet || S.ctx.state === "running") prefSave({ on: true });
@@ -1016,30 +1016,30 @@
   /* ---- HUD panel ---- */
   const $ = (q) => document.querySelector(q), esc = (t) => String(t).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
   function panel() {
-    let p = $(".fp-audio"); if (p) return p; const left = $("#fp-left"); if (!left) return null; p = document.createElement("section"); p.className = "fp-panel fp-audio"; p.setAttribute("aria-label", "你听到的声音");
-    p.innerHTML = `<h4>你听到的<span id="fa-who"></span></h4><div class="fa-ctl"><button type="button" class="btn" id="fa-on">🔊 开启声音</button><button type="button" class="btn" id="fa-mute" title="M" hidden>静音</button><input type="range" id="fa-vol" min="0" max="100" step="1" aria-label="主音量" hidden><span class="fa-st" id="fa-st"></span></div><div class="fa-meter" hidden><i id="fa-bar"></i><b id="fa-spl">— dB(A)</b></div><ul class="fa-list" id="fa-list"></ul><small class="fa-note" id="fa-note"></small>`;
+    let p = $(".fp-audio"); if (p) return p; const left = $("#fp-left"); if (!left) return null; p = document.createElement("section"); p.className = "fp-panel fp-audio"; p.setAttribute("aria-label", "What you hear");
+    p.innerHTML = `<h4>You hear<span id="fa-who"></span></h4><div class="fa-ctl"><button type="button" class="btn" id="fa-on">🔊 Enable sound</button><button type="button" class="btn" id="fa-mute" title="M" hidden>Mute</button><input type="range" id="fa-vol" min="0" max="100" step="1" aria-label="Master volume" hidden><span class="fa-st" id="fa-st"></span></div><div class="fa-meter" hidden><i id="fa-bar"></i><b id="fa-spl">— dB(A)</b></div><ul class="fa-list" id="fa-list"></ul><small class="fa-note" id="fa-note"></small>`;
     left.insertBefore(p, $("#fp-near-l")); $("#fa-on").addEventListener("click", (e) => { e.target.blur(); if (S.on) AU.disable(); else AU.enable(); }); $("#fa-mute").addEventListener("click", (e) => { e.target.blur(); AU.toggleMute(); });
     const vol = $("#fa-vol"); vol.value = Math.round(S.pref.vol * 100); vol.addEventListener("input", () => AU.setVolume(vol.value / 100)); return p;
   }
   const panelShow = (on) => { const p = panel(); if (p) p.hidden = !on; };
-  const WHO = { human: "双耳 HRTF · 1.6 m 耳高", dog: "4 麦阵列 → 立体声监听 · 含自身电机/脚步噪声", uav: "机载单麦克风 · 被自身旋翼主导(监听 -24 dB)" };
+  const WHO = { human: "Binaural HRTF · ears at 1.6 m", dog: "4-mic array · stereo monitor", uav: "Single onboard microphone · dominated by its own rotors (monitored at -24 dB)" };
   function hudUpdate(force) {
     const p = $(".fp-audio"); if (!p || p.hidden) return; const on = $("#fa-on"), body = (ES.view3d && ES.view3d.walk.state.body) || "human", running = S.on && S.ctx && S.ctx.state === "running";
-    $("#fa-who").textContent = `· ${WHO[body]}`; on.textContent = S.loading ? "加载声音…" : S.on ? (running ? "🔊 声音已开启" : "▶ 点击页面恢复声音") : "🔊 开启声音"; on.classList.toggle("pulse", !S.on && !S.loading); on.title = S.on ? "再点一次关闭" : "浏览器需要一次点击才允许播放声音";
-    const mute = $("#fa-mute"), vol = $("#fa-vol"), met = p.querySelector(".fa-meter"); mute.hidden = vol.hidden = met.hidden = !S.on; mute.textContent = S.pref.mute ? "取消静音" : "静音"; mute.classList.toggle("on", !!S.pref.mute);
+    $("#fa-who").textContent = `· ${WHO[body]}`; on.textContent = S.loading ? "Loading sounds…" : S.on ? (running ? "🔊 Sound on" : "▶ Click the page to resume sound") : "🔊 Enable sound"; on.classList.toggle("pulse", !S.on && !S.loading); on.title = S.on ? "Click again to turn off" : "The browser needs one click before it allows sound";
+    const mute = $("#fa-mute"), vol = $("#fa-vol"), met = p.querySelector(".fa-meter"); mute.hidden = vol.hidden = met.hidden = !S.on; mute.textContent = S.pref.mute ? "Unmute" : "Mute"; mute.classList.toggle("on", !!S.pref.mute);
     const note = $("#fa-note"), list = $("#fa-list");
-    if (!S.on) { list.innerHTML = ""; note.textContent = S.err ? "声音出错:" + S.err : "声音按物理计算:距离衰减、空气吸收、穿墙损失、绕射、室内混响、多普勒。需要点一次\"开启声音\"。"; return; }
-    $("#fa-st").textContent = S.err ? "出错" : ""; const mx = S.mx; if (!mx) { note.textContent = "进入场景后开始计算"; return; }
+    if (!S.on) { list.innerHTML = ""; note.textContent = S.err ? "Sound error: " + S.err : "Physically modelled sound. Click once to enable."; return; }
+    $("#fa-st").textContent = S.err ? "Error" : ""; const mx = S.mx; if (!mx) { note.textContent = "Starts once you are in the scene"; return; }
     const spl = mx.spl, bar = $("#fa-bar"); bar.style.width = clamp(((spl - 20) / 80) * 100, 0, 100) + "%"; $("#fa-spl").textContent = `${spl.toFixed(0)} dB(A)`;
     const rows = AU.sources().slice(0, 7), shots = (mx.lastShots || []).filter((q) => S.t - q.t < 0.7 && q.dba > mx.floorDba - 8);
     const arrow = (az) => `<span class="fa-ar" style="transform:rotate(${az.toFixed(0)}deg)">▲</span>`;
-    list.innerHTML = rows.map((r) => `<li class="${r.occluded ? "occ" : ""}">${arrow(r.bearing)}<span class="fa-n">${esc(r.name)}</span><span class="fa-d">${r.distance < 1e8 && r.distance > 0 ? r.distance.toFixed(r.distance < 10 ? 1 : 0) + " m" : ""}</span><span class="fa-l">${r.levelDba.toFixed(0)}</span><em class="${r.tag}">${esc(r.tag)}</em></li>`).join("") + shots.slice(-2).map((q) => `<li class="shot"><span class="fa-ar">·</span><span class="fa-n">${esc(NAMES[q.asset] || q.asset)}</span><span class="fa-d">${q.d.toFixed(1)} m</span><span class="fa-l">${q.dba.toFixed(0)}</span><em>瞬时</em></li>`).join("");
-    note.textContent = `${mx.L.space.room ? "室内 · " + (mx.L.space.room.name || mx.L.space.room.fn) : mx.L.space.bld ? "建筑内" : "室外"} · 噪声底 ${mx.floorDba.toFixed(0)} dB(A) · 声源 ${S.eng.active()}/${S.eng.voices.length} 路`;
+    list.innerHTML = rows.map((r) => `<li class="${r.occluded ? "occ" : ""}">${arrow(r.bearing)}<span class="fa-n">${esc(r.name)}</span><span class="fa-d">${r.distance < 1e8 && r.distance > 0 ? r.distance.toFixed(r.distance < 10 ? 1 : 0) + " m" : ""}</span><span class="fa-l">${r.levelDba.toFixed(0)}</span><em class="${r.tag}">${esc(r.tag)}</em></li>`).join("") + shots.slice(-2).map((q) => `<li class="shot"><span class="fa-ar">·</span><span class="fa-n">${esc(NAMES[q.asset] || q.asset)}</span><span class="fa-d">${q.d.toFixed(1)} m</span><span class="fa-l">${q.dba.toFixed(0)}</span><em>instant</em></li>`).join("");
+    note.textContent = `${mx.L.space.room ? "Indoors · " + (mx.L.space.room.name || mx.L.space.room.fn) : mx.L.space.bld ? "Inside a building" : "Outdoors"} · noise floor ${mx.floorDba.toFixed(0)} dB(A) · sources ${S.eng.active()}/${S.eng.voices.length} voices`;
   }
   /* ---- keys (listed in the HUD legend) ---- */
   if (ES.controls && ES.controls.add) {
-    ES.controls.add({ bodies: "all", group: "声音", keys: ["M"], codes: ["KeyM"], desc: "静音 / 取消静音(首次按下开启声音)", fn: (code, down) => { if (down) AU.toggleMute(); } });
-    ES.controls.add({ bodies: "all", group: "声音", keys: ["-", "="], codes: ["Minus", "Equal"], desc: "音量减小 / 增大", fn: (code, down) => { if (down) AU.setVolume(S.pref.vol + (code === "Equal" ? 0.08 : -0.08)); } });
+    ES.controls.add({ bodies: "all", group: "Sound", keys: ["M"], codes: ["KeyM"], desc: "Mute / unmute", fn: (code, down) => { if (down) AU.toggleMute(); } });
+    ES.controls.add({ bodies: "all", group: "Sound", keys: ["-", "="], codes: ["Minus", "Equal"], desc: "Volume down / up", fn: (code, down) => { if (down) AU.setVolume(S.pref.vol + (code === "Equal" ? 0.08 : -0.08)); } });
   }
   panel(); panelShow(false);
 

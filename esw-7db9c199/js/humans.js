@@ -6,7 +6,7 @@
   const ES = (window.ES = window.ES || {});
   const SKU_URL = "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/utils/SkeletonUtils.js";
   let skuP = null;
-  const loadSKU = () => (window.THREE && THREE.SkeletonUtils ? Promise.resolve() : skuP || (skuP = new Promise((res, rej) => { const s = document.createElement("script"); s.src = SKU_URL; s.onload = res; s.onerror = () => rej(new Error("SkeletonUtils 加载失败")); document.head.appendChild(s); })));
+  const loadSKU = () => (window.THREE && THREE.SkeletonUtils ? Promise.resolve() : skuP || (skuP = new Promise((res, rej) => { const s = document.createElement("script"); s.src = SKU_URL; s.onload = res; s.onerror = () => rej(new Error("SkeletonUtils failed to load")); document.head.appendChild(s); })));
   const RESP = ["resp_m", "resp_f"], CIV = ["civ_m1", "civ_f1", "civ_m2", "civ_f2", "civ_m3", "civ_f3"];
   const TPL = {};                                                  // key -> prepared template {scene, clips, info, gait: [{name, v, stride}], dur}
   const clamp = (x, a, b) => (x < a ? a : x > b ? b : x), s3 = (w) => { w = clamp(w, 0, 1); return w * w * (3 - 2 * w); };

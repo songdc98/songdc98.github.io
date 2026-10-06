@@ -250,7 +250,7 @@ const P_GNSS = { envelopeDb: { default: 26, warehouse: 13, factory: 13 }, lat0: 
   function cpNode() {
     const A = ES.app; if (!A) return null; const e = (A.ents || []).find((q) => q.kind === "cp"); const dev = ES.DEVICES.cp;
     if (e) return { id: e.id, name: e.name, x: e.x, y: e.y, z: dev.antH, radios: dev.radios, kind: "cp" };
-    const c = A.scene && A.scene.cp; return c ? { id: -1, name: "指挥站", x: c[0], y: c[1], z: dev.antH, radios: dev.radios, kind: "cp" } : null;
+    const c = A.scene && A.scene.cp; return c ? { id: -1, name: "Command post", x: c[0], y: c[1], z: dev.antH, radios: dev.radios, kind: "cp" } : null;
   }
   const GEO = new WeakMap();
   function geoFrom(W, node) {             // around-the-corner geodesic field of the (fixed) command post, cached per world and position

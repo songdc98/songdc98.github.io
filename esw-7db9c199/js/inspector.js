@@ -12,45 +12,46 @@
   const big = (v) => (!Number.isFinite(v) ? "—" : Math.abs(v) >= 1000 ? Math.round(v).toLocaleString("en-US") : Number.isInteger(v) ? String(v) : Math.abs(v) >= 100 ? v.toFixed(0) : Math.abs(v) >= 10 ? v.toFixed(1) : v.toFixed(2));
   const R2D = 180 / Math.PI, FL = { PHYS: 1, VIS: 2, NAV: 4, GLASS: 8, MOVABLE: 16, WALK: 32, DETAIL: 64, LOOSE: 128 };
   const WK = () => ES.view3d && ES.view3d.walk && ES.view3d.walk.state, VV = () => ES.view3d && ES.view3d.walk && ES.view3d.walk.V;
-  const compass = (yaw) => { const hd = Math.round((((90 - yaw * R2D) % 360) + 360) % 360) % 360; return [hd, ["北", "东北", "东", "东南", "南", "西南", "西", "西北"][Math.round(hd / 45) % 8]]; };
+  const compass = (yaw) => { const hd = Math.round((((90 - yaw * R2D) % 360) + 360) % 360) % 360; return [hd, ["N", "NE", "E", "SE", "S", "SW", "W", "NW"][Math.round(hd / 45) % 8]]; };
 
   /* ================================================================ Chinese names ================================================================ */
-  const ELEM_ZH = { wall_ext: "外墙", wall_int: "内墙", slab: "楼板", ceiling: "天花板", roof: "屋顶", glass: "玻璃", frame: "框", door: "门扇", stair: "楼梯", furniture: "家具", column: "柱", step: "台阶", trim: "饰条", appliance: "电器", rack: "货架", machine: "机器", light: "灯具", treat: "窗帘 / 百叶", rail: "栏杆", parapet: "女儿墙", chimney: "烟囱", ramp: "坡道", fixture: "洁具 / 固定设施", pallet: "托盘", plant: "植物", deco: "装饰" };
-  const CAT_ZH = { structure: "建筑结构", opening: "门窗洞口", furniture: "家具", appliance: "电器", fixture: "固定设施", light: "灯具", equipment: "设备", circulation: "通行构件", decor: "陈设", trim: "饰条", signage: "标识" };
-  const BKIND_ZH = { house: "住宅", commercial: "商铺", apartment: "公寓楼", campus: "校舍", warehouse: "仓库", factory: "厂房", rowhouse: "联排住宅", office: "办公楼", civic: "公共建筑", cottage: "小屋" };
-  const ROOM_ZH = { bedroom: "卧室", bath: "卫生间", living: "客厅", kitchen: "厨房", landing: "楼梯平台", office: "办公室", void: "楼梯井", classroom: "教室", core: "楼电梯核心筒", restroom: "公共卫生间", corridor: "走廊", stair: "楼梯间", lab: "实验室", meeting: "会议室", entry: "玄关", utility: "设备间", shop: "店面", storage: "库房", hall: "门厅", lobby: "大堂", dining: "餐厅", study: "书房", hall_big: "大厅", family: "家庭室", workshop: "车间", control: "控制室" };
-  const MAT_ZH = { none: "无", brick: "砖", brick_brown: "棕色砖", concrete: "混凝土", concrete_light: "浅色混凝土", concrete_dark: "深色混凝土", polished_concrete: "磨光混凝土", stucco: "抹灰", stucco_white: "白色抹灰", stucco_peach: "桃色抹灰", siding: "外墙挂板", siding_blue: "蓝色挂板", siding_sage: "灰绿挂板", metal_panel: "金属墙板",
-    curtain_glass: "幕墙玻璃", glass: "玻璃", glass_frosted: "磨砂玻璃", frame_white: "白色框料", frame_dark: "深色框料", gypsum: "石膏板", gypsum_accent: "彩色石膏板", wood_floor: "木地板", carpet: "地毯", tile: "瓷砖", ceiling: "吊顶板", door_wood: "木门板", door_metal: "钢门板",
-    roof_shingle: "沥青瓦", roof_tile: "屋面瓦", roof_metal: "金属屋面", roof_membrane: "屋面防水膜", asphalt_shingle_dark: "深色沥青瓦", wood_furn: "家具木材", metal_furn: "家具钢", appliance: "电器面板", steel: "钢", rack_blue: "蓝色货架漆", rack_orange: "橙色货架漆", cardboard: "纸板", pallet: "托盘木",
-    machine_green: "绿色机器漆", machine_yellow: "黄色机器漆", whiteboard: "白板", screen: "屏幕(关)", screen_on: "屏幕(亮)", ceramic: "陶瓷", countertop: "台面石材", curtain: "窗帘布", blinds: "百叶", stair_wood: "木楼梯", stair_concrete: "混凝土楼梯", rail: "栏杆钢", grating: "钢格栅",
-    light: "灯具发光面", light_off: "灯具(关)", rubber: "橡胶", rubber_grey: "灰色橡胶", paper: "纸", plant: "植物", plant_dark: "深色植物", counter_wood: "木台面", lockers: "储物柜钢板", leather: "皮革", leather_black: "黑皮革", blanket: "毯子", cork: "软木", foam: "海绵", mirror: "镜子", porcelain: "瓷", tile_wall: "墙砖",
-    tile_dark: "深色瓷砖", marble: "大理石", granite: "花岗岩", quartz: "石英石", terracotta: "赤陶", soil: "土壤", wicker: "藤编", floor_vinyl: "乙烯基地板", chrome_steel: "镀铬钢", brass_metal: "黄铜", dark_steel: "深色钢", black_metal: "黑色金属", stainless_steel: "不锈钢", galv_steel: "镀锌钢",
-    alu_white_metal: "白色铝材", alu_brown_metal: "棕色铝材",
-    asphalt: "柏油路面", road_paint: "道路标线", sidewalk: "人行道", grass: "草地", gravel: "碎石", water: "水面", bark: "树皮", foliage: "树叶", car_paint: "车漆", car_glass: "车窗玻璃", person: "人体(衣物)", fence_white: "白漆木栅", fence_wood: "木板围栏", fence_chain: "镀锌铁丝网", pole_metal: "钢杆", building_generic: "建筑外墙(简化)", rubble: "瓦砾", container: "集装箱钢板", shed: "棚屋木板", plastic: "塑料", uav_body: "无人机机身", dog_body: "机械狗机身", rover_body: "机器人外壳", cp_body: "指挥车车身" };
+  const ELEM_ZH = { wall_ext: "Exterior wall", wall_int: "Interior wall", slab: "Floor slab", ceiling: "Ceiling", roof: "Roof", glass: "Glass", frame: "Frame", door: "Door leaf", stair: "Stair", furniture: "Furniture", column: "Column", step: "Step", trim: "Trim", appliance: "Appliance", rack: "Rack", machine: "Machine", light: "Luminaire", treat: "Curtain / blinds", rail: "Railing", parapet: "Parapet", chimney: "Chimney", ramp: "Ramp", fixture: "Sanitary ware / fixed fitting", pallet: "Pallet", plant: "Plant", deco: "Decoration" };
+  const CAT_ZH = { structure: "Building structure", opening: "Doors and windows", furniture: "Furniture", appliance: "Appliance", fixture: "Fixed fitting", light: "Luminaire", equipment: "Equipment", circulation: "Circulation element", decor: "Furnishing", trim: "Trim", signage: "Signage" };
+  const BKIND_ZH = { house: "House", commercial: "Shop", apartment: "Apartment block", campus: "Campus building", warehouse: "Warehouse", factory: "Factory", rowhouse: "Row house", office: "Office building", civic: "Public building", cottage: "Cottage" };
+  const ROOM_ZH = { bedroom: "bedroom", bath: "bathroom", living: "living room", kitchen: "kitchen", landing: "stair landing", office: "office", void: "stairwell", classroom: "classroom", core: "stair / lift core", restroom: "public restroom", corridor: "corridor", stair: "stairwell room", lab: "laboratory", meeting: "meeting room", entry: "entrance hall", utility: "utility room", shop: "shop floor", storage: "storeroom", hall: "hall", lobby: "lobby", dining: "dining room", study: "study", hall_big: "large hall", family: "family room", workshop: "workshop", control: "control room" };
+  const MAT_ZH = { none: "none", brick: "brick", brick_brown: "brown brick", concrete: "concrete", concrete_light: "light concrete", concrete_dark: "dark concrete", polished_concrete: "polished concrete", stucco: "stucco", stucco_white: "white stucco", stucco_peach: "peach stucco", siding: "siding board", siding_blue: "blue siding", siding_sage: "sage siding", metal_panel: "metal wall panel",
+    curtain_glass: "curtain-wall glass", glass: "glass", glass_frosted: "frosted glass", frame_white: "white frame", frame_dark: "dark frame", gypsum: "plasterboard", gypsum_accent: "coloured plasterboard", wood_floor: "wood floor", carpet: "carpet", tile: "tile", ceiling: "ceiling board", door_wood: "wooden door leaf", door_metal: "steel door leaf",
+    roof_shingle: "asphalt shingle", roof_tile: "roof tile", roof_metal: "metal roof", roof_membrane: "roof membrane", asphalt_shingle_dark: "dark asphalt shingle", wood_furn: "furniture wood", metal_furn: "furniture steel", appliance: "appliance panel", steel: "steel", rack_blue: "blue rack paint", rack_orange: "orange rack paint", cardboard: "cardboard", pallet: "pallet wood",
+    machine_green: "green machine paint", machine_yellow: "yellow machine paint", whiteboard: "whiteboard", screen: "screen (off)", screen_on: "screen (on)", ceramic: "ceramic", countertop: "countertop stone", curtain: "curtain fabric", blinds: "blinds", stair_wood: "wooden stair", stair_concrete: "concrete stair", rail: "railing steel", grating: "steel grating",
+    light: "luminaire emitting face", light_off: "luminaire (off)", rubber: "rubber", rubber_grey: "grey rubber", paper: "paper", plant: "plant", plant_dark: "dark plant", counter_wood: "wood counter", lockers: "locker steel", leather: "leather", leather_black: "black leather", blanket: "blanket", cork: "cork", foam: "foam", mirror: "mirror", porcelain: "porcelain", tile_wall: "wall tile",
+    tile_dark: "dark tile", marble: "marble", granite: "granite", quartz: "quartz", terracotta: "terracotta", soil: "soil", wicker: "wicker", floor_vinyl: "vinyl floor", chrome_steel: "chrome steel", brass_metal: "brass metal", dark_steel: "dark steel", black_metal: "black metal", stainless_steel: "stainless steel", galv_steel: "galv steel",
+    alu_white_metal: "alu white metal", alu_brown_metal: "alu brown metal",
+    asphalt: "asphalt road", road_paint: "road marking", sidewalk: "sidewalk", grass: "grass", gravel: "gravel", water: "water", bark: "bark", foliage: "foliage", car_paint: "car paint", car_glass: "car glass", person: "human body (clothing)", fence_white: "white-painted wood fence", fence_wood: "wood board fence", fence_chain: "galvanised chain-link", pole_metal: "steel pole", building_generic: "building facade (simplified)", rubble: "rubble", container: "container steel", shed: "shed boards", plastic: "plastic", uav_body: "UAV body", dog_body: "quadruped body", rover_body: "robot shell", cp_body: "command-vehicle body" };
   function matZh(n) {
     if (MAT_ZH[n]) return MAT_ZH[n]; if (!n) return "—";
-    const col = { white: "白", grey: "灰", blue: "蓝", green: "绿", red: "红", yellow: "黄", black: "黑", cream: "米色", peach: "桃色", purple: "紫", teal: "青", orange: "橙", pink: "粉", brown: "棕", oak: "橡木", walnut: "胡桃木" };
+    const col = { white: "white", grey: "grey", blue: "blue", green: "green", red: "red", yellow: "yellow", black: "black", cream: "cream", peach: "peach", purple: "purple", teal: "teal", orange: "orange", pink: "pink", brown: "brown", oak: "oak", walnut: "walnut" };
     let m = /^(plastic|paint|laminate|wood|pc|fabric|bedding|cloth|awning|emit)_?(\w*)$/.exec(n);
-    if (m) { const fam = { plastic: "塑料", paint: "墙漆", laminate: "层压板", wood: "木材", pc: "包装印刷品", fabric: "织物", bedding: "床品", cloth: "衣料", awning: "遮阳篷布", emit: "发光面" }[m[1]], c = col[m[2]] || ""; return fam + (c ? "·" + c : ""); }
+    if (m) { const fam = { plastic: "plastic", paint: "paint", laminate: "laminate", wood: "wood", pc: "printed packaging", fabric: "fabric", bedding: "bedding", cloth: "cloth", awning: "awning fabric", emit: "emissive face" }[m[1]], c = col[m[2]] || ""; return (c ? c + " " : "") + fam; }
     return n;
   }
-  const PART_ZH = { leg: "腿", handle: "把手", baseboard: "踢脚线", product: "商品", ext: "外墙段", label: "标签", books: "书", part: "隔墙段", top: "台面", carton: "纸箱", back: "靠背 / 背板", seat: "座面", light: "灯", book_rack: "书架", foot: "脚", pallet_stringer: "托盘纵梁", price_tag: "价签", board: "搁板", brace: "拉撑", step: "踏步", canopy: "雨篷", nosing: "踏步边", drawer: "抽屉", carcass: "柜体", vents: "通风口", frame: "框", plinth: "底座", beam: "横梁", knob: "旋钮", shelf: "搁板", armrest: "扶手", post: "立柱", pallet_deck: "托盘面", worktop: "工作台面", screen: "屏幕", pillow: "枕头", upright: "立柱", seat_cushion: "座垫", back_cushion: "靠垫", ceiling: "天花板", toe_kick: "踢脚板", pedestal: "台座", base: "底座", side: "侧板", side_panel: "侧板", mirror: "镜子", mirror_frame: "镜框", plant: "植物", monitor: "显示器", keyboard: "键盘", cistern: "水箱", bowl: "便盆", seat_lid: "马桶圈 / 盖", mattress: "床垫", headboard: "床头板", footboard: "床尾板", duvet: "被子", blanket: "毯子", pot: "花盆", slat: "板条", body: "机身", freezer_door: "冷冻室门", fridge_door: "冷藏室门", backsplash: "挡水板", wall_cabinet: "吊柜", tv: "电视", cabinet: "柜", console: "台", parapet: "女儿墙", tub_wall: "浴缸壁", tub_floor: "浴缸底", basin: "水盆", lamp_base: "灯座", lamp_shade: "灯罩", tray: "托盘", stoop: "入口台阶", gutter: "檐沟", plate: "牌", housing: "灯壳", pad: "基座", top_vent: "顶部通风口" };
-  Object.assign(PART_ZH, { door: "门扇", basin_wall: "盆壁", price_rail: "价签条", textbook: "课本", bottle: "瓶子", support_bar: "支撑杆", base_bar: "底杆", wrap_band: "缠绕带", tap_spout: "龙头出水口", bin: "箱", arm: "扶手臂", arm_cap: "扶手端", cup: "杯", basin_floor: "盆底", tap_base: "龙头座", tap_neck: "龙头颈", drain: "排水口", beam_label: "横梁标签", lift: "举升", ornament: "摆件", awning: "遮阳篷", valance: "帷幔", lettering: "字牌", garment: "衣物", modesty_panel: "挡板", marker: "记号笔", stand_base: "支架底座", stand_neck: "支架杆", mouse: "鼠标", phone: "电话", cistern_lid: "水箱盖", flush_button: "冲水钮", hinge_block: "铰链块", soap: "肥皂", papers: "纸张", headboard_pad: "床头软垫", duvet_fold: "被褥折边", wrapped_load: "缠膜货物", crown: "顶冠", screen_trim: "屏幕边框", apron: "前裙板", magazine: "杂志", digit: "数字", door_gap: "门缝", tap_lever: "龙头手柄", dish_soap: "洗洁精", spine: "书脊", cap: "盖", lamp_stem: "灯杆", brace_low: "下拉撑", flask: "烧瓶", guard: "护罩", louvre: "百叶", cushion: "软垫", soap_dispenser: "皂液器", notepad: "便签本", leg_frame: "腿架", mug: "马克杯", top_edge: "顶边", neck: "颈", back_post: "靠背立柱", eraser: "板擦", foliage: "叶片", tub_basin: "浴缸盆", tap_body: "龙头体", shower_riser: "淋浴立管", shower_head: "花洒", shower_arm: "花洒臂", hazard_stripe: "警示条纹", vase: "花瓶", rod: "吊杆", screen_case: "屏幕外壳", notebook: "笔记本", downspout: "落水管", stretcher: "撑杆", fan_grille: "风扇格栅", reagent_shelf: "试剂架", sink: "水槽", tap: "水龙头", back_panel: "背板", seat_frame: "座椅框", glass: "玻璃", elbow: "弯头", laptop_base: "笔记本机身", laptop_lid: "笔记本屏", reflector: "反光片", handrail: "扶手", trestle: "支架", table_leg: "桌腿", hvac: "空调", flowers: "花", tower_lamp: "信号塔灯", membrane: "防水膜", rail: "栏杆", burner: "灶眼", burner_cap: "灶眼盖", guard_slat: "护栏板条", backrest_bar: "靠背横杆", lamp: "灯", casing: "外壳", line_set: "管线", jug: "水壶", front_panel: "前面板", guard_post: "护栏立柱", tyre: "轮胎", cross_brace: "交叉撑", guard_rail: "护栏", oven_handle_post: "烤箱把手柱", fruit_bowl: "果盘", hood: "抽油烟机罩", ramp: "坡道", ramp_end: "坡道端", soil: "土", carton_on_belt: "传送带上的纸箱", mast: "门架", fork: "货叉", fork_heel: "货叉根", headlight: "前灯", enclosure: "机罩", top_cabinet: "上柜", door_frame: "门框", door_window: "门窗", door_handle: "门把手", hmi_arm: "操作屏支臂", hmi_pod: "操作屏箱", hmi_screen: "操作屏", estop: "急停按钮", tower_pole: "信号塔杆", cable_duct: "线槽", penthouse: "屋顶设备间", sensor_post: "传感器立柱", sensor_lens: "传感器镜头", chimney: "烟囱", chimney_cap: "烟囱帽", chimney_pot: "烟囱管", hob: "灶台", oven_window: "烤箱窗", oven_door: "烤箱门", oven_handle: "烤箱把手", flue: "烟道", hood_filter: "油烟滤网", low_ceiling: "低吊顶", kick: "踢脚", inner_top: "内顶", bell: "铃", chassis: "底盘", counterweight: "配重", seat_back: "座椅靠背", steering_column: "转向柱", steering_wheel: "方向盘", beacon: "警示灯", carriage: "滑架", side_frame: "侧框", drum: "滚筒", bed: "床体", belt: "传送带", drive_motor: "驱动电机" });
-  const partZh = (t) => PART_ZH[t] || (/^floor_/.test(t) ? "地板" : /^ext\d+$/.test(t) ? "外墙段" : /^(door|win)_\d+$/.test(t) ? "" : t);
+  const PART_ZH = { leg: "leg", handle: "handle", baseboard: "baseboard", product: "product", ext: "ext", label: "label", books: "books", part: "part", top: "top", carton: "carton", back: "back", seat: "seat", light: "light", book_rack: "book rack", foot: "foot", pallet_stringer: "pallet stringer", price_tag: "price tag", board: "board", brace: "brace", step: "step", canopy: "canopy", nosing: "nosing", drawer: "drawer", carcass: "carcass", vents: "vents", frame: "frame", plinth: "plinth", beam: "beam", knob: "knob", shelf: "shelf", armrest: "armrest", post: "post", pallet_deck: "pallet deck", worktop: "worktop", screen: "screen", pillow: "pillow", upright: "upright", seat_cushion: "seat cushion", back_cushion: "back cushion", ceiling: "ceiling", toe_kick: "toe kick", pedestal: "pedestal", base: "base", side: "side", side_panel: "side panel", mirror: "mirror", mirror_frame: "mirror frame", plant: "plant", monitor: "monitor", keyboard: "keyboard", cistern: "cistern", bowl: "bowl", seat_lid: "seat lid", mattress: "mattress", headboard: "headboard", footboard: "footboard", duvet: "duvet", blanket: "blanket", pot: "pot", slat: "slat", body: "body", freezer_door: "freezer door", fridge_door: "fridge door", backsplash: "backsplash", wall_cabinet: "wall cabinet", tv: "tv", cabinet: "cabinet", console: "console", parapet: "parapet", tub_wall: "tub wall", tub_floor: "tub floor", basin: "basin", lamp_base: "lamp base", lamp_shade: "lamp shade", tray: "tray", stoop: "stoop", gutter: "gutter", plate: "plate", housing: "housing", pad: "pad", top_vent: "top vent" };
+  Object.assign(PART_ZH, { door: "door", basin_wall: "basin wall", price_rail: "price rail", textbook: "textbook", bottle: "bottle", support_bar: "support bar", base_bar: "base bar", wrap_band: "wrap band", tap_spout: "tap spout", bin: "bin", arm: "arm", arm_cap: "arm cap", cup: "cup", basin_floor: "basin floor", tap_base: "tap base", tap_neck: "tap neck", drain: "drain", beam_label: "beam label", lift: "lift", ornament: "ornament", awning: "awning", valance: "valance", lettering: "lettering", garment: "garment", modesty_panel: "modesty panel", marker: "marker", stand_base: "stand base", stand_neck: "stand neck", mouse: "mouse", phone: "phone", cistern_lid: "cistern lid", flush_button: "flush button", hinge_block: "hinge block", soap: "soap", papers: "papers", headboard_pad: "headboard pad", duvet_fold: "duvet fold", wrapped_load: "wrapped load", crown: "crown", screen_trim: "screen trim", apron: "apron", magazine: "magazine", digit: "digit", door_gap: "door gap", tap_lever: "tap lever", dish_soap: "dish soap", spine: "spine", cap: "cap", lamp_stem: "lamp stem", brace_low: "brace low", flask: "flask", guard: "guard", louvre: "louvre", cushion: "cushion", soap_dispenser: "soap dispenser", notepad: "notepad", leg_frame: "leg frame", mug: "mug", top_edge: "top edge", neck: "neck", back_post: "back post", eraser: "eraser", foliage: "foliage", tub_basin: "tub basin", tap_body: "tap body", shower_riser: "shower riser", shower_head: "shower head", shower_arm: "shower arm", hazard_stripe: "hazard stripe", vase: "vase", rod: "rod", screen_case: "screen case", notebook: "notebook", downspout: "downspout", stretcher: "stretcher", fan_grille: "fan grille", reagent_shelf: "reagent shelf", sink: "sink", tap: "tap", back_panel: "back panel", seat_frame: "seat frame", glass: "glass", elbow: "elbow", laptop_base: "laptop base", laptop_lid: "laptop lid", reflector: "reflector", handrail: "handrail", trestle: "trestle", table_leg: "table leg", hvac: "hvac", flowers: "flowers", tower_lamp: "tower lamp", membrane: "membrane", rail: "rail", burner: "burner", burner_cap: "burner cap", guard_slat: "guard slat", backrest_bar: "backrest bar", lamp: "lamp", casing: "casing", line_set: "line set", jug: "jug", front_panel: "front panel", guard_post: "guard post", tyre: "tyre", cross_brace: "cross brace", guard_rail: "guard rail", oven_handle_post: "oven handle post", fruit_bowl: "fruit bowl", hood: "hood", ramp: "ramp", ramp_end: "ramp end", soil: "soil", carton_on_belt: "carton on belt", mast: "mast", fork: "fork", fork_heel: "fork heel", headlight: "headlight", enclosure: "enclosure", top_cabinet: "top cabinet", door_frame: "door frame", door_window: "door window", door_handle: "door handle", hmi_arm: "hmi arm", hmi_pod: "hmi pod", hmi_screen: "hmi screen", estop: "estop", tower_pole: "tower pole", cable_duct: "cable duct", penthouse: "penthouse", sensor_post: "sensor post", sensor_lens: "sensor lens", chimney: "chimney", chimney_cap: "chimney cap", chimney_pot: "chimney pot", hob: "hob", oven_window: "oven window", oven_door: "oven door", oven_handle: "oven handle", flue: "flue", hood_filter: "hood filter", low_ceiling: "low ceiling", kick: "kick", inner_top: "inner top", bell: "bell", chassis: "chassis", counterweight: "counterweight", seat_back: "seat back", steering_column: "steering column", steering_wheel: "steering wheel", beacon: "beacon", carriage: "carriage", side_frame: "side frame", drum: "drum", bed: "bed", belt: "belt", drive_motor: "drive motor" });
+  const partZh = (t) => PART_ZH[t] || (/^floor_/.test(t) ? "floor" : /^ext\d+$/.test(t) ? "exterior wall segment" : /^(door|win)_\d+$/.test(t) ? "" : t);
   function partName(cat, it, elem, tag) {                                              // what the picked box is: leaf / frame / pane of a door or window, else the part name from the tag
     if (cat && (cat.cat === "structure" || cat.cat === "trim")) return ""; const win = it && /^window/.test(it.t), t = partZh(tag);
-    if (cat && cat.cat === "opening") return { frame: win ? "窗框" : "门框", glass: "窗玻璃", door: "门扇", fixture: "五金(把手 / 合页)", trim: "饰条", treat: "窗帘 / 百叶" }[elem] || t || ELEM_ZH[elem] || "";
+    if (cat && cat.cat === "opening") return { frame: win ? "window frame" : "door frame", glass: "window glass", door: "door leaf", fixture: "hardware (handle / hinge)", trim: "trim", treat: "curtain / blinds" }[elem] || t || ELEM_ZH[elem] || "";
     return t || ELEM_ZH[elem] || "";
   }
-  const FENCE_ZH = { picket: "木栅栏(尖桩)", privacy: "隐私木板围栏", chain: "铁丝网围栏" };
-  const OBJ_ZH = { shed: "棚屋", container: "集装箱", bins: "垃圾桶(两只)", mailbox: "信箱", hoop: "篮球架", tank: "储罐", chimney: "烟囱", playground: "游乐设施" };
-  const VEH_ZH = { sedan: "轿车", hatchback: "两厢车", suv: "SUV", van: "厢式面包车", box_truck: "厢式货车", taxi: "出租车", police: "警车", pickup: "皮卡", ambulance: "救护车", fire_truck: "消防车", truck: "货车", bus: "公交车" };
+  const catName = (c) => (c.name ? c.name.charAt(0).toUpperCase() + c.name.slice(1) : c.zh);   // catalogue names are English (catalog.py `name`); `zh` is the old Chinese label
+  const FENCE_ZH = { picket: "Wooden picket fence", privacy: "Privacy board fence", chain: "Chain-link fence" };
+  const OBJ_ZH = { shed: "Shed", container: "Shipping container", bins: "Bins (two)", mailbox: "Mailbox", hoop: "Basketball hoop", tank: "Storage tank", chimney: "Chimney", playground: "Playground equipment" };
+  const VEH_ZH = { sedan: "Sedan", hatchback: "Hatchback", suv: "SUV", van: "Van", box_truck: "Box truck", taxi: "Taxi", police: "Police car", pickup: "Pickup", ambulance: "Ambulance", fire_truck: "Fire truck", truck: "Truck", bus: "Bus" };
   /* typical kerb mass by vehicle type (public vehicle data, mid-range of the class; NOT project data: the scene only carries the outer dimensions) */
   const VEH_KG = { sedan: 1500, hatchback: 1300, suv: 1800, van: 2400, box_truck: 5000, taxi: 1500, police: 1900, pickup: 2100, ambulance: 3200, fire_truck: 12000 };
-  const SPECIES_ZH = { maple: "枫树", locust: "刺槐", oak: "橡树", pear: "梨树", birch: "桦树", linden: "椴树", poplar: "杨树", spruce: "云杉", pine: "松树" };
-  const KIND_TREE_ZH = { round: "圆冠阔叶树", tall: "高大阔叶树", conifer: "针叶树" };
-  const EMB = { human: ["🚶", "人", "人"], dog: ["🐕", "机械狗", "机械狗"], rover: ["🤖", "轮式", "轮式机器人"], uav: ["🚁", "无人机", "无人机"] };
-  const ROLE_ZH = { walk: "步行", stand: "站立", wave: "挥手示意(求助)", lie: "躺卧(倒地)", self: "你自己" };
+  const SPECIES_ZH = { maple: "Maple", locust: "Locust", oak: "Oak", pear: "Pear", birch: "Birch", linden: "Linden", poplar: "Poplar", spruce: "Spruce", pine: "Pine" };
+  const KIND_TREE_ZH = { round: "Round-crown broadleaf tree", tall: "Tall broadleaf tree", conifer: "Conifer" };
+  const EMB = { human: ["🚶", "person", "Person"], dog: ["🐕", "dog", "Quadruped robot"], rover: ["🤖", "wheeled", "Wheeled robot"], uav: ["🚁", "UAV", "UAV"] };
+  const ROLE_ZH = { walk: "Walking", stand: "Standing", wave: "Waving (asking for help)", lie: "Lying (on the ground)", self: "You" };
 
   /* ================================================================ catalogue + per-scene caches ================================================================ */
   let CAT = null, catP = null;
@@ -112,7 +113,7 @@
     S.obb.set(key, o); return o;
   }
   const FRONT_CATS = new Set(["furniture", "appliance", "fixture", "equipment"]);
-  const frontArrow = (x, y, z, fx, fy, len) => ({ t: "arrow", a: [x, y, z], b: [x + fx * len, y + fy * len, z], strong: true, text: "前" });
+  const frontArrow = (x, y, z, fx, fy, len) => ({ t: "arrow", a: [x, y, z], b: [x + fx * len, y + fy * len, z], strong: true, text: "front" });
   const PART_MODE = new Set(["structure", "trim", "circulation"]);                 // categories where the picked piece (a wall run, a slab, a tread) is what the owner means; for the rest the whole item is outlined
   const MASS_FROM_BOXES = new Set(["wall_ext", "wall_partition", "guard_rail", "floor_slab", "ceiling_slab", "parapet", "chimney", "penthouse", "entry_stoop", "entry_ramp", "entry_apron", "stair_flight", "roof_membrane"]);   // = catalog.py NOMINAL_MASS_FROM_BOXES
 
@@ -162,7 +163,7 @@
     const c = Math.cos(pose[6]), s = Math.sin(pose[6]), cr = Math.cos(pose[7]), sr = Math.sin(pose[7]), nx = hit.nx, ny = hit.ny, nz = hit.nz;
     const ln = [c * nx + s * ny, -s * cr * nx + c * cr * ny + sr * nz, s * sr * nx - c * sr * ny + cr * nz]; let ax = 0; if (Math.abs(ln[1]) > Math.abs(ln[ax])) ax = 1; if (Math.abs(ln[2]) > Math.abs(ln[ax])) ax = 2;
     const face = ax * 2 + (ln[ax] >= 0 ? 0 : 1), partMode = !it || !cat || PART_MODE.has(cat.cat) || !itemObb(bid, B, it);
-    const T = { kind: "bim", key: `bim:${bid}:${j}:${face}`, hit, bid, B, j, r, it, cat, pose, face, partMode, catLoaded: !!CAT, name: cat ? cat.zh : ELEM_ZH[S.elemName[r[14]]] || S.elemName[r[14]], icon: iconOf(cat, S.elemName[r[14]]) };
+    const T = { kind: "bim", key: `bim:${bid}:${j}:${face}`, hit, bid, B, j, r, it, cat, pose, face, partMode, catLoaded: !!CAT, name: cat ? catName(cat) : ELEM_ZH[S.elemName[r[14]]] || S.elemName[r[14]], icon: iconOf(cat, S.elemName[r[14]]) };
     T.dist = hit.t; T.center = () => { const p = boxPose(bid, B, j, r); return [p[0], p[1], p[2]]; };
     T.shapes = () => {
       const own = { t: "obb", o: boxPose(bid, B, j, r), strong: partMode, label: partMode }; if (partMode) return [own]; const q = itemObb(bid, B, it), out = [{ t: "obb", o: q, strong: true, label: true }, own];
@@ -180,69 +181,69 @@
   }
   const row = (k, v, tip, cls) => ({ k, v, tip, cls });
   const sec = (h, rows) => ({ h, rows: rows.filter(Boolean) });
-  const surfAxis = (n) => (Math.abs(n[2]) >= Math.abs(n[0]) && Math.abs(n[2]) >= Math.abs(n[1]) ? (n[2] > 0 ? "朝上" : "朝下") : Math.abs(n[0]) >= Math.abs(n[1]) ? (n[0] > 0 ? "朝东" : "朝西") : n[1] > 0 ? "朝北" : "朝南");
+  const surfAxis = (n) => (Math.abs(n[2]) >= Math.abs(n[0]) && Math.abs(n[2]) >= Math.abs(n[1]) ? (n[2] > 0 ? "facing up" : "facing down") : Math.abs(n[0]) >= Math.abs(n[1]) ? (n[0] > 0 ? "facing east" : "facing west") : n[1] > 0 ? "facing north" : "facing south");
   function faceNormals(p) { const R = rot9(p[6], p[7]); return [[R[0], R[3], R[6]], [-R[0], -R[3], -R[6]], [R[1], R[4], R[7]], [-R[1], -R[4], -R[7]], [R[2], R[5], R[8]], [-R[2], -R[5], -R[8]]]; }
 
   function bimCard(T) {
     const { bid, B, j, r, it, cat, hit, face } = T, bim = S.bim, mats = bim.materials, RAY = ES.ray, pose = boxPose(bid, B, j, r), elem = S.elemName[r[14]], flags = r[15], sx = r[3], sy = r[4], sz = r[5];
     const rooms = B.rooms || [], room = rooms.find((q) => q.id === r[17]) || null, storey = r[16];
-    const roomTxt = room ? `${ROOM_ZH[room.fn] || room.name}${room.area ? ` ${f1(room.area, 0)} m²` : ""}` : "室外 / 无房间";
-    const name = cat ? cat.zh : ELEM_ZH[elem] || elem, part = partName(cat, it, elem, B.tags[j]);
-    T.name = name; const sub = `${bid} ${BKIND_ZH[B.kind] || B.kind}(${B.label}) · 第 ${storey + 1} 层 · ${roomTxt}`;
+    const roomTxt = room ? `${ROOM_ZH[room.fn] || room.name}${room.area ? ` ${f1(room.area, 0)} m²` : ""}` : "outdoors / no room";
+    const name = cat ? catName(cat) : ELEM_ZH[elem] || elem, part = partName(cat, it, elem, B.tags[j]);
+    T.name = name; const sub = `${bid} ${BKIND_ZH[B.kind] || B.kind} (${B.label}) · floor ${storey + 1} · ${roomTxt}`;
     // ---- shape and mass
     const dims = it && it.sz ? it.sz : null, V = sx * sy * sz, thick = Math.min(sx, sy, sz), solid = !!(flags & FL.PHYS), detail = !!(flags & FL.DETAIL);
     const rowsShape = [];
-    if (dims) rowsShape.push(row("整件尺寸", `${f1(dims[0], 2)} × ${f1(dims[1], 2)} × ${f1(dims[2], 2)} m`, "宽 × 深 × 高(目录 items[].sz,地面以上)"));
-    rowsShape.push(row(dims ? "这一块" : "尺寸", `${f1(sx, 2)} × ${f1(sy, 2)} × ${f1(sz, 2)} m`, "命中的这个盒子:BIM boxes[] 的局部尺寸 sx × sy × sz(z 向上);厚度 = 最薄边 " + f1(thick, 3) + " m"));
+    if (dims) rowsShape.push(row("Whole-item size", `${f1(dims[0], 2)} × ${f1(dims[1], 2)} × ${f1(dims[2], 2)} m`, "width × depth × height (catalogue items[].sz, above ground)"));
+    rowsShape.push(row(dims ? "This piece" : "Size", `${f1(sx, 2)} × ${f1(sy, 2)} × ${f1(sz, 2)} m`, "The box that was hit: local size sx × sy × sz of BIM boxes[] (z up); thickness = the thinnest edge " + f1(thick, 3) + " m"));
     if (it && it.m > 0) {
-      let tipM = "目录质量 items[].m:家具 = 目录标称质量 × 尺寸比例(catalog.py annotate);建筑构件 = 体积 × 等效密度";
+      let tipM = "Catalogue mass items[].m: furniture = nominal catalogue mass × size ratio (catalog.py annotate); building parts = volume × equivalent density";
       if (MASS_FROM_BOXES.has(it.t) && !detail) {
         let vs = 0; for (let k = it.b[0]; k < it.b[1]; k++) { const q = B.boxes[k]; if (!(q[15] & FL.DETAIL) || it.t === "stair_flight") vs += q[3] * q[4] * q[5]; }
         const rho = vs > 0 ? it.m / vs : 0, mp = V * rho;
-        rowsShape.push(row("质量", `这一块 ≈ ${big(mp)} kg · 整件 ${big(it.m)} kg`, `${tipM};这一块 = 体积 ${f1(V, 3)} m³ × 等效密度 ${big(rho)} kg/m³(整件 ${big(it.m)} kg ÷ 整件体积 ${f1(vs, 2)} m³ = 目录装配密度,不等于材料密度)`));
-      } else rowsShape.push(row("质量", `${big(it.m)} kg${it.loose ? " · 可推动 / 搬动" : ""}`, tipM));
-    } else if (solid) rowsShape.push(row("质量", `这一块 ≈ ${big(V * (RAY.matInfo(core(r)) || {}).rho)} kg`, `体积 ${f1(V, 3)} m³ × 材料密度(无目录质量时的估计)`));
+        rowsShape.push(row("Mass", `This piece ≈ ${big(mp)} kg · whole item ${big(it.m)} kg`, `${tipM}; this piece = volume ${f1(V, 3)} m³ × equivalent density ${big(rho)} kg/m³ (whole item ${big(it.m)} kg ÷ whole-item volume ${f1(vs, 2)} m³ = catalogue assembly density, not the material density)`));
+      } else rowsShape.push(row("Mass", `${big(it.m)} kg${it.loose ? " · can be pushed / carried" : ""}`, tipM));
+    } else if (solid) rowsShape.push(row("Mass", `This piece ≈ ${big(V * (RAY.matInfo(core(r)) || {}).rho)} kg`, `volume ${f1(V, 3)} m³ × material density (an estimate when the catalogue has no mass)`));
     // ---- materials of the six faces + hit face
     const fn = faceNormals(pose), names = [0, 1, 2, 3, 4, 5].map((k) => (mats[r[8 + k]] || {}).name || "none"), chips = [0, 1, 2, 3, 4, 5].map((k) => ({ lab: surfAxis(fn[k]).slice(1), mat: names[k], rgb: (mats[r[8 + k]] || {}).rgb, hit: k === face }));
     const hitMat = RAY.matInfo(hit.mat) || {}, hitName = hitMat.name || names[face], bm = mats[hit.mat] || {};
-    const rowsMat = [row("命中面", `${surfAxis(fn[face])}的面 · ${E(matZh(hitName))}`, `这条射线打到的面(${surfAxis(fn[face])}),材料 ${hitName};面材料 = BIM boxes[] 的 m+x m-x m+y m-y m+z m-z`)];
+    const rowsMat = [row("Face hit", `Face ${surfAxis(fn[face])} · ${E(matZh(hitName))}`, `The face this ray hit (${surfAxis(fn[face])}), material ${hitName}; face material = m+x m-x m+y m-y m+z m-z of BIM boxes[]`)];
     const physRows = [];
     // ---- physics of the solid block (a DETAIL part rides on the item's solid block: take that one)
     const ph = boxPhysics(T), cm = ph ? ph.core : core(r), cmName = (mats[cm] || {}).name || "none";
     if (ph) {
-      const pr = ph.r, tl = ph.tl, rf = ph.rf, thick = ph.thick, rhoBack = Number.isFinite(tl) && tl > 0.01 && tl < 59.99 && !ph.glassy ? Math.pow(10, (tl + 47) / 20) / (thick * 500) : NaN, via = ph.j !== j ? `;命中的是细节件,按它贴着的实心块(${partZh(B.tags[ph.j]) || ELEM_ZH[S.elemName[pr[14]]] || "实心块"})计` : "";
-      physRows.push(row("密度 ρ", `${big((mats[cm] || {}).rho)} kg/m³ · ${E(matZh(ph.eff))}`, `材料表 rho(bim/materials.py);实心块的芯材 = ${cmName}${ph.eff !== cmName ? `,楼板 / 天花板按建筑类型换成 ${ph.eff}` : ""}(物理引擎用 +x 面材料作芯材)${via}`));
-      physRows.push(row("隔声 TL", `${f1(tl, 1)} dB(500 Hz)${ph.glassy ? " · 双层 6/12/6 mm" : thick < 0.5 ? ` · 厚 ${f1(thick, 2)} m` : ""}`, `场入射质量定律 TL = 20·log10(ρ·t·f) − 47 dB,上限 60 dB;t = 最薄边 ${f1(thick, 3)} m,f = 500 Hz,ρ 取声学等效密度${Number.isFinite(rhoBack) ? `(反推 ≈ ${big(rhoBack)} kg/m³)` : ""};玻璃按 2×6 mm 并扣重合效应凹陷。ES.ray.soundTlFromCrossings = bim/physics.py sound_tl_db${via}`));
-      physRows.push(row("射频损耗", `${f1(rf, 1)} dB(3.5 GHz)`, `ITU-R P.2040 多层平板传输矩阵,垂直入射、TE 极化,单块上限 45 dB;玻璃 = 6/12/6 mm 双层中空,石膏板隔墙 = 板/空气/板。ES.ray.rfLossFromCrossings = bim/physics.py rf_loss_db${via}`));
-    } else physRows.push(row("射线 / 声学", detail ? "细节件:只参与外观和激光雷达,不参与射频、声学" : "不是实心块", "DETAIL 标志的盒子没有 PHYS:bim/physics.py 的 crossings 跳过它们"));
-    const tmat = mats[r[10]] || mats[cm] || {}; physRows.push(row("可见光", `透射 ${f1(tmat.trans, 2)}${tmat.trans > 0 ? "" : "(不透光)"}`, `材料表 trans,取 +y 面材料 ${tmat.name || "—"}(与 physics.py light_transmission 相同);玻璃 0.85、窗帘 0.25、百叶 0.12`));
-    physRows.push(row("激光雷达", `905 nm 反射率 ${f1(hitMat.refl, 2)}${hitMat.spec ? ` + 镜面 ${f1(hitMat.spec, 2)}` : ""}${hitMat.nir ? ` · 透射 ${f1(hitMat.nir, 2)}` : ""}`, `命中面材料 ${hitName} 在 ES.ray.REFL 的行:[漫反射率, 镜面瓣峰值, 近红外透射];表来自 scripts/esworld/sensors/lidar.py REFL_NAMED`));
-    const mu = (CAT && CAT.materials[hitName]) || null, muT = cat && cat.mu_static; physRows.push(row("摩擦 μ", mu ? `静 ${f1(muT != null ? muT : mu.mu_static, 2)} / 动 ${f1(muT != null ? muT * 0.8 : mu.mu_kinetic, 2)}` : "—", "catalog.json:按材料族的干燥静摩擦系数(catalog.py MU),动摩擦 = 0.8 × 静摩擦;类型有自己的 mu_static 时用类型的", "lo"));
-    if (bm.alpha != null) physRows.push(row("吸声 α", `${f1(bm.alpha, 2)}(500 Hz)`, "材料表 alpha:暴露面在 500 Hz 的随机入射吸声系数(房间声学)", "lo"));
+      const pr = ph.r, tl = ph.tl, rf = ph.rf, thick = ph.thick, rhoBack = Number.isFinite(tl) && tl > 0.01 && tl < 59.99 && !ph.glassy ? Math.pow(10, (tl + 47) / 20) / (thick * 500) : NaN, via = ph.j !== j ? `; a detail piece was hit, counted as the solid block it sits on (${partZh(B.tags[ph.j]) || ELEM_ZH[S.elemName[pr[14]]] || "Solid block"})` : "";
+      physRows.push(row("Density ρ", `${big((mats[cm] || {}).rho)} kg/m³ · ${E(matZh(ph.eff))}`, `Material table rho (bim/materials.py); core material of the solid block = ${cmName}${ph.eff !== cmName ? `; floors / ceilings are replaced by ${ph.eff} according to the building type` : ""} (the physics engine uses the +x face material as core)${via}`));
+      physRows.push(row("Sound insulation TL", `${f1(tl, 1)} dB(500 Hz)${ph.glassy ? " · double glazing 6/12/6 mm" : thick < 0.5 ? ` · thickness ${f1(thick, 2)} m` : ""}`, `Field-incidence mass law TL = 20·log10(ρ·t·f) − 47 dB, capped at 60 dB; t = thinnest edge ${f1(thick, 3)} m, f = 500 Hz, ρ is the acoustic equivalent density${Number.isFinite(rhoBack) ? `(back-calculated ≈ ${big(rhoBack)} kg/m³)` : ""}; glass is treated as 2×6 mm with the coincidence dip subtracted. ES.ray.soundTlFromCrossings = bim/physics.py sound_tl_db${via}`));
+      physRows.push(row("RF loss", `${f1(rf, 1)} dB(3.5 GHz)`, `ITU-R P.2040 multilayer slab transfer matrix, normal incidence, TE polarisation, capped at 45 dB per box; glass = 6/12/6 mm double glazing, plasterboard partition = board / air / board. ES.ray.rfLossFromCrossings = bim/physics.py rf_loss_db${via}`));
+    } else physRows.push(row("Ray / acoustics", detail ? "Detail piece: used for appearance and LiDAR only, not for RF or acoustics" : "Not a solid block", "A box with the DETAIL flag has no PHYS: crossings in bim/physics.py skip it"));
+    const tmat = mats[r[10]] || mats[cm] || {}; physRows.push(row("Visible light", `Transmission ${f1(tmat.trans, 2)}${tmat.trans > 0 ? "" : "(opaque)"}`, `Material table trans, taken from the +y face material ${tmat.name || "—"} (same as light_transmission in physics.py); glass 0.85, curtain 0.25, blinds 0.12`));
+    physRows.push(row("LiDAR", `905 nm reflectivity ${f1(hitMat.refl, 2)}${hitMat.spec ? ` + specular ${f1(hitMat.spec, 2)}` : ""}${hitMat.nir ? ` · transmission ${f1(hitMat.nir, 2)}` : ""}`, `Row of the hit face material ${hitName} in ES.ray.REFL: [diffuse reflectance, specular lobe peak, near-IR transmission]; the table comes from scripts/esworld/sensors/lidar.py REFL_NAMED`));
+    const mu = (CAT && CAT.materials[hitName]) || null, muT = cat && cat.mu_static; physRows.push(row("Friction μ", mu ? `static ${f1(muT != null ? muT : mu.mu_static, 2)} / kinetic ${f1(muT != null ? muT * 0.8 : mu.mu_kinetic, 2)}` : "—", "catalog.json: dry static friction coefficient by material family (catalog.py MU), kinetic = 0.8 × static; a type's own mu_static is used when it has one", "lo"));
+    if (bm.alpha != null) physRows.push(row("Absorption α", `${f1(bm.alpha, 2)}(500 Hz)`, "Material table alpha: random-incidence absorption coefficient of the exposed face at 500 Hz (room acoustics)", "lo"));
     // ---- function / state
     const fnR = [], stR = [];
-    if (cat) fnRows(cat, it).forEach(([k, v]) => fnR.push(row(k, E(v), `目录 catalog.json types["${it.t}"].functions(docs/bim-catalog.md);数值是类型的标称值`)));
+    if (cat) fnRows(cat, it).forEach(([k, v]) => fnR.push(row(k, E(v), `Catalogue catalog.json types["${it.t}"].functions (docs/bim-catalog.md); the values are nominal for the type`)));
     const dr = doorOf(T), mov = B.mov[j];
     if (dr && it) {
-      const o = dr.open, isWin = /^win/.test(it.id) || cat && cat.cat === "opening" && /window/.test(it.t), ang = dr.mov && dr.mov.kind === "swing" ? ` · 开角 ${f1(Math.abs(o * dr.mov.angle) * R2D, 0)}°` : "";
-      stR.push(row(isWin ? "窗扇" : "门", `${o < 0.05 ? "关着" : o > 0.95 ? "全开" : "半开"} · 开度 ${f1(o * 100, 0)}%${ang}`, `V.col.doors["${bid}/${B.tags[j]}"].open(0 关 … 1 全开);F 键开关最近的门窗`, o > 0.5 ? "ok" : ""));
-      stR.push(row("锁", "未上锁(模型里没有门锁状态)", "BIM 的门 / 窗记录没有 locked 字段:任何人都可以直接开"));
-    } else if (cat && /^window/.test(it.t)) { const w = (B.windows || []).find((q) => q.id === it.id); stR.push(row("窗扇", `固定窗 · ${w ? `玻璃 ${w.glass === "double" ? "双层中空 6/12/6" : w.glass}` : ""}`, "目录:fixed / frosted / ribbon / storefront / clerestory / picture 窗不可开")); }
+      const o = dr.open, isWin = /^win/.test(it.id) || cat && cat.cat === "opening" && /window/.test(it.t), ang = dr.mov && dr.mov.kind === "swing" ? ` · opening angle ${f1(Math.abs(o * dr.mov.angle) * R2D, 0)}°` : "";
+      stR.push(row(isWin ? "window sash" : "door", `${o < 0.05 ? "closed" : o > 0.95 ? "fully open" : "half open"} · opening ${f1(o * 100, 0)}%${ang}`, `V.col.doors["${bid}/${B.tags[j]}"].open (0 closed … 1 fully open); the F key toggles the nearest door or window`, o > 0.5 ? "ok" : ""));
+      stR.push(row("Lock", "not locked (the model has no lock state)", "BIM door / window records have no locked field: anyone can simply open it"));
+    } else if (cat && /^window/.test(it.t)) { const w = (B.windows || []).find((q) => q.id === it.id); stR.push(row("window sash", `fixed window · ${w ? `glass ${w.glass === "double" ? "double glazing 6/12/6" : w.glass}` : ""}`, "Catalogue: fixed / frosted / ribbon / storefront / clerestory / picture windows cannot be opened")); }
     if (cat && cat.cat === "light" || cat && cat.emits && cat.emits.light) {
-      const m = matchLight(B, it); if (m) { const on = ES.interior && ES.interior.lightOn ? ES.interior.lightOn(bid, m.k, m.L) : !!m.L.on; stR.push(row("灯", `${on ? "亮着" : "关着"} · ${big(m.L.lm)} lm · ${big(m.L.cct)} K`, `lights[] 记录 lm / cct(BIM)+ ES.interior.lightOn(房间开关 G 键、停电);${cat.emits && cat.emits.light && cat.emits.light.lm ? `目录典型光通量 ${big(cat.emits.light.lm)} lm` : ""}`, on ? "ok" : "")); }
-      else if (cat.emits && cat.emits.light && cat.emits.light.lm) stR.push(row("灯", `${big(cat.emits.light.lm)} lm${cat.emits.light.cct ? ` · ${big(cat.emits.light.cct)} K` : ""}(目录)`, "目录 emits.light"));
+      const m = matchLight(B, it); if (m) { const on = ES.interior && ES.interior.lightOn ? ES.interior.lightOn(bid, m.k, m.L) : !!m.L.on; stR.push(row("Light", `${on ? "on" : "closed"} · ${big(m.L.lm)} lm · ${big(m.L.cct)} K`, `lights[] record lm / cct (BIM) + ES.interior.lightOn (room switch via the G key, power cut); ${cat.emits && cat.emits.light && cat.emits.light.lm ? `catalogue typical luminous flux ${big(cat.emits.light.lm)} lm` : ""}`, on ? "ok" : "")); }
+      else if (cat.emits && cat.emits.light && cat.emits.light.lm) stR.push(row("Light", `${big(cat.emits.light.lm)} lm${cat.emits.light.cct ? ` · ${big(cat.emits.light.cct)} K` : ""} (catalogue)`, "catalogue emits.light"));
     }
-    if (it && /tv_unit/.test(it.t)) { let on = false; for (let k = it.b[0]; k < it.b[1]; k++) if (B.tags[k] === "screen" && (mats[B.boxes[k][8 + 4]] || {}).name === "screen_on") on = true; stR.push(row("电视", on ? "开着(屏幕发光)" : "关着", "屏幕盒子的材料:screen_on = 开,screen = 关", on ? "ok" : "")); }
+    if (it && /tv_unit/.test(it.t)) { let on = false; for (let k = it.b[0]; k < it.b[1]; k++) if (B.tags[k] === "screen" && (mats[B.boxes[k][8 + 4]] || {}).name === "screen_on") on = true; stR.push(row("TV", on ? "on (screen glowing)" : "closed", "material of the screen box: screen_on = on, screen = off", on ? "ok" : "")); }
     if (cat && cat.emits) {
-      const em = cat.emits; if (em.sound) fnR.push(row("发声", `${em.sound.spl_1m_db} dB(1 m)· ${E(SND_ZH[em.sound.kind] || em.sound.kind)}${em.sound.freq_hz ? ` ${em.sound.freq_hz} Hz` : ""}${em.sound.when ? ` · ${E(WHEN_ZH[em.sound.when] || em.sound.when)}时` : ""}`, "目录 emits.sound:1 m 处声压级,供声学 / 麦克风模型"));
-      if (em.heat) fnR.push(row("发热", `${big(em.heat.w)} W${em.heat.when ? ` · ${E(WHEN_ZH[em.heat.when] || em.heat.when)}时` : ""}`, "目录 emits.heat"));
-      if (em.rf) fnR.push(row("无线电", `${E(em.rf.band)} · ${em.rf.tx_dbm} dBm`, "目录 emits.rf"));
+      const em = cat.emits; if (em.sound) fnR.push(row("Sound", `${em.sound.spl_1m_db} dB(1 m)· ${E(SND_ZH[em.sound.kind] || em.sound.kind)}${em.sound.freq_hz ? ` ${em.sound.freq_hz} Hz` : ""}${em.sound.when ? `  · ${E(WHEN_ZH[em.sound.when] || em.sound.when)} when running` : ""}`, "catalogue emits.sound: sound pressure level at 1 m, for the acoustics / microphone models"));
+      if (em.heat) fnR.push(row("Heat", `${big(em.heat.w)} W${em.heat.when ? `  · ${E(WHEN_ZH[em.heat.when] || em.heat.when)} when running` : ""}`, "catalogue emits.heat"));
+      if (em.rf) fnR.push(row("Radio", `${E(em.rf.band)} · ${em.rf.tx_dbm} dBm`, "catalogue emits.rf"));
     }
-    if (!fnR.length && !stR.length) fnR.push(row("功能", elem === "wall_ext" || elem === "wall_int" || elem === "column" ? "围护 / 承重结构,无活动功能" : "—"));
+    if (!fnR.length && !stR.length) fnR.push(row("Function", elem === "wall_ext" || elem === "wall_int" || elem === "column" ? "Enclosure / load-bearing structure, no active function" : "—"));
     const trav = travRows(T);
-    const html6 = `<div class="faces lo" title="这个盒子六个面的材料(按它现在的朝向,命中面高亮)">${chips.map((c) => `<span class="fc${c.hit ? " hit" : ""}" title="${E(c.lab)}面:${E(c.mat)}"><i style="background:${c.rgb ? `rgb(${c.rgb[0]},${c.rgb[1]},${c.rgb[2]})` : "#444"}"></i>${E(c.lab)} ${E(matZh(c.mat))}</span>`).join("")}</div>`;
+    const html6 = `<div class="faces lo" title="Materials of the six faces of this box (in its current orientation; the face that was hit is highlighted)">${chips.map((c) => `<span class="fc${c.hit ? " hit" : ""}" title="${E(c.lab)} face: ${E(c.mat)}"><i style="background:${c.rgb ? `rgb(${c.rgb[0]},${c.rgb[1]},${c.rgb[2]})` : "#444"}"></i>${E(c.lab)} ${E(matZh(c.mat))}</span>`).join("")}</div>`;
     const blind = glassBehind(T);
-    return { icon: iconOf(cat, elem), title: name, part, sub, dist: hit.t, cols: [[sec("尺寸与质量", rowsShape), Object.assign(sec("材料(六个面)", rowsMat), { html: html6 }), sec("物理量(命中的这一块)", physRows)], [sec("功能与状态", fnR.concat(stR)), blind ? sec("透过玻璃", [blind]) : null, sec("谁能过(人 · 机械狗 · 轮式 · 无人机)", trav)]]};
+    return { icon: iconOf(cat, elem), title: name, part, sub, dist: hit.t, cols: [[sec("Size and mass", rowsShape), Object.assign(sec("Materials (six faces)", rowsMat), { html: html6 }), sec("Physical quantities (of the piece that was hit)", physRows)], [sec("Function and state", fnR.concat(stR)), blind ? sec("Through the glass", [blind]) : null, sec("Who can pass (person · dog · wheeled · UAV)", trav)]]};
   }
   /* sound / RF loss of the solid block under the hit (the picked box when it is PHYS, else the item's nearest PHYS box within 0.2 m): numbers from ES.ray with a one-box crossing at normal incidence */
   function boxPhysics(T) {
@@ -262,26 +263,26 @@
     const { r, hit } = T; if (!(r[15] & FL.GLASS) || !T.o) return null; let d = [hit.x - T.o[0], hit.y - T.o[1], hit.z - T.o[2]]; const L = Math.hypot(d[0], d[1], d[2]) || 1; d = [d[0] / L, d[1] / L, d[2] / L];
     let o = T.o.slice(), run = 0;
     for (let n = 0; n < 5; n++) {
-      const h2 = ES.ray.cast(o[0], o[1], o[2], d[0], d[1], d[2], 400 - run, { mask: maskAll(), glass: false, ignore: "walk" }); if (!h2) return row("看到的是", "天空 / 远处", "玻璃后面没有挡光的东西");
+      const h2 = ES.ray.cast(o[0], o[1], o[2], d[0], d[1], d[2], 400 - run, { mask: maskAll(), glass: false, ignore: "walk" }); if (!h2) return row("What is seen", "sky / far away", "nothing behind the glass blocks the view");
       const t2 = targetFromHit(h2, o), same = t2 && t2.kind === "bim" && t2.bid === T.bid && t2.it && T.it && t2.it.id === T.it.id;
-      if (t2 && !same) return row("看到的是", `${E(t2.name || "?")} · ${f1(run + h2.t, 1)} m`, "把玻璃当作透明时,这条视线上第一个不透光、且不是这扇窗自己的东西(ES.ray.cast glass:false)");
+      if (t2 && !same) return row("What is seen", `${E(t2.name || "?")} · ${f1(run + h2.t, 1)} m`, "Treating the glass as transparent: the first opaque thing on this line of sight that is not this window itself (ES.ray.cast glass:false)");
       const adv = h2.t + 0.03; o = [o[0] + d[0] * adv, o[1] + d[1] * adv, o[2] + d[2] * adv]; run += adv;
     }
     return null;
   }
-  const SND_ZH = { "compressor hum": "压缩机嗡鸣", "extractor fan": "抽油烟机风扇", "speech/tv": "电视声", "PC fan": "电脑风扇", "scanner beeps": "扫码蜂鸣", "electric drive / reverse beeper": "电机 / 倒车蜂鸣", "spindle and pumps": "主轴和泵", "belt and rollers": "皮带和滚筒", "transformer hum": "变压器嗡鸣", fan: "风扇", "compressor and fan": "压缩机和风扇" };
-  const WHEN_ZH = { cooking: "烹饪", serving: "营业", moving: "行驶", running: "运转", cooling: "制冷" };
-  const FN_ST = { swing: "平开", drawer: "抽屉", slide_up: "上翻", slide: "推拉" };
+  const SND_ZH = { "compressor hum": "compressor hum", "extractor fan": "extractor fan", "speech/tv": "TV sound", "PC fan": "computer fan", "scanner beeps": "scanner beep", "electric drive / reverse beeper": "motor / reversing beeper", "spindle and pumps": "spindle and pump", "belt and rollers": "belt and rollers", "transformer hum": "transformer hum", fan: "fan", "compressor and fan": "compressor and fan" };
+  const WHEN_ZH = { cooking: "cooking", serving: "trading", moving: "driving", running: "running", cooling: "cooling" };
+  const FN_ST = { swing: "hinged", drawer: "drawer", slide_up: "flip-up", slide: "sliding" };
   function fnRows(cat, it) {
     const f = cat.functions || {}, out = [];
-    if (f.sit) out.push(["可坐", `${f.sit.capacity} 人 · 座高 ${f1(f.sit.seat_h, 2)} m`]); if (f.sleep) out.push(["可睡", `${f.sleep.capacity} 人 · 床垫高 ${f1(f.sleep.mattress_h, 2)} m`]);
-    if (f.store) out.push(["储物", f.store.volume_l ? `${f.store.volume_l} L` : f.store.pallets ? `${f.store.pallets} 个托盘位` : f.store.garments ? `${f.store.garments} 件衣物` : f.store.letters ? `${f.store.letters} 个信箱` : "可存放物品"]);
-    if (f.support) out.push(["承物台面", `台面高 ${f1(f.support.top_h, 2)} m`]); if (f.cook) out.push(["烹饪", `${f.cook.hobs || ""} 灶眼 · ${big(f.cook.power_w)} W${f.cook.oven ? " · 带烤箱" : ""}`]); if (f.cool) out.push(["制冷", `设定 ${f.cool.setpoint_c} °C`]);
-    if (f.wash) out.push(["盥洗", f.wash.flow_lpm ? `出水 ${f.wash.flow_lpm} L/min` : f.wash.flush_l ? `冲水 ${f.wash.flush_l} L` : f.wash.volume_l ? `容积 ${f.wash.volume_l} L` : f.wash.basins ? `${f.wash.basins} 个水盆` : "卫生设施"]);
-    if (f.work) out.push(["办公", "可在这里工作"]); if (f.write) out.push(["书写", "可书写"]); if (f.project) out.push(["投影", "可投影"]); if (f.display) out.push(["显示", `${f.display.diag_in} 英寸屏幕`]); if (f.sell) out.push(["销售", "陈列 / 售卖商品"]); if (f.convey) out.push(["输送", `带速 ${f.convey.speed_ms} m/s`]);
-    if (f.process) out.push(["加工", `${f.process.power_kw} kW`]); if (f.drive) out.push(["驾驶", `${f.drive.speed_ms} m/s · 举升 ${f.drive.lift_kg} kg`]); if (f.vent) out.push(["通风", "烟道"]); if (f.switch) out.push(["配电", "开关柜"]);
-    if (f.openable) { const o = f.openable; out.push(["可开合", `${FN_ST[o.kind] || o.kind}${o.doors ? ` · ${o.doors} 扇` : ""}${o.n ? ` · ${o.n} 个` : ""}${o.leaves ? ` · ${o.leaves} 扇` : ""}${o.max_deg ? ` · 最大 ${o.max_deg}°` : ""}`]); }
-    if (f.switchable) out.push(["开关", "可开 / 关(房间开关)"]);
+    if (f.sit) out.push(["seat", `${f.sit.capacity} people · seat height ${f1(f.sit.seat_h, 2)} m`]); if (f.sleep) out.push(["sleeping", `${f.sleep.capacity} people · mattress height ${f1(f.sleep.mattress_h, 2)} m`]);
+    if (f.store) out.push(["storage", f.store.volume_l ? `${f.store.volume_l} L` : f.store.pallets ? `${f.store.pallets} pallet positions` : f.store.garments ? `${f.store.garments} garments` : f.store.letters ? `${f.store.letters} mailboxes` : "can store items"]);
+    if (f.support) out.push(["work surface", `surface height ${f1(f.support.top_h, 2)} m`]); if (f.cook) out.push(["cooking", `${f.cook.hobs || ""} burners · ${big(f.cook.power_w)} W${f.cook.oven ? " · with oven" : ""}`]); if (f.cool) out.push(["cooling", `set to ${f.cool.setpoint_c} °C`]);
+    if (f.wash) out.push(["washing", f.wash.flow_lpm ? `flow ${f.wash.flow_lpm} L/min` : f.wash.flush_l ? `flush ${f.wash.flush_l} L` : f.wash.volume_l ? `volume ${f.wash.volume_l} L` : f.wash.basins ? `${f.wash.basins} basins` : "sanitary facility"]);
+    if (f.work) out.push(["office", "can work here"]); if (f.write) out.push(["writing", "can be written on"]); if (f.project) out.push(["projection", "can be projected on"]); if (f.display) out.push(["display", `${f.display.diag_in}-inch screen`]); if (f.sell) out.push(["sales", "displays / sells goods"]); if (f.convey) out.push(["conveying", `belt speed ${f.convey.speed_ms} m/s`]);
+    if (f.process) out.push(["processing", `${f.process.power_kw} kW`]); if (f.drive) out.push(["driving", `${f.drive.speed_ms} m/s · lift ${f.drive.lift_kg} kg`]); if (f.vent) out.push(["ventilation", "flue"]); if (f.switch) out.push(["power distribution", "switchgear"]);
+    if (f.openable) { const o = f.openable; out.push(["can open and close", `${FN_ST[o.kind] || o.kind}${o.doors ? ` · ${o.doors} leaves` : ""}${o.n ? ` · ${o.n} pieces` : ""}${o.leaves ? ` · ${o.leaves} leaves` : ""}${o.max_deg ? ` · max ${o.max_deg}°` : ""}`]); }
+    if (f.switchable) out.push(["switch", "can be switched on / off (room switch)"]);
     return out;
   }
 
@@ -306,36 +307,36 @@
   function travText(k, q, T) {
     const e = CAT.embodiments[k]; if (!q) return ["—", ""]; const loose = T.it && T.it.loose;
     switch (q.m) {
-      case "step_over": return [`可跨过 / 踩上去(高 ${f1(q.top, 2)} ≤ ${f1(e.step, 2)} m)`, "ok"];
-      case "blocked": return [k === "dog" ? `爬不上(高 ${f1(q.top, 2)} m > ${f1(q.step, 2)} m),不会跳上家具` : k === "rover" ? `过不去(高 ${f1(q.top, 2)} m > ${f1(q.step, 2)} m)` : `挡住(高 ${f1(q.top, 2)} m > ${f1(q.step, 2)} m)${loose ? ";松散件,可推开" : ""}`, "no"];
-      case "fly_over": return [`可飞越(顶高 ${f1(q.top, 2)} m)`, "ok"];
-      case "under": return [`可从下面走过(净空 ${f1(q.clear, 2)} ≥ ${f1(q.need, 2)} m)`, "ok"];
-      case "blocked_under": return [`过不去(台面下 ${f1(q.clear, 2)} m < 需要 ${f1(q.need, 2)} m)${loose && k === "human" ? ";可推开" : ""}`, "no"];
-      case "free": return ["可通过(≤ 2 cm 地面覆盖物)", "ok"];
-      case "door_human": return [q.always ? `门洞,直接走过(净宽 ${f1(q.w, 2)} m)` : `自己开门通过(净宽 ${f1(q.w, 2)} m${q.ok ? "" : ",太窄"})${q.open > 0.5 ? ";现在开着" : ""}`, q.ok ? "ok" : "no"];
-      case "door_held": return [q.always ? `门洞,${q.ok ? "能过" : "太窄"}(净宽 ${f1(q.w, 2)},需 ${f1(q.need, 2)} m)` : q.open > 0.5 ? `门开着,${q.ok ? "能过" : "太窄"}(净宽 ${f1(q.w, 2)},需 ${f1(q.need, 2)} m)` : `不会开门,门开着才过得去(净宽 ${f1(q.w, 2)} ${q.ok ? "≥" : "<"} ${f1(q.need, 2)} m)`, q.always ? (q.ok ? "ok" : "no") : q.open > 0.5 && q.ok ? "ok" : "warn"];
-      case "door_uav": return [q.always ? `门洞,飞得进去(净宽 ${f1(q.w, 2)} m)` : q.open > 0.5 ? `门开着,${q.ok ? "飞得进去" : "洞口太小"}(净宽 ${f1(q.w, 2)} m)` : `门关着进不去,开着才行(净宽 ${f1(q.w, 2)} m)`, q.always || (q.open > 0.5 && q.ok) ? "ok" : "warn"];
-      case "blocked_glass": return ["过不去(窗玻璃)", "no"];
-      case "window_uav": { const ok = q.open > 0.3 && q.w >= q.need[0] && q.h >= q.need[1]; return [q.openable ? `窗扇开着才进得去(洞口 ${f1(q.w, 2)} × ${f1(q.h, 2)} ≥ ${q.need[0]} × ${q.need[1]} m);现在${q.open > 0.05 ? "开度 " + f1(q.open * 100, 0) + "%" : "关着"}` : "固定窗,飞不进去", ok ? "ok" : "warn"]; }
-      case "climb": return [`能${k === "dog" ? "爬" : "上"}(踏步 ${f1(q.rise, 3)} ≤ ${f1(q.step, 2)} m,踏面 ${f1(q.tread, 2)} m${q.ok ? "" : ",偏窄"})`, q.ok ? "ok" : "warn"];
-      case "blocked_step": return [`上不去(踏步 ${f1(q.rise, 3)} m > ${f1(q.step, 2)} m)`, "no"];
-      case "blocked_stair": return ["上不去(轮子过不了台阶,要走坡道 / 电梯)", "no"];
-      case "fly_stair": return ["可飞过楼梯井(井宽 ≥ 0.8 m)", "ok"];
-      case "ramp": return [`能走(坡度 1:12${k === "rover" ? q.ok ? ",在轮式上限内" : ",超过轮式上限" : ""})`, q.ok ? "ok" : "no"];
-      case "blocked_wall": return ["过不去(墙 / 实体结构)", "no"];
-      case "blocked_wall_uav": return ["过不去;只能从开着的门窗进", "no"];
-      case "surface": return [`可站立 / 行走(摩擦 μ ${f1(q.mu, 2)})`, "ok"];
-      case "none": return ["不是障碍(灯具 / 饰条 / 装饰)", "ok"];
+      case "step_over": return [`can step over / onto (height ${f1(q.top, 2)} ≤ ${f1(e.step, 2)} m)`, "ok"];
+      case "blocked": return [k === "dog" ? `cannot climb (height ${f1(q.top, 2)} m > ${f1(q.step, 2)} m), does not jump onto furniture` : k === "rover" ? `cannot pass (height ${f1(q.top, 2)} m > ${f1(q.step, 2)} m)` : `blocks (height ${f1(q.top, 2)} m > ${f1(q.step, 2)} m)${loose ? "; loose piece, can be pushed aside" : ""}`, "no"];
+      case "fly_over": return [`can fly over (top height ${f1(q.top, 2)} m)`, "ok"];
+      case "under": return [`can walk underneath (clearance ${f1(q.clear, 2)} ≥ ${f1(q.need, 2)} m)`, "ok"];
+      case "blocked_under": return [`cannot pass (under the top ${f1(q.clear, 2)} m < needed ${f1(q.need, 2)} m)${loose && k === "human" ? "; can be pushed aside" : ""}`, "no"];
+      case "free": return ["can pass (floor covering ≤ 2 cm)", "ok"];
+      case "door_human": return [q.always ? `doorway, walks straight through (clear width ${f1(q.w, 2)} m)` : `opens the door itself and passes (clear width ${f1(q.w, 2)} m${q.ok ? "" : ", too narrow"})${q.open > 0.5 ? "; it is open now" : ""}`, q.ok ? "ok" : "no"];
+      case "door_held": return [q.always ? `doorway, ${q.ok ? "can pass" : "too narrow"} (clear width ${f1(q.w, 2)}, needs ${f1(q.need, 2)} m)` : q.open > 0.5 ? `door open, ${q.ok ? "can pass" : "too narrow"} (clear width ${f1(q.w, 2)}, needs ${f1(q.need, 2)} m)` : `cannot open doors; passes only when the door is open (clear width ${f1(q.w, 2)} ${q.ok ? "≥" : "<"} ${f1(q.need, 2)} m)`, q.always ? (q.ok ? "ok" : "no") : q.open > 0.5 && q.ok ? "ok" : "warn"];
+      case "door_uav": return [q.always ? `doorway, can fly in (clear width ${f1(q.w, 2)} m)` : q.open > 0.5 ? `door open, ${q.ok ? "can fly in" : "opening too small"} (clear width ${f1(q.w, 2)} m)` : `cannot enter through a closed door, only when it is open (clear width ${f1(q.w, 2)} m)`, q.always || (q.open > 0.5 && q.ok) ? "ok" : "warn"];
+      case "blocked_glass": return ["cannot pass (window glass)", "no"];
+      case "window_uav": { const ok = q.open > 0.3 && q.w >= q.need[0] && q.h >= q.need[1]; return [q.openable ? `can enter only when the sash is open (opening ${f1(q.w, 2)} × ${f1(q.h, 2)} ≥ ${q.need[0]} × ${q.need[1]} m); now ${q.open > 0.05 ? "opening " + f1(q.open * 100, 0) + "%" : "closed"}` : "fixed window, cannot fly in", ok ? "ok" : "warn"]; }
+      case "climb": return [`can ${k === "dog" ? "climb" : "go up"} (step ${f1(q.rise, 3)} ≤ ${f1(q.step, 2)} m, tread ${f1(q.tread, 2)} m${q.ok ? "" : ", rather narrow"})`, q.ok ? "ok" : "warn"];
+      case "blocked_step": return [`cannot go up (step ${f1(q.rise, 3)} m > ${f1(q.step, 2)} m)`, "no"];
+      case "blocked_stair": return ["cannot go up (wheels cannot take steps; use a ramp / lift)", "no"];
+      case "fly_stair": return ["can fly over the stairwell (well width ≥ 0.8 m)", "ok"];
+      case "ramp": return [`can drive (slope 1:12${k === "rover" ? q.ok ? ", within the wheeled limit" : ", beyond the wheeled limit" : ""})`, q.ok ? "ok" : "no"];
+      case "blocked_wall": return ["cannot pass (wall / solid structure)", "no"];
+      case "blocked_wall_uav": return ["cannot pass; can only enter through an open door or window", "no"];
+      case "surface": return [`can stand / walk (friction μ ${f1(q.mu, 2)})`, "ok"];
+      case "none": return ["not an obstacle (luminaire / trim / decoration)", "ok"];
     }
     return ["—", ""];
   }
   function travRows(T) {
-    if (!CAT) return [row("提示", "目录还没加载", "")];
+    if (!CAT) return [row("Note", "the catalogue has not loaded yet", "")];
     const out = [];
     for (const k of ["human", "dog", "rover", "uav"]) {
       let q = null; if (T.cat) q = travInfo(T, k); else q = fallbackTrav(T, k);
       const [txt, cls] = travText(k, q, T), e = CAT.embodiments[k];
-      out.push(row(EMB[k][0] + " " + EMB[k][1], E(txt), `${EMB[k][2]}:台阶上限 ${f1(e.step, 2)} m · 桌下需要净空 ${f1(e.under, 2)} m · 半径 ${f1(e.radius, 2)} m · ${e.opens_doors ? "会开门" : "不会开门"}(catalog.json embodiments;规则 = catalog.py traverse())`, cls));
+      out.push(row(EMB[k][0] + " " + EMB[k][1], E(txt), `${EMB[k][2]}: step limit ${f1(e.step, 2)} m · clearance needed under a table ${f1(e.under, 2)} m · radius ${f1(e.radius, 2)} m · ${e.opens_doors ? "can open doors" : "cannot open doors"} (catalog.json embodiments; rule = catalog.py traverse())`, cls));
     }
     return out;
   }
@@ -350,19 +351,19 @@
     const BLD = ES.ray.buildings()[desc.bld], bid = BLD && BLD.id, B = bid && S.bim && S.bim.buildings[bid]; if (!B) return null;
     let bestK = -1, bd = 0.05; (B.polys || []).forEach((p, k) => { const v = p.v; if (v.length < 3) return; const a = v[0], b = v[1], c = v[2], u = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], w = [c[0] - a[0], c[1] - a[1], c[2] - a[2]], n = [u[1] * w[2] - u[2] * w[1], u[2] * w[0] - u[0] * w[2], u[0] * w[1] - u[1] * w[0]], nl = Math.hypot(n[0], n[1], n[2]) || 1, dist = Math.abs(((hit.x - a[0]) * n[0] + (hit.y - a[1]) * n[1] + (hit.z - a[2]) * n[2]) / nl); if (dist < bd && ES.pip(v.map((q) => [q[0], q[1]]), hit.x, hit.y)) { bd = dist; bestK = k; } });
     const it = bestK >= 0 ? (B.items || []).find((q) => q.pl && bestK >= q.pl[0] && bestK < q.pl[1]) : null, cat = CAT && it ? CAT.types[it.t] : null, poly = bestK >= 0 ? B.polys[bestK] : null;
-    const T = { kind: "roof", key: `roof:${bid}:${bestK}`, hit, name: cat ? cat.zh : "屋顶", icon: "🏠", bid, B, it, cat }; T.dist = hit.t; T.center = () => [hit.x, hit.y, hit.z];
+    const T = { kind: "roof", key: `roof:${bid}:${bestK}`, hit, name: cat ? catName(cat) : "Roof", icon: "🏠", bid, B, it, cat }; T.dist = hit.t; T.center = () => [hit.x, hit.y, hit.z];
     T.shapes = () => (poly ? [{ t: "poly", pts: poly.v, strong: true, label: true }] : []);
     T.card = () => {
       const mi = ES.ray.matInfo(hit.mat) || {}, slope = Math.acos(Math.min(1, Math.abs(hit.nz))) * R2D, nm = mi.name || "roof_shingle"; let rf = NaN;
       try { rf = ES.ray.rfLossFromCrossings([{ roof: true, mat: hit.mat, matName: nm, cos: Math.max(Math.abs(hit.nz), 0.05), treat: false }], 3.5e9, "TE"); } catch (e) { /* roofs without assembly */ }
-      return { icon: "🏠", title: T.name, sub: `${bid} ${BKIND_ZH[B.kind] || B.kind}(${B.label}) · 屋面`, chips: `<span class="ichip">${E(cat ? CAT_ZH[cat.cat] : "建筑结构")}</span>`, dist: hit.t, cols: [[sec("屋面", [row("坡度", `${f1(slope, 0)}°${slope < 3 ? "(平屋面)" : ""}`, "命中点的面法线与竖直方向的夹角"), row("材料", E(matZh(nm)), `屋面多边形的材料 ${nm}`), it && it.m ? row("质量", `整个屋面 ${big(it.m)} kg`, "目录 items[].m:多边形面积 × 0.05 m × 装配密度") : null, row("射频损耗", `${f1(rf, 1)} dB(3.5 GHz)`, "屋顶是无厚度多边形:按 ES.ray 的典型屋面装配计(沥青瓦 = 40 mm 木板;瓦 = 30 mm 混凝土;金属 1 mm;膜 = 60 mm 混凝土),ITU-R P.2040,仅 GNSS 穿屋顶时使用")])], [sec("物理量", [row("激光雷达", `905 nm 反射率 ${f1(mi.refl, 2)}${mi.spec ? ` + 镜面 ${f1(mi.spec, 2)}` : ""}`, "ES.ray.REFL 的行(REFL_NAMED)"), row("摩擦 μ", cat && cat.mu_static != null ? f1(cat.mu_static, 2) : "—", "catalog.json 类型的 mu_static")]), sec("谁能过", ["human", "dog", "rover", "uav"].map((k) => row(EMB[k][0] + " " + EMB[k][1], k === "uav" ? "可飞越(屋面不是障碍)" : "不能上屋顶(没有通道)", "屋顶没有入口 / 楼梯:地面机器人和人到不了", k === "uav" ? "ok" : "no")))]], foot: "屋面多边形:ES.ray 的 T_TRI(GNSS / 激光雷达共用)" };
+      return { icon: "🏠", title: T.name, sub: `${bid} ${BKIND_ZH[B.kind] || B.kind} (${B.label}) · roof`, chips: `<span class="ichip">${E(cat ? CAT_ZH[cat.cat] : "Building structure")}</span>`, dist: hit.t, cols: [[sec("Roof surface", [row("Slope", `${f1(slope, 0)}°${slope < 3 ? "(flat roof)" : ""}`, "Angle between the surface normal at the hit point and the vertical"), row("Material", E(matZh(nm)), `Material of the roof polygon ${nm}`), it && it.m ? row("Mass", `Whole roof ${big(it.m)} kg`, "Catalogue items[].m: polygon area × 0.05 m × assembly density") : null, row("RF loss", `${f1(rf, 1)} dB(3.5 GHz)`, "The roof is a polygon without thickness: counted as the typical roof assembly of ES.ray (asphalt shingle = 40 mm timber board; tile = 30 mm concrete; metal 1 mm; membrane = 60 mm concrete), ITU-R P.2040, used only when GNSS passes through a roof")])], [sec("Physical quantities", [row("LiDAR", `905 nm reflectivity ${f1(mi.refl, 2)}${mi.spec ? ` + specular ${f1(mi.spec, 2)}` : ""}`, "Row of ES.ray.REFL (REFL_NAMED)"), row("Friction μ", cat && cat.mu_static != null ? f1(cat.mu_static, 2) : "—", "mu_static of the catalog.json type")]), sec("Who can pass", ["human", "dog", "rover", "uav"].map((k) => row(EMB[k][0] + " " + EMB[k][1], k === "uav" ? "can fly over (the roof is no obstacle)" : "cannot get onto the roof (no access)", "The roof has no entrance / stairs: ground robots and people cannot reach it", k === "uav" ? "ok" : "no")))]], foot: "Roof polygon: T_TRI of ES.ray (shared by GNSS / LiDAR)" };
     };
     return T;
   }
   function prismTarget(desc, hit) {
-    const b = S.A.scene.buildings[desc.i]; if (!b) return null; const T = { kind: "prism", key: `prism:${desc.i}`, hit, name: desc.kind === "rubble" ? "倒塌的建筑(瓦砾堆)" : "建筑(只有外形,没有内部)", icon: "🏚" }; T.dist = hit.t; T.center = () => [hit.x, hit.y, hit.z];
+    const b = S.A.scene.buildings[desc.i]; if (!b) return null; const T = { kind: "prism", key: `prism:${desc.i}`, hit, name: desc.kind === "rubble" ? "Collapsed building (rubble pile)" : "Building (outer shape only, no interior)", icon: "🏚" }; T.dist = hit.t; T.center = () => [hit.x, hit.y, hit.z];
     T.shapes = () => [{ t: "poly", pts: (b.fp || []).map((p) => [p[0], p[1], 0.14]).concat([]), strong: true, label: true, flat: true }];
-    T.card = () => { const mi = ES.ray.matInfo(hit.mat) || {}, dmg = S.A.W.damage && S.A.W.damage[b.id], h = desc.kind === "rubble" ? Math.min(2.2, 0.18 * b.h) : dmg && dmg.state === "partial" ? 0.7 * b.h : b.h; return { icon: T.icon, title: T.name, sub: `${b.id || ""} ${BKIND_ZH[b.kind] || b.kind || ""}`, chips: "", dist: hit.t, cols: [[sec("外形", [row("高度", `${f1(h, 1)} m${h < b.h - 0.05 ? `(原 ${f1(b.h, 1)} m)` : ""}`, "场景 JSON buildings[].h;倒塌 = min(2.2 m, 0.18 h),部分倒塌 = 0.7 h(World / ES.ray 的同一规则)"), row("层数", `${b.floors || "—"}`, "场景 JSON buildings[].floors"), row("说明", desc.kind === "rubble" ? "倒塌后只剩 ≤ 2.2 m 的瓦砾堆" : "BIM 没有这栋楼的内部:按实心棱柱体处理", "")])], [sec("物理量", [row("激光雷达", `905 nm 反射率 ${f1(mi.refl, 2)}`, "ES.ray.REFL building_generic / rubble"), row("通行", "人 / 机械狗 / 轮式 / 无人机:都进不去", "", "no")])]], foot: "" }; };
+    T.card = () => { const mi = ES.ray.matInfo(hit.mat) || {}, dmg = S.A.W.damage && S.A.W.damage[b.id], h = desc.kind === "rubble" ? Math.min(2.2, 0.18 * b.h) : dmg && dmg.state === "partial" ? 0.7 * b.h : b.h; return { icon: T.icon, title: T.name, sub: `${b.id || ""} ${BKIND_ZH[b.kind] || b.kind || ""}`, chips: "", dist: hit.t, cols: [[sec("Outer shape", [row("Height", `${f1(h, 1)} m${h < b.h - 0.05 ? `(was ${f1(b.h, 1)} m)` : ""}`, "Scene JSON buildings[].h; collapsed = min(2.2 m, 0.18 h), partly collapsed = 0.7 h (the same rule in World / ES.ray)"), row("Floors", `${b.floors || "—"}`, "Scene JSON buildings[].floors"), row("Note", desc.kind === "rubble" ? "After the collapse only a rubble pile of ≤ 2.2 m remains" : "The BIM has no interior for this building: treated as a solid prism", "")])], [sec("Physical quantities", [row("LiDAR", `905 nm reflectivity ${f1(mi.refl, 2)}`, "ES.ray.REFL building_generic / rubble"), row("Passage", "person / quadruped / wheeled / UAV: none can enter", "", "no")])]], foot: "" }; };
     return T;
   }
   function vehicleTarget(i, hit) {
@@ -371,44 +372,44 @@
     T.shapes = () => [{ t: "obb", o: [v.xy[0], v.xy[1], z0() + v.dims[2] / 2, v.dims[0] / 2, v.dims[1] / 2, v.dims[2] / 2, ES.rad(v.yaw), 0], strong: true, label: true }, frontArrow(v.xy[0], v.xy[1], z0() + v.dims[2] * 0.55, Math.cos(ES.rad(v.yaw)), Math.sin(ES.rad(v.yaw)), v.dims[0] / 2 + 0.6)];
     T.card = () => {
       const [L, Wd, H] = v.dims, kg = VEH_KG[v.vtype] || VEH_KG[v.kind], mi = ES.ray.matInfo(hit.mat) || {}, glass = ES.ray.matInfo(ES.ray.WM.car_glass) || {}, paint = ES.ray.matInfo(ES.ray.WM.car_paint) || {}, g = (V) => V && V.vehGroups && V.vehGroups[i], rig = g(VV()) && g(VV()).children[0] && g(VV()).children[0].userData.rig, night = ES.actors ? ES.actors.isNight() : false;
-      return { icon: "🚗", title: T.name, sub: `停放车辆 ${v.id} · 朝向 ${compass(ES.rad(v.yaw))[0]}°${compass(ES.rad(v.yaw))[1]}`, chips: `<span class="ichip">车辆</span><span class="ichip">${E(v.vtype)}</span>`, dist: hit.t,
-        cols: [[sec("外形与质量", [row("外形尺寸", `${f1(L, 2)} × ${f1(Wd, 2)} × ${f1(H, 2)} m`, "场景 JSON vehicles[].dims(长 × 宽 × 高),也是物理碰撞盒"), row("质量级别", `${kg ? `≈ ${big(kg / 1000)} t(典型整备质量)` : "—"}`, "公开车型资料里这一类车的典型整备质量(区间中值),不是项目数据:场景只给外形尺寸"), row("体积", `${f1(L * Wd * H, 1)} m³(外廓)`, "长 × 宽 × 高")]),
-          sec("材料与物理量", [row("车身", `${E(matZh("car_paint"))} · 雷达 ${f1(paint.refl, 2)} + 镜面 ${f1(paint.spec, 2)}`, "ES.ray.REFL car_paint = [漫反射 0.35, 镜面瓣 0.30]"), row("车窗", `${E(matZh("car_glass"))} · 雷达 ${f1(glass.refl, 2)} + 镜面 ${f1(glass.spec, 2)}`, "ES.ray.REFL car_glass"), row("射线形状", "车身盒 + 座舱盒", "ES.ray 按车型把车身和座舱分成两个盒子(raycast.js VEH 表)")])],
-          [sec("状态", [row("发动机", "熄火(停放)", "停放车辆没有行驶状态"), row("车门", "全部关闭", "车辆模型的门不能开"), row("灯", rig && rig.dynamic ? "警灯 / 顶灯在闪(值勤)" : night ? "关(停放车辆不开灯)" : "关", "vehicles.js:只有警车 / 救护车 / 消防车的灯条会闪;停放的车不亮前后灯")]),
-            sec("谁能过", ["human", "dog", "rover", "uav"].map((k) => { const e = CAT ? CAT.embodiments[k] : { step: 0 }; return row(EMB[k][0] + " " + EMB[k][1], k === "uav" ? `飞越(车顶高 ${f1(H, 2)} m)` : `过不去(高 ${f1(H, 2)} m > 台阶上限 ${f1(e.step, 2)} m)`, "按外形高度与各身份台阶上限比较", k === "uav" ? "ok" : "no"); }))]], foot: "外形来自场景数据;质量级别是典型值(见提示)" };
+      return { icon: "🚗", title: T.name, sub: `Parked vehicle ${v.id} · heading ${compass(ES.rad(v.yaw))[0]}°${compass(ES.rad(v.yaw))[1]}`, chips: `<span class="ichip">Vehicle</span><span class="ichip">${E(v.vtype)}</span>`, dist: hit.t,
+        cols: [[sec("Shape and mass", [row("Outer dimensions", `${f1(L, 2)} × ${f1(Wd, 2)} × ${f1(H, 2)} m`, "Scene JSON vehicles[].dims (length × width × height), also the physical collision box"), row("Mass class", `${kg ? `≈ ${big(kg / 1000)} t (typical kerb mass)` : "—"}`, "Typical kerb mass of this class of vehicle from public model data (mid-range), not project data: the scene only gives the outer dimensions"), row("Volume", `${f1(L * Wd * H, 1)} m³ (outer envelope)`, "length × width × height")]),
+          sec("Material and physical quantities", [row("Body", `${E(matZh("car_paint"))} · radar ${f1(paint.refl, 2)} + specular ${f1(paint.spec, 2)}`, "ES.ray.REFL car_paint = [diffuse 0.35, specular lobe 0.30]"), row("car window", `${E(matZh("car_glass"))} · radar ${f1(glass.refl, 2)} + specular ${f1(glass.spec, 2)}`, "ES.ray.REFL car_glass"), row("Ray shape", "body box + cabin box", "ES.ray splits body and cabin into two boxes per vehicle type (VEH table in raycast.js)")])],
+          [sec("State", [row("Engine", "off (parked)", "A parked vehicle has no driving state"), row("Doors", "all closed", "The vehicle model's doors cannot be opened"), row("Light", rig && rig.dynamic ? "emergency lights flashing (on duty)" : night ? "off (parked vehicles keep their lights off)" : "off", "vehicles.js: only the light bars of police cars / ambulances / fire trucks flash; parked cars show no head or tail lights")]),
+            sec("Who can pass", ["human", "dog", "rover", "uav"].map((k) => { const e = CAT ? CAT.embodiments[k] : { step: 0 }; return row(EMB[k][0] + " " + EMB[k][1], k === "uav" ? `can fly over (roof height ${f1(H, 2)} m)` : `cannot pass (height ${f1(H, 2)} m > step limit ${f1(e.step, 2)} m)`, "Shape height compared with each identity's step limit", k === "uav" ? "ok" : "no"); }))]], foot: "The shape comes from the scene data; the mass class is a typical value (see the note)" };
     };
     return T;
   }
   function treeTarget(i, hit, crown, o) {
     const A = S.A, t = A.scene.trees[i]; if (!t) return null; const k = ES.TREE[t[2]] || ES.TREE.round, s = t[3], V = VV(), vt = V && V.trees && V.trees[i], sp = vt && vt.choice ? vt.choice.species : null;
-    const T = { kind: "tree", key: `tree:${i}`, hit, name: SPECIES_ZH[sp] || KIND_TREE_ZH[t[2]] || "树", icon: "🌳" }; T.dist = hit.t; const rz = (k.h - k.lo) * 0.5 * s, cz = 0.14 + k.lo * s + rz, tr = 0.13 * s, zt = 0.14 + (k.lo + 0.45 * (k.h - k.lo)) * s;
+    const T = { kind: "tree", key: `tree:${i}`, hit, name: SPECIES_ZH[sp] || KIND_TREE_ZH[t[2]] || "Tree", icon: "🌳" }; T.dist = hit.t; const rz = (k.h - k.lo) * 0.5 * s, cz = 0.14 + k.lo * s + rz, tr = 0.13 * s, zt = 0.14 + (k.lo + 0.45 * (k.h - k.lo)) * s;
     T.center = () => [t[0], t[1], cz]; T.shapes = () => [{ t: "cyl", c: [t[0], t[1]], r: tr, z0: 0.14, z1: zt, strong: false }, { t: "ell", c: [t[0], t[1], cz], rx: k.r * s, rz, strong: true, label: true }];
     T.card = () => {
       const den = k.den, bark = ES.ray.matInfo(ES.ray.WM.bark) || {}, leaf = ES.ray.matInfo(ES.ray.WM.foliage) || {};
-      return { icon: "🌳", title: T.name, sub: `${KIND_TREE_ZH[t[2]]} · 场景树 #${i}${t[4] ? " · " + ({ street: "行道树", park: "公园树" }[t[4]] || t[4]) : ""}`, chips: `<span class="ichip">植被</span>${sp ? `<span class="ichip">${E(sp)}</span>` : ""}`, dist: hit.t,
-        cols: [[sec("形态", [row("树高", `${f1(k.h * s, 1)} m`, `类型高度 ${k.h} m × 缩放 ${f1(s, 2)}(ES.TREE.${t[2]}.h × 场景树的 scale)`), row("树干(碰撞柱)", `半径 ${f1(tr, 2)} m · 高 0.14 – ${f1(zt, 1)} m`, "ES.ray 的树干圆柱:半径 0.13 × scale,高到冠底以上 45% 处;人 / 狗被它挡住"), row("树冠", `半径 ${f1(k.r * s, 1)} m · 离地 ${f1(k.lo * s, 1)} m 起 · 顶 ${f1(k.h * s, 1)} m`, "ES.TREE:冠半径 r、冠底 lo、顶 h,均 × scale(椭球)"), row("叶密度", `${f1(den, 2)} → 光线衰减 ${f1(0.5 * den, 2)} /m`, "ES.ray 树冠 = Beer-Lambert 介质,衰减系数 = 0.5 × den(每米);GNSS / 射频按冠内路径长度计")]),
-          sec("物理量", [row("树皮", `雷达反射率 ${f1(bark.refl, 2)}`, "ES.ray.REFL bark"), row("树叶", `雷达反射率 ${f1(leaf.refl, 2)}`, "ES.ray.REFL foliage"), row("碰撞", "树干是实心柱;树冠不挡人 / 狗 / 无人机,只衰减信号、遮挡视线", "view3d.js:World 里树干占 hB(到冠底),树冠只记 cLo / cHi / cDen")])],
-          [sec("谁能过", ["human", "dog", "rover", "uav"].map((kk) => row(EMB[kk][0] + " " + EMB[kk][1], kk === "uav" ? `树干要绕开(半径 ${f1(tr, 2)} m);冠层可穿过` : `过不去(树干半径 ${f1(tr, 2)} m,要绕开)`, "树干是实心柱", kk === "uav" ? "warn" : "no")))]], foot: crown ? "命中的是树冠椭球(拾取时把树冠当实心体)" : "" };
+      return { icon: "🌳", title: T.name, sub: `${KIND_TREE_ZH[t[2]]} · scene tree #${i}${t[4] ? " · " + ({ street: "street tree", park: "park tree" }[t[4]] || t[4]) : ""}`, chips: `<span class="ichip">Vegetation</span>${sp ? `<span class="ichip">${E(sp)}</span>` : ""}`, dist: hit.t,
+        cols: [[sec("Form", [row("Tree height", `${f1(k.h * s, 1)} m`, `type height ${k.h} m × scale ${f1(s, 2)} (ES.TREE.${t[2]}.h × the scene tree's scale)`), row("Trunk (collision column)", `radius ${f1(tr, 2)} m · height 0.14 – ${f1(zt, 1)} m`, "ES.ray trunk cylinder: radius 0.13 × scale, up to 45% above the crown base; people and dogs are stopped by it"), row("Crown", `radius ${f1(k.r * s, 1)} m · from ${f1(k.lo * s, 1)} m above ground · top ${f1(k.h * s, 1)} m`, "ES.TREE: crown radius r, crown base lo, top h, all × scale (ellipsoid)"), row("Leaf density", `${f1(den, 2)} → light attenuation ${f1(0.5 * den, 2)} /m`, "ES.ray crown = Beer-Lambert medium, attenuation coefficient = 0.5 × den (per metre); GNSS / radio use the path length inside the crown")]),
+          sec("Physical quantities", [row("Bark", `LiDAR reflectivity ${f1(bark.refl, 2)}`, "ES.ray.REFL bark"), row("Leaves", `LiDAR reflectivity ${f1(leaf.refl, 2)}`, "ES.ray.REFL foliage"), row("Collision", "The trunk is a solid column; the crown does not stop people / dogs / UAVs, it only attenuates signals and blocks the view", "view3d.js: in World the trunk occupies hB (up to the crown base), the crown only records cLo / cHi / cDen")])],
+          [sec("Who can pass", ["human", "dog", "rover", "uav"].map((kk) => row(EMB[kk][0] + " " + EMB[kk][1], kk === "uav" ? `Go round the trunk (radius ${f1(tr, 2)} m); the canopy can be passed through` : `cannot pass (trunk radius ${f1(tr, 2)} m, go round it)`, "The trunk is a solid column", kk === "uav" ? "warn" : "no")))]], foot: crown ? "The crown ellipsoid was hit (picking treats the crown as a solid)" : "" };
     };
     return T;
   }
   function lampTarget(i, hit) {
-    const l = S.A.scene.lamps[i]; if (!l) return null; const T = { kind: "lamp", key: `lamp:${i}`, hit, name: "路灯", icon: "💡" }; T.dist = hit.t; const hx = l[0] + Math.cos(l[2]) * 1.6, hy = l[1] + Math.sin(l[2]) * 1.6;
+    const l = S.A.scene.lamps[i]; if (!l) return null; const T = { kind: "lamp", key: `lamp:${i}`, hit, name: "Street lamp", icon: "💡" }; T.dist = hit.t; const hx = l[0] + Math.cos(l[2]) * 1.6, hy = l[1] + Math.sin(l[2]) * 1.6;
     T.center = () => [l[0], l[1], 3.5]; T.shapes = () => [{ t: "cyl", c: [l[0], l[1]], r: 0.085, z0: 0.14, z1: 7.14, strong: true, label: true }, { t: "obb", o: [(l[0] + hx) / 2, (l[1] + hy) / 2, 7.0, 0.85, 0.04, 0.04, l[2], 0], strong: true }, { t: "obb", o: [hx, hy, 6.95, 0.35, 0.15, 0.06, l[2], 0], strong: true }];
     T.card = () => { const night = ES.actors ? ES.actors.isNight() : false, mi = ES.ray.matInfo(ES.ray.WM.pole_metal) || {};
-      return { icon: "💡", title: "路灯", sub: `场景路灯 #${i} · 臂朝向 ${compass(l[2])[0]}°${compass(l[2])[1]}`, chips: `<span class="ichip">街道设施</span>`, dist: hit.t, cols: [[sec("外形", [row("灯杆", "高 7.0 m · 杆半径 0.085 m", "ES.ray 灯杆圆柱 0.14 … 7.14 m"), row("灯臂 / 灯头", "臂长 1.7 m · 灯头 0.7 × 0.3 m,高 6.95 m", "ES.ray:臂盒 1.7 × 0.08 × 0.08 m,灯头盒 0.7 × 0.3 × 0.12 m"), row("材料", `${E(matZh("pole_metal"))} · 激光雷达 ${f1(mi.refl, 2)} + 镜面 ${f1(mi.spec, 2)}`, "ES.ray.REFL pole_metal")])], [sec("功能与状态", [row("灯", `${night ? "亮着(夜间)" : "关着(白天)"} · 6,000 lm`, "光照模型 telemetry.js:夜间每盏街灯 6,000 lm;白天不亮(随昼夜 look 切换)", night ? "ok" : "")]), sec("谁能过", ["human", "dog", "rover", "uav"].map((kk) => row(EMB[kk][0] + " " + EMB[kk][1], kk === "uav" ? "杆 / 灯臂要绕开" : "过不去(灯杆是实心柱,绕开)", "", kk === "uav" ? "warn" : "no")))]], foot: "" }; };
+      return { icon: "💡", title: "Street lamp", sub: `Scene lamp #${i} · arm heading ${compass(l[2])[0]}°${compass(l[2])[1]}`, chips: `<span class="ichip">Street furniture</span>`, dist: hit.t, cols: [[sec("Outer shape", [row("Lamp pole", "height 7.0 m · pole radius 0.085 m", "ES.ray lamp-pole cylinder 0.14 … 7.14 m"), row("Arm / luminaire head", "arm length 1.7 m · head 0.7 × 0.3 m, height 6.95 m", "ES.ray: arm box 1.7 × 0.08 × 0.08 m, head box 0.7 × 0.3 × 0.12 m"), row("Material", `${E(matZh("pole_metal"))} · LiDAR ${f1(mi.refl, 2)} + specular ${f1(mi.spec, 2)}`, "ES.ray.REFL pole_metal")])], [sec("Function and state", [row("Light", `${night ? "on (night)" : "off (day)"} · 6,000 lm`, "Lighting model in telemetry.js: each street lamp 6,000 lm at night; off by day (follows the day / night look)", night ? "ok" : "")]), sec("Who can pass", ["human", "dog", "rover", "uav"].map((kk) => row(EMB[kk][0] + " " + EMB[kk][1], kk === "uav" ? "Go round the pole / arm" : "cannot pass (the lamp pole is a solid column, go round it)", "", kk === "uav" ? "warn" : "no")))]], foot: "" }; };
     return T;
   }
   function fenceTarget(desc, hit) {
     const o = S.A.scene.objects[desc.i]; if (!o) return null; const ln = o.lines[desc.line] || o.lines[0]; let bk = 0, bd = 1e9;
     for (let k = 0; k + 1 < ln.length; k++) { const a = ln[k], b = ln[k + 1], dx = b[0] - a[0], dy = b[1] - a[1], L2 = dx * dx + dy * dy || 1e-9, t = Math.max(0, Math.min(1, ((hit.x - a[0]) * dx + (hit.y - a[1]) * dy) / L2)), d = Math.hypot(a[0] + t * dx - hit.x, a[1] + t * dy - hit.y); if (d < bd) { bd = d; bk = k; } }
-    const a = ln[bk], b = ln[bk + 1], L = Math.hypot(b[0] - a[0], b[1] - a[1]); const T = { kind: "fence", key: `fence:${desc.i}:${desc.line}:${bk}`, hit, name: FENCE_ZH[o.style] || "围栏", icon: "🚧" }; T.dist = hit.t; T.center = () => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2, 0.14 + o.h / 2];
+    const a = ln[bk], b = ln[bk + 1], L = Math.hypot(b[0] - a[0], b[1] - a[1]); const T = { kind: "fence", key: `fence:${desc.i}:${desc.line}:${bk}`, hit, name: FENCE_ZH[o.style] || "Fence", icon: "🚧" }; T.dist = hit.t; T.center = () => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2, 0.14 + o.h / 2];
     T.shapes = () => [{ t: "poly", pts: [[a[0], a[1], 0.14], [b[0], b[1], 0.14], [b[0], b[1], 0.14 + o.h], [a[0], a[1], 0.14 + o.h]], strong: true, label: true }];
     T.card = () => {
-      const mi = ES.ray.matInfo(hit.mat) || {}, st = o.style, see = st === "privacy" ? "不透(木板连续)" : st === "picket" ? "半透:板条之间有缝,能看到后面" : "基本透明:铁丝网只遮一小部分";
-      const cov = st === "picket" ? "板条覆盖约 63%(0.094 m 板 / 0.15 m 间距)+ 2 根横档 + 立柱" : st === "privacy" ? "100%(木板连续 + 横档)" : "铁丝覆盖率随距离:近处 ≈ 5%(0.004 + 0.0075·d)/0.177 × 2,上限 85%";
-      return { icon: "🚧", title: T.name, sub: `围栏 #${desc.i} · 本段 ${f1(L, 1)} m`, chips: `<span class="ichip">围栏</span>`, dist: hit.t, cols: [[sec("外形", [row("高度", `${f1(o.h, 1)} m`, "场景 JSON objects[].h"), row("本段长度", `${f1(L, 1)} m · 共 ${Math.max(1, Math.round(L / 2.4))} 个立柱段`, "立柱间距约 2.4 m(ES.ray fence 原语)"), row("样式", E(FENCE_ZH[st]), "场景 JSON objects[].style")]), sec("物理量", [row("透视", E(see), "ES.ray fenceHit:按板条 / 铁丝的位置决定射线是否被挡"), row("遮挡细节", E(cov), "raycast.js fenceHit 的几何常数"), row("材料", `${E(matZh(mi.name))} · 激光雷达 ${f1(mi.refl, 2)}${mi.spec ? ` + 镜面 ${f1(mi.spec, 2)}` : ""}`, "ES.ray.REFL " + (mi.name || ""))])],
-        [sec("谁能过", ["human", "dog", "rover", "uav"].map((k) => row(EMB[k][0] + " " + EMB[k][1], k === "uav" ? `可飞越(高 ${f1(o.h, 1)} m)` : `过不去(栏高 ${f1(o.h, 1)} m;只能走大门 / 缺口)`, "view3d.js rasterBlocked:围栏占 World 的 hT / hB 栅格", k === "uav" ? "ok" : "no")))]], foot: "" };
+      const mi = ES.ray.matInfo(hit.mat) || {}, st = o.style, see = st === "privacy" ? "opaque (continuous boards)" : st === "picket" ? "semi-transparent: gaps between the slats, you can see through" : "almost transparent: the wire mesh hides only a small part";
+      const cov = st === "picket" ? "slats cover about 63% (0.094 m board / 0.15 m pitch) + 2 rails + posts" : st === "privacy" ? "100% (continuous boards + rails)" : "wire coverage depends on distance: close up ≈ 5% (0.004 + 0.0075·d)/0.177 × 2, capped at 85%";
+      return { icon: "🚧", title: T.name, sub: `Fence #${desc.i} · this section ${f1(L, 1)} m`, chips: `<span class="ichip">Fence</span>`, dist: hit.t, cols: [[sec("Outer shape", [row("Height", `${f1(o.h, 1)} m`, "Scene JSON objects[].h"), row("Length of this section", `${f1(L, 1)} m · ${Math.max(1, Math.round(L / 2.4))} post sections in all`, "post spacing about 2.4 m (ES.ray fence primitive)"), row("Style", E(FENCE_ZH[st]), "Scene JSON objects[].style")]), sec("Physical quantities", [row("See-through", E(see), "ES.ray fenceHit: the position of the slats / wires decides whether a ray is blocked"), row("Occlusion detail", E(cov), "Geometric constants of fenceHit in raycast.js"), row("Material", `${E(matZh(mi.name))} · LiDAR ${f1(mi.refl, 2)}${mi.spec ? ` + specular ${f1(mi.spec, 2)}` : ""}`, "ES.ray.REFL " + (mi.name || ""))])],
+        [sec("Who can pass", ["human", "dog", "rover", "uav"].map((k) => row(EMB[k][0] + " " + EMB[k][1], k === "uav" ? `can fly over (height ${f1(o.h, 1)} m)` : `cannot pass (fence height ${f1(o.h, 1)} m; only through a gate / gap)`, "view3d.js rasterBlocked: the fence occupies the hT / hB grids of World", k === "uav" ? "ok" : "no")))]], foot: "" };
     };
     return T;
   }
@@ -418,31 +419,31 @@
     T.shapes = () => (o.type === "box" ? [{ t: "obb", o: [o.xy[0], o.xy[1], 0.14 + o.size[2] / 2, o.size[0] / 2, o.size[1] / 2, o.size[2] / 2, o.yaw || 0, 0], strong: true, label: true }] : [{ t: "cyl", c: [o.xy[0], o.xy[1]], r: o.type === "cyl" ? o.r : 0.05, z0: o.type === "cyl" ? 0 : 0.14, z1: o.type === "cyl" ? o.h : 0.14 + o.h, strong: true, label: true }]);
     T.card = () => {
       const mi = ES.ray.matInfo(hit.mat) || {}, top = o.type === "box" ? o.size[2] : o.h;
-      return { icon: T.icon, title: T.name, sub: `场景物体 #${i} · ${o.type === "box" ? "盒体" : o.type === "cyl" ? "圆柱" : "杆"}`, chips: `<span class="ichip">场景物体</span>`, dist: hit.t,
-        cols: [[sec("外形", [row("尺寸", o.type === "box" ? `${f1(o.size[0], 2)} × ${f1(o.size[1], 2)} × ${f1(o.size[2], 2)} m` : o.type === "cyl" ? `直径 ${f1(2 * o.r, 2)} m · 高 ${f1(o.h, 1)} m` : `杆高 ${f1(o.h, 1)} m`, "场景 JSON objects[]"), o.yaw != null ? row("朝向", `${compass(o.yaw)[0]}°${compass(o.yaw)[1]}`, "场景 JSON objects[].yaw") : null]), sec("物理量", [row("材料", `${E(matZh(mi.name))} · 激光雷达 ${f1(mi.refl, 2)}${mi.spec ? ` + 镜面 ${f1(mi.spec, 2)}` : ""}`, "ES.ray.REFL " + (mi.name || "")), row("质量", "场景没有给质量", "scene JSON 只含几何")])],
-          [sec("谁能过", ["human", "dog", "rover", "uav"].map((k) => { const e = CAT ? CAT.embodiments[k] : { step: 0 }; return row(EMB[k][0] + " " + EMB[k][1], k === "uav" ? `飞越(高 ${f1(top, 1)} m)` : top <= e.step ? `可跨过(高 ${f1(top, 2)} m)` : `过不去(高 ${f1(top, 1)} m > ${f1(e.step, 2)} m)`, "按高度与台阶上限比较", k === "uav" || top <= e.step ? "ok" : "no"); }))]], foot: "" };
+      return { icon: T.icon, title: T.name, sub: `Scene object #${i} · ${o.type === "box" ? "Box" : o.type === "cyl" ? "Cylinder" : "Pole"}`, chips: `<span class="ichip">Scene object</span>`, dist: hit.t,
+        cols: [[sec("Outer shape", [row("Size", o.type === "box" ? `${f1(o.size[0], 2)} × ${f1(o.size[1], 2)} × ${f1(o.size[2], 2)} m` : o.type === "cyl" ? `diameter ${f1(2 * o.r, 2)} m · height ${f1(o.h, 1)} m` : `pole height ${f1(o.h, 1)} m`, "Scene JSON objects[]"), o.yaw != null ? row("Heading", `${compass(o.yaw)[0]}°${compass(o.yaw)[1]}`, "Scene JSON objects[].yaw") : null]), sec("Physical quantities", [row("Material", `${E(matZh(mi.name))} · LiDAR ${f1(mi.refl, 2)}${mi.spec ? ` + specular ${f1(mi.spec, 2)}` : ""}`, "ES.ray.REFL " + (mi.name || "")), row("Mass", "The scene gives no mass", "The scene JSON only contains geometry")])],
+          [sec("Who can pass", ["human", "dog", "rover", "uav"].map((k) => { const e = CAT ? CAT.embodiments[k] : { step: 0 }; return row(EMB[k][0] + " " + EMB[k][1], k === "uav" ? `fly over (height ${f1(top, 1)} m)` : top <= e.step ? `can step over (height ${f1(top, 2)} m)` : `cannot pass (height ${f1(top, 1)} m > ${f1(e.step, 2)} m)`, "Compared by height with the step limits", k === "uav" || top <= e.step ? "ok" : "no"); }))]], foot: "" };
     };
     return T;
   }
   function groundTarget(hit) {
     const W = S.A.W, cls = hit.cls, mi = ES.ray.matInfo(hit.mat) || {}, nm = mi.name, id = W.ij(hit.x, hit.y), rub = id >= 0 ? W.rub[id] : 0;
-    const T = { kind: "ground", key: `ground:${nm}`, hit, name: ({ asphalt: "柏油路面", road_paint: "道路标线(反光漆)", sidewalk: "人行道(混凝土)", grass: "草地", gravel: "碎石地面", soil: "泥土", water: "水面" })[nm] || "地面", icon: nm === "water" ? "🌊" : nm === "asphalt" || nm === "road_paint" ? "🛣" : nm === "grass" ? "🌿" : "▦" }; T.dist = hit.t; T.center = () => [hit.x, hit.y, hit.z];
+    const T = { kind: "ground", key: `ground:${nm}`, hit, name: ({ asphalt: "Asphalt road", road_paint: "Road marking (reflective paint)", sidewalk: "Sidewalk (concrete)", grass: "Grass", gravel: "Gravel ground", soil: "Soil", water: "Water surface" })[nm] || "Ground", icon: nm === "water" ? "🌊" : nm === "asphalt" || nm === "road_paint" ? "🛣" : nm === "grass" ? "🌿" : "▦" }; T.dist = hit.t; T.center = () => [hit.x, hit.y, hit.z];
     T.shapes = () => [{ t: "ring", c: [hit.x, hit.y, hit.z], r: 0.5, strong: true }];
     T.card = () => {
-      const cn = { 1: "道路", 2: "人行道 / 铺装", 13: "草地 / 土地", 11: "水面" }[cls] || "地面", mu = nm === "sidewalk" && CAT ? (CAT.materials.concrete || {}).mu_static : null, water = nm === "water";
-      return { icon: T.icon, title: T.name, sub: `${cn} · 高度 z = ${f1(hit.z, 3)} m`, chips: `<span class="ichip">地面</span>${rub > 0.05 ? `<span class="ichip warn">瓦砾 ${f1(rub, 2)} m</span>` : ""}`, dist: hit.t,
-        cols: [[sec("表面", [row("类别", E(cn), "ES.ray 地面栅格类别:道路 / 人行道 / 草地 / 水(场景多边形光栅化)"), row("高度", `${f1(hit.z, 3)} m`, "A.W.gz:道路 0.012、草地 0.14、公园 0.15、人行道 0.16、小径 0.164"), row("坡度", "平地(栅格地面无坡)", "A.W 高度场:同类地面等高"), rub > 0.05 ? row("瓦砾", `高 ${f1(rub, 2)} m`, "震后变体的瓦砾高度 A.W.rub", "warn") : null]),
-          sec("物理量", [row("激光雷达", `905 nm 反射率 ${f1(mi.refl, 2)}${mi.spec ? ` + 镜面 ${f1(mi.spec, 2)}` : ""}`, "ES.ray.REFL " + nm + (nm === "road_paint" ? "(标线是逆反射漆)" : "")), row("摩擦 μ", mu != null ? `${f1(mu, 2)}(混凝土静摩擦)` : "模型未定义", "户外地面只有人行道(混凝土)对应目录里的 μ;柏油 / 草地 / 碎石模型里没有摩擦数据")])],
-          [sec("谁能走", ["human", "dog", "rover", "uav"].map((k) => row(EMB[k][0] + " " + EMB[k][1], water ? (k === "uav" ? "可飞过水面" : "不能下水") : k === "uav" ? "可飞过" : rub > 0.25 ? `瓦砾高 ${f1(rub, 2)} m,${k === "dog" ? "狗只能走 ≤ 0.5 m 的瓦砾" : "要看高度"}` : "可以走", "view3d.js rasterBlocked:水 / 瓦砾 / 实体占用的栅格不可走", water && k !== "uav" ? "no" : "ok")))]], foot: "" };
+      const cn = { 1: "Road", 2: "Sidewalk / paving", 13: "Grass / soil", 11: "Water surface" }[cls] || "Ground", mu = nm === "sidewalk" && CAT ? (CAT.materials.concrete || {}).mu_static : null, water = nm === "water";
+      return { icon: T.icon, title: T.name, sub: `${cn} · height z = ${f1(hit.z, 3)} m`, chips: `<span class="ichip">Ground</span>${rub > 0.05 ? `<span class="ichip warn">Rubble ${f1(rub, 2)} m</span>` : ""}`, dist: hit.t,
+        cols: [[sec("Surface", [row("Class", E(cn), "ES.ray ground-grid class: road / sidewalk / grass / water (rasterised scene polygons)"), row("Height", `${f1(hit.z, 3)} m`, "A.W.gz: road 0.012, grass 0.14, park 0.15, sidewalk 0.16, path 0.164"), row("Slope", "Flat (the grid ground has no slope)", "A.W height field: the same kind of ground has the same height"), rub > 0.05 ? row("Rubble", `height ${f1(rub, 2)} m`, "Rubble height A.W.rub of the post-quake variant", "warn") : null]),
+          sec("Physical quantities", [row("LiDAR", `905 nm reflectivity ${f1(mi.refl, 2)}${mi.spec ? ` + specular ${f1(mi.spec, 2)}` : ""}`, "ES.ray.REFL " + nm + (nm === "road_paint" ? "(markings are retro-reflective paint)" : "")), row("Friction μ", mu != null ? `${f1(mu, 2)} (static friction of concrete)` : "not defined in the model", "Outdoor ground only has the sidewalk (concrete) matched to a μ in the catalogue; asphalt / grass / gravel have no friction data in the model")])],
+          [sec("Who can walk", ["human", "dog", "rover", "uav"].map((k) => row(EMB[k][0] + " " + EMB[k][1], water ? (k === "uav" ? "can fly over water" : "cannot enter the water") : k === "uav" ? "can fly over" : rub > 0.25 ? `rubble height ${f1(rub, 2)} m, ${k === "dog" ? "the dog can only walk over rubble ≤ 0.5 m" : "depends on the height"}` : "can walk", "view3d.js rasterBlocked: grid cells occupied by water / rubble / solids are not walkable", water && k !== "uav" ? "no" : "ok")))]], foot: "" };
     };
     return T;
   }
 
   /* ================================================================ agents: live episode, placed entities, my own body ================================================================ */
-  const MASS = { dog: [15.2, "Unitree Go2 MJCF 总质量 15.206 kg(scripts/esworld/dynamics/robots.py load_go2_spec)"], uav: [1.325, "Skydio X2 MJCF 质量 1.325 kg(load_x2_spec)"], rover: [40, "catalog.json embodiments.rover.mass_kg"] };
+  const MASS = { dog: [15.2, "Unitree Go2 MJCF total mass 15.206 kg (scripts/esworld/dynamics/robots.py load_go2_spec)"], uav: [1.325, "Skydio X2 MJCF mass 1.325 kg (load_x2_spec)"], rover: [40, "catalog.json embodiments.rover.mass_kg"] };
   function agentInfo(uid) {
     const V = VV(), A = S.A;
-    if (uid === "walk") { const W = WK(); return { uid, live: false, self: true, kind: W.body === "human" ? "human" : W.body, name: "你自己", pos: () => ({ x: W.x, y: W.y, z: W.body === "uav" ? W.z : W.zf, yaw: W.yaw, speed: W.speed || 0 }), body: W.body }; }
+    if (uid === "walk") { const W = WK(); return { uid, live: false, self: true, kind: W.body === "human" ? "human" : W.body, name: "You", pos: () => ({ x: W.x, y: W.y, z: W.body === "uav" ? W.z : W.zf, yaw: W.yaw, speed: W.speed || 0 }), body: W.body }; }
     if (uid.startsWith("live:")) { const id = uid.slice(5), it = V && V.live && V.live.userData.items.find((q) => q.id === id); if (!it) return null; const k = it.kind === "dog" ? "dog" : it.kind === "uav" ? "uav" : it.kind === "rover" ? "rover" : it.kind === "t:lying" ? "lying" : "human";
       return { uid, live: true, it, id, kind: k, role: it.a && it.a.role, pos: () => { const m = it.model, st = it.st; return { x: m.position.x, y: -m.position.z, z: m.position.y, yaw: m.rotation.y, speed: st ? st.speed : 0, st }; }, rigKey: it.model.userData.rig && it.model.userData.rig.key }; }
     if (uid.startsWith("ent:")) { const id = uid.slice(4), e = (A.ents || []).find((q) => String(q.id) === id); if (!e) return null; const k = e.kind === "t:person" ? "person" : e.kind === "t:lying" ? "lying" : e.kind === "t:vehicle" ? "vehicle" : e.kind === "human" ? "human" : e.kind;
@@ -452,13 +453,13 @@
   const AG_ICON = { dog: "🐕", uav: "🚁", rover: "🤖", human: "🚶", person: "🚶", lying: "🧍", cp: "📡", vehicle: "🚗" };
   function agentNames(g) {
     const kind = g.kind, me = WK(); let name, model;
-    if (g.self) { name = "你自己(" + ES.controls.IDENT[me.body].name + ")"; model = ES.controls.IDENT[me.body].spec; }
-    else if (kind === "dog") { name = g.live ? "机械狗(回合中)" : (g.ent && g.ent.name) || "机械狗"; model = "Unitree Go2"; }
-    else if (kind === "uav") { name = g.live ? "无人机(回合中)" : (g.ent && g.ent.name) || "无人机"; model = "Skydio X2 级"; }
-    else if (kind === "rover") { name = g.live ? "配送机器人(回合中)" : (g.ent && g.ent.name) || "配送机器人"; model = "轮式配送机器人"; }
-    else if (kind === "cp") { name = (g.ent && g.ent.name) || "指挥站"; model = "移动指挥车(厢式货车 + 桅杆)"; }
-    else if (kind === "vehicle") { name = (g.ent && g.ent.name) || "行驶的车辆(目标)"; model = "两厢车目标"; }
-    else { const resp = g.live ? g.id === "human_0" : kind === "human"; name = g.live ? (g.id === "human_0" ? "应急人员(回合中)" : g.role === "wave" ? "窗口挥手求助的居民" : kind === "lying" ? "倒地的人" : "平民(回合中)") : (g.ent && g.ent.name) || (kind === "lying" ? "倒地的人" : "站立的人"); model = resp ? "应急人员(Rocketbox 头盔 + 反光背心)" : "平民(Rocketbox 人物)"; }
+    if (g.self) { name = "You (" + ES.controls.IDENT[me.body].name + ")"; model = ES.controls.IDENT[me.body].spec; }
+    else if (kind === "dog") { name = g.live ? "Quadruped robot (episode)" : (g.ent && g.ent.name) || "Quadruped robot"; model = "Unitree Go2"; }
+    else if (kind === "uav") { name = g.live ? "UAV (episode)" : (g.ent && g.ent.name) || "UAV"; model = "Skydio X2 class"; }
+    else if (kind === "rover") { name = g.live ? "Delivery robot (episode)" : (g.ent && g.ent.name) || "Delivery robot"; model = "Wheeled delivery robot"; }
+    else if (kind === "cp") { name = (g.ent && g.ent.name) || "Command post"; model = "Mobile command vehicle (box truck + mast)"; }
+    else if (kind === "vehicle") { name = (g.ent && g.ent.name) || "Moving vehicle (target)"; model = "Hatchback target"; }
+    else { const resp = g.live ? g.id === "human_0" : kind === "human"; name = g.live ? (g.id === "human_0" ? "Responder (episode)" : g.role === "wave" ? "Resident waving for help from a window" : kind === "lying" ? "Person on the ground" : "Civilian (episode)") : (g.ent && g.ent.name) || (kind === "lying" ? "Person on the ground" : "Standing person"); model = resp ? "Responder (Rocketbox helmet + hi-vis vest)" : "Civilian (Rocketbox person)"; }
     return { name, model };
   }
   function agentTarget(uid, hit) {
@@ -477,8 +478,8 @@
     let best = null; for (const [ka, kb] of P.radioGroupPairs(meNode.radios, dn.radios)) { const ab = P.link(W, meNode, dn, ES.RADIOS[ka], ES.RADIOS[kb], null), ba = P.link(W, dn, meNode, ES.RADIOS[kb], ES.RADIOS[ka], null), good = Math.min(ab.good, ba.good); if (!best || good > best.good) best = { good, tech: ka === kb ? ka : ka + "↔" + kb, los: ab.los }; }
     return best;
   }
-  const OTHER_SENS = { dog: "4 麦克风阵列 · IMU · GNSS", uav: "气压计 · IMU · GNSS · 麦克风", human: "双耳麦克风 · 手机无线(5G / Wi-Fi / 蓝牙)", rover: "麦克风", cp: "麦克风 · 5G 基站 · Wi-Fi · 900 MHz 自组网" };       // = the non-camera, non-LiDAR part of ES.DEVICES[kind].sensors (agents_cfg.DEVICES)
-  const MOVE_ZH = { dog: ["行走", "站立"], uav: ["飞行", "悬停"], rover: ["行驶", "停着"] };
+  const OTHER_SENS = { dog: "4-microphone array · IMU · GNSS", uav: "barometer · IMU · GNSS · microphone", human: "binaural microphones · phone radio (5G / Wi-Fi / Bluetooth)", rover: "microphone", cp: "microphone · 5G base station · Wi-Fi · 900 MHz mesh" };       // = the non-camera, non-LiDAR part of ES.DEVICES[kind].sensors (agents_cfg.DEVICES)
+  const MOVE_ZH = { dog: ["walking", "standing"], uav: ["flying", "hovering"], rover: ["driving", "stopped"] };
   function agentCard(T) {
     const g = T.g, p = g.pos(), me = WK(), RAY = ES.ray, bk = bodyKind(g), B = RAY.BODY[bk] || {}, kind = g.kind, { name, model } = agentNames(g), icon = AG_ICON[kind] || "🤖"; T.name = name;
     const eye = [me.x, me.y, ES.view3d.walk.V.cam.position.y], dist = Math.hypot(p.x - eye[0], p.y - eye[1], p.z - eye[2]), spd = p.speed || 0, [hd, hn] = compass(p.yaw);
@@ -486,24 +487,24 @@
     const dev = civ ? null : ES.DEVICES[kind], H = ES.hud || {}, CAMS = civ ? null : (H.CAMS || {})[kind], LID = civ ? null : (H.LIDARS || {})[kind], MM = ES.lidar && ES.lidar.MODELS && LID ? ES.lidar.MODELS[LID.model] : null;
     const camTxt = CAMS ? CAMS.map((c) => `${c.zh} ${c.hfov}° ${c.res[0]}×${c.res[1]} ${c.fps} fps`).join(" · ") : "", lidTxt = LID ? `${LID.zh} · ${MM ? MM.h_fov : LID.hfov}° × ${MM ? MM.v_max - MM.v_min : LID.vmax - LID.vmin}° · ≤ ${MM ? MM.max_range : LID.range} m · ${MM ? MM.rate_hz : LID.rate} Hz` : "";
     let size, mass = null;
-    if (kind === "cp") { const d = S.A.scene.cp_dims || [7, 2.5, 3.3]; size = `${f1(d[0], 1)} × ${f1(d[1], 1)} × ${f1(d[2], 1)} m`; } else if (kind === "vehicle") size = "4.2 × 1.8 × 1.5 m"; else if (B.t === 1) size = `身高 ${f1(B.h, 2)} m · 碰撞胶囊半径 ${f1(B.r, 2)} m`; else size = `${f1(2 * B.hx, 2)} × ${f1(2 * B.hy, 2)} × ${f1(2 * B.hz, 2)} m`;
+    if (kind === "cp") { const d = S.A.scene.cp_dims || [7, 2.5, 3.3]; size = `${f1(d[0], 1)} × ${f1(d[1], 1)} × ${f1(d[2], 1)} m`; } else if (kind === "vehicle") size = "4.2 × 1.8 × 1.5 m"; else if (B.t === 1) size = `height ${f1(B.h, 2)} m · collision capsule radius ${f1(B.r, 2)} m`; else size = `${f1(2 * B.hx, 2)} × ${f1(2 * B.hy, 2)} × ${f1(2 * B.hz, 2)} m`;
     if (kind === "human" || kind === "person" || kind === "lying") {      // roster height; mass scales with height^2 from the young adult (1.71 m, 72 kg) of dynamics/human.py
-      const key = g.rigKey || (g.self ? "resp_m" : null), pe = PEOPLE && key && PEOPLE.people && PEOPLE.people[key], h = pe ? pe.height : 1.7; mass = [72 * Math.pow(h / 1.71, 2), `${f1(h, 2)} m 的人:质量 = 72 kg × (身高 / 1.71 m)²(dynamics/human.py 青年组 1.71 m / 72 kg;traffic/pedestrians.py 同一缩放)`]; if (pe && B.t === 1) size = `身高 ${f1(h, 2)} m(${key}) · 碰撞胶囊半径 ${f1(B.r, 2)} m`;
+      const key = g.rigKey || (g.self ? "resp_m" : null), pe = PEOPLE && key && PEOPLE.people && PEOPLE.people[key], h = pe ? pe.height : 1.7; mass = [72 * Math.pow(h / 1.71, 2), `A person of ${f1(h, 2)} m: mass = 72 kg × (height / 1.71 m)² (dynamics/human.py young group 1.71 m / 72 kg; traffic/pedestrians.py uses the same scaling)`]; if (pe && B.t === 1) size = `height ${f1(h, 2)} m (${key}) · collision capsule radius ${f1(B.r, 2)} m`;
     } else if (MASS[kind]) mass = MASS[kind];
-    const sensRows = civ ? [row("装备", "无传感器", "平民 / 目标没有设备")] : [camTxt ? row("相机", E(camTxt), "ES.hud.CAMS(镜像 agents_cfg.DEVICES)") : null, lidTxt ? row("激光雷达", E(lidTxt), "ES.lidar.MODELS(lidar_models.json,与 agents_cfg 同源)") : null, OTHER_SENS[kind] ? row("其他", E(OTHER_SENS[kind]), "ES.DEVICES[kind].sensors 里除相机 / 激光雷达外的部分") : null];
-    const mv = MOVE_ZH[kind], act = kind === "lying" ? "躺卧(倒地)" : g.live && g.role && ROLE_ZH[g.role] && !mv ? ROLE_ZH[g.role] : mv ? mv[spd > 0.25 ? 0 : 1] : spd > 0.25 ? "行走" : kind === "cp" ? "停放" : "站立";
-    const st = [row("动作", E(act), g.live ? "回合数据 agents[].role + 路径速度" : g.self ? "你自己" : "放置的实体是静止的"), row("速度", `${f1(spd, 2)} m/s`, g.live ? "回放路径的有限差分(ES.actors.track)" : g.self ? "你自己的速度 WALK.speed" : "放置的实体不动"), row("航向", `${hd}° ${hn}`, "yaw(自 +x 逆时针)→ 罗盘方位")];
-    if (kind === "uav") st.push(row("离地高度", `${f1(p.z - S.A.W.groundZ(p.x, p.y), 1)} m`, "机身高度 − 地面高度"));
-    if (g.self) { const W = WK(), pct = Math.round(100 * (W.batt != null ? W.batt : 1)); st.push(row("电量", `${pct}%`, "view3d.js 电池模型(无人机悬停 108 W,狗 25-60 W …)", pct < 15 ? "warn" : "")); }
-    else if (dev && dev.battery_wh) st.push(row(kind === "human" ? "手机电池" : "电池", `${dev.battery_wh} Wh`, "ES.DEVICES(agents_cfg.DEVICES)的容量;回合数据没有剩余电量"));
+    const sensRows = civ ? [row("Equipment", "no sensors", "civilians / targets carry no equipment")] : [camTxt ? row("Camera", E(camTxt), "ES.hud.CAMS (mirrors agents_cfg.DEVICES)") : null, lidTxt ? row("LiDAR", E(lidTxt), "ES.lidar.MODELS (lidar_models.json, same source as agents_cfg)") : null, OTHER_SENS[kind] ? row("Other", E(OTHER_SENS[kind]), "the part of ES.DEVICES[kind].sensors other than cameras / LiDAR") : null];
+    const mv = MOVE_ZH[kind], act = kind === "lying" ? "lying (on the ground)" : g.live && g.role && ROLE_ZH[g.role] && !mv ? ROLE_ZH[g.role] : mv ? mv[spd > 0.25 ? 0 : 1] : spd > 0.25 ? "walking" : kind === "cp" ? "parked" : "standing";
+    const st = [row("Action", E(act), g.live ? "episode data agents[].role + path speed" : g.self ? "You" : "A placed entity is static"), row("Speed", `${f1(spd, 2)} m/s`, g.live ? "finite difference of the replayed path (ES.actors.track)" : g.self ? "your own speed WALK.speed" : "A placed entity does not move"), row("Heading", `${hd}° ${hn}`, "yaw (counter-clockwise from +x) → compass bearing")];
+    if (kind === "uav") st.push(row("Height above ground", `${f1(p.z - S.A.W.groundZ(p.x, p.y), 1)} m`, "body height − ground height"));
+    if (g.self) { const W = WK(), pct = Math.round(100 * (W.batt != null ? W.batt : 1)); st.push(row("Battery", `${pct}%`, "view3d.js battery model (UAV hover 108 W, dog 25-60 W …)", pct < 15 ? "warn" : "")); }
+    else if (dev && dev.battery_wh) st.push(row(kind === "human" ? "phone battery" : "battery", `${dev.battery_wh} Wh`, "capacity from ES.DEVICES (agents_cfg.DEVICES); the episode data has no remaining charge"));
     if (!g.self) {
       const head = [p.x, p.y, p.z + (kind === "uav" ? 0 : B.t === 1 ? B.h * 0.9 : (B.lift || 0.4) + (B.hz || 0.2))], los = !RAY.blocked([eye[0], eye[1], eye[2]], head);
-      st.push(row("视线", los ? "看得见(无遮挡)" : "被遮挡", "ES.ray.blocked:我的眼睛到它的头部,玻璃当透明", los ? "ok" : "warn")); st.push(row("到我的距离", `${f1(dist, 1)} m`, "三维距离(眼睛到它的中心)"));
-      const lk = dev && dev.radios ? linkTo(g) : null; if (lk) st.push(row("链路(到我)", lk.good > 0 ? `${lk.good >= 10 ? Math.round(lk.good) : f1(lk.good, 1)} Mb/s · ${E(lk.tech)} · ${lk.los ? "视距" : "有遮挡"}` : "连不上", "ES.phys.link:双方共有的无线制式里取最好的(与 HUD 邻近设备卡片同一算法)", lk.good > 0 ? "ok" : "warn"));
+      st.push(row("Line of sight", los ? "visible (not occluded)" : "occluded", "ES.ray.blocked: from my eyes to its head, glass treated as transparent", los ? "ok" : "warn")); st.push(row("Distance to me", `${f1(dist, 1)} m`, "3D distance (my eyes to its centre)"));
+      const lk = dev && dev.radios ? linkTo(g) : null; if (lk) st.push(row("Link (to me)", lk.good > 0 ? `${lk.good >= 10 ? Math.round(lk.good) : f1(lk.good, 1)} Mb/s · ${E(lk.tech)} · ${lk.los ? "line of sight" : "obstructed"}` : "no link", "ES.phys.link: the best of the radio standards both sides share (same algorithm as the HUD nearby-device cards)", lk.good > 0 ? "ok" : "warn"));
     }
-    const rr = B.r || Math.max(B.hx || 0, B.hy || 0), coll = [row("碰撞", kind === "uav" ? `机身 ${f1(2 * B.hx, 2)} m;在空中,绕开 / 飞越` : `碰撞半径 ${f1(rr, 2)} m,会动:挡路时要绕开;被它撞上你会被挤到一边`, "view3d.js:活动实体是实心体(liveHit / pushedByLive)", "warn")];
-    return { icon, title: name, sub: model, chips: `<span class="ichip">${g.self ? "我" : g.live ? "回合内" : "我放置的"}</span><span class="ichip">${E(kind)}</span>`, dist,
-      cols: [[sec("外形与质量", [row("尺寸", E(size), "ES.ray 物理形状(与激光雷达、碰撞同一套)"), mass ? row("质量", `${big(mass[0])} kg`, mass[1]) : null]), sec("传感器", sensRows), g.self ? null : sec("碰撞", coll)], [sec("现在的状态", st)]], foot: g.live ? "回合内的智能体:位置 / 速度来自 live_<场景>.json 的回放" : g.self ? "" : "你放置的实体(返回俯视图可编辑)" };
+    const rr = B.r || Math.max(B.hx || 0, B.hy || 0), coll = [row("Collision", kind === "uav" ? `body ${f1(2 * B.hx, 2)} m; in the air, go round / fly over` : `collision radius ${f1(rr, 2)} m, it moves: go round it when it blocks you; if it walks into you, you are pushed aside`, "view3d.js: moving entities are solid (liveHit / pushedByLive)", "warn")];
+    return { icon, title: name, sub: model, chips: `<span class="ichip">${g.self ? "me" : g.live ? "in episode" : "placed by me"}</span><span class="ichip">${E(kind)}</span>`, dist,
+      cols: [[sec("Shape and mass", [row("Size", E(size), "ES.ray physical shape (the same one used by LiDAR and collision)"), mass ? row("Mass", `${big(mass[0])} kg`, mass[1]) : null]), sec("Sensors", sensRows), g.self ? null : sec("Collision", coll)], [sec("Current state", st)]], foot: g.live ? "Episode agent: position / speed come from the replay of live_<scene>.json" : g.self ? "" : "An entity you placed (editable in the top view)" };
   }
 
   /* ================================================================ drawing ================================================================ */
@@ -574,16 +575,16 @@
     if (dom) return dom; const hud = $("#fphud"); if (!hud) return null;
     const cv = document.createElement("canvas"); cv.id = "fp-insp-fx"; hud.insertBefore(cv, hud.firstChild);
     const card = document.createElement("section"); card.id = "fp-insp"; card.className = "fp-panel insp"; card.hidden = true; hud.appendChild(card);
-    const box = $(".fp-acts"); let chip = $("#fp-inspect"); if (box && !chip) { chip = document.createElement("button"); chip.type = "button"; chip.className = "btn chip-insp"; chip.id = "fp-inspect"; chip.textContent = "🔍 检查物体 (I)"; chip.title = "I 键:检查模式。准星指到的东西会高亮,卡片显示它的材料、质量、隔声 / 射频 / 激光雷达数值和各身份能不能通过;右键点任意物体可锁定"; chip.addEventListener("click", () => { chip.blur(); toggle(); }); box.insertBefore(chip, box.querySelector("label")); }
+    const box = $(".fp-acts"); let chip = $("#fp-inspect"); if (box && !chip) { chip = document.createElement("button"); chip.type = "button"; chip.className = "btn chip-insp"; chip.id = "fp-inspect"; chip.textContent = "🔍 Inspect (I)"; chip.title = "I key: inspect mode. What the crosshair points at is highlighted, and the card shows its material, mass, sound-insulation / RF / LiDAR values and whether each identity can pass; right-click any object to pin it"; chip.addEventListener("click", () => { chip.blur(); toggle(); }); box.insertBefore(chip, box.querySelector("label")); }
     const cvs = $("#v3d"); if (cvs && !cvs._inspCtx) { cvs._inspCtx = 1; cvs.addEventListener("contextmenu", onContext); }
     fx.cv = cv; fx.g = cv.getContext("2d"); dom = { cv, card, chip }; return dom;
   }
-  const HINT_ON = "检查模式:准星对准物体看它的属性 · 右键点任意物体锁定 / 取消 · 按 I 退出";
+  const HINT_ON = "Inspect mode: aim the crosshair at an object to see its properties · right-click any object to pin / unpin · press I to leave";
   function setHint(on) { const h = $("#fp-hint"); if (!h) return; if (on) { if (st.hint === null) st.hint = h.textContent; h.textContent = HINT_ON; } else if (st.hint !== null) { h.textContent = st.hint; st.hint = null; } }
   function toggle(on) {
     const want = on === undefined ? !st.on : !!on; if (want === st.on) return st.on; if (!ensureDom()) return false;
     st.on = want; if (!want) { st.pin = null; st.cur = null; st.keyCur = ""; clearFx(); dom.card.hidden = true; const c = $("#v3d"); if (c) c.style.cursor = "grab"; } else { loadCat(); loadPeople(); const c = $("#v3d"); if (c) c.style.cursor = "crosshair"; }
-    if (dom.chip) { dom.chip.classList.toggle("on", st.on); dom.chip.setAttribute("aria-pressed", st.on); } setHint(st.on); toast(st.on ? "检查模式:准星指到的物体会高亮并显示属性(右键锁定)" : "检查模式已关闭"); return st.on;
+    if (dom.chip) { dom.chip.classList.toggle("on", st.on); dom.chip.setAttribute("aria-pressed", st.on); } setHint(st.on); toast(st.on ? "Inspect mode: the object under the crosshair is highlighted and described (right-click to pin)" : "Inspect mode off"); return st.on;
   }
   const toast = (m) => { const t = $("#fp-toast"); if (!t) return; t.textContent = m; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => (t.hidden = true), 1600); };
   function clearFx() { if (fx.g) fx.g.clearRect(0, 0, fx.cv.width, fx.cv.height); }
@@ -594,7 +595,7 @@
   function cardHtml(c) {
     const rowH = (r) => `<div class="ir${r.cls ? " " + r.cls : ""}"${r.tip ? ` title="${E(r.tip)}"` : ""}><span class="k">${E(r.k)}</span><span class="v">${r.v}</span></div>`;
     const secH = (s) => (s && (s.rows.length || s.html) ? `<div class="isec"><h5>${E(s.h)}</h5>${s.rows.map(rowH).join("")}${s.html || ""}</div>` : "");
-    return `<header class="ih"><span class="ico">${c.icon}</span><div class="tt"><b>${E(c.title)}${c.part ? `<span class="part">${E(c.part)}</span>` : ""}${c.chips || ""}</b><small>${E(c.sub)}</small></div><div class="dd"><span>${f1(c.dist, 1)} m</span>${st.pin ? `<em class="pinned">已锁定</em>` : ""}</div></header><div class="ib">${c.cols.flat().map(secH).join("")}</div>${st.pin ? `<footer class="if">右键再点一次(或按 I)取消锁定</footer>` : ""}`;
+    return `<header class="ih"><span class="ico">${c.icon}</span><div class="tt"><b>${E(c.title)}${c.part ? `<span class="part">${E(c.part)}</span>` : ""}${c.chips || ""}</b><small>${E(c.sub)}</small></div><div class="dd"><span>${f1(c.dist, 1)} m</span>${st.pin ? `<em class="pinned">Pinned</em>` : ""}</div></header><div class="ib">${c.cols.flat().map(secH).join("")}</div>${st.pin ? `<footer class="if">Right-click again (or press I) to unpin</footer>` : ""}`;
   }
   function showCard(T, force) {
     if (!dom) return; const now = performance.now(); if (!force && st.shown && st.shown.key === T.key && now - st.tCard < 250) { st.shown = T; return; }
@@ -605,8 +606,8 @@
   function onContext(e) {
     e.preventDefault(); const V = VV(); if (!V || !ES.ray) return; if (!ensureDom()) return; if (!st.on) toggle(true); ensureScene();
     const r = e.currentTarget.getBoundingClientRect(), nd = [((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1], v = new THREE.Vector3(nd[0], nd[1], 0.5).unproject(V.cam), p = V.cam.position, d = [v.x - p.x, -(v.z - p.z), v.y - p.y], L = Math.hypot(d[0], d[1], d[2]) || 1;
-    const o = [p.x, -p.z, p.y], T = pick(o, [d[0] / L, d[1] / L, d[2] / L]); if (st.pin && (!T || T.key === st.pin.key)) { st.pin = null; toast("已取消锁定"); return; } if (!T) { toast("没有指到东西"); return; }
-    st.pin = T; st.html = ""; showCard(T, true); toast("已锁定:" + (T.name || ""));
+    const o = [p.x, -p.z, p.y], T = pick(o, [d[0] / L, d[1] / L, d[2] / L]); if (st.pin && (!T || T.key === st.pin.key)) { st.pin = null; toast("Unpinned"); return; } if (!T) { toast("Nothing under the crosshair"); return; }
+    st.pin = T; st.html = ""; showCard(T, true); toast("Pinned: " + (T.name || ""));
   }
   function centreRay(V) {
     const cam = V.cam; cam.updateMatrixWorld(true); const p = cam.position, q = cam.getWorldDirection(centreRay.v || (centreRay.v = new THREE.Vector3()));
@@ -631,7 +632,7 @@
   }
   function registerKeys() {
     if (registerKeys.done || !ES.controls) return; registerKeys.done = true;
-    ES.controls.add({ bodies: "all", group: "动作", keys: ["I"], codes: ["KeyI"], desc: "检查物体 · 右键锁定", fn: (code, down) => { if (down) toggle(); } });
+    ES.controls.add({ bodies: "all", group: "Action", keys: ["I"], codes: ["KeyI"], desc: "Inspect · right-click to pin", fn: (code, down) => { if (down) toggle(); } });
   }
   registerKeys();
   ES.bus.on("ready", () => { registerKeys(); loadCat(); });

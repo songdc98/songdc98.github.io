@@ -7,11 +7,11 @@
   const ES = window.ES;
   const THREE_URL = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
   let loading = null;
-  const loadThree = () => window.THREE ? Promise.resolve() : loading || (loading = new Promise((res, rej) => { const s = document.createElement("script"); s.src = THREE_URL; s.onload = res; s.onerror = () => rej(new Error("three.js 加载失败")); document.head.appendChild(s); }));
+  const loadThree = () => window.THREE ? Promise.resolve() : loading || (loading = new Promise((res, rej) => { const s = document.createElement("script"); s.src = THREE_URL; s.onload = res; s.onerror = () => rej(new Error("Failed to load three.js")); document.head.appendChild(s); }));
   const V = { key: "", renderer: null, scene: null, cam: null, agents: null, lamps: [], A: null, hide: null, tex: null, live: null, col: null, bimB: {}, mats: null, env: null, exposure: 1 };
   const WALK = { active: false, x: 0, y: 0, zf: 0, zv: 0, yaw: 0, pitch: 0, body: "human", z: 28, fov: 75, keys: {}, tween: null, bob: 0, raf: 0, last: 0, hud: 0, hooks: {}, speedMul: 1 };
   /* bodies: capsule radius r, height h, step-up height step (stairs, kerbs, thresholds), eye height; Unitree Go2: ~0.7 m long, 0.4 m high, climbs ~0.2 m steps; people: 0.28 m shoulder radius */
-  const BODY = { human: { eye: 1.6, r: 0.28, h: 1.7, step: 0.35, v: 1.4, run: 3.8, fov: 75, label: "人(1.7 m)" }, dog: { eye: 0.45, r: 0.27, h: 0.55, step: 0.22, v: 1.0, run: 2.6, fov: 100, label: "机械狗(0.45 m)" }, uav: { eye: 0, r: 0.3, h: 0.3, step: 0, v: 6, run: 16, fov: 84, label: "无人机(飞行)" } };
+  const BODY = { human: { eye: 1.6, r: 0.28, h: 1.7, step: 0.35, v: 1.4, run: 3.8, fov: 75, label: "Human (1.7 m)" }, dog: { eye: 0.45, r: 0.27, h: 0.55, step: 0.22, v: 1.0, run: 2.6, fov: 100, label: "Quadruped robot (0.45 m)" }, uav: { eye: 0, r: 0.3, h: 0.3, step: 0, v: 6, run: 16, fov: 84, label: "UAV (flying)" } };
   const SRGB = (c) => new THREE.Color(c).convertSRGBToLinear();           // hex colours are sRGB; the renderer works in linear light
   const WALL = { house: 0xe0c4a0, cottage: 0xdcc09c, apartment: 0xb5654f, rowhouse: 0xc27a5e, commercial: 0xb4a89a, campus: 0xb4694f, warehouse: 0xc3c9ce, factory: 0xb4bac0, office: 0x9fb2c6, civic: 0xc3b6a4 };
   const ROOF = { house: 0x6d5a4f, cottage: 0x7a5148, apartment: 0x77797c, rowhouse: 0x7d5a4a, commercial: 0x6f7378, campus: 0x7a6a64, warehouse: 0x9a3a32, factory: 0x7c7f83, office: 0x6f7378, civic: 0x7a7168 };
@@ -269,18 +269,18 @@
     if (A.look === "night" && !(ES.env && ES.env.handlesLamps)) { const cp = V.cam.position, ls = V.lamps.map((p) => ({ p, d: Math.hypot(p[0] - cp.x, p[2] - cp.z) })).sort((a, b) => a.d - b.d).slice(0, 8); for (const { p } of ls) { const L = new THREE.PointLight(0xffd9a0, 1.2, 55, 1.6); L.position.set(...p); V.scene.add(L); V.lampLights.push(L); } }
   }
   function camFromEntity(A) {
-    const e = A.ents.find((q) => q.id === A.sel), d = e && ES.DEVICES[e.kind], S = A.scene.size, aspect = V.w / V.h; let from = "总览(选中一个带相机的智能体可切换为它的视角)";
+    const e = A.ents.find((q) => q.id === A.sel), d = e && ES.DEVICES[e.kind], S = A.scene.size, aspect = V.w / V.h; let from = "Overview (select an agent with a camera to switch to its view)";
     if (d && d.cam) {
       const vfov = ES.deg(2 * Math.atan(Math.tan(ES.rad(e.hfov) / 2) / aspect)); V.cam.fov = vfov; V.cam.aspect = aspect; V.cam.updateProjectionMatrix();
       const z = e.kind === "uav" ? e.z : ((e.zf != null ? e.zf : surfZ(e.x, e.y)) + (d.antH || d.z)), cp = Math.cos(e.pitch || 0); V.cam.position.set(e.x, z, -e.y); V.cam.lookAt(e.x + Math.cos(e.yaw) * cp, z + Math.sin(e.pitch || 0), -(e.y + Math.sin(e.yaw) * cp));
-      from = `${e.name} 的视角 · 水平 ${Math.round(e.hfov)}° · 俯仰 ${Math.round(ES.deg(e.pitch || 0))}°`; V.hide = e.id;
+      from = `${e.name} view · horizontal ${Math.round(e.hfov)}° · pitch ${Math.round(ES.deg(e.pitch || 0))}°`; V.hide = e.id;
     } else { V.cam.fov = 55; V.cam.aspect = aspect; V.cam.updateProjectionMatrix(); V.cam.position.set(-0.05 * S, 0.5 * S, 0.8 * S); V.cam.lookAt(S * 0.5, 0, -S * 0.45); V.hide = null; }
     $cap().textContent = from;
   }
   function ensureRenderer() {
     if (!window.THREE) return false;
     if (!V.renderer) {
-      try { V.renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("v3d"), antialias: true }); } catch (e) { $cap().textContent = "此浏览器无法创建 WebGL 画布"; return false; }
+      try { V.renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("v3d"), antialias: true }); } catch (e) { $cap().textContent = "This browser cannot create a WebGL canvas"; return false; }
       V.renderer.shadowMap.enabled = true; V.renderer.shadowMap.type = THREE.PCFSoftShadowMap; V.renderer.outputEncoding = THREE.sRGBEncoding; V.renderer.toneMapping = THREE.ACESFilmicToneMapping; V.renderer.toneMappingExposure = 1.0; V.renderer.localClippingEnabled = true; V.cam = new THREE.PerspectiveCamera(60, 16 / 9, 0.1, 4000);
       ES.env.init(V.renderer);                                    // HDR pipeline (linear scene radiance, own tone mapping), shader patches: env.js
       new ResizeObserver(() => { if (V.renderer && V.A && V.scene && !WALK.active) { size(); camFromEntity(V.A); renderPreview(V.A); } }).observe(document.getElementById("preview"));
@@ -369,8 +369,8 @@
   /* doors: shared state between the collision model and the rendered leaf */
   function setDoor(d, open) { V.col.setDoor(d, open); const bb = V.bimB[d.bid], info = bb && bb.doors[d.tag]; if (info) { info.open = open; ES.bim.applyDoor(info); } }
   function toggleNearestDoor() {
-    const near = V.col.nearestDoor(WALK.x, WALK.y, WALK.zf, 1.9); if (!near) { WALK.hooks.toast && WALK.hooks.toast("附近没有门"); return; }
-    const d = near.door, to = d.open < 0.5 ? 1 : 0; WALK.doorAnim = WALK.doorAnim || []; WALK.doorAnim = WALK.doorAnim.filter((a) => a.d !== d); WALK.doorAnim.push({ d, to }); WALK.hooks.toast && WALK.hooks.toast(to ? "开门" : "关门");
+    const near = V.col.nearestDoor(WALK.x, WALK.y, WALK.zf, 1.9); if (!near) { WALK.hooks.toast && WALK.hooks.toast("No door nearby"); return; }
+    const d = near.door, to = d.open < 0.5 ? 1 : 0; WALK.doorAnim = WALK.doorAnim || []; WALK.doorAnim = WALK.doorAnim.filter((a) => a.d !== d); WALK.doorAnim.push({ d, to }); WALK.hooks.toast && WALK.hooks.toast(to ? "Open door" : "Close door");
   }
   function tickDoors(dt) {
     const L = WALK.doorAnim; if (!L || !L.length) return;
@@ -447,7 +447,7 @@
     const c = Math.cos(WALK.yaw), s = Math.sin(WALK.yaw), vx = c * dyn.vf + s * dyn.vs, vy = s * dyn.vf - c * dyn.vs;
     if (Math.abs(dyn.vf) > 0.02 || Math.abs(dyn.vs) > 0.02) {
       const moved = moveBody(vx * dt, vy * dt, 0);
-      if (!moved) { dyn.vf *= 0.4; dyn.vs *= 0.4; if (WALK.goal) { WALK.goal.stuck = (WALK.goal.stuck || 0) + dt; if (WALK.goal.stuck > 0.7) { WALK.goal = null; WALK.hooks.toast && WALK.hooks.toast("过不去:被墙、家具、台阶或关着的门挡住"); } } else if (WALK.hooks.toast && now - (WALK.toastAt || -1e9) > 1800) { WALK.toastAt = now; WALK.hooks.toast("被挡住了(墙、家具、台阶过高、车或树干)"); } } else if (WALK.goal) WALK.goal.stuck = 0;
+      if (!moved) { dyn.vf *= 0.4; dyn.vs *= 0.4; if (WALK.goal) { WALK.goal.stuck = (WALK.goal.stuck || 0) + dt; if (WALK.goal.stuck > 0.7) { WALK.goal = null; WALK.hooks.toast && WALK.hooks.toast("Cannot get through: blocked by a wall, furniture, a step or a closed door"); } } else if (WALK.hooks.toast && now - (WALK.toastAt || -1e9) > 1800) { WALK.toastAt = now; WALK.hooks.toast("Blocked (wall, furniture, a step that is too high, a vehicle or a tree trunk)"); } } else if (WALK.goal) WALK.goal.stuck = 0;
     }
     const sp = Math.hypot(dyn.vf, dyn.vs); WALK.speed = sp; WALK.bob += dt * (sp > 0.05 ? 3.2 + 2.2 * sp : 0); WALK.phase = (WALK.phase || 0) + dt * (WALK.body === "human" && ES.humans && ES.humans.cycleRate ? ES.humans.cycleRate(sp) : 1.6 + 1.1 * Math.min(sp, 1.6));          // full gait cycles: people = v / stride (stride 1.26 m at 1.4 m/s, heel strike of the left foot at integer phase), the dog's trot keeps its own rate
     const dzv = WALK.zf - WALK.zv; WALK.zv += dzv * Math.min(1, dt * (dzv > 0 ? 12 : 9)); if (Math.abs(dzv) > 3) WALK.zv = WALK.zf;
@@ -458,7 +458,7 @@
     const fw = (k.w || k.up ? 1 : 0) - (k.s || k.down ? 1 : 0), st = (k.d ? 1 : 0) - (k.a ? 1 : 0), up = (k.space ? 1 : 0) - (k.c ? 1 : 0), turn = (k.q || k.left ? 1 : 0) - (k.e || k.right ? 1 : 0);
     const vmax = (k.shift ? 16 : 7) * WALK.speedMul, empty = U.batt <= 0, low = U.batt < 0.06 * BATT_WH;
     let cf = fw * vmax, cs = st * vmax, cz = up * (k.shift ? 5 : 3.5); { const m = Math.hypot(cf, cs); if (m > vmax) { cf *= vmax / m; cs *= vmax / m; } }
-    if (low && !empty) { cz = Math.min(cz, -1.2); if (!U.warned) { U.warned = true; WALK.hooks.toast && WALK.hooks.toast("电量低:自动降落"); } }
+    if (low && !empty) { cz = Math.min(cz, -1.2); if (!U.warned) { U.warned = true; WALK.hooks.toast && WALK.hooks.toast("Battery low: landing automatically"); } }
     if (empty) { cz = -9; cf = cs = 0; }
     const gnd = W.groundZ(WALK.x, WALK.y) + 0.12;
     U.w += ES.clamp(turn * 1.8 - U.w, -9 * dt, 9 * dt); WALK.yaw += U.w * dt;
@@ -470,7 +470,7 @@
     const dx = U.vx * dt, dy = U.vy * dt, dz = U.vz * dt, ox = WALK.x, oy = WALK.y, oz = WALK.z;
     moveBody(dx, dy, dz);
     const hitXY = Math.hypot(WALK.x - ox, WALK.y - oy) < 0.7 * Math.hypot(dx, dy) - 1e-6, hitZ = Math.abs(WALK.z - oz) < 0.7 * Math.abs(dz) - 1e-6;
-    if (hitXY || hitZ) { const spd = Math.hypot(U.vx, U.vy, U.vz); if (spd > 3.5 && now - U.crash > 1500) { U.crash = now; WALK.hooks.toast && WALK.hooks.toast(`撞击 ${spd.toFixed(1)} m/s(碰到了墙、窗、天花板或树)`); } if (hitXY) { U.vx *= -0.15; U.vy *= -0.15; } if (hitZ) U.vz = 0; }
+    if (hitXY || hitZ) { const spd = Math.hypot(U.vx, U.vy, U.vz); if (spd > 3.5 && now - U.crash > 1500) { U.crash = now; WALK.hooks.toast && WALK.hooks.toast(`Impact ${spd.toFixed(1)} m/s (hit a wall, window, ceiling or tree)`); } if (hitXY) { U.vx *= -0.15; U.vy *= -0.15; } if (hitZ) U.vz = 0; }
     if (WALK.z < gnd) { WALK.z = gnd; if (U.vz < 0) U.vz = 0; U.landed = !up || empty; } else U.landed = false;
     if (U.landed && !up) { U.vx *= 0.8; U.vy *= 0.8; }
     const vh = Math.hypot(U.vx, U.vy), P = U.landed ? 3 : P_HOVER + 3.2 * vh * vh + 95 * Math.max(U.vz, 0) + 12 * Math.abs(U.w); U.batt = Math.max(0, U.batt - P * dt / 3600);
@@ -483,7 +483,7 @@
   function pushedByLive() {                 // a moving live agent that walks into you pushes you aside (it cannot avoid you); never into a wall
     const B = BODY[WALK.body], h = liveHit(WALK.x, WALK.y, B.r, WALK.zf); if (!h) return;
     const d = h.d || 1e-3, push = (h.rr - d) + 0.01, nx = WALK.x + (h.dx / d) * push, ny = WALK.y + (h.dy / d) * push;
-    if (bodyOK(nx, ny, WALK.zf, WALK.body)) { WALK.x = nx; WALK.y = ny; } else if (WALK.hooks.toast && performance.now() - (WALK.pushToast || 0) > 2500) { WALK.pushToast = performance.now(); WALK.hooks.toast("被走过来的人/机器挤住了"); }
+    if (bodyOK(nx, ny, WALK.zf, WALK.body)) { WALK.x = nx; WALK.y = ny; } else if (WALK.hooks.toast && performance.now() - (WALK.pushToast || 0) > 2500) { WALK.pushToast = performance.now(); WALK.hooks.toast("Squeezed by a person / machine walking into you"); }
   }
   function tick(now) {
     if (!WALK.active) return; WALK.raf = requestAnimationFrame(tick); const dt = Math.min(0.1, (now - (WALK.last || now)) / 1000); WALK.last = now;
@@ -497,15 +497,15 @@
   function onUp(e) { if (!drag) return; const d = drag; drag = null; if (d.moved <= 4) clickGo(e); }
   function clickGo(e) {
     const A = V.A, r = e.currentTarget.getBoundingClientRect(), nd = new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1), rc = new THREE.Raycaster(); rc.setFromCamera(nd, V.cam);
-    if (WALK.body === "uav") { WALK.hooks.toast && WALK.hooks.toast("无人机用 WASD 飞行,空格/C 升降"); return; }
+    if (WALK.body === "uav") { WALK.hooks.toast && WALK.hooks.toast("Fly the drone with WASD; Space / C to climb / descend"); return; }
     // first floor-like surface hit (building meshes), else the outdoor ground plane
     let hit = null; const meshes = []; for (const bb of Object.values(V.bimB)) bb.group.traverse((o) => { if (o.isMesh && o.visible && o.parent.visible && !(o.material && o.material.userData && o.material.userData.glass)) meshes.push(o); });
     const hits = rc.intersectObjects(meshes, false); for (const h of hits) { if (h.face && h.face.normal.clone().transformDirection(h.object.matrixWorld).y > 0.7) { hit = h.point; break; } if (h.distance < 60) break; }
     let px, py, pz;
     if (hit) { px = hit.x; py = -hit.z; pz = hit.y; }
-    else { const gy = A.W.groundZ(WALK.x, WALK.y) + 0.02; if (rc.ray.direction.y > -0.02) { WALK.hooks.toast && WALK.hooks.toast("点地面或地板才能走过去"); return; } const t = (gy - rc.ray.origin.y) / rc.ray.direction.y; px = rc.ray.origin.x + rc.ray.direction.x * t; py = -(rc.ray.origin.z + rc.ray.direction.z * t); pz = gy; }
-    const B = BODY[WALK.body]; if (!A.W.inside(px, py)) { WALK.hooks.toast && WALK.hooks.toast("那里站不了"); return; }
-    const zs = supportZ(px, py, pz, 0.15); if (!bodyOK(px, py, zs, WALK.body)) { WALK.hooks.toast && WALK.hooks.toast("那里站不了(家具、墙、围栏或障碍)"); return; }
+    else { const gy = A.W.groundZ(WALK.x, WALK.y) + 0.02; if (rc.ray.direction.y > -0.02) { WALK.hooks.toast && WALK.hooks.toast("Click the ground or a floor to walk there"); return; } const t = (gy - rc.ray.origin.y) / rc.ray.direction.y; px = rc.ray.origin.x + rc.ray.direction.x * t; py = -(rc.ray.origin.z + rc.ray.direction.z * t); pz = gy; }
+    const B = BODY[WALK.body]; if (!A.W.inside(px, py)) { WALK.hooks.toast && WALK.hooks.toast("You cannot stand there"); return; }
+    const zs = supportZ(px, py, pz, 0.15); if (!bodyOK(px, py, zs, WALK.body)) { WALK.hooks.toast && WALK.hooks.toast("You cannot stand there (furniture, wall, fence or obstacle)"); return; }
     WALK.goal = { x: px, y: py, stuck: 0 };
   }
   function onWheel(e) { if (!WALK.active) return; e.preventDefault(); WALK.fov = ES.clamp(WALK.fov * Math.exp(e.deltaY * 0.001), 35, 110); }
@@ -526,7 +526,7 @@
     teleport(x, y) { const [px, py, zs] = nearestFree(x, y, WALK.body, WALK.body === "uav" ? WALK.z : surfZ(x, y)); WALK.goal = null; WALK.x = px; WALK.y = py; if (WALK.body !== "uav") { WALK.zf = zs ?? WALK.zf; WALK.zv = WALK.zf; } },
     setKey(k, v) { WALK.keys[k] = v; },
     toggleDoor() { toggleNearestDoor(); },
-    setView(v) { WALK.view = v; if (V.self) V.self.visible = v === "chase"; WALK.hooks.toast && WALK.hooks.toast(v === "chase" ? "跟随视角(V 切换)" : "第一人称(V 切换)"); if (WALK.hooks.onView) WALK.hooks.onView(v); },
+    setView(v) { WALK.view = v; if (V.self) V.self.visible = v === "chase"; WALK.hooks.toast && WALK.hooks.toast(v === "chase" ? "Chase view (V to switch)" : "First person (V to switch)"); if (WALK.hooks.onView) WALK.hooks.onView(v); },
     advance(dt) { advance(dt, performance.now()); renderWalk(); },      // one simulation step (also used by tests: the browser pauses animation frames in hidden tabs)
     exit() {
       if (!WALK.active) return; WALK.active = false; ES.bus.emit("walk:exit", WALK, V); cancelAnimationFrame(WALK.raf); const cv = document.getElementById("v3d"); cv.onpointerdown = cv.onpointermove = cv.onpointerup = cv.onwheel = null; cv.style.cursor = ""; cv.style.touchAction = ""; V.exposure = 1; if (V.renderer) V.renderer.toneMappingExposure = 1;
@@ -547,7 +547,7 @@
     walk,
     update(A) {
       V.A = A; if (!A.scene || !A.W) return;
-      if (!window.THREE) { $cap().textContent = "加载 3D 引擎…"; loadThree().then(() => ES.view3d.update(A)).catch(() => { $cap().textContent = "3D 预览不可用(无法加载 three.js)"; }); return; }
+      if (!window.THREE) { $cap().textContent = "Loading 3D engine…"; loadThree().then(() => ES.view3d.update(A)).catch(() => { $cap().textContent = "3D preview unavailable (three.js could not be loaded)"; }); return; }
       if (!ensureRenderer()) return; size();
       if (A.bimFor !== A.name || A.bim === undefined || A.bim === null) { loadBim(A).then(() => { V.key = ""; ES.view3d.update(A); }); return; }
       ensureScene(A);

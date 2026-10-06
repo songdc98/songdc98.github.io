@@ -18,7 +18,7 @@
 
   /* ------------------------------------------------------------------ palette: scripts/esworld/classes.py (SEM, SEM_COLOR) ------------------------------------------------------------------ */
   const SEM_NAMES = ["sky", "road", "sidewalk", "building", "vegetation", "vehicle", "person", "uav", "ugv", "debris", "fire_smoke", "water", "furniture", "ground", "victim", "command_post"];
-  const SEM_ZH = ["天空", "道路", "人行道", "建筑", "植被", "车辆", "人", "无人机", "机器人", "碎石", "烟火", "水", "家具", "地面", "受害者", "指挥站"];
+  const SEM_ZH = ["Sky", "Road", "Sidewalk", "Building", "Vegetation", "Vehicle", "Person", "UAV", "Robot", "Rubble", "Smoke / fire", "Water", "Furniture", "Ground", "Victim", "Command post"];
   const SEM_RGB = [[200, 220, 240], [70, 70, 80], [160, 160, 150], [214, 156, 60], [60, 160, 70], [0, 114, 178], [213, 94, 0], [204, 121, 167], [240, 228, 66], [120, 80, 50], [230, 30, 30], [86, 180, 233], [110, 110, 130], [190, 175, 140], [255, 0, 120], [0, 0, 0]];
   const SEM_ID = {}; SEM_NAMES.forEach((n, i) => (SEM_ID[n] = i));
   CF.SEM = { names: SEM_NAMES, zh: SEM_ZH, rgb: SEM_RGB, id: SEM_ID };
@@ -329,10 +329,10 @@
   }
   function verdict(st) {
     const hi = st.clippedHigh, lowLight = st.limited === "ceiling" || st.iso >= 1600;
-    if (st.backlit) return { code: "backlit", zh: "逆光", detail: st.sunVisible > 0.15 ? "太阳在视野内,前景欠曝" : "亮部过曝,主体偏暗" };
-    if (hi > 0.28 || st.limited === "floor") return { code: "over", zh: "过曝", detail: hi > 0.28 ? "高光溢出 " + Math.round(hi * 100) + "%" : "已到最短曝光" };
-    if (lowLight) return { code: "dim", zh: "偏暗", detail: "ISO " + Math.round(st.iso) + (st.limited === "ceiling" ? ",已到最大增益" : ",噪点增多") };
-    return { code: "ok", zh: "光线正常", detail: "EV " + st.ev.toFixed(1) };
+    if (st.backlit) return { code: "backlit", zh: "Backlit", detail: st.sunVisible > 0.15 ? "Sun in view, foreground underexposed" : "Highlights blown, subject dark" };
+    if (hi > 0.28 || st.limited === "floor") return { code: "over", zh: "Overexposed", detail: hi > 0.28 ? "Highlight clipping " + Math.round(hi * 100) + "%" : "At shortest exposure" };
+    if (lowLight) return { code: "dim", zh: "Dark", detail: "ISO " + Math.round(st.iso) + (st.limited === "ceiling" ? ", at maximum gain" : ", noise increasing") };
+    return { code: "ok", zh: "Lighting normal", detail: "EV " + st.ev.toFixed(1) };
   }
   CF.verdict = verdict;
 
