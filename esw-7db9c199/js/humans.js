@@ -1,5 +1,5 @@
 /* People: Rocketbox avatars (scripts/export_human_assets.py -> assets/humans/<key>.glb: skinned mesh + baked clips) driven by the actor state (docs section 0).
-   Kinds: "human" = emergency responder (helmet camera; the identity "人", live human_0), "person" = civilian, "lying" = a person on the floor.
+   Kinds: "human" = emergency responder (helmet camera; the "Human" identity, live human_0), "person" = civilian, "lying" = a person on the floor.
    Clips (in place, 60 fps): idle, wave, lie, fall, walk_<v> / run_<v> gait cycles with a planted stance foot. The page plays the gait cycles at the phase rate  v / stride  (the stance foot then stands still on the
    ground: foot lock) and blends the two neighbouring cycles by speed; idle / gait / wave / lie are cross-faded. Head follows st.head (own body), the body leans into turns. */
 (function () {

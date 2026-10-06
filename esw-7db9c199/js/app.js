@@ -190,7 +190,7 @@
     for (const t of tg) { const who = cams.filter((cc) => seen(cc, t) > 0.25).map((cc) => cc.e.name); rows += `<tr><td>${esc(t.name)}</td><td>${who.length ? `<span class="ok">✓</span> ${esc(who.join(", "))}` : `<span class="bad">✗ nobody sees it</span>`}</td></tr>`; }
     R(`<dl class="kv"><dt>Cameras</dt><dd>${cams.length}</dd><dt>Combined coverage (walkable ground area)</dt><dd>${fmt(100 * frac, 1)} %</dd>${cams.map((cc, i) => `<dt>${esc(cc.e.name)} alone</dt><dd>${fmt(100 * union.stats[i], 1)} %  · detects up to ${fmt(cc.c.range, 0)} m</dd>`).join("")}</dl>
       ${tg.length ? `<table><tr><th>Target</th><th>Seen by</th></tr>${rows}</table>` : `<div class="note">Place "standing person / person on the ground / vehicle" targets to check one by one who can see them.</div>`}
-      <div class="note">“Detection range” = the farthest distance at which a target still fills 14 pixels (set by camera resolution and field of view). Time: ${A.timing}。</div>`);
+      <div class="note">“Detection range” = the farthest distance at which a target still fills 14 pixels (set by camera resolution and field of view). Time: ${A.timing}.</div>`);
     setLegend("Yellow = seen by at least one camera (target height " + zt + " m)", 0, 1, "yellow");
   }
 
@@ -222,7 +222,7 @@
     }
     R(`<dl class="kv"><dt>Sources</dt><dd>${src.length}</dd><dt>Ambient noise</dt><dd>${amb} dB(A)(${A.look === "night" ? "night" : "day"})</dd></dl>
       <table><tr><th>Receiver</th><th>Noise floor dB</th><th>Heard</th></tr>${rows}</table>
-      <div class="note">Noise floor = energy sum of the ambient and the receiver's own noise (UAV rotors 92, dog gait 78 dB). Heard: the source is above the noise floor; speech intelligible: at least 10 dB above it. Time: ${A.timing}。</div>`);
+      <div class="note">Noise floor = energy sum of the ambient and the receiver's own noise (UAV rotors 92, dog gait 78 dB). Heard: the source is above the noise floor; speech intelligible: at least 10 dB above it. Time: ${A.timing}.</div>`);
   }
 
   /* ---- 3. rf ---- */
@@ -437,7 +437,7 @@
   async function boot() {
     A.index = await ES.loadJSON(ES.DATA_DIR + "/index.json");
     A.map = new ES.MapView($("#map"), hooks);
-    $("#scenes").innerHTML = A.index.scenes.map((s) => `<button class="scene" data-name="${s.name}" aria-pressed="false" title="${esc(s.title)}"><img src="img/${s.name}_day_day_cloud_aerial.jpg" alt="${esc(s.title)}" loading="lazy"><span>${esc(s.title)}</span></button>`).join("");
+    $("#scenes").innerHTML = A.index.scenes.map((s) => `<button class="scene" data-name="${s.name}" aria-pressed="false" title="${esc(s.title)}"><img data-src="img/${s.name}_day_day_cloud_aerial.jpg" alt="${esc(s.title)}" loading="lazy"><span>${esc(s.title)}</span></button>`).join("");
     $$("#scenes .scene").forEach((b) => b.addEventListener("click", async () => { await loadScene(b.dataset.name, "day"); ES.sceneChanged(); }));
     A.occ = { fences: true, trees: true, vehicles: true };
     $("#occ").innerHTML = [["fences", "Fences"], ["trees", "Trees"], ["vehicles", "Parked vehicles"]].map(([k, n]) => `<button class="chip" data-occ="${k}" aria-pressed="true">${n}</button>`).join("");

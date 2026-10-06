@@ -13,8 +13,8 @@
       sensors: "Helmet camera 90° · binaural microphones · phone radio",
       groups: [
         { title: "Move", items: [k(["W", "S"], ["KeyW", "KeyS"], "Forward / back"), k(["A", "D"], ["KeyA", "KeyD"], "Strafe left / right"), k(["Shift"], ["ShiftLeft"], "Hold to run")] },
-        { title: "Turning and view", items: [k(["Q", "E"], ["KeyQ", "KeyE"], "Turn left / right"), k(["←", "→"], ["ArrowLeft", "ArrowRight"], "Same (arrow keys)"), k(["Drag mouse"], [], "Look around"), k(["Scroll wheel"], [], "Zoom")] },
-        { title: "Actions", items: [k(["F"], ["KeyF"], "Open / close door or window"), k(["Click the ground"], [], "Auto-walk"), k(["V"], ["KeyV"], "First person ⇄ chase view")] },
+        { title: "Turning and view", items: [k(["Q", "E"], ["KeyQ", "KeyE"], "Turn left / right"), k(["←", "→"], ["ArrowLeft", "ArrowRight"], "Same (arrow keys)"), k(["Drag"], [], "Drag the mouse to look around"), k(["Wheel"], [], "Scroll wheel zooms")] },
+        { title: "Actions", items: [k(["F"], ["KeyF"], "Open / close door or window"), k(["Click"], [], "Click the ground to auto-walk"), k(["V"], ["KeyV"], "First person ⇄ chase view")] },
       ],
     },
     dog: {
@@ -23,8 +23,8 @@
       sensors: "Front / rear cameras 100° · LiDAR L1 360°×90° ≤30 m · 4 mics · IMU · GNSS",
       groups: [
         { title: "Move", items: [k(["W", "S"], ["KeyW", "KeyS"], "Forward / back"), k(["A", "D"], ["KeyA", "KeyD"], "Sidestep left / right"), k(["Shift"], ["ShiftLeft"], "Hold to trot")] },
-        { title: "Turning and view", items: [k(["Q", "E"], ["KeyQ", "KeyE"], "Turn left / right"), k(["←", "→"], ["ArrowLeft", "ArrowRight"], "Same (arrow keys)"), k(["Drag mouse"], [], "Look around"), k(["Scroll wheel"], [], "Zoom")] },
-        { title: "Actions", items: [k(["F"], ["KeyF"], "Operator opens / closes nearest door"), k(["Click the ground"], [], "Auto-walk"), k(["V"], ["KeyV"], "First person ⇄ chase view")] },
+        { title: "Turning and view", items: [k(["Q", "E"], ["KeyQ", "KeyE"], "Turn left / right"), k(["←", "→"], ["ArrowLeft", "ArrowRight"], "Same (arrow keys)"), k(["Drag"], [], "Drag the mouse to look around"), k(["Wheel"], [], "Scroll wheel zooms")] },
+        { title: "Actions", items: [k(["F"], ["KeyF"], "Operator opens / closes nearest door"), k(["Click"], [], "Click the ground to auto-walk"), k(["V"], ["KeyV"], "First person ⇄ chase view")] },
       ],
     },
     uav: {
@@ -33,7 +33,7 @@
       sensors: "Gimbal camera 84° · front camera 110° · LiDAR 360°×59° ≤40 m · barometer · IMU · GNSS · microphone",
       groups: [
         { title: "Flight", items: [k(["W", "S"], ["KeyW", "KeyS"], "Forward / back"), k(["A", "D"], ["KeyA", "KeyD"], "Strafe left / right"), k(["Space", "C"], ["Space", "KeyC"], "Climb / descend"), k(["Shift"], ["ShiftLeft"], "Sport mode")] },
-        { title: "Yaw and gimbal", items: [k(["Q", "E"], ["KeyQ", "KeyE"], "Yaw left / right"), k(["←", "→"], ["ArrowLeft", "ArrowRight"], "Same (arrow keys)"), k(["Drag mouse"], [], "Gimbal pitch / yaw"), k(["Scroll wheel"], [], "Zoom")] },
+        { title: "Yaw and gimbal", items: [k(["Q", "E"], ["KeyQ", "KeyE"], "Yaw left / right"), k(["←", "→"], ["ArrowLeft", "ArrowRight"], "Same (arrow keys)"), k(["Drag"], [], "Drag the mouse: gimbal pitch / yaw"), k(["Wheel"], [], "Scroll wheel zooms")] },
         { title: "Actions", items: [k(["F"], ["KeyF"], "Open / close door or window"), k(["V"], ["KeyV"], "First person ⇄ chase view")] },
       ],
     },
@@ -49,7 +49,7 @@
       for (const e of [...extra.all, ...(extra[body] || [])]) { let g = out.find((x) => x.title === e.group); if (!g) out.push((g = { title: e.group, items: [] })); g.items.push(e.item); }
       return out;
     },
-    /* add({bodies:["dog","uav"] | "all", group:"传感器", keys:["1","2","3"], codes:["Digit1",...], desc:"画面:彩色 / 深度 / 语义", fn(code, down, body)}) */
+    /* add({bodies:["dog","uav"] | "all", group:"Sensors", keys:["1","2","3"], codes:["Digit1",...], desc:"View: colour / depth / semantic", fn(code, down, body)}) */
     add(o) {
       const bodies = o.bodies === "all" || !o.bodies ? ["all"] : o.bodies, item = { keys: o.keys, codes: o.codes || [], desc: o.desc };
       for (const b of bodies) extra[b].push({ group: o.group || "Other", item });

@@ -537,7 +537,7 @@
       for (const [dx, dy] of [[0.2, 0], [0, 0.2]]) segs.push([V([sh.c[0] - dx, sh.c[1] - dy, sh.c[2] + 0.02]), V([sh.c[0] + dx, sh.c[1] + dy, sh.c[2] + 0.02])]); }
     return { segs, fills };
   }
-  function drawArrow(g, P, sh, rgb) {                                                   // front arrow: from the middle of the object out through its front, tip labelled 前
+  function drawArrow(g, P, sh, rgb) {                                                   // front arrow: from the middle of the object out through its front, tip labelled "front"
     const a = P.v(sh.a[0], sh.a[1], sh.a[2]), b = P.v(sh.b[0], sh.b[1], sh.b[2]), sg = clipSeg(P, a, b); if (!sg) return; const [p0, p1] = sg, dx = p1[0] - p0[0], dy = p1[1] - p0[1], L = Math.hypot(dx, dy); if (L < 3) return;
     const ux = dx / L, uy = dy / L, hl = Math.min(11, L * 0.5), cw = [Math.cos(0.45), Math.sin(0.45)], tip = b[2] <= -P.near * 1.5;
     g.lineCap = "round"; g.lineJoin = "round"; g.beginPath(); g.moveTo(p0[0], p0[1]); g.lineTo(p1[0], p1[1]);

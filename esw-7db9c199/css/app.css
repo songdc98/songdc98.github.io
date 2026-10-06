@@ -377,3 +377,10 @@ pre.code{font-family:var(--mono);font-size:.8rem;background:var(--shade);border:
 @media (max-width:1000px){.insp{width:calc(100vw - 2*min(280px,42vw) - 40px)}}
 @media (max-height:820px){.insp{top:44px;font-size:.68rem;padding:5px 8px 4px;max-height:calc(50vh - 72px)}.insp .ico{font-size:1.2rem}.insp .tt b{font-size:.9rem}.insp .isec{margin-top:2px}.insp .ir{padding:0}.insp .lo{display:none}}
 /* ==== end inspector ==== */
+
+/* ==== overlay rows ==== */
+.ovrow{position:absolute;left:4px;right:4px;display:flex;flex-wrap:wrap;gap:3px 4px;justify-content:space-between;align-items:flex-start;z-index:2;pointer-events:none}
+.ovrow>*{pointer-events:auto}.ovrow.top{top:4px}.ovrow.bot{bottom:4px;align-items:flex-end;flex-wrap:wrap-reverse}
+.ovrow .ov,.ovrow .cap-bl,.ovrow .cap-br,.ovrow .cap-one{position:static;top:auto;left:auto;right:auto;bottom:auto}
+.ovrow .cap-bl,.ovrow .cap-br{pointer-events:none}.ovrow.top>.ov.tr{margin-left:auto}
+/* ==== end overlay rows ==== */

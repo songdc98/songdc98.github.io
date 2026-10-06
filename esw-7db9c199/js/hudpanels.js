@@ -22,7 +22,7 @@
   /* camera mounts: off = [forward, left, up] from the body reference point (base height above the floor / the UAV centre), res = sensor resolution, far = depth max range */
   const CAMS = {
     dog: [{ key: "front", zh: "Front camera", hfov: 100, res: [1280, 720], fps: 15, off: [0.385, 0, 0.06], yaw: 0, far: 30 }, { key: "rear", zh: "Rear camera", hfov: 100, res: [640, 480], fps: 10, off: [-0.2, 0, 0.08], yaw: Math.PI, far: 20 }],
-    uav: [{ key: "gimbal", zh: "Gimbal camera", hfov: 84, res: [1280, 720], fps: 15, off: [0.1, 0, -0.02], gimbal: true, far: 120 }, { key: "nav", zh: "Front-view camera", hfov: 110, res: [640, 480], fps: 15, off: [0.12, 0, 0], yaw: 0, far: 40 }],
+    uav: [{ key: "gimbal", zh: "Gimbal camera", hfov: 84, res: [1280, 720], fps: 15, off: [0.1, 0, -0.02], gimbal: true, far: 120 }, { key: "nav", sh: "Nav", zh: "Front-view camera", hfov: 110, res: [640, 480], fps: 15, off: [0.12, 0, 0], yaw: 0, far: 40 }],
     human: [{ key: "helmet", zh: "Helmet camera", hfov: 90, res: [1280, 720], fps: 15, off: [0.09, 0, 0], head: true, far: 40, eye: 1.6 }],
     rover: [{ key: "front", zh: "Front camera", hfov: 110, res: [1280, 720], fps: 15, off: [0.34, 0, 0.26], yaw: 0, far: 30 }],
     cp: [{ key: "mast", zh: "Mast camera", hfov: 110, res: [1920, 1080], fps: 10, off: [0, 0, 6.0], mast: true, far: 150 }],
@@ -33,7 +33,7 @@
     rover: { model: "velodyne_vlp16", zh: "Velodyne VLP-16", hfov: 360, vmin: -15, vmax: 15, range: 100, rate: 10, pts: 28800, off: [0, 0, 0.45] },
   };
   const SENSORS = { dog: "Front / rear cameras · L1 LiDAR · IMU · GNSS", uav: "Gimbal / front-view cameras · LiDAR payload · barometer · IMU · GNSS", human: "Helmet camera · phone radio · binaural microphones" };
-  const MODALITY = [["rgb", "Colour", "Digit1"], ["depth", "Depth", "Digit2"], ["sem", "Semantic", "Digit3"]];
+  const MODALITY = [["rgb", "RGB", "Digit1"], ["depth", "Depth", "Digit2"], ["sem", "Semantic", "Digit3"]];
   const MOD_ZH = { rgb: "Colour", depth: "Depth", sem: "Semantic" };
   const LMODE = [["top", "Top"], ["side", "Side"], ["persp", "3D"]];
   const COLORBY = [["height", "Height"], ["range", "Range"], ["intensity", "Intensity"], ["class", "Class"]];
@@ -99,12 +99,12 @@
     box.innerHTML = `<h4>My device<span id="fp-own-who">· ${esc((ES.controls && ES.controls.IDENT[body] ? ES.controls.IDENT[body].name : body))}</span></h4>
       <div class="own-spec" id="own-spec">${ownSpecText(body)}</div>
       <figure class="own-cam wait" id="own-cam"><div class="own-cam-box" id="own-cam-box"></div>
-        <div class="ov tl"><div class="seg sm" id="own-mod">${MODALITY.map(([m, z, c]) => `<button data-m="${m}" aria-pressed="${m === o.mod}" title="Press key ${c.slice(-1)}">${z}${kbd(c.slice(-1))}</button>`).join("")}</div></div>
-        <div class="ov tr">${cs.length > 1 ? `<div class="seg sm" id="own-sel">${cs.map((c, i) => `<button data-i="${i}" aria-pressed="${i === o.cam}" title="Tab switches">${c.zh.replace("Camera", "")}</button>`).join("")}${kbd("Tab")}</div>` : `<span class="cap-one">${esc(cs[0].zh)}</span>`}</div>
-        <span class="cap-bl" id="own-cam-exp"></span><span class="cap-br" id="own-cam-verdict"></span><div class="cam-extra" id="own-cam-extra"></div></figure>
-      ${hasL ? `<figure class="own-lidar" id="own-lid"><canvas id="fp-own-lidar" width="320" height="164"></canvas><span class="cap-bl" id="own-lid-pts"></span><span class="cap-br" id="own-lid-near"></span>
-        <div class="ov tl"><div class="seg sm" id="own-lmode">${LMODE.map(([m, z]) => `<button data-m="${m}" aria-pressed="${m === st.lid.mode}">${z}</button>`).join("")}${kbd("L")}</div></div>
-        <div class="ov tr"><label class="own-cb">Colour<select id="own-cby">${COLORBY.map(([m, z]) => `<option value="${m}"${m === st.lid.colorBy ? " selected" : ""}>${z}</option>`).join("")}</select></label></div></figure>
+        <div class="ovrow top"><div class="ov tl"><div class="seg sm" id="own-mod">${MODALITY.map(([m, z, c]) => `<button data-m="${m}" aria-pressed="${m === o.mod}" title="Press key ${c.slice(-1)}">${z}${kbd(c.slice(-1))}</button>`).join("")}</div></div>
+        <div class="ov tr">${cs.length > 1 ? `<div class="seg sm" id="own-sel">${cs.map((c, i) => `<button data-i="${i}" aria-pressed="${i === o.cam}" title="${esc(c.zh)} (Tab switches)">${c.sh || c.zh.replace(/\s*camera/i, "")}</button>`).join("")}${kbd("Tab")}</div>` : `<span class="cap-one">${esc(cs[0].zh)}</span>`}</div></div>
+        <div class="ovrow bot"><span class="cap-bl" id="own-cam-exp"></span><span class="cap-br" id="own-cam-verdict"></span></div><div class="cam-extra" id="own-cam-extra"></div></figure>
+      ${hasL ? `<figure class="own-lidar" id="own-lid"><canvas id="fp-own-lidar" width="320" height="164"></canvas><div class="ovrow bot"><span class="cap-bl" id="own-lid-pts"></span><span class="cap-br" id="own-lid-near"></span></div>
+        <div class="ovrow top"><div class="ov tl"><div class="seg sm" id="own-lmode">${LMODE.map(([m, z]) => `<button data-m="${m}" aria-pressed="${m === st.lid.mode}">${z}</button>`).join("")}${kbd("L")}</div></div>
+        <div class="ov tr"><label class="own-cb">Colour<select id="own-cby">${COLORBY.map(([m, z]) => `<option value="${m}"${m === st.lid.colorBy ? " selected" : ""}>${z}</option>`).join("")}</select></label></div></div></figure>
         <div class="own-lspec" id="own-lspec"></div>` : `<div class="own-nolid">No LiDAR: a person carries a helmet camera and a phone</div>`}
       <div class="fp-tele own-grid" id="fp-tele"></div>
       <div class="own-rec" id="own-rec"><button class="btn rec" id="own-rec-btn" title="Record the data my device collects (camera frames, LiDAR sweeps, pose / IMU table) into a zip">● Record</button><select id="own-rec-sec" title="Recording length"><option value="5">5 s</option><option value="10" selected>10 s</option><option value="20">20 s</option><option value="30">30 s</option></select><span id="own-rec-msg" class="rec-msg"></span></div>`;
