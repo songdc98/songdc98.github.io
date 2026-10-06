@@ -2,112 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>ES-World Lab</title>
-<meta name="robots" content="noindex,nofollow,noarchive"><meta name="esw-gated" content="1">
-<link rel="icon" type="image/png" href="data:image/png;base64,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">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/app.css?v=eb180bdc">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Private</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="esw-gated" content="1">
+<link rel="icon" type="image/png" href="data:image/png;base64,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"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 </head>
 <body>
-
-<div id="app">
-  <header class="bar">
-    <div class="brand"><b>ES-World</b><span>Heterogeneous multi-agent simulation · interactive lab</span></div>
-    <nav class="tabs" role="tablist" aria-label="Pages">
-      <button role="tab" data-tab="lab" aria-selected="true">Lab</button>
-      <button role="tab" data-tab="replay" aria-selected="false">Episode replay</button>
-      <button role="tab" data-tab="gallery" aria-selected="false">Gallery and image quality</button>
-      <button role="tab" data-tab="ref" aria-selected="false">Reference</button>
-    </nav>
-    <div class="status" id="engine"><span class="dot" id="engdot"></span><span id="engtxt">Built-in browser physics model</span></div>
-    <button class="iconbtn" id="theme" title="Toggle light / dark theme" aria-label="Toggle light / dark theme">◐</button>
-  </header>
-
-  <main id="tab-lab" class="tab active" role="tabpanel">
-    <aside class="side left" aria-label="Scenes and placement">
-      <details class="note" id="intro" open><summary><b>What is this?</b></summary>
-        <p style="margin-top:6px">ES-World is a heterogeneous multi-agent simulation environment: UAVs, quadruped robots, people and robots move through 5 common small scenes, and what each of them sees, hears and receives obeys physics (occlusion, sound propagation, radio links). Place them on the map, pick a location, and the result appears on the right at once; or click "First-person walk-through" to stand in the scene and walk around. Start with the "Quick examples" below.</p></details>
-      <div class="sec"><h4>Scenes</h4><div class="scenes" id="scenes"></div>
-        <p class="muted" id="scenedesc" style="font-size:.82rem"></p></div>
-      <div class="sec"><h4>Quick examples</h4><div class="chips" id="presets"></div></div>
-      <div class="sec"><h4>State and environment</h4>
-        <div class="seg" id="seg-variant"><button data-v="day" aria-pressed="true">Daily</button><button data-v="quake" aria-pressed="false">After the quake</button></div>
-        <div class="seg" id="seg-time"><button data-v="day" aria-pressed="true">Day</button><button data-v="night" aria-pressed="false">Night</button></div>
-        <div class="chips" id="occ"></div>
-        <div class="note" id="occnote">Occluders decide who can see, hear and connect to whom. Turn off fences or trees to see the effect of each.</div></div>
-      <div class="sec"><h4>Place (click a tool, then the map)</h4>
-        <div class="tools" id="tools"></div>
-        <div class="row"><button class="btn" id="btn-default">Load example setup</button><button class="btn" id="btn-clear">Clear</button></div>
-        <div class="note" id="toolhint">With no tool selected: drag an entity to move it, drag the dot to change its heading, scroll to zoom, drag empty space to pan, Delete removes.</div></div>
-      <div class="sec"><h4>Placed</h4><div class="ents" id="ents"></div><div class="card" id="props" hidden></div></div>
-    </aside>
-
-    <section class="stage" aria-label="Map">
-      <div class="mapwrap"><canvas id="map" aria-label="Top view of the scene; click to place agents"></canvas><div class="cursor mono" id="cursor">—</div>
-        <button class="btn primary mapwalk" id="btn-walk" title="Click, then click any spot on the map to stand there and look (double-clicking the map also works)">🚶 First-person walk-through</button>
-        <div id="walkstage" hidden></div>
-        <div id="fphud" hidden>
-          <div class="fp-col fp-left" id="fp-left">
-            <button class="btn fp-exit" id="fp-exit" title="Esc">← Back to top view (Esc)</button>
-            <section class="fp-panel fp-ident" aria-label="Identity selection">
-              <h4>Identity<span>Click to switch · the highlighted one is who you are now</span></h4>
-              <div class="idlist" id="fp-idlist" role="radiogroup" aria-label="Choose identity"></div>
-            </section>
-            <section class="fp-panel fp-keys" aria-label="Keys of the current identity">
-              <h4 id="fp-keys-h">Controls</h4>
-              <div id="fp-keys"></div>
-              <div class="fp-acts">
-                <button class="btn" id="fp-view" title="V key: first person / chase view (see the machine you are controlling)">Chase view</button>
-                <button class="btn" id="fp-door" title="F key: open / close the nearest door or window">Open / close door</button>
-                <button class="btn" id="fp-drop" title="Place your current position and heading as an entity">Place as entity</button>
-                <button class="btn" id="fp-render" disabled title="Needs scripts/serve_lab.py running on this computer">📷 Render here with Blender</button>
-                <label class="row"><input type="checkbox" id="fp-live" checked> Episode people and vehicles are moving</label>
-              </div>
-            </section>
-            <div class="fp-near" id="fp-near-l" aria-label="Information collected by nearby devices on the left"></div>
-          </div>
-          <div class="fp-col fp-right" id="fp-right">
-            <section class="fp-panel fp-own" id="fp-own" aria-label="Information collected by my device">
-              <h4>My device<span id="fp-own-who"></span></h4>
-              <div class="own-sens" id="fp-own-sens">
-                <figure class="own-cam"><canvas id="fp-own-cam" width="320" height="180"></canvas><figcaption id="fp-own-cam-cap">Camera</figcaption></figure>
-                <figure class="own-lidar"><canvas id="fp-own-lidar" width="320" height="240"></canvas><figcaption id="fp-own-lidar-cap">LiDAR</figcaption></figure>
-              </div>
-              <div class="fp-tele" id="fp-tele"></div>
-            </section>
-            <div class="fp-near" id="fp-near-r" aria-label="Information collected by nearby devices on the right"></div>
-          </div>
-          <div class="fp-info" id="fp-info"></div>
-          <canvas id="fp-mini" width="360" height="360" aria-label="Mini-map, click to teleport"></canvas>
-          <div class="fp-dpad" id="fp-dpad"><button data-k="q">⟲</button><button data-k="w">▲</button><button data-k="e">⟳</button><button data-k="a">◀</button><button data-k="s">▼</button><button data-k="d">▶</button></div>
-          <div class="fp-hint" id="fp-hint">Drag the mouse to look around · click the ground to walk there · scroll to zoom the view</div>
-          <div class="fp-toast" id="fp-toast" hidden></div></div>
-        <div class="legend" id="legend"><div id="legtitle"></div><canvas id="legbar" width="180" height="10"></canvas><div class="ticks" id="legticks"></div></div>
-        <div class="maptools"><button id="z-in" title="Zoom in" aria-label="Zoom in">+</button><button id="z-out" title="Zoom out" aria-label="Zoom out">−</button><button id="z-fit" title="Fit to window" aria-label="Fit to window">⤢</button></div></div>
-      <div class="hintbar" id="hint">Choose an experiment, place agents or targets on the map, and the result updates in real time.</div>
-    </section>
-
-    <aside class="side right" aria-label="Experiments and results">
-      <div class="sec"><h4>Experiment</h4>
-        <div class="seg" id="seg-exp" style="flex-wrap:wrap">
-          <button data-e="view" aria-pressed="true">View</button><button data-e="sound" aria-pressed="false">Sound field</button><button data-e="rf" aria-pressed="false">Communication</button>
-          <button data-e="route" aria-pressed="false">Route</button><button data-e="lidar" aria-pressed="false">LiDAR</button><button data-e="fusion" aria-pressed="false">Combined</button></div>
-        <div id="expdesc" class="note"></div><div id="expparams" class="sec"></div>
-        <div class="row"><button class="btn" id="btn-engine" hidden>Recompute with the full engine and compare</button></div></div>
-      <div class="sec res"><h4>Result</h4><div id="results" class="sec"></div><div id="engineout" class="sec"></div></div>
-      <div class="sec"><h4>View preview</h4><div class="preview" id="preview"><canvas id="v3d"></canvas><div class="cap" id="v3dcap">Select an agent with a camera</div></div>
-        <div class="row"><button class="btn" id="btn-render" disabled title="Needs scripts/serve_lab.py running on this computer">Render this view with Blender</button><select id="render-q" title="Render quality"><option value="preview">Preview 960×540 (about 15 s)</option><option value="hd">High definition 1920×1080 (about 1.5 min)</option></select><button class="btn" id="btn-png" title="Save the current map (with legend) as an image">Save map image</button><button class="btn" id="btn-share" title="Encode the current layout into a link">Copy share link</button><button class="btn" id="btn-export">Export configuration</button></div>
-        <div id="renderout"></div></div>
-      <details class="note"><summary>How far can these numbers be trusted?</summary><div id="fidelity" class="sec" style="margin-top:6px"></div></details>
-    </aside>
-  </main>
-
-  <section id="tab-replay" class="tab" role="tabpanel"><div id="replay-root"></div></section>
-  <section id="tab-gallery" class="tab" role="tabpanel"><div id="gallery-root"></div></section>
-  <section id="tab-ref" class="tab" role="tabpanel"><div id="ref-root"></div></section>
-</div>
-<script src="js/gate.js?v=eb180bdc" data-next="js/core.js?v=eb180bdc,js/devices.js?v=eb180bdc,js/world.js?v=eb180bdc,js/phys_core.js?v=eb180bdc,js/phys_models.js?v=eb180bdc,js/map.js?v=eb180bdc,js/app.js?v=eb180bdc,js/tabs.js?v=eb180bdc,js/controls.js?v=eb180bdc,js/pbr.js?v=eb180bdc,js/env.js?v=eb180bdc,js/bimcol.js?v=eb180bdc,js/bim3d.js?v=eb180bdc,js/models.js?v=eb180bdc,js/humans.js?v=eb180bdc,js/robots.js?v=eb180bdc,js/vehicles.js?v=eb180bdc,js/props.js?v=eb180bdc,js/raycast.js?v=eb180bdc,js/lidar.js?v=eb180bdc,js/telemetry.js?v=eb180bdc,js/camfeed.js?v=eb180bdc,js/lmkernel.js?v=eb180bdc,js/lightmap.js?v=eb180bdc,js/interior.js?v=eb180bdc,js/audio.js?v=eb180bdc,js/view3d.js?v=eb180bdc,js/inspector.js?v=eb180bdc,js/hudpanels.js?v=eb180bdc,js/walkui.js?v=eb180bdc,js/main.js?v=eb180bdc"></script>
+<script src="js/gate.js?v=5e0a6497"></script>
 </body>
 </html>
