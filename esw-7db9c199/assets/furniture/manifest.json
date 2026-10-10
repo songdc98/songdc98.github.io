@@ -1,0 +1,276 @@
+{
+ "models": {
+  "sofa": {
+   "file": "sofa.glb",
+   "source": "https://polyhaven.com/a/sofa_02",
+   "id": "sofa_02",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    1.8072,
+    0.8178,
+    0.7095
+   ],
+   "tris": 2728,
+   "tris_src": 2728,
+   "tex": 1024,
+   "bytes": 424688,
+   "uses": "sofa",
+   "rear_balance": 0.186,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "school_chair": {
+   "file": "school_chair.glb",
+   "source": "https://polyhaven.com/a/SchoolChair_01",
+   "id": "SchoolChair_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.5668,
+    0.6784,
+    1.0067
+   ],
+   "tris": 1500,
+   "tris_src": 5072,
+   "tex": 512,
+   "bytes": 120904,
+   "uses": "student_chair",
+   "rear_balance": -0.643,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "armchair": {
+   "file": "armchair.glb",
+   "source": "https://polyhaven.com/a/modern_arm_chair_01",
+   "id": "modern_arm_chair_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.8204,
+    0.9866,
+    1.0229
+   ],
+   "tris": 6000,
+   "tris_src": 8916,
+   "tex": 512,
+   "bytes": 313500,
+   "uses": "armchair",
+   "rear_balance": -0.258,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "coffee_table": {
+   "file": "coffee_table.glb",
+   "source": "https://polyhaven.com/a/modern_coffee_table_01",
+   "id": "modern_coffee_table_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    1.2018,
+    0.6,
+    0.39
+   ],
+   "tris": 4000,
+   "tris_src": 4504,
+   "tex": 1024,
+   "bytes": 1315300,
+   "uses": "coffee_table",
+   "rear_balance": -0.004,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "side_table": {
+   "file": "side_table.glb",
+   "source": "https://polyhaven.com/a/side_table_01",
+   "id": "side_table_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.55,
+    0.45,
+    0.5507
+   ],
+   "tris": 2500,
+   "tris_src": 2756,
+   "tex": 512,
+   "bytes": 193164,
+   "uses": "nightstand",
+   "rear_balance": -0.0,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "sideboard": {
+   "file": "sideboard.glb",
+   "source": "https://polyhaven.com/a/WoodenTable_03",
+   "id": "WoodenTable_03",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    1.3269,
+    0.5753,
+    0.8301
+   ],
+   "tris": 2298,
+   "tris_src": 2298,
+   "tex": 1024,
+   "bytes": 630492,
+   "uses": "dresser, sideboard",
+   "rear_balance": 0.44,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "media_cabinet": {
+   "file": "media_cabinet.glb",
+   "source": "https://polyhaven.com/a/modern_wooden_cabinet",
+   "id": "modern_wooden_cabinet",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    2.44,
+    0.5204,
+    0.6801
+   ],
+   "tris": 4000,
+   "tris_src": 24976,
+   "tex": 512,
+   "bytes": 351692,
+   "uses": "tv_unit (cabinet only; the flat TV stays the BIM parts)",
+   "rear_balance": 0.649,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "dining_table": {
+   "file": "dining_table.glb",
+   "source": "https://polyhaven.com/a/wooden_table_02",
+   "id": "wooden_table_02",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    1.1344,
+    0.706,
+    0.7995
+   ],
+   "tris": 196,
+   "tris_src": 196,
+   "tex": 1024,
+   "bytes": 485132,
+   "uses": "dining_table (table only)",
+   "rear_balance": -0.0,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "dining_chair": {
+   "file": "dining_chair.glb",
+   "source": "https://polyhaven.com/a/painted_wooden_chair_01",
+   "id": "painted_wooden_chair_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.4318,
+    0.5398,
+    0.9565
+   ],
+   "tris": 724,
+   "tris_src": 724,
+   "tex": 512,
+   "bytes": 145180,
+   "uses": "dining_table (one instance per chair)",
+   "rear_balance": -0.866,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "school_desk": {
+   "file": "school_desk.glb",
+   "source": "https://polyhaven.com/a/SchoolDesk_01",
+   "id": "SchoolDesk_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.714,
+    0.5476,
+    0.8822
+   ],
+   "tris": 1000,
+   "tris_src": 4162,
+   "tex": 512,
+   "bytes": 116072,
+   "uses": "student_desk",
+   "rear_balance": 0.041,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "desk": {
+   "file": "desk.glb",
+   "source": "https://polyhaven.com/a/small_wooden_table_01",
+   "id": "small_wooden_table_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.9162,
+    0.44,
+    0.5331
+   ],
+   "tris": 2999,
+   "tris_src": 3410,
+   "tex": 1024,
+   "bytes": 404064,
+   "uses": "desk (desk body only)",
+   "rear_balance": -0.005,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "office_desk": {
+   "file": "office_desk.glb",
+   "source": "https://polyhaven.com/a/metal_office_desk",
+   "id": "metal_office_desk",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    2.0,
+    0.9472,
+    0.7875
+   ],
+   "tris": 4000,
+   "tris_src": 6898,
+   "tex": 512,
+   "bytes": 250244,
+   "uses": "teacher_desk, workstation (desk body only)",
+   "rear_balance": 0.324,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "shelves": {
+   "file": "shelves.glb",
+   "source": "https://polyhaven.com/a/wooden_display_shelves_01",
+   "id": "wooden_display_shelves_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    1.0778,
+    0.3715,
+    1.5562
+   ],
+   "tris": 3000,
+   "tris_src": 3174,
+   "tex": 1024,
+   "bytes": 466924,
+   "uses": "bookshelf",
+   "rear_balance": 0.0,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "plant": {
+   "file": "plant.glb",
+   "source": "https://polyhaven.com/a/potted_plant_01",
+   "id": "potted_plant_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.5854,
+    0.6305,
+    1.3569
+   ],
+   "tris": 9000,
+   "tris_src": 176226,
+   "tex": 512,
+   "bytes": 946676,
+   "uses": "planter",
+   "rear_balance": 0.094,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "small_plant": {
+   "file": "small_plant.glb",
+   "source": "https://polyhaven.com/a/potted_plant_04",
+   "id": "potted_plant_04",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.168,
+    0.1846,
+    0.2676
+   ],
+   "tris": 2500,
+   "tris_src": 8929,
+   "tex": 512,
+   "bytes": 209524,
+   "uses": "coffee_table pot + plant, dining_table vase + flowers (table decoration)",
+   "rear_balance": 0.07,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  }
+ },
+ "total_bytes": 6373556,
+ "generator": "scripts/convert_models.py (Blender 5.2.2 LTS)"
+}
