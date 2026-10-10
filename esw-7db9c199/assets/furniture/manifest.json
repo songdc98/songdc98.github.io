@@ -269,8 +269,206 @@
    "uses": "coffee_table pot + plant, dining_table vase + flowers (table decoration)",
    "rear_balance": 0.07,
    "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "desk_lamp": {
+   "file": "desk_lamp.glb",
+   "source": "https://polyhaven.com/a/desk_lamp_arm_01",
+   "id": "desk_lamp_arm_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.2017,
+    0.6157,
+    0.8927
+   ],
+   "tris": 2500,
+   "tris_src": 24102,
+   "tex": 512,
+   "bytes": 267304,
+   "uses": "desk lamp (lamp_base, lamp_shade)",
+   "rear_balance": -0.452,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "stove": {
+   "file": "stove.glb",
+   "source": "https://polyhaven.com/a/electric_stove",
+   "id": "electric_stove",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.5026,
+    0.6476,
+    0.8586
+   ],
+   "tris": 5000,
+   "tris_src": 13914,
+   "tex": 1024,
+   "bytes": 2868800,
+   "uses": "stove (body, hob, oven door, knobs)",
+   "rear_balance": 0.333,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "obj_kettle": {
+   "file": "obj_kettle.glb",
+   "source": "https://polyhaven.com/a/vintage_electric_kettle",
+   "id": "vintage_electric_kettle",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.3216,
+    0.2521,
+    0.3052
+   ],
+   "tris": 1499,
+   "tris_src": 14838,
+   "tex": 512,
+   "bytes": 562948,
+   "uses": "household kettle",
+   "rear_balance": -0.002,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "obj_pot": {
+   "file": "obj_pot.glb",
+   "source": "https://polyhaven.com/a/pot_enamel_01",
+   "id": "pot_enamel_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.2631,
+    0.1823,
+    0.1785
+   ],
+   "tris": 1500,
+   "tris_src": 11416,
+   "tex": 512,
+   "bytes": 111548,
+   "uses": "household cooking_pot / saucepan",
+   "rear_balance": 0.002,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "obj_jug": {
+   "file": "obj_jug.glb",
+   "source": "https://polyhaven.com/a/jug_01",
+   "id": "jug_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.276,
+    0.1679,
+    0.2107
+   ],
+   "tris": 1200,
+   "tris_src": 5770,
+   "tex": 512,
+   "bytes": 78840,
+   "uses": "household jug",
+   "rear_balance": 0.004,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "obj_bowl": {
+   "file": "obj_bowl.glb",
+   "source": "https://polyhaven.com/a/wooden_bowl_01",
+   "id": "wooden_bowl_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.3134,
+    0.3099,
+    0.0936
+   ],
+   "tris": 800,
+   "tris_src": 14122,
+   "tex": 512,
+   "bytes": 100508,
+   "uses": "household bowl",
+   "rear_balance": -0.138,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "obj_board": {
+   "file": "obj_board.glb",
+   "source": "https://polyhaven.com/a/wooden_cutting_board",
+   "id": "wooden_cutting_board",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.4504,
+    0.2466,
+    0.0418
+   ],
+   "tris": 600,
+   "tris_src": 3520,
+   "tex": 512,
+   "bytes": 101920,
+   "uses": "household cutting_board",
+   "rear_balance": 0.02,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "obj_laptop": {
+   "file": "obj_laptop.glb",
+   "source": "https://polyhaven.com/a/classic_laptop",
+   "id": "classic_laptop",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.6523,
+    0.4899,
+    0.5452
+   ],
+   "tris": 1500,
+   "tris_src": 14450,
+   "tex": 512,
+   "bytes": 224792,
+   "uses": "household laptop",
+   "rear_balance": -0.786,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "obj_books": {
+   "file": "obj_books.glb",
+   "source": "https://polyhaven.com/a/book_encyclopedia_set_01",
+   "id": "book_encyclopedia_set_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.5531,
+    0.1635,
+    0.2374
+   ],
+   "tris": 2000,
+   "tris_src": 67306,
+   "tex": 512,
+   "bytes": 261924,
+   "uses": "household book_stack",
+   "rear_balance": 0.367,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "obj_carton": {
+   "file": "obj_carton.glb",
+   "source": "https://polyhaven.com/a/cardboard_box_01",
+   "id": "cardboard_box_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.3873,
+    0.5155,
+    0.34
+   ],
+   "tris": 400,
+   "tris_src": 16952,
+   "tex": 512,
+   "bytes": 105332,
+   "uses": "household carton / parcel",
+   "rear_balance": 0.1,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
+  },
+  "obj_apple": {
+   "file": "obj_apple.glb",
+   "source": "https://polyhaven.com/a/food_apple_01",
+   "id": "food_apple_01",
+   "licence": "CC0 1.0 (https://polyhaven.com/license)",
+   "dims": [
+    0.1009,
+    0.0969,
+    0.0838
+   ],
+   "tris": 299,
+   "tris_src": 7012,
+   "tex": 256,
+   "bytes": 35300,
+   "uses": "fruit in fruit bowls",
+   "rear_balance": 0.098,
+   "frame": "x = width, y = up, -z = front (lab item frame), origin = footprint centre on the floor, native size in metres"
   }
  },
- "total_bytes": 6373556,
+ "total_bytes": 15422396,
  "generator": "scripts/convert_models.py (Blender 5.2.2 LTS)"
 }
