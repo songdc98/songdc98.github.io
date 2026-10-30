@@ -34,7 +34,7 @@ const translations = {
     "about.p1":
       "I am a Ph.D. student in Electrical and Computer Engineering at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>. I study how language models can <strong>retain and retrieve useful information over long sequences</strong> while keeping computation manageable.",
     "about.p2":
-      "My current project, <strong>Sparse Delta Cache (SDC)</strong>, develops <strong>attention-free memory augmentation for state-space models</strong>. The goal is stronger memory retention and retrieval, with computation that grows linearly with sequence length.",
+      "My current project, <strong>DSX (Dense–Sparse State-Space Models)</strong>, develops <strong>attention-free memory augmentation for state-space models</strong>. The goal is stronger memory retention and retrieval, with computation that grows linearly with sequence length.",
     "areas.kicker": "Research directions",
     "areas.agent.title": "Efficient Recurrent Inference",
     "areas.agent.body":
@@ -172,7 +172,7 @@ const translations = {
     "about.p1":
       "我是<a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a>电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。我的研究关注语言模型如何在计算成本可控的条件下，<strong>保留并检索长序列中的有用信息</strong>。",
     "about.p2":
-      "目前的项目 <strong>Sparse Delta Cache（SDC）</strong> 探索<strong>无需 Attention 的状态空间模型记忆增强</strong>，目标是在计算量随序列长度线性增长的条件下，提升记忆保持与检索能力。",
+      "目前的项目 <strong>DSX（稠密–稀疏状态空间模型）</strong> 探索<strong>无需 Attention 的状态空间模型记忆增强</strong>，目标是在计算量随序列长度线性增长的条件下，提升记忆保持与检索能力。",
     "areas.kicker": "研究方向",
     "areas.agent.title": "高效递归推理",
     "areas.agent.body":
