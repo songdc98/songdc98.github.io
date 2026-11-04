@@ -30,7 +30,7 @@ const translations = {
     "profile.university": "George Mason University",
     "profile.location": "Fairfax, Virginia, USA",
     "about.kicker": "Research focus",
-    "about.title": "State-space models.<br>Long-context memory.",
+    "about.title": "State-Space Models.<br>Long-Context Modeling.<br>Memory and Reasoning.<br>Efficient Inference.",
     "about.p1":
       "I am a Ph.D. student in Electrical and Computer Engineering at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>. I study how language models can <strong>retain and retrieve useful information over long sequences</strong> while keeping computation manageable.",
     "about.p2":
@@ -168,7 +168,7 @@ const translations = {
     "profile.university": "George Mason University",
     "profile.location": "Fairfax, Virginia, USA",
     "about.kicker": "研究主线",
-    "about.title": "状态空间模型。<br>长上下文记忆。",
+    "about.title": "状态空间模型。<br>长上下文建模。<br>记忆与推理。<br>高效推理。",
     "about.p1":
       "我是<a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a>电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。我的研究关注语言模型如何在计算成本可控的条件下，<strong>保留并检索长序列中的有用信息</strong>。",
     "about.p2":
