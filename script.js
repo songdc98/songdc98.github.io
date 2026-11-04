@@ -34,14 +34,14 @@ const translations = {
     "about.p1":
       "I am a Ph.D. student in Electrical and Computer Engineering at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>. I study how language models can <strong>retain and retrieve useful information over long sequences</strong> while keeping computation manageable.",
     "about.p2":
-      "My current project, <strong>DSX (Dense–Sparse State-Space Models)</strong>, develops <strong>attention-free memory augmentation for state-space models</strong>. The goal is stronger memory retention and retrieval, with computation that grows linearly with sequence length.",
+      "My current work extends state-space language models to support <strong>exact recall and multi-hop reasoning</strong> over long contexts.",
     "areas.kicker": "Research directions",
     "areas.agent.title": "Efficient Recurrent Inference",
     "areas.agent.body":
       "Connect model architecture to GPU execution through fused recurrent decoding. Measure latency, throughput, and memory use under matched benchmark conditions.",
-    "areas.sequence.title": "Attention-Free Memory",
+    "areas.sequence.title": "Memory and Reasoning",
     "areas.sequence.body":
-      "Study how state-space models can retain and retrieve information over long contexts without attention, with linear computational scaling as a design goal.",
+      "Extend state-space language models to support exact recall and multi-hop reasoning over long contexts.",
     "areas.ssm.title": "Train-Once Model Compression",
     "areas.ssm.body":
       "Build compact, standalone models from one trained checkpoint. Spectral-channel structure makes different deployment capacities part of the training objective.",
@@ -172,14 +172,14 @@ const translations = {
     "about.p1":
       "我是<a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a>电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。我的研究关注语言模型如何在计算成本可控的条件下，<strong>保留并检索长序列中的有用信息</strong>。",
     "about.p2":
-      "目前的项目 <strong>DSX（稠密–稀疏状态空间模型）</strong> 探索<strong>无需 Attention 的状态空间模型记忆增强</strong>，目标是在计算量随序列长度线性增长的条件下，提升记忆保持与检索能力。",
+      "我目前的工作是为状态空间语言模型加入<strong>精确召回与多跳推理</strong>能力，使其能够利用长上下文中的信息。",
     "areas.kicker": "研究方向",
     "areas.agent.title": "高效递归推理",
     "areas.agent.body":
       "通过融合递归解码连接模型结构与 GPU 执行，在匹配的测试条件下评估延迟、吞吐量与内存开销。",
-    "areas.sequence.title": "Attention-Free 记忆增强",
+    "areas.sequence.title": "记忆与推理",
     "areas.sequence.body":
-      "研究状态空间模型如何不依赖 Attention，保留并检索长上下文信息，并将计算量随序列长度线性增长作为设计目标。",
+      "为状态空间语言模型加入精确召回与多跳推理能力，使其能够利用长上下文中的信息。",
     "areas.ssm.title": "一次训练，多预算部署",
     "areas.ssm.body":
       "从一个训练好的检查点导出可独立部署的紧凑模型，通过谱通道结构，在训练时就优化不同部署容量。",
