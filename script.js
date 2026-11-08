@@ -91,7 +91,7 @@ const translations = {
     "publications.essh.venue": "arXiv · 2026",
     "publications.essh.title": "Elastic Selective Spectral Hybrids for Train-Once, Export-Many Budgeted Inference",
     "publications.essh.summary":
-      "<strong>Selective spectral memory with fast recurrent decoding.</strong> ESSH pairs input-dependent decay and write/read gates with sliding-window attention, then exports several model sizes from one trained checkpoint. At 1.53B parameters, fused decoding reached <strong>1.37 ms/token</strong> on B300, <strong>2.14–2.80× faster</strong> than the tested, parameter-matched Mamba-2/Mamba-3 implementations (batch 1, 2K context).",
+      "<strong>Selective spectral memory with fast recurrent decoding.</strong> ESSH pairs input-dependent decay and write/read gates with sliding-window attention, then exports several model sizes from one trained checkpoint. At 1.53B parameters on an A100, fused decoding matches Mamba-2 in speed, with <strong>1.1–1.6×</strong> speedups over Mamba-3 and <strong>1.1–4.6×</strong> over Transformer++. All comparisons use matched parameter counts and the same compilation policy.",
     "publications.essh.keywords": "Selective spectral recurrence · Compact language models · Fused decoding",
     "publications.essh.imageAlt": "Figure 1 of ESSH: selective spectral hybrid and elastic capacity axes",
     "publications.fmri.type": "Journal Article",
@@ -230,7 +230,7 @@ const translations = {
     "publications.essh.venue": "arXiv · 2026",
     "publications.essh.title": "用于一次训练、多预算导出的弹性选择性谱混合模型",
     "publications.essh.summary":
-      "<strong>让谱记忆具备输入选择性，并实现高效递归解码。</strong>ESSH 将输入依赖的衰减与读写门控、滑窗注意力结合，从一个训练好的检查点导出多档模型。1.53B 参数配置在 B300 上的融合解码为 <strong>1.37 ms/token</strong>，比测试中参数匹配的 Mamba-2/Mamba-3 实现<strong>快 2.14–2.80 倍</strong>（batch 1，2K 上下文）。",
+      "<strong>让谱记忆具备输入选择性，并实现高效递归解码。</strong>ESSH 将输入依赖的衰减与读写门控、滑窗注意力结合，从一个训练好的检查点导出多档模型。在 A100 上，1.53B 参数配置的融合解码速度与 Mamba-2 持平，相对 Mamba-3 和 Transformer++ 的加速比分别为 <strong>1.1–1.6×</strong> 和 <strong>1.1–4.6×</strong>。各模型参数量匹配，编译策略相同。",
     "publications.essh.keywords": "选择性谱递归 · 紧凑语言模型 · 融合解码",
     "publications.essh.imageAlt": "ESSH 图 1：选择性谱混合架构与弹性容量维度",
     "publications.fmri.type": "期刊论文",
