@@ -34,14 +34,14 @@ const translations = {
     "about.p1":
       "I am a Ph.D. student in Electrical and Computer Engineering at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>. I study how language models can <strong>retain and retrieve useful information over long sequences</strong> while keeping computation manageable.",
     "about.p2":
-      "My current work extends state-space language models to support <strong>exact recall and multi-hop reasoning</strong> over long contexts.",
+      "My current work extends state-space language models to support <strong>exact recall and multi-hop reasoning</strong> over long contexts. I also study how <strong>delta-rule linear attention</strong> updates recurrent memory in Gated DeltaNet, Kimi Delta Attention (KDA), and Gated DeltaNet-2.",
     "areas.kicker": "Research directions",
     "areas.agent.title": "Efficient Recurrent Inference",
     "areas.agent.body":
       "Connect model architecture to GPU execution through fused recurrent decoding. Measure latency, throughput, and memory use under matched benchmark conditions.",
     "areas.sequence.title": "Memory and Reasoning",
     "areas.sequence.body":
-      "Extend state-space language models to support exact recall and multi-hop reasoning over long contexts.",
+      "Study how memory updates in state-space models and delta-rule linear attention affect exact recall and multi-hop reasoning over long contexts.",
     "areas.ssm.title": "Train-Once Model Compression",
     "areas.ssm.body":
       "Build compact, standalone models from one trained checkpoint. Spectral-channel structure makes different deployment capacities part of the training objective.",
@@ -55,10 +55,11 @@ const translations = {
     "skills.sequence.1": "Long-context retention & recall",
     "skills.sequence.2": "Recurrent memory & state updates",
     "skills.sequence.3": "Memory and retrieval evaluation",
-    "skills.ssm.title": "State-Space Models",
+    "skills.ssm.title": "SSMs & Linear Attention",
     "skills.ssm.1": "Spectral & selective SSMs",
     "skills.ssm.2": "Linear dynamical systems",
     "skills.ssm.3": "Attention-free & hybrid architectures",
+    "skills.ssm.4": "Delta-rule linear attention: Gated DeltaNet, Kimi Delta Attention (KDA), Gated DeltaNet-2",
     "skills.agent.title": "Efficient Inference",
     "skills.agent.1": "CUDA & fused recurrent decoding",
     "skills.agent.2": "Model compression & compact export",
@@ -172,14 +173,14 @@ const translations = {
     "about.p1":
       "我是<a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a>电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。我的研究关注语言模型如何在计算成本可控的条件下，<strong>保留并检索长序列中的有用信息</strong>。",
     "about.p2":
-      "我目前的工作是为状态空间语言模型加入<strong>精确召回与多跳推理</strong>能力，使其能够利用长上下文中的信息。",
+      "我目前的工作是为状态空间语言模型加入<strong>精确召回与多跳推理</strong>能力，使其能够利用长上下文中的信息。我也研究 Gated DeltaNet、Kimi Delta Attention（KDA）和 Gated DeltaNet-2 这几种<strong>基于 Delta 规则的线性注意力模型</strong>如何更新递归记忆。",
     "areas.kicker": "研究方向",
     "areas.agent.title": "高效递归推理",
     "areas.agent.body":
       "通过融合递归解码连接模型结构与 GPU 执行，在匹配的测试条件下评估延迟、吞吐量与内存开销。",
     "areas.sequence.title": "记忆与推理",
     "areas.sequence.body":
-      "为状态空间语言模型加入精确召回与多跳推理能力，使其能够利用长上下文中的信息。",
+      "研究状态空间模型和基于 Delta 规则的线性注意力如何更新记忆，以及这些更新对长上下文精确召回与多跳推理的影响。",
     "areas.ssm.title": "一次训练，多预算部署",
     "areas.ssm.body":
       "从一个训练好的检查点导出可独立部署的紧凑模型，通过谱通道结构，在训练时就优化不同部署容量。",
@@ -193,10 +194,11 @@ const translations = {
     "skills.sequence.1": "长上下文信息保持与召回",
     "skills.sequence.2": "递归记忆与状态更新",
     "skills.sequence.3": "记忆与检索能力评测",
-    "skills.ssm.title": "状态空间模型",
+    "skills.ssm.title": "状态空间模型与线性注意力",
     "skills.ssm.1": "谱 SSM 与选择性 SSM",
     "skills.ssm.2": "线性动力系统",
     "skills.ssm.3": "Attention-Free 与混合架构",
+    "skills.ssm.4": "基于 Delta 规则的线性注意力：Gated DeltaNet、Kimi Delta Attention（KDA）、Gated DeltaNet-2",
     "skills.agent.title": "高效推理",
     "skills.agent.1": "CUDA 与融合递归解码",
     "skills.agent.2": "模型压缩与紧凑导出",
