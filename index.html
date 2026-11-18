@@ -10,7 +10,7 @@
     <title>Dachuan Song | AI Research & Engineering</title>
     <link rel="canonical" href="https://dcsong.com/" />
     <script src="./domain-routing.js?v=20261001" defer></script>
-    <link rel="stylesheet" href="./styles.css?v=research-copy-20261028" />
+    <link rel="stylesheet" href="./styles.css?v=taste-20261117" />
   </head>
   <body>
     <button
@@ -71,7 +71,7 @@
         <div class="hero-copy">
           <p class="eyebrow" data-i18n="hero.eyebrow">State Space Models · Long-Context Memory · Efficient Inference</p>
           <h1>Dachuan Song <span class="han-name">宋大川</span></h1>
-          <p class="lead" data-i18n-html="hero.lead">I build <strong>state-space language models for long-context memory and retrieval</strong>. My first-author <strong>NeurIPS 2026</strong> work makes one training run serve multiple inference budgets.</p>
+          <p class="lead" data-i18n-html="hero.lead">I build state-space language models for long-context memory and retrieval. My first-author <strong>NeurIPS 2026</strong> work makes one training run serve multiple inference budgets.</p>
           <p class="hero-availability" data-i18n="hero.availability">Seeking Summer 2027 research internships in the U.S.</p>
           <div class="hero-actions" aria-label="Profile links" data-i18n-aria="hero.linksLabel">
             <button
@@ -114,7 +114,7 @@
         </div>
         <div class="section-body">
           <p data-i18n-html="about.p1">I am a Ph.D. student in Electrical and Computer Engineering at <a class="direction-link" href="https://www.gmu.edu/" target="_blank" rel="noreferrer">George Mason University</a>, advised by <a class="direction-link" href="https://mason.gmu.edu/~xwang64/index.html" target="_blank" rel="noreferrer">Prof. Xuan Wang</a>. I study how language models can <strong>retain and retrieve useful information over long sequences</strong> while keeping computation manageable.</p>
-          <p data-i18n-html="about.p2">My current work extends state-space language models to support <strong>exact recall and multi-hop reasoning</strong> over long contexts. I also study how <strong>delta-rule linear attention</strong> updates recurrent memory in Gated DeltaNet, Kimi Delta Attention (KDA), and Gated DeltaNet-2.</p>
+          <p data-i18n-html="about.p2">My current work extends state-space language models to support <strong>exact recall and multi-hop reasoning</strong> over long contexts. I also study how delta-rule linear attention updates recurrent memory in Gated DeltaNet, Kimi Delta Attention (KDA), and Gated DeltaNet-2.</p>
         </div>
       </section>
 
@@ -134,12 +134,12 @@
               <a id="paper-es-title" href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer" data-i18n="publications.es.title">Elastic Spectral State Space Models for Train-Once Budgeted Inference</a>
             </h3>
             <p><strong class="author-self">Dachuan Song</strong>, Junyu Yin, Zechen Hu, Xuan Wang</p>
-            <p class="publication-summary" data-i18n-html="publications.es.summary"><strong>Train once, export compact models for different compute budgets.</strong> ES-SSM combines ordered Hankel spectral channels with input-adaptive gates and budget dropout. Direct prefix truncation produces independently deployable models <strong>without budget-specific retraining</strong>.</p>
+            <p class="publication-summary" data-i18n-html="publications.es.summary"><strong>Train once, export compact models for different compute budgets.</strong> ES-SSM combines ordered Hankel spectral channels with input-adaptive gates and budget dropout. Direct prefix truncation produces independently deployable models without budget-specific retraining.</p>
             <div class="paper-links" aria-label="Elastic Spectral State Space Models links" data-i18n-aria="publications.links.es">
               <a class="paper-id" href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer">arXiv:2601.22488</a>
               <a href="https://github.com/songdc98/ES-SSM" target="_blank" rel="noreferrer" data-i18n="publications.link.code">Code</a>
             </div>
-            <p class="stack publication-keywords" data-i18n="publications.es.keywords">Spectral state-space models · Compact model export · Budgeted inference</p>
+            <p class="stack publication-keywords" data-i18n="publications.es.keywords">Spectral state‑space models · Compact model export · Budgeted inference</p>
             <a class="paper-thumbnail paper-thumbnail-figure1" href="https://arxiv.org/abs/2601.22488" target="_blank" rel="noreferrer" aria-labelledby="paper-es-title">
               <img src="./assets/es-ssm-figure1.png" alt="Figure 1 of ES-SSM: spectral channels and compact model export" data-i18n-alt="publications.es.imageAlt" />
             </a>
@@ -153,7 +153,7 @@
               <a id="paper-essh-title" href="https://arxiv.org/abs/2609.32486" target="_blank" rel="noreferrer" data-i18n="publications.essh.title">Elastic Selective Spectral Hybrids for Train-Once, Export-Many Budgeted Inference</a>
             </h3>
             <p><strong class="author-self">Dachuan Song</strong>, Chuchu Chen, Xuan Wang</p>
-            <p class="publication-summary" data-i18n-html="publications.essh.summary"><strong>Selective spectral memory with fast recurrent decoding.</strong> ESSH pairs input-dependent decay and write/read gates with sliding-window attention, then exports several model sizes from one trained checkpoint. At 1.53B parameters on an A100, fused decoding matches Mamba-2 in speed, with <strong>1.1–1.6×</strong> speedups over Mamba-3 and <strong>1.1–4.6×</strong> over Transformer++. All comparisons use matched parameter counts and the same compilation policy.</p>
+            <p class="publication-summary" data-i18n-html="publications.essh.summary"><strong>Selective spectral memory with fast recurrent decoding.</strong> ESSH pairs input-dependent decay and write/read gates with sliding-window attention, then exports several model sizes from one trained checkpoint. At 1.53B parameters on an A100, fused decoding matches Mamba-2 in speed, with 1.1⁠–⁠1.6× speedups over Mamba-3 and 1.1⁠–⁠4.6× over Transformer++. All comparisons use matched parameter counts and the same compilation policy.</p>
             <div class="paper-links" aria-label="Elastic Selective Spectral Hybrids paper links" data-i18n-aria="publications.links.essh">
               <a class="paper-id" href="https://arxiv.org/abs/2609.32486" target="_blank" rel="noreferrer">arXiv:2609.32486</a>
               <a href="https://github.com/songdc98/ESSH" target="_blank" rel="noreferrer" data-i18n="publications.link.code">Code</a>
@@ -172,12 +172,12 @@
               <a id="paper-sketchops-title" href="https://arxiv.org/abs/2607.26448" target="_blank" rel="noreferrer" data-i18n="publications.sketchops.title">Mergeable Model-Side Aggregation States for Long-Context Language Models</a>
             </h3>
             <p><strong class="author-self">Dachuan Song</strong>, Junyu Yin, Zechen Hu, Xuan Wang</p>
-            <p class="publication-summary" data-i18n-html="publications.sketchops.summary"><strong>Long-context aggregation in a fixed 2 KiB state.</strong> SketchOps augments a frozen language model with mergeable summaries of counts and set relations. On 3,969 aggregate-then-reason tasks with Gemma 4 (31B), it achieved <strong>99.2% accuracy</strong> without rereading the full history.</p>
+            <p class="publication-summary" data-i18n-html="publications.sketchops.summary"><strong>Long-context aggregation in a fixed 2 KiB state.</strong> SketchOps augments a frozen language model with mergeable summaries of counts and set relations. On 3,969 aggregate-then-reason tasks with Gemma 4 (31B), it achieved 99.2% accuracy without rereading the full history.</p>
             <div class="paper-links" aria-label="SketchOps paper links" data-i18n-aria="publications.links.sketchops">
               <a class="paper-id" href="https://arxiv.org/abs/2607.26448" target="_blank" rel="noreferrer">arXiv:2607.26448</a>
               <a href="https://github.com/songdc98/sketchops" target="_blank" rel="noreferrer" data-i18n="publications.link.code">Code</a>
             </div>
-            <p class="stack publication-keywords" data-i18n="publications.sketchops.keywords">SketchOps · Mergeable memory · Long-context aggregation</p>
+            <p class="stack publication-keywords" data-i18n="publications.sketchops.keywords">SketchOps · Mergeable memory · Long‑context aggregation</p>
             <a class="paper-thumbnail paper-thumbnail-stack" href="https://arxiv.org/abs/2607.26448" target="_blank" rel="noreferrer" aria-labelledby="paper-sketchops-title">
               <img src="./assets/sketchops-figures.png?v=2" alt="SketchOps workflow and main experimental results" />
             </a>
@@ -196,7 +196,7 @@
             <div class="paper-links" aria-label="ACM BCB conference paper links" data-i18n-aria="publications.links.bcb">
               <a class="paper-id" href="https://dl.acm.org/doi/abs/10.1145/3698587.3701342" target="_blank" rel="noreferrer">DOI: 10.1145/3698587.3701342</a>
             </div>
-            <p class="stack publication-keywords" data-i18n="publications.bcb.keywords">Two-timescale dynamics · State-space modeling · Graph learning</p>
+            <p class="stack publication-keywords" data-i18n="publications.bcb.keywords">Two‑timescale dynamics · State‑space modeling · Graph learning</p>
             <a class="paper-thumbnail" href="https://dl.acm.org/doi/abs/10.1145/3698587.3701342" target="_blank" rel="noreferrer" aria-labelledby="paper-bcb-title">
               <img
                 src="./assets/conference-figures-1-2.png"
@@ -234,7 +234,7 @@
               <a id="internship-title-link" href="https://www.optosurgical.com/" target="_blank" rel="noreferrer" data-i18n="publications.internship.title">Surgical Video Understanding and Efficient Depth Estimation</a>
               <span class="internship-role">(<span data-i18n="publications.internship.role">Machine Learning Engineer Intern</span>)</span>
             </h3>
-            <p class="publication-summary" data-i18n-html="publications.internship.summary"><strong>Video understanding and model compression for surgical systems.</strong> Built models for surgical-phase and instrument-action recognition. Compressed and fine-tuned Depth Anything 3 to <strong>29% of its original model size</strong> while retaining near-baseline depth-estimation performance.</p>
+            <p class="publication-summary" data-i18n-html="publications.internship.summary"><strong>Video understanding and model compression for surgical systems.</strong> Built models for surgical-phase and instrument-action recognition. Compressed and fine-tuned Depth Anything 3 to 29% of its original model size while retaining near-baseline depth-estimation performance.</p>
             <p class="stack publication-keywords" data-i18n="publications.internship.keywords">Computer vision · Surgical video understanding · Model compression · Depth estimation</p>
             <a class="paper-thumbnail internship-thumbnail" href="https://www.optosurgical.com/" target="_blank" rel="noreferrer" aria-labelledby="internship-title-link">
               <img
@@ -364,7 +364,7 @@
     <footer id="contact" class="footer">
       <div>
         <p class="section-kicker" data-i18n="contact.kicker">Contact</p>
-        <h2 data-i18n="contact.title">Let’s connect on state-space models, long-context memory, and efficient inference.</h2>
+        <h2 data-i18n="contact.title">Let’s connect on state‑space models, long‑context memory, and efficient inference.</h2>
       </div>
       <div class="footer-links">
         <button
@@ -384,6 +384,6 @@
       <p class="copyright">© <span id="year"></span> Dachuan Song.</p>
     </footer>
 
-    <script src="./script.js?v=essh-a100-20261108"></script>
+    <script src="./script.js?v=taste-20261117"></script>
   </body>
 </html>

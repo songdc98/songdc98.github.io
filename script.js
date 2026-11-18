@@ -16,7 +16,7 @@ const translations = {
     "nav.contact": "Contact",
     "hero.eyebrow": "State Space Models · Long-Context Memory · Efficient Inference",
     "hero.lead":
-      "I build <strong>state-space language models for long-context memory and retrieval</strong>. My first-author <strong>NeurIPS 2026</strong> work makes one training run serve multiple inference budgets.",
+      "I build state-space language models for long-context memory and retrieval. My first-author <strong>NeurIPS 2026</strong> work makes one training run serve multiple inference budgets.",
     "hero.availability": "Seeking Summer 2027 research internships in the U.S.",
     "hero.linksLabel": "Profile links",
     "links.email": "Email",
@@ -34,7 +34,7 @@ const translations = {
     "about.p1":
       "I am a Ph.D. student in Electrical and Computer Engineering at <a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">George Mason University</a>, advised by <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Prof. Xuan Wang</a>. I study how language models can <strong>retain and retrieve useful information over long sequences</strong> while keeping computation manageable.",
     "about.p2":
-      "My current work extends state-space language models to support <strong>exact recall and multi-hop reasoning</strong> over long contexts. I also study how <strong>delta-rule linear attention</strong> updates recurrent memory in Gated DeltaNet, Kimi Delta Attention (KDA), and Gated DeltaNet-2.",
+      "My current work extends state-space language models to support <strong>exact recall and multi-hop reasoning</strong> over long contexts. I also study how delta-rule linear attention updates recurrent memory in Gated DeltaNet, Kimi Delta Attention (KDA), and Gated DeltaNet-2.",
     "areas.kicker": "Research directions",
     "areas.agent.title": "Efficient Recurrent Inference",
     "areas.agent.body":
@@ -76,22 +76,22 @@ const translations = {
     "publications.sketchops.venue": "arXiv · 2026",
     "publications.sketchops.title": "Mergeable Model-Side Aggregation States for Long-Context Language Models",
     "publications.sketchops.summary":
-      "<strong>Long-context aggregation in a fixed 2 KiB state.</strong> SketchOps augments a frozen language model with mergeable summaries of counts and set relations. On 3,969 aggregate-then-reason tasks with Gemma 4 (31B), it achieved <strong>99.2% accuracy</strong> without rereading the full history.",
+      "<strong>Long-context aggregation in a fixed 2 KiB state.</strong> SketchOps augments a frozen language model with mergeable summaries of counts and set relations. On 3,969 aggregate-then-reason tasks with Gemma 4 (31B), it achieved 99.2% accuracy without rereading the full history.",
     "publications.sketchops.keywords":
-      "SketchOps · Mergeable memory · Long-context aggregation",
+      "SketchOps · Mergeable memory · Long‑context aggregation",
     "publications.es.type": "Conference Paper",
     "publications.es.venue": "First author · Accepted poster",
     "publications.es.badge": "<span class=\"neurips-year\">NeurIPS 2026</span><span class=\"neurips-track\">Main Track</span>",
     "publications.es.title": "Elastic Spectral State Space Models for Train-Once Budgeted Inference",
     "publications.es.summary":
-      "<strong>Train once, export compact models for different compute budgets.</strong> ES-SSM combines ordered Hankel spectral channels with input-adaptive gates and budget dropout. Direct prefix truncation produces independently deployable models <strong>without budget-specific retraining</strong>.",
-    "publications.es.keywords": "Spectral state-space models · Compact model export · Budgeted inference",
+      "<strong>Train once, export compact models for different compute budgets.</strong> ES-SSM combines ordered Hankel spectral channels with input-adaptive gates and budget dropout. Direct prefix truncation produces independently deployable models without budget-specific retraining.",
+    "publications.es.keywords": "Spectral state‑space models · Compact model export · Budgeted inference",
     "publications.es.imageAlt": "Figure 1 of ES-SSM: spectral channels and compact model export",
     "publications.essh.type": "Preprint",
     "publications.essh.venue": "arXiv · 2026",
     "publications.essh.title": "Elastic Selective Spectral Hybrids for Train-Once, Export-Many Budgeted Inference",
     "publications.essh.summary":
-      "<strong>Selective spectral memory with fast recurrent decoding.</strong> ESSH pairs input-dependent decay and write/read gates with sliding-window attention, then exports several model sizes from one trained checkpoint. At 1.53B parameters on an A100, fused decoding matches Mamba-2 in speed, with <strong>1.1–1.6×</strong> speedups over Mamba-3 and <strong>1.1–4.6×</strong> over Transformer++. All comparisons use matched parameter counts and the same compilation policy.",
+      "<strong>Selective spectral memory with fast recurrent decoding.</strong> ESSH pairs input-dependent decay and write/read gates with sliding-window attention, then exports several model sizes from one trained checkpoint. At 1.53B parameters on an A100, fused decoding matches Mamba-2 in speed, with 1.1⁠–⁠1.6× speedups over Mamba-3 and 1.1⁠–⁠4.6× over Transformer++. All comparisons use matched parameter counts and the same compilation policy.",
     "publications.essh.keywords": "Selective spectral recurrence · Compact language models · Fused decoding",
     "publications.essh.imageAlt": "Figure 1 of ESSH: selective spectral hybrid and elastic capacity axes",
     "publications.fmri.type": "Journal Article",
@@ -107,13 +107,13 @@ const translations = {
     "publications.bcb.title": "Causality-based Subject and Task Fingerprints using fMRI Time-series Data",
     "publications.bcb.summary":
       "<strong>Two-timescale dynamics for subject and task identification.</strong> A state-space model reconstructs directional interactions from fMRI time series. Modal features identify subjects, while a graph neural network classifies tasks.",
-    "publications.bcb.keywords": "Two-timescale dynamics · State-space modeling · Graph learning",
+    "publications.bcb.keywords": "Two‑timescale dynamics · State‑space modeling · Graph learning",
     "publications.internship.type": "Internship",
     "publications.internship.venue": "Optosurgical · Summer 2026",
     "publications.internship.title": "Surgical Video Understanding and Efficient Depth Estimation",
     "publications.internship.role": "Machine Learning Engineer Intern",
     "publications.internship.summary":
-      "<strong>Video understanding and model compression for surgical systems.</strong> Built models for surgical-phase and instrument-action recognition. Compressed and fine-tuned Depth Anything 3 to <strong>29% of its original model size</strong> while retaining near-baseline depth-estimation performance.",
+      "<strong>Video understanding and model compression for surgical systems.</strong> Built models for surgical-phase and instrument-action recognition. Compressed and fine-tuned Depth Anything 3 to 29% of its original model size while retaining near-baseline depth-estimation performance.",
     "publications.internship.keywords":
       "Computer vision · Surgical video understanding · Model compression · Depth estimation",
     "publications.internship.imageAlt":
@@ -135,7 +135,7 @@ const translations = {
     "awards.icml.body": "Recognized for review quality, based on Area Chair evaluations.",
     "awards.service": "Reviewer for NeurIPS 2026 and AAAI 2027.",
     "contact.kicker": "Contact",
-    "contact.title": "Let’s connect on state-space models, long-context memory, and efficient inference.",
+    "contact.title": "Let’s connect on state‑space models, long‑context memory, and efficient inference.",
     "contact.email": "dsong25@gmu.edu",
   },
   zh: {
@@ -155,7 +155,7 @@ const translations = {
     "nav.contact": "联系",
     "hero.eyebrow": "状态空间模型 · 长上下文记忆 · 高效推理",
     "hero.lead":
-      "我研究用于<strong>长上下文记忆与检索的状态空间语言模型</strong>。我的第一作者论文已被 <strong>NeurIPS 2026</strong> 主会接收，实现一次训练、多档推理预算下的模型部署。",
+      "我研究用于长上下文记忆与检索的状态空间语言模型。我的第一作者论文已被 <strong>NeurIPS 2026</strong> 主会接收，实现一次训练、多档推理预算下的模型部署。",
     "hero.availability": "正在寻找美国 2027 年暑期研究实习。",
     "hero.linksLabel": "个人链接",
     "links.email": "邮箱",
@@ -173,7 +173,7 @@ const translations = {
     "about.p1":
       "我是<a class=\"direction-link\" href=\"https://www.gmu.edu/\" target=\"_blank\" rel=\"noreferrer\">乔治梅森大学</a>电子与计算机工程博士研究生，导师为 <a class=\"direction-link\" href=\"https://mason.gmu.edu/~xwang64/index.html\" target=\"_blank\" rel=\"noreferrer\">Xuan Wang 教授</a>。我的研究关注语言模型如何在计算成本可控的条件下，<strong>保留并检索长序列中的有用信息</strong>。",
     "about.p2":
-      "我目前的工作是为状态空间语言模型加入<strong>精确召回与多跳推理</strong>能力，使其能够利用长上下文中的信息。我也研究 Gated DeltaNet、Kimi Delta Attention（KDA）和 Gated DeltaNet-2 这几种<strong>基于 Delta 规则的线性注意力模型</strong>如何更新递归记忆。",
+      "我目前的工作是为状态空间语言模型加入<strong>精确召回与多跳推理</strong>能力，使其能够利用长上下文中的信息。我也研究 Gated DeltaNet、Kimi Delta Attention（KDA）和 Gated DeltaNet-2 这几种基于 Delta 规则的线性注意力模型如何更新递归记忆。",
     "areas.kicker": "研究方向",
     "areas.agent.title": "高效递归推理",
     "areas.agent.body":
@@ -215,7 +215,7 @@ const translations = {
     "publications.sketchops.venue": "arXiv · 2026",
     "publications.sketchops.title": "面向长上下文语言模型的可合并模型侧聚合状态",
     "publications.sketchops.summary":
-      "<strong>用固定 2 KiB 状态完成长上下文信息聚合。</strong>SketchOps 在冻结语言模型旁维护可跨片段合并的计数与集合关系摘要。在 Gemma 4（31B）的 3,969 道聚合后推理任务上，达到 <strong>99.2% 准确率</strong>，无需重读完整历史。",
+      "<strong>用固定 2 KiB 状态完成长上下文信息聚合。</strong>SketchOps 在冻结语言模型旁维护可跨片段合并的计数与集合关系摘要。在 Gemma 4（31B）的 3,969 道聚合后推理任务上，达到 99.2% 准确率，无需重读完整历史。",
     "publications.sketchops.keywords":
       "SketchOps · 可合并记忆 · 长上下文聚合",
     "publications.es.type": "会议论文",
@@ -223,14 +223,14 @@ const translations = {
     "publications.es.badge": "<span class=\"neurips-year\">NeurIPS 2026</span><span class=\"neurips-track\">Main Track</span>",
     "publications.es.title": "可一次训练并按预算导出的弹性谱状态空间模型",
     "publications.es.summary":
-      "<strong>一次训练，导出适配不同计算预算的紧凑模型。</strong>ES-SSM 将有序 Hankel 谱通道与输入自适应门控、预算丢弃训练结合，通过直接截断谱通道前缀得到可独立部署的小模型，<strong>无需针对各档预算重新训练</strong>。",
+      "<strong>一次训练，导出适配不同计算预算的紧凑模型。</strong>ES-SSM 将有序 Hankel 谱通道与输入自适应门控、预算丢弃训练结合，通过直接截断谱通道前缀得到可独立部署的小模型，无需针对各档预算重新训练。",
     "publications.es.keywords": "谱状态空间模型 · 紧凑模型导出 · 预算约束推理",
     "publications.es.imageAlt": "ES-SSM 图 1：谱通道与紧凑模型导出",
     "publications.essh.type": "预印本",
     "publications.essh.venue": "arXiv · 2026",
     "publications.essh.title": "用于一次训练、多预算导出的弹性选择性谱混合模型",
     "publications.essh.summary":
-      "<strong>让谱记忆具备输入选择性，并实现高效递归解码。</strong>ESSH 将输入依赖的衰减与读写门控、滑窗注意力结合，从一个训练好的检查点导出多档模型。在 A100 上，1.53B 参数配置的融合解码速度与 Mamba-2 持平，相对 Mamba-3 和 Transformer++ 的加速比分别为 <strong>1.1–1.6×</strong> 和 <strong>1.1–4.6×</strong>。各模型参数量匹配，编译策略相同。",
+      "<strong>让谱记忆具备输入选择性，并实现高效递归解码。</strong>ESSH 将输入依赖的衰减与读写门控、滑窗注意力结合，从一个训练好的检查点导出多档模型。在 A100 上，1.53B 参数配置的融合解码速度与 Mamba-2 持平，相对 Mamba-3 和 Transformer++ 的加速比分别为 1.1⁠–⁠1.6× 和 1.1⁠–⁠4.6×。各模型参数量匹配，编译策略相同。",
     "publications.essh.keywords": "选择性谱递归 · 紧凑语言模型 · 融合解码",
     "publications.essh.imageAlt": "ESSH 图 1：选择性谱混合架构与弹性容量维度",
     "publications.fmri.type": "期刊论文",
@@ -251,7 +251,7 @@ const translations = {
     "publications.internship.title": "手术视频理解与高效深度估计",
     "publications.internship.role": "机器学习工程师实习生",
     "publications.internship.summary":
-      "<strong>面向手术系统的视频理解与模型压缩。</strong>开发手术阶段和器械动作识别模型，并将 Depth Anything 3 压缩、微调至<strong>原模型大小的 29%</strong>，深度估计性能接近完整模型。",
+      "<strong>面向手术系统的视频理解与模型压缩。</strong>开发手术阶段和器械动作识别模型，并将 Depth Anything 3 压缩、微调至原模型大小的 29%，深度估计性能接近完整模型。",
     "publications.internship.keywords":
       "计算机视觉 · 手术视频理解 · 模型压缩 · 深度估计",
     "publications.internship.imageAlt":

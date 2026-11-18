@@ -253,9 +253,8 @@ a {
   height: var(--header-height);
   padding: 0 max(28px, calc((100vw - 1180px) / 2));
   padding-left: max(28px, calc((100% - 1180px) / 2 + 28px));
-  background: rgba(255, 255, 255, 0.94);
+  background: #ffffff;
   border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(18px);
 }
 
 main {
@@ -370,8 +369,8 @@ main > section + section {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(230px, 260px) minmax(0, 1fr);
-  gap: clamp(44px, 6vw, 82px);
+  grid-template-columns: minmax(240px, 0.42fr) minmax(0, 0.58fr);
+  gap: 64px;
   align-items: start;
   min-height: auto;
   padding-top: 66px;
@@ -380,7 +379,7 @@ main > section + section {
 
 .hero-copy {
   order: 2;
-  margin-left: clamp(84px, 10.5vw, 154px);
+  margin-left: 0;
 }
 
 .hero-copy,
@@ -843,7 +842,7 @@ h3 {
   top: 0.7em;
   left: 0;
   width: 7px;
-  height: 1.5px;
+  height: 2px;
   border-radius: 999px;
   background: var(--accent);
   content: "";
@@ -875,11 +874,11 @@ h3 {
 
 .agent-card::before,
 .code-card::before {
-  background: #2878bd;
+  background: var(--accent);
 }
 
 .sequence-card::before {
-  background: #d9822b;
+  background: var(--accent);
 }
 
 .product-card::before {
@@ -887,7 +886,7 @@ h3 {
 }
 
 .systems-card::before {
-  background: #3f9d68;
+  background: var(--accent);
 }
 
 .learning-card::before {
@@ -1141,10 +1140,11 @@ h3 {
 .publication .publication-keywords {
   margin: 6px 0 0;
   color: var(--heading);
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  line-height: 1.6;
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.55;
+  text-transform: none;
   text-wrap: pretty;
 }
 
