@@ -91,7 +91,7 @@ const translations = {
     "publications.essh.venue": "arXiv · 2026",
     "publications.essh.title": "Elastic Selective Spectral Hybrids for Train-Once, Export-Many Budgeted Inference",
     "publications.essh.summary":
-      "<strong>Selective spectral memory with fast recurrent decoding.</strong> ESSH pairs input-dependent decay and write/read gates with sliding-window attention, then exports several model sizes from one trained checkpoint. At 1.53B parameters on an A100, fused decoding matches Mamba-2 in speed, with 1.1⁠–⁠1.6× speedups over Mamba-3 and 1.1⁠–⁠4.6× over Transformer++. All comparisons use matched parameter counts and the same compilation policy.",
+      "<strong>Selective spectral memory with fast recurrent decoding.</strong> ESSH adds input-dependent decay and write/read gates to Hankel spectral channels and pairs them with sliding-window attention. A two-rate capacity map with full-model distillation exports several model sizes from one checkpoint. At 1.53B parameters on a B300, fused decoding has the lowest latency among the tested models, with speedups of 1.12⁠–⁠1.45× over Mamba-2, 1.2⁠–⁠1.6× over Mamba-3 and 1.2⁠–⁠6.6× over Transformer++ across batch sizes 1⁠–⁠512. All models use the same compilation and CUDA-graph settings.",
     "publications.essh.keywords": "Selective spectral recurrence · Compact language models · Fused decoding",
     "publications.essh.imageAlt": "Figure 1 of ESSH: selective spectral hybrid and elastic capacity axes",
     "publications.fmri.type": "Journal Article",
@@ -230,7 +230,7 @@ const translations = {
     "publications.essh.venue": "arXiv · 2026",
     "publications.essh.title": "用于一次训练、多预算导出的弹性选择性谱混合模型",
     "publications.essh.summary":
-      "<strong>让谱记忆具备输入选择性，并实现高效递归解码。</strong>ESSH 将输入依赖的衰减与读写门控、滑窗注意力结合，从一个训练好的检查点导出多档模型。在 A100 上，1.53B 参数配置的融合解码速度与 Mamba-2 持平，相对 Mamba-3 和 Transformer++ 的加速比分别为 1.1⁠–⁠1.6× 和 1.1⁠–⁠4.6×。各模型参数量匹配，编译策略相同。",
+      "<strong>让谱记忆具备输入选择性，并实现高效递归解码。</strong>ESSH 为 Hankel 谱通道加入输入依赖的衰减与读写门控，并与滑窗注意力结合；借助双速率容量映射与全模型蒸馏，从一个检查点导出多档模型。在 B300 上，1.53B 参数配置的融合解码延迟在所有对比模型中最低，批大小 1⁠–⁠512 下相对 Mamba-2、Mamba-3 和 Transformer++ 的加速比分别为 1.12⁠–⁠1.45×、1.2⁠–⁠1.6× 和 1.2⁠–⁠6.6×。所有模型使用相同的编译与 CUDA Graph 设置。",
     "publications.essh.keywords": "选择性谱递归 · 紧凑语言模型 · 融合解码",
     "publications.essh.imageAlt": "ESSH 图 1：选择性谱混合架构与弹性容量维度",
     "publications.fmri.type": "期刊论文",

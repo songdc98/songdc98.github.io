@@ -153,7 +153,7 @@
               <a id="paper-essh-title" href="https://arxiv.org/abs/2609.32486" target="_blank" rel="noreferrer" data-i18n="publications.essh.title">Elastic Selective Spectral Hybrids for Train-Once, Export-Many Budgeted Inference</a>
             </h3>
             <p><strong class="author-self">Dachuan Song</strong>, Chuchu Chen, Xuan Wang</p>
-            <p class="publication-summary" data-i18n-html="publications.essh.summary"><strong>Selective spectral memory with fast recurrent decoding.</strong> ESSH pairs input-dependent decay and write/read gates with sliding-window attention, then exports several model sizes from one trained checkpoint. At 1.53B parameters on an A100, fused decoding matches Mamba-2 in speed, with 1.1⁠–⁠1.6× speedups over Mamba-3 and 1.1⁠–⁠4.6× over Transformer++. All comparisons use matched parameter counts and the same compilation policy.</p>
+            <p class="publication-summary" data-i18n-html="publications.essh.summary"><strong>Selective spectral memory with fast recurrent decoding.</strong> ESSH adds input-dependent decay and write/read gates to Hankel spectral channels and pairs them with sliding-window attention. A two-rate capacity map with full-model distillation exports several model sizes from one checkpoint. At 1.53B parameters on a B300, fused decoding has the lowest latency among the tested models, with speedups of 1.12⁠–⁠1.45× over Mamba-2, 1.2⁠–⁠1.6× over Mamba-3 and 1.2⁠–⁠6.6× over Transformer++ across batch sizes 1⁠–⁠512. All models use the same compilation and CUDA-graph settings.</p>
             <div class="paper-links" aria-label="Elastic Selective Spectral Hybrids paper links" data-i18n-aria="publications.links.essh">
               <a class="paper-id" href="https://arxiv.org/abs/2609.32486" target="_blank" rel="noreferrer">arXiv:2609.32486</a>
               <a href="https://github.com/songdc98/ESSH" target="_blank" rel="noreferrer" data-i18n="publications.link.code">Code</a>
@@ -384,6 +384,6 @@
       <p class="copyright">© <span id="year"></span> Dachuan Song.</p>
     </footer>
 
-    <script src="./script.js?v=taste-20261117"></script>
+    <script src="./script.js?v=essh-b300-20261119"></script>
   </body>
 </html>
