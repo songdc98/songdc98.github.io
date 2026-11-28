@@ -25,6 +25,7 @@ const translations = {
     "links.emailCopyFailed": "Copy failed",
     "links.scholar": "Google Scholar",
     "profile.summaryLabel": "Profile summary",
+    "profile.spinLabel": "Spin the portrait",
     "profile.role": "Ph.D. Student",
     "profile.program": "Electrical & Computer Engineering",
     "profile.university": "George Mason University",
@@ -164,6 +165,7 @@ const translations = {
     "links.emailCopyFailed": "复制失败",
     "links.scholar": "Google Scholar",
     "profile.summaryLabel": "个人简介",
+    "profile.spinLabel": "转动头像",
     "profile.role": "博士研究生",
     "profile.program": "电子与计算机工程",
     "profile.university": "George Mason University",
@@ -453,6 +455,19 @@ window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") hideEmailPopover();
 });
 
+const portraitPlate = {
+  angle: 0,
+  from: 0,
+  to: 0,
+  startTime: 0,
+  duration: 0,
+  frame: 0,
+};
+const PLATE_EDGE_LAYERS = 12;
+const PLATE_HALF_THICKNESS = 5;
+const PLATE_SPIN_BOOST = 1260;
+const PLATE_MAX_SPEED = 3600;
+
 function resetPortraitInteraction() {
   if (!portraitRing) return;
 
@@ -463,7 +478,87 @@ function resetPortraitInteraction() {
   portraitRing.classList.remove("is-pressed");
 }
 
-if (portraitRing) {
+function buildPlateEdge() {
+  // Stacked discs between the two faces form the rim seen when the plate turns side-on.
+  for (let i = 0; i < PLATE_EDGE_LAYERS; i += 1) {
+    const t = i / (PLATE_EDGE_LAYERS - 1);
+    const z = (t * 2 - 1) * (PLATE_HALF_THICKNESS - 0.5);
+    const shade = 86 - Math.round(10 * Math.sin(Math.PI * t));
+    const layer = document.createElement("span");
+    layer.className = "portrait-edge";
+    layer.setAttribute("aria-hidden", "true");
+    layer.style.transform = `translateZ(${z.toFixed(2)}px)`;
+    layer.style.background = `hsl(214 10% ${shade}%)`;
+    portraitRing.insertBefore(layer, portraitRing.querySelector(".portrait-back"));
+  }
+}
+
+function plateEase(progress) {
+  return 1 - (1 - progress) ** 4;
+}
+
+function plateVelocity(now) {
+  if (!portraitPlate.frame) return 0;
+  const progress = Math.min(1, (now - portraitPlate.startTime) / portraitPlate.duration);
+  return ((portraitPlate.to - portraitPlate.from) * 4 * (1 - progress) ** 3) / (portraitPlate.duration / 1000);
+}
+
+function renderPlate(angle) {
+  const facing = Math.abs(Math.cos((angle * Math.PI) / 180));
+  portraitRing.style.setProperty("--portrait-spin", `${angle.toFixed(2)}deg`);
+  portraitStage.style.setProperty("--portrait-floor-scale", (0.32 + 0.68 * facing).toFixed(3));
+}
+
+function stepPlate(now) {
+  const progress = Math.min(1, (now - portraitPlate.startTime) / portraitPlate.duration);
+  portraitPlate.angle = portraitPlate.from + (portraitPlate.to - portraitPlate.from) * plateEase(progress);
+  renderPlate(portraitPlate.angle);
+
+  if (progress < 1) {
+    portraitPlate.frame = requestAnimationFrame(stepPlate);
+    return;
+  }
+
+  // Land exactly face-on, then hand the transform back to the hover transition.
+  portraitPlate.frame = 0;
+  portraitPlate.angle = 0;
+  renderPlate(0);
+  requestAnimationFrame(() => {
+    portraitStage.classList.remove("is-spinning");
+  });
+}
+
+function spinPlate(direction) {
+  if (!portraitRing || prefersReducedMotion.matches) return;
+
+  const now = performance.now();
+  const currentSpeed = plateVelocity(now);
+  let speed = currentSpeed + direction * PLATE_SPIN_BOOST;
+  speed = Math.max(-PLATE_MAX_SPEED, Math.min(PLATE_MAX_SPEED, speed));
+  if (Math.abs(speed) < 360) speed = direction * PLATE_SPIN_BOOST;
+
+  const from = portraitPlate.angle;
+  const glide = Math.min(4.6, Math.max(1.8, 1.4 + Math.abs(speed) / 1300));
+  let to = Math.round((from + (speed * glide) / 4) / 360) * 360;
+  if (Math.sign(to - from) !== Math.sign(speed) || Math.abs(to - from) < 360) {
+    to = (Math.floor(from / 360) + (speed > 0 ? 1 : 0)) * 360 + Math.sign(speed) * 360;
+  }
+
+  portraitPlate.from = from;
+  portraitPlate.to = to;
+  portraitPlate.startTime = now;
+  // Keep the speed continuous at the moment of the click: v0 = 4 * distance / duration.
+  portraitPlate.duration = Math.min(5200, Math.max(1400, (4 * Math.abs(to - from) * 1000) / Math.abs(speed)));
+
+  portraitStage.classList.add("is-spinning");
+  if (!portraitPlate.frame) portraitPlate.frame = requestAnimationFrame(stepPlate);
+}
+
+const portraitStage = portraitRing ? portraitRing.closest(".portrait-stage") : null;
+
+if (portraitRing && portraitStage) {
+  buildPlateEdge();
+
   portraitRing.addEventListener("pointermove", (event) => {
     if (event.pointerType === "touch" || prefersReducedMotion.matches) return;
 
@@ -489,6 +584,19 @@ if (portraitRing) {
   });
   portraitRing.addEventListener("pointercancel", resetPortraitInteraction);
   portraitRing.addEventListener("pointerleave", resetPortraitInteraction);
+
+  portraitRing.addEventListener("click", (event) => {
+    const bounds = portraitStage.getBoundingClientRect();
+    const fromCenter = event.clientX - (bounds.left + bounds.width / 2);
+    // Pressing the right half pushes that side away from the viewer, like flicking a plate.
+    spinPlate(fromCenter >= 0 ? 1 : -1);
+  });
+
+  portraitRing.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    spinPlate(1);
+  });
 }
 
 function closeWechatDialog() {

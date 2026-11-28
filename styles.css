@@ -653,41 +653,142 @@ h3 {
   max-width: 260px;
 }
 
+.portrait-stage {
+  --portrait-floor-scale: 1;
+  position: relative;
+  width: 196px;
+  max-width: 100%;
+  perspective: 760px;
+}
+
 .portrait-ring {
   --portrait-shadow-x: 0px;
   --portrait-shadow-y: 7px;
   --portrait-tilt-x: 0deg;
   --portrait-tilt-y: 0deg;
+  --portrait-spin: 0deg;
+  --portrait-press: 1;
+  --portrait-half: 5px;
   position: relative;
-  width: 196px;
-  max-width: 100%;
+  width: 100%;
   aspect-ratio: 1;
   border-radius: 50%;
-  padding: 3px;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.035);
-  box-shadow: var(--relief-shadow);
-  overflow: hidden;
-  transform: perspective(700px) rotateX(var(--portrait-tilt-x)) rotateY(var(--portrait-tilt-y));
+  cursor: pointer;
+  outline: none;
+  transform:
+    rotateX(var(--portrait-tilt-x))
+    rotateY(calc(var(--portrait-tilt-y) + var(--portrait-spin)))
+    scale(var(--portrait-press));
   transform-style: preserve-3d;
-  transition:
-    transform 140ms ease-out,
-    box-shadow 140ms ease-out;
+  transition: transform 140ms ease-out;
   will-change: transform;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.portrait-ring:hover {
+.portrait-ring.is-pressed {
+  --portrait-press: 0.985;
+  transition-duration: 70ms;
+}
+
+.portrait-stage.is-spinning .portrait-ring {
+  transition: none;
+}
+
+.portrait-face,
+.portrait-edge {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.portrait-face {
+  padding: 3px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.035);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.portrait-front {
+  box-shadow: var(--relief-shadow);
+  transform: translateZ(var(--portrait-half));
+  transition: box-shadow 200ms ease-out;
+}
+
+.portrait-ring:hover .portrait-front {
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.05),
     var(--portrait-shadow-x) var(--portrait-shadow-y) 20px rgba(0, 0, 0, 0.11);
 }
 
-.portrait-ring.is-pressed {
-  transform: perspective(700px) rotateX(var(--portrait-tilt-x)) rotateY(var(--portrait-tilt-y)) scale(0.985);
-  transition-duration: 70ms;
+.portrait-stage.is-spinning .portrait-front {
+  box-shadow: none;
 }
 
-.profile-panel img {
+.portrait-ring:focus-visible .portrait-front {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.portrait-back {
+  container-type: inline-size;
+  display: grid;
+  place-items: center;
+  transform: rotateY(180deg) translateZ(var(--portrait-half));
+}
+
+.portrait-back::before {
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #f5f5f7 55%, #e8e8ed 100%);
+  content: "";
+}
+
+.portrait-monogram {
+  position: relative;
+  color: #7c3aed;
+  background: linear-gradient(
+    90deg,
+    #e11d48 0%,
+    #f97316 18%,
+    #10b981 38%,
+    #0891b2 55%,
+    #2563eb 72%,
+    #7c3aed 87%,
+    #c026d3 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 58px;
+  font-size: 30cqi;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.portrait-floor {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 15%;
+  width: 70%;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(17, 22, 27, 0.2), rgba(17, 22, 27, 0));
+  opacity: 0;
+  pointer-events: none;
+  transform: scaleX(var(--portrait-floor-scale));
+  transition: opacity 360ms ease-out;
+}
+
+.portrait-stage.is-spinning .portrait-floor {
+  opacity: 1;
+  transition-duration: 160ms;
+}
+
+.portrait-front img {
   width: 100%;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -1429,7 +1530,7 @@ a.paper-thumbnail:focus-visible {
     max-width: 200px;
   }
 
-  .portrait-ring {
+  .portrait-stage {
     width: 168px;
   }
 
@@ -1548,15 +1649,20 @@ a.paper-thumbnail:focus-visible {
     max-width: 176px;
   }
 
-  .portrait-ring {
+  .portrait-stage {
     width: 150px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .paper-thumbnail,
-  .portrait-ring {
+  .portrait-ring,
+  .portrait-floor {
     transition: none;
+  }
+
+  .portrait-ring {
+    cursor: default;
   }
 
   .paper-thumbnail:hover,
